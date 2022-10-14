@@ -8,13 +8,13 @@ Kutay Şenyiğit 21902377
 
 Users:
 
--Students
--Coordinators
--Faculty Administration Committee Members
--Admins
--Course Coordinators
--Incoming Students
--International Student Office
+-Students <br />
+-Coordinators <br />
+-Faculty Administration Committee Members <br />
+-Admins <br />
+-Course Coordinators <br />
+-Incoming Students <br />
+-International Student Office <br />
 
 Features:
 
