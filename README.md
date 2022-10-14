@@ -9,22 +9,17 @@ Kutay Şenyiğit 21902377
 Users:
 
 -Students
-
 -Coordinators
-
 -Faculty Administration Committee Members
-
 -Admins
-
 -Course Coordinators
+-Incoming Students
+-International Student Office
 
 Features:
 
 - Activate Application Period: allows coordinators to activate the application period (November-December) and notify the students
-- Submit Application Form: allows the students to submit the application form online
-- Calculate Score: calculates each student's overall score
-- Rank Applicants by Overall Score: creates the rankings of applicants
-- Update Rankings: checks the requirements of the applicants and updates rankings accordingly
+- Upload Erasmus Placement Results: allows coordinators to upload the placements of applicants
 - Discard Placement: allows students to discard their placement and logs the cancellation
 - Notify Placement: allows coordinators to notify the students after the placements are complete
 - Display Logs: allows coordinators to see the logs
@@ -46,3 +41,16 @@ Features:
 - Reject Form: allows coordinators to reject the pre-approval form
 - Submit Learning Agreement: allows students to submit their learning agreement document
 - Report Problem: allows students to notify the coordinators and proposes alternative courses in case the pre-approved courses could not be taken due to schedule conflict or prerequisites
+- Check ECTS: checks the ECTS credits of the courses that the students wishes to take
+- Upload Syllabus: allows students to upload the syllabus of the course which they want to take
+- View Application Status: Allows students to view the current status of their application
+- Upload Signature: allows coordinators to upload their signature in order to create the required forms
+- View Formerly Accepted Courses: allows students to check/view formerly accepted courses in other universities
+- Generate Pre-Approval Form: generates pre-approval forms with the given information for the students
+- Notify Open Place: notifies the coordinator when a new place opens
+- Direct Message: allows users to directly message each other
+- Notification: general notification feature for every user, notifications are viewed in a notification center
+- Reminder: reminds the deadlines to users
+- Calendar: feature to sync the local calendar
+- Review System: allows students to review / state their feedbacks about their own erasmus experience in terms of their university
+
