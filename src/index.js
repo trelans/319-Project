@@ -22,3 +22,5 @@ console.log("Test Commit")
 console.log("Test Commit")
 console.log("Test Commit Mert")
 
+console.log("Test ama başka")
+
