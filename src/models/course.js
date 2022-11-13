@@ -4,73 +4,74 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
-const userSchema = new mongoose.Schema({
+const courseSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        uppercase: true
     },
-    surname: {
+    department: {
         type: String,
         required: true,
         trim: true
     },
-    active: {
+    courseCode: {
+        type: String,
+        required: true,
+        trim: true,
+        uppercase: true
+    },
+    courseType: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    courseID: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    alternativeCourses: [{
+        course: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Course'
+        }
+    }],
+    syllabusLink: {
+        type: String,
+        required: false,
+        trim: true,
+        default: 'No link provided'   
+    },
+    courseWebPage: {
+        type: String,
+        required: false,
+        trim: true,
+        default: 'No Webpage Provided'    
+    },
+    universityID: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    courseLanguage: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    previousAcceptance: {
         type: Boolean,
+        required: false,
+        trim: true,
         default: false
     },
-    departments:[{
-        department: {
-            type: String,
-            default: "noDepartment"
-        },
-        //0 major, 1 minor
-        type: {
-            type: Number,
-            default: 0
-        }
-    }],
-    studentId: {
-        type: Number,
-        default: 0
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Invalid email!')
-            }
-        }
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
-            }
-        }
-    },
-    userType: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if(value < 0) {
-                throw new Error('User Type must be greater than zero')
-            }
-        }
-    },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
     avatar: {
         type: Buffer
     }
@@ -84,14 +85,6 @@ userSchema.virtual('tasks', {
     localField: '_id',
     foreignField: 'owner'
 })
-
-/*
-userSchema.virtual('university', {
-    ref: 'University',
-    localField: '_id',
-    foreignField: 'owner'
-})
-*/
 
 userSchema.methods.toJSON = function () {
     const user = this
@@ -154,6 +147,6 @@ userSchema.pre('remove', async function (next) {
     next()
 })
 
-const User = mongoose.model('User', userSchema)
+const Course = mongoose.model('Course', courseSchema)
 
-module.exports = User
+module.exports = Course
