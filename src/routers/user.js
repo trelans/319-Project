@@ -21,10 +21,14 @@ router.post('/users/login', async (req,res) => {
 
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
-        const token = await user.generateAuthToken()
-        res.send({user, token})
+        if(user.active) {
+            const token = await user.generateAuthToken()
+            res.send({user, token})
+        } else {
+            throw new Error('The Account is not active!')
+        }
     } catch (e) {
-        res.status(400).send()
+        res.status(400).send(e)
     }
 })
 
