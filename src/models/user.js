@@ -10,6 +10,30 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    surname: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    active: {
+        type: Boolean,
+        default: false
+    },
+    departments:[{
+        department: {
+            type: String,
+            default: "noDepartment"
+        },
+        //0 major, 1 minor
+        type: {
+            type: Number,
+            default: 0
+        }
+    }],
+    studentId: {
+        type: Number,
+        default: 0
+    },
     email: {
         type: String,
         unique: true,
@@ -32,12 +56,12 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
-    age: {
+    userType: {
         type: Number,
         default: 0,
         validate(value) {
             if(value < 0) {
-                throw new Error('Age must be greater or equal to zero.')
+                throw new Error('User Type must be greater than zero')
             }
         }
     },
@@ -60,6 +84,14 @@ userSchema.virtual('tasks', {
     localField: '_id',
     foreignField: 'owner'
 })
+
+/*
+userSchema.virtual('university', {
+    ref: 'University',
+    localField: '_id',
+    foreignField: 'owner'
+})
+*/
 
 userSchema.methods.toJSON = function () {
     const user = this
