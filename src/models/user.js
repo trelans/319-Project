@@ -22,7 +22,6 @@ const userSchema = new mongoose.Schema({
     departments:[{
         department: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
             ref: 'User'
         },
         //0 major, 1 minor
@@ -32,9 +31,15 @@ const userSchema = new mongoose.Schema({
         }
     }],
 
+    applications: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Application'
+        }
+    ],
+
     appliedInstitution: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'University'
     },
 

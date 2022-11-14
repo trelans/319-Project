@@ -73,8 +73,8 @@ const universitySchema = new mongoose.Schema({
         }
     }],
     
-    languageRequirement: [{
-        requiredLanguages: {
+    languageRequirements: [{
+        language: {
             type: String,
             required: true
         }

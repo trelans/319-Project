@@ -57,16 +57,15 @@ applicationSchema.statics.cancelApplication = async function (_id) {
     return query
 }
 
-applicationSchema.statics.createApplication = async function (user, appliedInstitution, applicationProgramType = 0) {
+applicationSchema.statics.createApplication = async function (user, applicationProgramType = 0) {
     const application = {
         status: 0,
         applicantUser: user._id,
-        appliedInstitution,
+        appliedInstitution: user.appliedInstitution,
         responsibleErasmusCoord: await User.find({ assignedUniversities: { $all: [user.appliedInstitution] }, department: await user.departments.find(element => element.type == applicationProgramType).department }),
         forms: [{
-            // Bir şekilde initialize edicez de snasıl?            
+            // Form lazım initialize etmek için         
         }],
-
     }
     return application
 }

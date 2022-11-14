@@ -11,32 +11,33 @@ const departmentSchema = new mongoose.Schema({
         trim: true
     },
 
-    quota: {
-        type: Number,
-        default: 0,
-    },
+    erasmusCoordinators: [{
+        erasmusCoordinator: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ErasmusCoordinator',
+        }
+    }],
 
-    erasmusCoordinator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User',
-    },
-
-    ownerUniversityId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'University'
-    },
-
-    fallSuitability: {
-        type: Boolean,
-        required: true
-    },
-
-    springSuitability: {
-        type: Boolean,
-        required: true
-    }
+    hostUniversities: [{
+        universityId: {
+            type: Number,
+            required: true,
+            ref: 'University'
+        },
+        quota: {
+            type: Number,
+            default: 0,
+        },
+        fallSuitability: {
+            type: Boolean,
+            default: false
+        },
+    
+        springSuitability: {
+            type: Boolean,
+            default: false
+        }
+    }]
 }, {
     timestamps: true
 })

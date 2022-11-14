@@ -1,24 +1,76 @@
 const express = require('express')
 const User = require('../models/user')
+const University = require('../models/university')
+const ErasmusCoordinator = require('../models/erasmusCoordinator')
+const Department = require("../models/department")
+const Application = require("../models/application")
 const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
 const path = require('path')
 
-router.post('/users', async (req,res) => {
+router.post('/create/newCandidate', async (req,res) => {
     const user = new User(req.body);
-
     try {
+        const application = await Application.createApplication(user)
+        await application.save()
+        user.applications.push(application)
         const token = await user.generateAuthToken()
         await user.save()
-        res.status(201).send({user,token})
+        res.status(201).send({user,token, application})
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.get('/users/loginpage', async (req,res) => {
+router.post('/create/newErasmusCoordinator', async (req,res) => {
+    const user = new ErasmusCoordinator(req.body);
+    try {
+        const token = await user.generateAuthToken()
+        await user.save()
+        res.status(201).send({user, token})
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.post('/create/newUniversity', async (req,res) => {
+    const departments = req.body.departments
+    departments.forEach(async depName => {
+        const department = await Department.findOne( {name: depName} )
+        if(department) {
+            department.hostUniversities.push({
+                universityId: req.body.universityId,
+            })
+            department.save()
+        } else {
+            console.log("Given Department is not yet created!")
+        }
+    })
+    delete req.body["departments"]
+    const university = new University(req.body);
+    try {
+        await university.save()
+        res.status(201).send({university})
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+// Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
+router.post('/create/newDepartment', async (req,res) => {
+    const department = new Department(req.body);
+    try {
+        await department.save()
+        res.status(201).send({department})
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.get('/create/loginpage', async (req,res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))
 })
 
