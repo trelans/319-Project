@@ -64,7 +64,7 @@ applicationSchema.statics.createApplication = async function (user, appliedInsti
         appliedInstitution,
         responsibleErasmusCoord: await User.find({ assignedUniversities: { $all: [user.appliedInstitution] }, department: await user.departments.find(element => element.type == applicationProgramType).department }),
         forms: [{
-            // Bir şekilde initialize edicez de nasıl?            
+            // Bir şekilde initialize edicez de snasıl?            
         }],
 
     }
