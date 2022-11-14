@@ -1,29 +1,15 @@
-const express = require('express')
 require('./db/mongoose') //connect to db
-const User = require('./models/user')
-const Task = require('./models/task')
 const http = require('http')
-const userRouter = require('./routers/user')
-const taskRouter = require('./routers/task')
-const loginRouter = require('./routers/login-pages')
+const app = require('./app')
 
-const path = require('path')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser,removeUser,getUser,getUsersInRoom} = require('./utils/users')
 
-const app = express()
 const port = process.env.PORT
 const server = http.createServer(app)
 const io = socketio(server)
-const publicDirectoryPath = path.join(__dirname, '../public')
-
-app.use(express.json())
-app.use(userRouter)
-app.use(taskRouter)
-app.use(loginRouter)
-app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
     console.log('New WebSocket connection')

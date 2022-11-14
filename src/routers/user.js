@@ -4,6 +4,7 @@ const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
+const path = require('path')
 
 router.post('/users', async (req,res) => {
     const user = new User(req.body);
@@ -17,9 +18,14 @@ router.post('/users', async (req,res) => {
     }
 })
 
+router.get('/users/loginpage', async (req,res) => {
+    res.sendFile(path.join(__dirname, '../../public/login.html'))
+})
+
 router.post('/users/login', async (req,res) => {
 
     try {
+        res.sendFile(path.join(__dirname, '../../public/login.html'))
         const user = await User.findByCredentials(req.body.email, req.body.password)
         if(user.active) {
             const token = await user.generateAuthToken()
