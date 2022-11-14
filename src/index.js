@@ -5,6 +5,7 @@ const Task = require('./models/task')
 const http = require('http')
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
+const loginRouter = require('./routers/login-pages')
 
 const path = require('path')
 const socketio = require('socket.io')
@@ -21,6 +22,7 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
+app.use(loginRouter)
 app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
