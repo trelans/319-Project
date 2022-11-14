@@ -58,6 +58,18 @@ const universitySchema = new mongoose.Schema({
         feedback: {
             type: String,
             required: true
+        },
+        feedbackOwner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ErasmusCandidate'
+        }
+    }],
+    
+    appliedStudents: [{
+        student: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'ErasmusCandidate'
         }
     }],
     
@@ -71,12 +83,6 @@ const universitySchema = new mongoose.Schema({
     timestamps: true
 })
 
-// not stored in db for mongoose
-userSchema.virtual('tasks', {
-    ref: 'Task',
-    localField: '_id',
-    foreignField: 'owner'
-})
 
 /*
 userSchema.virtual('university', {
@@ -86,66 +92,25 @@ userSchema.virtual('university', {
 })
 */
 
-userSchema.methods.toJSON = function () {
-    const user = this
-    const userObject = user.toObject()
 
-    delete userObject.password
-    delete userObject.tokens
-    delete userObject.avatar
 
-    return userObject
+universitySchema.methods.toJSON = function () {
+    const university = this
+    const universityObject = university.toObject()
+    
+    return universityObject
 }
 
-userSchema.methods.generateAuthToken = async function() {
-    const user = this
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
-    user.tokens = user.tokens.concat({token})
-    await user.save()
+universitySchema.statics.findByName = async (name) => {
+    const university = await University.findOne({name})
 
-    return token
+    if(!university) {
+        throw new Error('Unable to find the university')
+    }
+
+    return university
 }
-
-userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email})
-
-    if(!user) {
-        throw new Error('Unable to login')
-    }
-
-    const isMatch = await bcrypt.compare(password,user.password)
-
-    if(!isMatch) {
-        throw new Error('Unable to login')
-    }
-
-    return user
-}
-
-/**
- * Hash the plain text password before saving
- */
-userSchema.pre('save', async function (next) {
-    const user = this
-
-    if(user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
-    }
-
-    next()
-})
-
-/**
- * Delete user tasks when the user is removed
- */
-userSchema.pre('remove', async function (next) {
-    const user = this
-
-    await Task.deleteMany({owner: user._id})
-
-    next()
-})
 
 const University = mongoose.model('University', universitySchema)
 
