@@ -25,46 +25,49 @@ const universitySchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    email: {
+    fallSuitability: {
+        type: Boolean,
+        required: true
+    },
+    springSuitability: {
+        type: Boolean,
+        required: true
+    },
+    applicationLink: {
         type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Invalid email!')
-            }
-        }
+        default: 'No application link provided...'
     },
-    password: {
+    mobilityPeriod: {
         type: String,
-        required: true,
-        trim: true,
-        validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
-            }
-        }
+        required: true
     },
-    userType: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if(value < 0) {
-                throw new Error('User Type must be greater than zero')
-            }
-        }
-    },
-    tokens: [{
-        token: {
+    // userType: {
+    //     type: Number,
+    //     default: 0,
+    //     validate(value) {
+    //         if(value < 0) {
+    //             throw new Error('User Type must be greater than zero')
+    //         }
+    //     }
+    // },
+    departments: [{
+        department: {
             type: String,
             required: true
         }
     }],
-    avatar: {
-        type: Buffer
-    }
+    feedbacks: [{
+        feedback: {
+            type: String,
+            required: true
+        }
+    }],
+    languageRequirement: [{
+        requiredLanguages: {
+            type: String,
+            required: true
+        }
+    }]
 }, {
     timestamps: true
 })
