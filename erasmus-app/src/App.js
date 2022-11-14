@@ -1,7 +1,8 @@
-
 function App() {
   return (
-    <div> <h1> Slm</h1>
+    <div>
+      {" "}
+      <h1> Slm</h1>
     </div>
   );
 }
