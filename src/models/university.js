@@ -106,7 +106,7 @@ universitySchema.statics.findByName = async (name) => {
     const university = await University.findOne({name})
 
     if(!university) {
-        throw new Error('Unable to the university')
+        throw new Error('Unable to find the university')
     }
 
     return university
