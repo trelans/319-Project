@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
+const Form = require('./')
 
 const applicationSchema = new mongoose.Schema({
     status: {
@@ -29,9 +30,19 @@ const applicationSchema = new mongoose.Schema({
         ref: 'User',
     },
 
-    forms: {
-        
-    }
+    forms: [{
+        form: {
+            type: 
+            required: true
+        }
+    }]
+
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }],
 
 }, {
     timestamps: true
