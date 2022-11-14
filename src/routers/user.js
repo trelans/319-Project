@@ -3,6 +3,7 @@ const User = require('../models/user')
 const University = require('../models/university')
 const ErasmusCoordinator = require('../models/erasmusCoordinator')
 const Department = require("../models/department")
+const Application = require("../models/application")
 const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
@@ -11,11 +12,13 @@ const path = require('path')
 
 router.post('/create/newCandidate', async (req,res) => {
     const user = new User(req.body);
-
     try {
+        const application = await Application.createApplication(user)
+        await application.save()
+        user.applications.push(application)
         const token = await user.generateAuthToken()
         await user.save()
-        res.status(201).send({user,token})
+        res.status(201).send({user,token, application})
     } catch (e) {
         res.status(400).send(e)
     }

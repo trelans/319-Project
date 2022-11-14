@@ -31,6 +31,13 @@ const userSchema = new mongoose.Schema({
         }
     }],
 
+    applications: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Application'
+        }
+    ],
+
     appliedInstitution: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'University'

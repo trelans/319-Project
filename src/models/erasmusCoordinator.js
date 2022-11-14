@@ -58,7 +58,7 @@ const erasmusCoordinatorSchema = new mongoose.Schema({
             }
         }
     },
-    //default hali olmalı boş uni arr olarak?
+    
     assignedUniversities: [{
         university: {
             type: mongoose.Schema.Types.ObjectId,
