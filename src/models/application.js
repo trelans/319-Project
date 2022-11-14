@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
-const validator = require('validator')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const Task = require('./task')
-const Form = require('./')
+const Form = require('./form')
+const Department = require('./department')
 
 const applicationSchema = new mongoose.Schema({
     status: {
@@ -27,94 +24,71 @@ const applicationSchema = new mongoose.Schema({
     responsibleErasmusCoord: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User',
+        ref: 'User'
     },
 
     forms: [{
         form: {
-            type: 
-            required: true
-        }
-    }]
-
-    tokens: [{
-        token: {
-            type: String,
-            required: true
+            type: Form,
+            required: true,
+            ref: 'Form'
         }
     }],
+
+
 
 }, {
     timestamps: true
 })
 
 // not stored in db for mongoose
-userSchema.virtual('tasks', {
-    ref: 'Task',
+applicationSchema.virtual('forms', {
+    ref: 'Form',
     localField: '_id',
     foreignField: 'owner'
 })
 
-userSchema.methods.toJSON = function () {
-    const user = this
-    const userObject = user.toObject()
-
-    delete userObject.password
-    delete userObject.tokens
-    delete userObject.avatar
-
-    return userObject
+applicationSchema.statics.cancelApplication = async function (_id) {
+    await Form.deleteMany({ owner: _id })
+    const query = await Application.deleteOne({ _id })
+    // if (!application){
+    //     throw new Error('Unable to find specified Application')
+    // }
+    return query
 }
 
-userSchema.methods.generateAuthToken = async function () {
-    const user = this
-    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
+applicationSchema.statics.createApplication = async function (user, appliedInstitution, applicationProgramType = 0) {
+    const application = {
+        status: 0,
+        applicantUser: user._id,
+        appliedInstitution,
+        responsibleErasmusCoord: await User.find({ assignedUniversities: { $all: [user.appliedInstitution] }, department: await user.departments.find(element => element.type == applicationProgramType).department }),
+        forms: [{
+            // Bir şekilde initialize edicez de nasıl?            
+        }],
 
-    user.tokens = user.tokens.concat({ token })
-    await user.save()
-
-    return token
+    }
+    return application
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({ email })
-
-    if (!user) {
-        throw new Error('Unable to login')
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password)
-
-    if (!isMatch) {
-        throw new Error('Unable to login')
-    }
-
-    return user
+applicationSchema.statics.discardPlacement = async function (_id) {
+    await Form.deleteMany({ owner: _id })
+    const query = await Application.deleteOne({ _id })
+    // if (!application){
+    //     throw new Error('Unable to find specified Application')
+    // }
+    return query
 }
 
-/**
- * Hash the plain text password before saving
- */
-userSchema.pre('save', async function (next) {
-    const user = this
+applicationSchema.statics.findByOwnerId = async (applicantUser) => {
+    const application = await Application.findOne({ applicantUser })
 
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+    if (!application) {
+        throw new Error('Unable to find Application of the given user')
     }
 
-    next()
-})
-
-/**
- * Delete user tasks when the user is removed
- */
-userSchema.pre('remove', async function (next) {
-    const user = this
-
-    await Task.deleteMany({ owner: user._id })
-
-    next()
-})
+    return application
+}
 
 const Application = mongoose.model('Application', applicationSchema)
 

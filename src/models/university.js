@@ -10,37 +10,40 @@ const universitySchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+
     departments:[{
         department: {
-            type: String,
-            default: "noDepartment"
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Department',
         },
-        //0 major, 1 minor
-        type: {
-            type: Number,
-            default: 0
-        }
     }],
+
     universityId: {
         type: Number,
         default: 0
     },
+
     fallSuitability: {
         type: Boolean,
         required: true
     },
+
     springSuitability: {
         type: Boolean,
         required: true
     },
+
     applicationLink: {
         type: String,
         default: 'No application link provided...'
     },
+    
     mobilityPeriod: {
         type: String,
         required: true
     },
+    
     // userType: {
     //     type: Number,
     //     default: 0,
@@ -50,18 +53,14 @@ const universitySchema = new mongoose.Schema({
     //         }
     //     }
     // },
-    departments: [{
-        department: {
-            type: String,
-            required: true
-        }
-    }],
+    
     feedbacks: [{
         feedback: {
             type: String,
             required: true
         }
     }],
+    
     languageRequirement: [{
         requiredLanguages: {
             type: String,

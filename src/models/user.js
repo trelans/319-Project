@@ -21,8 +21,9 @@ const userSchema = new mongoose.Schema({
     },
     departments:[{
         department: {
-            type: String,
-            default: "noDepartment"
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
         },
         //0 major, 1 minor
         type: {
@@ -30,6 +31,13 @@ const userSchema = new mongoose.Schema({
             default: 0
         }
     }],
+
+    appliedInstitution: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
+    },
+
     studentId: {
         type: Number,
         default: 0
