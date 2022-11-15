@@ -2,14 +2,20 @@ import "./LoginPage.css";
 
 function LoginPage() {
   return (
-    <div className="center">
-      <h1>
-        Welcome to
-        <br />
-        Erasmus App!
-      </h1>
+    <div class="container">
       <div>
-      <input type="text" />
+        <form>
+          <div className="center">
+            <h1>
+              Welcome to <br /> Erasmus App!
+            </h1>
+          </div>
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="Password" />
+          <div className="center">
+            <button>LOGIN</button>
+          </div>
+        </form>
       </div>
     </div>
   );
