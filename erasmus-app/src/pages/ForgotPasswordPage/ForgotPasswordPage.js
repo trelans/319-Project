@@ -16,7 +16,7 @@ function ForgotPasswordPage() {
       </div>
       <div className="fpp-center">
             <Link to="/main-page">
-              <button>RESET PASSWORD</button>
+              <button className="fpp-button">RESET PASSWORD</button>
             </Link>
           </div>
     </div>
