@@ -8,7 +8,7 @@ function LoginPage() {
       <div>
         <form>
           <div className="center">
-            <h1>
+            <h1 className="lp-h1">
               Welcome to <br /> Erasmus App!
             </h1>
           </div>
