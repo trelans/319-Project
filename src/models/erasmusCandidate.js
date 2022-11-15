@@ -32,6 +32,7 @@ const erasmusCandidateSchema = new mongoose.Schema({
             }
         }
     },
+    // Bu neydi kanka hatırlayamadım
     totalPoints: {
         type: Number,
         default: 0
@@ -40,10 +41,12 @@ const erasmusCandidateSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    nominatedUniversityID: {
-        type: Number,
-        required: true
+    nominatedUniversityId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
     },
+
     //prefferred universities string arr mı olmalı
     //yoksa university arrayi mi
     preferredUniversities: [{
@@ -105,21 +108,13 @@ const erasmusCandidateSchema = new mongoose.Schema({
 })
 
 // not stored in db for mongoose
-userSchema.virtual('tasks', {
-    ref: 'Task',
+erasmusCandidateSchema.virtual('applications', {
+    ref: 'Application',
     localField: '_id',
-    foreignField: 'owner'
+    foreignField: 'applicantCandidate'
 })
 
-/*
-userSchema.virtual('university', {
-    ref: 'University',
-    localField: '_id',
-    foreignField: 'owner'
-})
-*/
-
-userSchema.methods.toJSON = function () {
+erasmusCandidateSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
 
@@ -130,7 +125,7 @@ userSchema.methods.toJSON = function () {
     return userObject
 }
 
-userSchema.methods.generateAuthToken = async function() {
+erasmusCandidateSchema.methods.generateAuthToken = async function() {
     const user = this
     const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
@@ -140,7 +135,7 @@ userSchema.methods.generateAuthToken = async function() {
     return token
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
+erasmusCandidateSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({email})
     if(!user) {
         throw new Error('Unable to login')
@@ -156,7 +151,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 /**
  * Hash the plain text password before saving
  */
-userSchema.pre('save', async function (next) {
+erasmusCandidateSchema.pre('save', async function (next) {
     const user = this
 
     if(user.isModified('password')) {
@@ -169,7 +164,7 @@ userSchema.pre('save', async function (next) {
 /**
  * Delete user tasks when the user is removed
  */
-userSchema.pre('remove', async function (next) {
+erasmusCandidateSchema.pre('remove', async function (next) {
     const user = this
 
     await Task.deleteMany({owner: user._id})

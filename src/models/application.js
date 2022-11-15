@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const Form = require('./form')
 const Department = require('./department')
+const PreApproval = require('./preApprovalForm')
+const LearningAgreement = require('./learningAgreementForm')
+const ErasmusCoordinator = require('./erasmusCoordinator')
 
 const applicationSchema = new mongoose.Schema({
     status: {
@@ -9,7 +12,7 @@ const applicationSchema = new mongoose.Schema({
         required: true
     },
 
-    applicantUser: {
+    applicantCandidate: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
@@ -26,17 +29,6 @@ const applicationSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-
-    forms: [{
-        form: {
-            type: Form,
-            required: true,
-            ref: 'Form'
-        }
-    }],
-
-
-
 }, {
     timestamps: true
 })
@@ -57,16 +49,26 @@ applicationSchema.statics.cancelApplication = async function (_id) {
     return query
 }
 
+// applicationProgramType will be always 0 since student's minor application form will be evaluated by the corresponding Erasmus Coordinator of the major program
 applicationSchema.statics.createApplication = async function (user, applicationProgramType = 0) {
     const application = {
         status: 0,
         applicantUser: user._id,
         appliedInstitution: user.appliedInstitution,
-        responsibleErasmusCoord: await User.find({ assignedUniversities: { $all: [user.appliedInstitution] }, department: await user.departments.find(element => element.type == applicationProgramType).department }),
-        forms: [{
-            // Form lazım initialize etmek için         
-        }],
+        responsibleErasmusCoord: await ErasmusCoordinator.find({ assignedUniversities: { $all: [user.nominatedUniversityId] }, department: await user.departments.find(element => element.type == applicationProgramType).department }),
     }
+    // Manually creating object id and storing it on database after usage
+    var id = new mongoose.Types.ObjectId();
+    console.log(id)
+    application["_id"] = id
+    let form = new PreApproval({
+        ownerApplication: id
+    })
+    await form.save()
+    form = new LearningAgreement({
+        ownerApplication: id
+    })
+    await form.save()
     return application
 }
 

@@ -6,10 +6,10 @@ const Task = require('./task')
 
 const incomingStudentWishedCoursesFormSchema = new mongoose.Schema({
     
-    ownerStudent: {
+    ownerApplication: {
         type: mongoose.SchemaType.Type.ObjectId,
         required: true,
-        ref: 'IncomingStudent'
+        ref: 'Application'
     },
     userType: {
         type: Number,

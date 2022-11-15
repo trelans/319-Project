@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/user')
 const University = require('../models/university')
 const ErasmusCoordinator = require('../models/erasmusCoordinator')
+const ErasmusCandidate = require('../models/erasmusCandidate')
 const Department = require("../models/department")
 const Application = require("../models/application")
 const auth = require('../middleware/auth')
@@ -11,15 +12,18 @@ const router = new express.Router()
 const path = require('path')
 
 router.post('/create/newCandidate', async (req,res) => {
-    const user = new User(req.body);
+    const university = await University.findOne({"name": req.body.nominatedUniversity})
+    delete req.body.universityName
+    req.body.nominatedUniversityId = university._id
+    const user = new ErasmusCandidate(req.body);
     try {
         const application = await Application.createApplication(user)
         await application.save()
-        user.applications.push(application)
         const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({user,token, application})
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
