@@ -1,6 +1,7 @@
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MainPage from "./pages/MainPage/MainPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -13,6 +14,11 @@ function App() {
         exact
         path="/forgot-password-page"
         element={<ForgotPasswordPage />}
+      />
+      <Route
+        exact
+        path="/reset-password-confirm-page"
+        element={<ResetPasswordConfirmPage />}
       />
     </Routes>
   );
