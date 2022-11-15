@@ -1,9 +1,11 @@
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
-    <div>
-      {" "}
-      <h1> Slm</h1>
-    </div>
+    <Routes>
+      <Route exact path="/" element={<LoginPage />} />
+    </Routes>
   );
 }
 
