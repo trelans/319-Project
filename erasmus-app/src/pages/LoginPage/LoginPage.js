@@ -15,10 +15,12 @@ function LoginPage() {
           <input type="text" placeholder="Username" />
           <input type="password" placeholder="Password" />
           <div className="center">
-            <button>LOGIN</button>
+            <Link to="/main-page">
+              <button>LOGIN</button>
+            </Link>
           </div>
           <div className="center">
-            <Link to="/main-page">Forgot Password?</Link>
+            <Link to="/forgot-password-page">Forgot Password?</Link>
           </div>
         </form>
       </div>
