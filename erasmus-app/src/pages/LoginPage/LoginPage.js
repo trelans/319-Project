@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./LoginPage.css";
 
 function LoginPage() {
@@ -14,6 +16,9 @@ function LoginPage() {
           <input type="password" placeholder="Password" />
           <div className="center">
             <button>LOGIN</button>
+          </div>
+          <div className="center">
+            <Link to="/main-page">Forgot Password?</Link>
           </div>
         </form>
       </div>
