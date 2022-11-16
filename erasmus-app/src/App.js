@@ -3,6 +3,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -25,6 +26,11 @@ function App() {
         exact
         path="/reset-password-page"
         element={<ResetPasswordPage />}
+      />
+      <Route 
+      exact 
+      path="/settings-page"
+      element={<SettingsPage/>}
       />
     </Routes>
   );
