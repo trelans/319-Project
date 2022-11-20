@@ -14,6 +14,7 @@ const path = require('path')
 router.post('/create/newCandidate', async (req, res) => {
     const university = await University.findOne({ "name": req.body.nominatedUniversity })
     const departments = []
+
     
     req.body.departments.forEach(async (e) => {
         // NOT USE DOT NOTATION AFTER AWAIT  

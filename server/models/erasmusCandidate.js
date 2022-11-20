@@ -32,11 +32,13 @@ const erasmusCandidateSchema = new mongoose.Schema({
             }
         }
     },
-    // Bu neydi kanka hatırlayamadım
+
+    // ENG notes + cpga ile hesaplanan erasmus placement puanı
     totalPoints: {
         type: Number,
         default: 0
     },
+
     preferredSemester: {
         type: Number,
         required: true
@@ -45,6 +47,16 @@ const erasmusCandidateSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'University'
+    },
+
+    signature: {
+        type: String,
+        required: true
+    },
+
+    academicYear: {
+        type: Number,
+        required: true
     },
 
     //prefferred universities string arr mı olmalı
