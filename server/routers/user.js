@@ -15,15 +15,17 @@ router.post('/create/newCandidate', async (req, res) => {
     const university = await University.findOne({ "name": req.body.nominatedUniversity })
     const departments = []
 
-    
-    req.body.departments.forEach(async (e) => {
-        // NOT USE DOT NOTATION AFTER AWAIT  
-        // const department = await Department.findOne({ "name": e.name })._id
-        const department = await Department.findOne({ "name": e.name })
-        console.log(department)
-        
-    })
+    // Do NOT use forEach with await functions, use this method instead
+    await Promise.all(req.body.departments.map(async (e) => {
+        const department = await Department.findOne({ "name": e.name})
+        departments.push({"id": department._id, "type": e.type})
+    }))
+
     delete req.body.universityName
+    delete req.body.departments
+
+    req.body.departments = departments
+
     req.body.nominatedUniversityId = university._id
     const user = new ErasmusCandidate(req.body);
 
@@ -41,6 +43,7 @@ router.post('/create/newCandidate', async (req, res) => {
 
 router.post('/create/newErasmusCoordinator', async (req, res) => {
     const user = new ErasmusCoordinator(req.body);
+    console.log(user)
     try {
         const token = await user.generateAuthToken()
         await user.save()
