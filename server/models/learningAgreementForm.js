@@ -12,24 +12,20 @@ const learningAgreementFormSchema = new mongoose.Schema({
         ref: 'Application'
     },
     
+    ownerStudent: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'erasmusCandidate'
+    },
+    
+    
+    
+    
 }, {
     timestamps: true
 })
 
-// // not stored in db for mongoose
-// userSchema.virtual('tasks', {
-//     ref: 'Task',
-//     localField: '_id',
-//     foreignField: 'owner'
-// })
 
-/*
-userSchema.virtual('university', {
-    ref: 'University',
-    localField: '_id',
-    foreignField: 'owner'
-})
-*/
 
 
 
