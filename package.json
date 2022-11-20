@@ -1,30 +1,42 @@
 {
-  "name": "task-manager",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server/index.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon server/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "erasmus-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bad-words": "^3.0.4",
-    "bcryptjs": "^2.4.3",
-    "express": "^4.18.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongodb": "^4.8.1",
-    "mongoose": "^6.5.0",
-    "multer": "^1.4.5-lts.1",
-    "save-dev": "^0.0.1-security",
-    "sharp": "^0.30.7",
-    "socket.io": "^4.5.3",
-    "validator": "^13.7.0"
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.14",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "env-cmd": "^10.1.0",
-    "nodemon": "^2.0.19"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
