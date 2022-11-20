@@ -336,10 +336,60 @@ const learningAgreementFormSchema = new mongoose.Schema({
     },
 
     //below parts is for "after mobility period".
-    academicOutcomesAtReceivingIns: {},
+    academicOutcomesAtReceivingIns: {
+        component: [{
+            componentCode: {
+                type: String,
+                required: true
+            },
+            componentTitle: {
+                type: String,
+                required: true
+            },
+            isComponentComplete: {
+                type: Boolean,
+                required: true
+            },
+            ectsCredits: {
+                type: Number,
+                required: true
+            },
+            grade: {
+                type: String,
+                required: true
+            }
+        }],
+        totalPoints: {
+            type: Number,
+            required: true
+        }
+    },
 
 
-    recognitionOfOutcomesAtSendingIns: {},
+    recognitionOfOutcomesAtSendingIns: {
+        component: [{
+            componentCode: {
+                type: String,
+                required: true
+            },
+            componentTitle: {
+                type: String,
+                required: true
+            },
+            ectsCredits: {
+                type: Number,
+                required: true
+            },
+            grade: {
+                type: String,
+                required: false
+            }
+        }],
+        totalPoints: {
+            type: Number,
+            required: true
+        }
+    },
 
 
 
