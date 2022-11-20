@@ -51,15 +51,15 @@ applicationSchema.statics.cancelApplication = async function (_id) {
 
 // applicationProgramType will be always 0 since student's minor application form will be evaluated by the corresponding Erasmus Coordinator of the major program
 applicationSchema.statics.createApplication = async function (user, applicationProgramType = 0) {
-    const erasmusCoord = await ErasmusCoordinator.find({ assignedUniversities: { $all: [user.nominatedUniversityId]  }})
-    console.log("asdasdsa " + erasmusCoord)
+    const erasmusCoord = await ErasmusCoordinator.findOne({ "assignedUniversities.universityId": user.nominatedUniversityId})
 
     const application = new Application({
         status: 0,
-        applicantUser: user._id,
-        appliedInstitution: user.appliedInstitution,
-        responsibleErasmusCoord: await ErasmusCoordinator.find({ assignedUniversities: { $all: [user.nominatedUniversityId] }, department: await user.departments.find(element => element.type == applicationProgramType).department })
+        applicantCandidate: user._id,
+        appliedInstitution: user.nominatedUniversityId,
+        responsibleErasmusCoord: erasmusCoord._id
     })
+
     // Manually creating object id and storing it on database after usage
     var id = new mongoose.Types.ObjectId();
     console.log(id)

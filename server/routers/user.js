@@ -25,10 +25,10 @@ router.post('/create/newCandidate', async (req, res) => {
     delete req.body.departments
 
     req.body.departments = departments
-    console.log(departments)
+
     req.body.nominatedUniversityId = university._id
     const user = new ErasmusCandidate(req.body);
-    console.log(user)
+
     try {
         const application = await Application.createApplication(user)
         await application.save()
@@ -43,6 +43,7 @@ router.post('/create/newCandidate', async (req, res) => {
 
 router.post('/create/newErasmusCoordinator', async (req, res) => {
     const user = new ErasmusCoordinator(req.body);
+    console.log(user)
     try {
         const token = await user.generateAuthToken()
         await user.save()
