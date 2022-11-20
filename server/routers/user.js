@@ -84,14 +84,15 @@ router.post('/create/newDepartment', async (req, res) => {
     }
 })
 
+/*
 router.get('/create/loginpage', async (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))
 })
+*/
 
 router.post('/users/login', async (req, res) => {
 
     try {
-        res.sendFile(path.join(__dirname, '../../public/login.html'))
         const user = await User.findByCredentials(req.body.email, req.body.password)
         if (user.active) {
             const token = await user.generateAuthToken()

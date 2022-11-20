@@ -1,16 +1,16 @@
-require('./db/mongoose') //connect to db
-const http = require('http')
 const app = require('./app')
 
+/*
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const {generateMessage, generateLocationMessage} = require('./utils/messages')
 const {addUser,removeUser,getUser,getUsersInRoom} = require('./utils/users')
 
 const port = process.env.PORT
-const server = http.createServer(app)
 const io = socketio(server)
+*/
 
+/*
 io.on('connection', (socket) => {
     console.log('New WebSocket connection')
 
@@ -67,7 +67,10 @@ io.on('connection', (socket) => {
         }
     })
 })
+*/
 
+/*
 server.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
+*/
