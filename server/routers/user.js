@@ -10,6 +10,36 @@ const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
 const path = require('path')
+const Task = require("../models/task");
+
+// Transport these to profiles routes Later
+router.get('/profiles/universities/:id', auth, async (req,res) => {
+    const _id = req.params.id
+    try {
+        const university = await University.findOne({_id})
+        console.log(university)
+        return res.send(university)
+    }catch (e) {
+        res.status(500).send(e)
+    }
+})
+router.get('/tasks/:id', auth, async (req,res) => {
+
+    const _id = req.params.id;
+
+    try {
+        const task = await Task.findOne({_id, owner: req.user._id})
+
+        if(!task) {
+            return res.status(404).send(task)
+        }
+
+        res.send(task)
+    } catch(e) {
+        res.status(500).send(e)
+    }
+})
+//
 
 router.post('/create/newCandidate', async (req, res) => {
     const university = await University.findOne({ "name": req.body.nominatedUniversity })
