@@ -60,7 +60,7 @@ const erasmusCoordinatorSchema = new mongoose.Schema({
     },
     
     assignedUniversities: [{
-        university: {
+        universityId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'University'

@@ -4,6 +4,20 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+// Mongoose creates id for SubDocuments automatically, create this method to override it
+const department = mongoose.Schema({
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: "noDepartment",
+        ref: 'Department'
+    },
+    //0 major, 1 minor
+    type: {
+        type: Number,
+        default: 0
+    }
+}, { _id : false });
+
 const erasmusCandidateSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -32,11 +46,13 @@ const erasmusCandidateSchema = new mongoose.Schema({
             }
         }
     },
-    // Bu neydi kanka hatırlayamadım
+
+    // ENG notes + cpga ile hesaplanan erasmus placement puanı
     totalPoints: {
         type: Number,
         default: 0
     },
+
     preferredSemester: {
         type: Number,
         required: true
@@ -45,6 +61,16 @@ const erasmusCandidateSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'University'
+    },
+
+    signature: {
+        type: String,
+        required: true
+    },
+
+    academicYear: {
+        type: Number,
+        required: true
     },
 
     //prefferred universities string arr mı olmalı
@@ -56,18 +82,9 @@ const erasmusCandidateSchema = new mongoose.Schema({
             ref: 'University'
         }
     }],
-    departments:[{
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            default: "noDepartment",
-            ref: 'Department'
-        },
-        //0 major, 1 minor
-        type: {
-            type: Number,
-            default: 0
-        }
-    }],
+
+    departments:[department],
+
     studentId: {
         type: Number,
         default: 0

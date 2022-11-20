@@ -72,7 +72,31 @@ const universitySchema = new mongoose.Schema({
             ref: 'ErasmusCandidate'
         }
     }],
-    
+
+    erasmusCode: {
+        type: Number,
+        required: true
+    },
+
+    address: {
+        type: String,
+        required: true
+    },
+
+    country: {
+        type: String,
+        required: true
+    },
+
+    countryCode: {
+        type: String,
+        required: true
+    },
+
+
+
+
+
     languageRequirements: [{
         language: {
             type: String,
