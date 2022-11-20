@@ -57,7 +57,7 @@ const erasmusCandidateSchema = new mongoose.Schema({
         }
     }],
     departments:[{
-        department: {
+        id: {
             type: mongoose.Schema.Types.ObjectId,
             default: "noDepartment",
             ref: 'Department'

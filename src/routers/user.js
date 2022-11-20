@@ -11,39 +11,49 @@ const sharp = require('sharp')
 const router = new express.Router()
 const path = require('path')
 
-router.post('/create/newCandidate', async (req,res) => {
-    const university = await University.findOne({"name": req.body.nominatedUniversity})
+router.post('/create/newCandidate', async (req, res) => {
+    const university = await University.findOne({ "name": req.body.nominatedUniversity })
+    const departments = []
+    
+    req.body.departments.forEach(async (e) => {
+        // NOT USE DOT NOTATION AFTER AWAIT  
+        // const department = await Department.findOne({ "name": e.name })._id
+        const department = await Department.findOne({ "name": e.name })
+        console.log(department)
+        
+    })
     delete req.body.universityName
     req.body.nominatedUniversityId = university._id
     const user = new ErasmusCandidate(req.body);
+
     try {
         const application = await Application.createApplication(user)
         await application.save()
         const token = await user.generateAuthToken()
         await user.save()
-        res.status(201).send({user,token, application})
+        res.status(201).send({ user, token, application })
     } catch (e) {
-        console.log(e)
+        // console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.post('/create/newErasmusCoordinator', async (req,res) => {
+router.post('/create/newErasmusCoordinator', async (req, res) => {
     const user = new ErasmusCoordinator(req.body);
     try {
         const token = await user.generateAuthToken()
         await user.save()
-        res.status(201).send({user, token})
+        res.status(201).send({ user, token })
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.post('/create/newUniversity', async (req,res) => {
+router.post('/create/newUniversity', async (req, res) => {
     const departments = req.body.departments
     departments.forEach(async depName => {
-        const department = await Department.findOne( {name: depName} )
-        if(department) {
+        const department = await Department.findOne({ name: depName })
+        if (department) {
             department.hostUniversities.push({
                 universityId: req.body.universityId,
             })
@@ -56,36 +66,36 @@ router.post('/create/newUniversity', async (req,res) => {
     const university = new University(req.body);
     try {
         await university.save()
-        res.status(201).send({university})
+        res.status(201).send({ university })
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
 // Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
-router.post('/create/newDepartment', async (req,res) => {
+router.post('/create/newDepartment', async (req, res) => {
     const department = new Department(req.body);
     try {
         await department.save()
-        res.status(201).send({department})
+        res.status(201).send({ department })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get('/create/loginpage', async (req,res) => {
+router.get('/create/loginpage', async (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))
 })
 
-router.post('/users/login', async (req,res) => {
+router.post('/users/login', async (req, res) => {
 
     try {
         res.sendFile(path.join(__dirname, '../../public/login.html'))
         const user = await User.findByCredentials(req.body.email, req.body.password)
-        if(user.active) {
+        if (user.active) {
             const token = await user.generateAuthToken()
-            res.send({user, token})
+            res.send({ user, token })
         } else {
             throw new Error('The Account is not active!')
         }
@@ -95,7 +105,7 @@ router.post('/users/login', async (req,res) => {
 })
 
 router.post('/users/logout', auth, async (req, res) => {
-    try{
+    try {
         //remove the specific token
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -104,40 +114,40 @@ router.post('/users/logout', auth, async (req, res) => {
         await req.user.save()
 
         res.send()
-    }catch(e){
+    } catch (e) {
         res.status(500).send()
     }
 })
 
 router.post('/users/logoutAll', auth, async (req, res) => {
-    try{
+    try {
         //remove all tokens
         req.user.tokens = []
         await req.user.save()
 
         res.send()
-    }catch(e){
+    } catch (e) {
         res.status(500).send()
     }
 })
 
-router.get('/users/me', auth, async (req,res) => {
+router.get('/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
 
-router.patch('/users/me', auth, async (req,res) => {
+router.patch('/users/me', auth, async (req, res) => {
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name','email','password','age']
+    const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => {
         return allowedUpdates.includes(update)
     })
 
-    if(!isValidOperation) {
-        return res.status(400).send({error: 'Invalid Updates!'})
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid Updates!' })
     }
 
-    try{
+    try {
         const user = req.user
 
         updates.forEach((update) => {
@@ -146,7 +156,7 @@ router.patch('/users/me', auth, async (req,res) => {
 
         await user.save()
         res.send(user)
-    }catch(e) {
+    } catch (e) {
         res.status(400).send(e)
     }
 })
@@ -157,7 +167,7 @@ const upload = multer({
     },
     fileFilter(req, file, cb) {
 
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             cb(new Error('Please upload an image'))
             return
         }
@@ -166,49 +176,49 @@ const upload = multer({
     }
 })
 
-router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) => {
+router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
 
-    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
+    const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
     req.user.avatar = buffer
 
     await req.user.save()
 
     res.send()
 }, (error, req, res, next) => {
-    res.status(400).send({error: error.message})
+    res.status(400).send({ error: error.message })
 })
 
-router.delete('/users/me/avatar', auth, async (req,res) => {
+router.delete('/users/me/avatar', auth, async (req, res) => {
 
     req.user.avatar = undefined
     await req.user.save()
-    
+
     res.status(200).send()
 })
 
-router.get('/users/:id/avatar', async (req,res) => {
+router.get('/users/:id/avatar', async (req, res) => {
 
     try {
         const user = await User.findById(req.params.id)
 
-        if(!user || !user.avatar) {
+        if (!user || !user.avatar) {
             throw new Error()
         }
 
-        res.set('Content-Type','image/png')
+        res.set('Content-Type', 'image/png')
         res.send(user.avatar)
 
-    } catch(e) {
+    } catch (e) {
         res.status(404).send()
     }
 })
 
-router.delete('/users/me', auth, async (req,res) => {
+router.delete('/users/me', auth, async (req, res) => {
 
     try {
         await req.user.remove()
         res.send(req.user)
-    }catch(e) { 
+    } catch (e) {
         res.status(500).send()
     }
 })
