@@ -218,13 +218,133 @@ const learningAgreementFormSchema = new mongoose.Schema({
         }
     },
 
+    //below is needed for "during mobility period", most of above was for "before mobility period".
+
+    //change for study program and its approval tables
+    changedStudyProgram: {
+        component: [{
+
+            componentCode: {
+                type: String,
+                required: true
+            },
+            componentTitle: {
+                type: String,
+                required: true
+            },
+            isComponentAdded: {
+                type: Boolean,
+                required: true
+            },
+            isComponentDeleted: {
+                type: Boolean,
+                required: true
+            },
+            reasonForChange: {
+                type: String,
+                required: true
+            },
+            ectsCredits: {
+                type: Number,
+                required: true
+            }
+        }],
+        totalEctsCredits: {
+            type: Number,
+            required: true
+        }
+    },
+
+
+    changedRecognitionTable:  {
+        component: [{
+            componentCode: {
+                type: String,
+                required: true
+            },
+            componentTitle: {
+                type: String,
+                required: true
+            },
+            semester: {
+                type: String,
+                required: true
+            },
+            ectsCredits: {
+                type: Number,
+                required: true
+            }
+        }],
+        totalEctsCredits: {
+            type: Number,
+            required: true
+        }
+    },
+
+    changedResponsiblePersonAtReceivingIns: {
+        name: {
+            type: String,
+            required: true
+        },
+        personFunction: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true
+        },
+        signature: {
+            type: String,
+            required: true
+        }
+    },
+
+    changedResponsiblePersonFromSendingIns: {
+        name: {
+            type: String,
+            required: true
+        },
+        personFunction: {
+            type: String,
+            required: true
+        },
+        phoneNumber: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true
+        },
+        signature: {
+            type: String,
+            required: true
+        }
+    },
+
+    //below parts is for "after mobility period".
+    academicOutcomesAtReceivingIns: {},
+
+
+    recognitionOfOutcomesAtSendingIns: {},
 
 
 
+    //
 
-    
-    
-    
 }, {
     timestamps: true
 })
