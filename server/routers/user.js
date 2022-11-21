@@ -123,10 +123,31 @@ router.post('/create/newUniversity', async (req, res) => {
 // Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
 router.post('/create/newDepartment', async (req, res) => {
     console.log(req.body)
-    const department = new Department(req.body);
     try {
+        let department;
+        let response;
+        // 0 POST, 1 GET
+        if(req.body.type === "0"){
+            delete req.type
+            department = new Department(req.body);
+            response = res.status(201)
+        }else {
+            department = await Department.findById(req.body.depId);
+            response = res.status(302)
+        }
         await department.save()
-        res.status(201).send({ department })
+        response.send({ department })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.get('/create/newDepartment', async (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    try {
+        res.status(302).send({ department })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
