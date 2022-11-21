@@ -1,6 +1,7 @@
 //import Routes from './pageRoutes'
 import React, {Component} from 'react'
-import { Routes, Route} from "react-router";
+import { Routes, Route } from "react-router"
+import { Navigate } from "react-router-dom"
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -61,6 +62,8 @@ class App extends Component {
 function App() {
     return (
         <Routes>
+            // TODO true will be changed to checking login
+            <Route exact path="/" element={true ? <Navigate to="/login"/>: <Navigate to="/main-page" />}/>
             <Route exact path="/login" element={<LoginPage/>}/>
             <Route exact path="/main-page" element={<MainPage/>}/>
             <Route
