@@ -5,8 +5,8 @@ const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
 
-router.post('/login', auth, async (req,res) => {
-
+router.post('/login', async (req,res) => {
+    console.log(req.body)
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         if(user.active) {
@@ -16,7 +16,8 @@ router.post('/login', auth, async (req,res) => {
             res.status(401).send("The account is not active")
         }
     } catch (e) {
-        res.status(400).send(e.message)
+        console.log(e)
+        res.status(400).send(e)
     }
 })
 

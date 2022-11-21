@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import "./styles.css";
 
-import {handleSubmit} from "../requests";
+import {handleRequests} from "../requests";
 import React, {useState} from "react";
 
 function CreateDepartment() {
@@ -21,12 +21,12 @@ function CreateDepartment() {
                     <input className="lp-input" type="text" placeholder="Department Name" onChange={e => setName(e.target.value)}/>
                     <div className="lp-center">
 
-                        <button onClick={(e) => handleSubmit(e, {"name": name}, "create/newDepartment", "0",(result) => {
-                            setCreatedId(result)
-                            console.log("name", name)
+                        <button onClick={(e) => handleRequests(e, {"name": name}, "create/newDepartment", "0",(response, status) => {
+                            console.log(response)
+                            setCreatedId(response._id)
                         })}>Post Data</button>
-                        <button onClick={(e) => handleSubmit(e, {"depId": createdId}, "create/newDepartment", "1",(result) => {
-                            setCreatedDep(result)
+                        <button onClick={(e) => handleRequests(e, {"depId": createdId}, "create/newDepartment", "1",(response, status) => {
+                            setCreatedDep(JSON.stringify(response))
                         })}>Get Data</button>
 
                     </div>

@@ -136,7 +136,8 @@ router.post('/create/newDepartment', async (req, res) => {
             response = res.status(302)
         }
         await department.save()
-        response.send({ department })
+        console.log(department)
+        response.send(department)
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
