@@ -143,17 +143,6 @@ router.post('/create/newDepartment', async (req, res) => {
     }
 })
 
-router.get('/create/newDepartment', async (req, res) => {
-    console.log(req.body)
-    console.log(req.params)
-    try {
-        res.status(302).send({ department })
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
 /*
 router.get('/create/loginpage', async (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))
