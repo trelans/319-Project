@@ -1,4 +1,4 @@
-//import Routes from './pageRoutes'
+//import pageRoutes from './pageRoutes'
 import React, {Component} from 'react'
 import { Routes, Route } from "react-router"
 import { Navigate } from "react-router-dom"
@@ -11,6 +11,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList"
 import CreateDepartment from "./pages/CreateDepartment/CreateDepartment";
+
 
 /*
 class App extends Component {
@@ -53,7 +54,7 @@ class App extends Component {
 
 	render() {
 		return (
-            Routes
+            pageRoutes
 		)
 	}
 }
@@ -100,6 +101,5 @@ function App() {
         </Routes>
     );
 }
-
 
 export default App;
