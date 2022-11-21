@@ -62,7 +62,7 @@ class App extends Component {
 function App() {
     return (
         <Routes>
-            <Route exact path="/users/login" element={<LoginPage/>}/>
+            <Route exact path="/" element={<LoginPage/>}/>
             <Route exact path="/main-page" element={<LoginPage/>}/>
             
             <Route
