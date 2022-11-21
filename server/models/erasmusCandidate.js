@@ -88,15 +88,8 @@ const erasmusCandidateSchema = new mongoose.Schema({
         required: true
     },
 
-    //prefferred universities string arr mı olmalı
-    //yoksa university arrayi mi
-    preferredUniversities: [{
-        University: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'University'
-        }
-    }],
+    preferredUniversities: [preferredUniversity],
+    tokens: [token],
 
     departments:[department],
 
@@ -126,12 +119,7 @@ const erasmusCandidateSchema = new mongoose.Schema({
             }
         }
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
+
     avatar: {
         type: Buffer
     }
