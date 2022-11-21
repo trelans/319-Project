@@ -1,6 +1,7 @@
 //import pageRoutes from './pageRoutes'
 import React, {Component} from 'react'
-import { Routes, Route} from "react-router";
+import { Routes, Route } from "react-router"
+import { Navigate } from "react-router-dom"
 
 import LoginPage from "./pages/LoginPage/LoginPage";
 import MainPage from "./pages/MainPage/MainPage";
@@ -9,6 +10,7 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPass
 import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList"
+import CreateDepartment from "./pages/CreateDepartment/CreateDepartment";
 
 
 /*
@@ -58,13 +60,13 @@ class App extends Component {
 }
 */
 
-
 function App() {
     return (
         <Routes>
-            <Route exact path="/" element={<LoginPage/>}/>
-            <Route exact path="/main-page" element={<LoginPage/>}/>
-            
+            // TODO true will be changed to checking login
+            <Route exact path="/" element={true ? <Navigate to="/login"/>: <Navigate to="/main-page" />}/>
+            <Route exact path="/login" element={<LoginPage/>}/>
+            <Route exact path="/main-page" element={<MainPage/>}/>
             <Route
                 exact
                 path="/forgot-password-page"
@@ -89,6 +91,11 @@ function App() {
                 exact
                 path="/applicants-list"
                 element={<ApplicantsList/>}
+            />
+            <Route
+                exact
+                path="/create-department"
+                element={<CreateDepartment/>}
             />
 
         </Routes>

@@ -10,6 +10,50 @@ const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
 const path = require('path')
+const Task = require("../models/task");
+
+// Transport these to profiles routes Later
+router.get('/profiles/universities/:id', async (req,res) => {
+    const _id = req.params.id
+    try {
+        const university = await University.findOne({_id})
+        console.log(university)
+        return res.send(university)
+    }catch (e) {
+        res.status(500).send(e)
+    }
+})
+
+/*
+router.post('/profiles/universities/:id', async (req,res) => {
+    const _id = req.params.id
+    try {
+        const university = await University.findOne({_id})
+        console.log(university)
+        return res.send(university)
+    }catch (e) {
+        res.status(500).send(e)
+    }
+})
+*/
+
+router.get('/tasks/:id', auth, async (req,res) => {
+
+    const _id = req.params.id;
+
+    try {
+        const task = await Task.findOne({_id, owner: req.user._id})
+
+        if(!task) {
+            return res.status(404).send(task)
+        }
+
+        res.send(task)
+    } catch(e) {
+        res.status(500).send(e)
+    }
+})
+//
 
 router.post('/create/newCandidate', async (req, res) => {
     const university = await University.findOne({ "name": req.body.nominatedUniversity })
@@ -78,10 +122,32 @@ router.post('/create/newUniversity', async (req, res) => {
 
 // Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
 router.post('/create/newDepartment', async (req, res) => {
-    const department = new Department(req.body);
+    console.log(req.body)
     try {
+        let department;
+        let response;
+        // 0 POST, 1 GET
+        if(req.body.type === "0"){
+            delete req.type
+            department = new Department(req.body);
+            response = res.status(201)
+        }else {
+            department = await Department.findById(req.body.depId);
+            response = res.status(302)
+        }
         await department.save()
-        res.status(201).send({ department })
+        response.send({ department })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.get('/create/newDepartment', async (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    try {
+        res.status(302).send({ department })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

@@ -59,13 +59,13 @@ const erasmusCoordinatorSchema = new mongoose.Schema({
         }
     },
     
-    assignedUniversities: [{
+    assignedUniversities: [mongoose.Schema({
         universityId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: 'University'
         }
-    }],
+    }, {_id: false})],
     assignedTasks: [{
         task: {
             type: mongoose.Schema.Types.ObjectId,
