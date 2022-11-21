@@ -23,4 +23,6 @@ app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
 
+console.log("Burayı sil")
+
 module.exports = app
