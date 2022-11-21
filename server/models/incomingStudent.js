@@ -23,6 +23,7 @@ const token = mongoose.Schema({
 
 }, {_id : false});
 
+
 const incomingStudentSchema = new mongoose.Schema({
     name: {
         type: String,
