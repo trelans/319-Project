@@ -4,6 +4,17 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+/*
+componentOfStudyProgramAtReceivingIns
+componentOfRecognitionAtSendingIns
+componentOfChangedStudyProgram
+componentOfChangedRecognitionTable
+changedResponsiblePersonAtReceivingIns
+changedResponsiblePersonFromSendingIns
+componentOfAcademicOutcomesAtReceivingIns
+componentOfRecognitionOfOutcomesAtSendingIns
+ */
+
 const learningAgreementFormSchema = new mongoose.Schema({
     
     ownerApplication: {
@@ -114,7 +125,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
     }],
     */
     studyProgramAtReceivingIns: {
-        component: [{
+        componentOfStudyProgramAtReceivingIns: [{
             componentCode: {
                 type: String,
                 required: true
@@ -140,7 +151,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     recognitionAtSendingIns:  {
-        component: [{
+        componentOfRecognitionAtSendingIns: [{
             componentCode: {
                 type: String,
                 required: true
@@ -222,7 +233,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
     //change for study program and its approval tables
     changedStudyProgram: {
-        component: [{
+        componentOfChangedStudyProgram: [{
 
             componentCode: {
                 type: String,
@@ -257,7 +268,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     changedRecognitionTable:  {
-        component: [{
+        componentOfChangedRecognitionTable: [{
             componentCode: {
                 type: String,
                 required: true
@@ -337,7 +348,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
     //below parts is for "after mobility period".
     academicOutcomesAtReceivingIns: {
-        component: [{
+        componentOfAcademicOutcomesAtReceivingIns: [{
             componentCode: {
                 type: String,
                 required: true
@@ -367,7 +378,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     recognitionOfOutcomesAtSendingIns: {
-        component: [{
+        componentOfRecognitionOfOutcomesAtSendingIns: [{
             componentCode: {
                 type: String,
                 required: true
@@ -390,8 +401,6 @@ const learningAgreementFormSchema = new mongoose.Schema({
             required: true
         }
     },
-
-
 
     //
 
