@@ -122,6 +122,7 @@ router.post('/create/newUniversity', async (req, res) => {
 
 // Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
 router.post('/create/newDepartment', async (req, res) => {
+    console.log(req.body)
     const department = new Department(req.body);
     try {
         await department.save()

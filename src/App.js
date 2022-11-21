@@ -9,6 +9,7 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPass
 import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList"
+import CreateDepartment from "./pages/CreateDepartment/CreateDepartment";
 
 /*
 class App extends Component {
@@ -57,7 +58,6 @@ class App extends Component {
 }
 */
 
-
 function App() {
     return (
         <Routes>
@@ -87,6 +87,11 @@ function App() {
                 exact
                 path="/applicants-list"
                 element={<ApplicantsList/>}
+            />
+            <Route
+                exact
+                path="/create-department"
+                element={<CreateDepartment/>}
             />
 
         </Routes>
