@@ -3,9 +3,6 @@ import { Link } from "react-router-dom";
 function SettingsPage() {
   return (
     <div className="sp-container">
-      <Link to="/main-page">
-        <button>Back</button>
-      </Link>
       <form className="sp-center">
         <div>
           <h1 className="sp-h1">Settings</h1>
