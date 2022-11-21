@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
-const assignedUniversity = new mongoose.Schema({
+const assignedUniversity = mongoose.Schema({
     universityId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -12,7 +12,7 @@ const assignedUniversity = new mongoose.Schema({
     }
 }, {_id: false});
 
-const assignedTask = new mongoose.Schema({
+const assignedTask = mongoose.Schema({
     task: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
