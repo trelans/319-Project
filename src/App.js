@@ -1,4 +1,4 @@
-//import Routes from './pageRoutes'
+//import pageRoutes from './pageRoutes'
 import React, {Component} from 'react'
 import { Routes, Route} from "react-router";
 
@@ -9,6 +9,7 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPass
 import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList"
+
 
 /*
 class App extends Component {
@@ -51,7 +52,7 @@ class App extends Component {
 
 	render() {
 		return (
-            Routes
+            pageRoutes
 		)
 	}
 }
@@ -61,8 +62,9 @@ class App extends Component {
 function App() {
     return (
         <Routes>
-            <Route exact path="/" element={<LoginPage/>}/>
-            <Route exact path="/main-page" element={<MainPage/>}/>
+            <Route exact path="/users/login" element={<LoginPage/>}/>
+            <Route exact path="/main-page" element={<LoginPage/>}/>
+            
             <Route
                 exact
                 path="/forgot-password-page"
@@ -92,6 +94,5 @@ function App() {
         </Routes>
     );
 }
-
 
 export default App;
