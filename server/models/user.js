@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    /*
     departments:[{
         department: {
             type: mongoose.Schema.Types.ObjectId,
@@ -42,7 +43,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'University'
     },
-
+    */
     studentId: {
         type: Number,
         default: 0

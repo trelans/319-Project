@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)
-//app.use(loginRouter)
+app.use(loginRouter)
 //app.use(applicationRouter)
 
 app.listen(port, () => {
