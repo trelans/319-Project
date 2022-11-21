@@ -4,7 +4,7 @@ const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
 const loginRouter = require('./routers/loginPages')
 const applicationRouter = require('./routers/application')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 
 const app = express()
 

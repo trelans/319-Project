@@ -13,7 +13,7 @@ const path = require('path')
 const Task = require("../models/task");
 
 // Transport these to profiles routes Later
-router.get('/profiles/universities/:id', auth, async (req,res) => {
+router.get('/profiles/universities/:id', async (req,res) => {
     const _id = req.params.id
     try {
         const university = await University.findOne({_id})
@@ -23,6 +23,20 @@ router.get('/profiles/universities/:id', auth, async (req,res) => {
         res.status(500).send(e)
     }
 })
+
+/*
+router.post('/profiles/universities/:id', async (req,res) => {
+    const _id = req.params.id
+    try {
+        const university = await University.findOne({_id})
+        console.log(university)
+        return res.send(university)
+    }catch (e) {
+        res.status(500).send(e)
+    }
+})
+*/
+
 router.get('/tasks/:id', auth, async (req,res) => {
 
     const _id = req.params.id;
