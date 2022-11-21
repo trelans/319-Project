@@ -3,6 +3,16 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
+const Enum = require('enum')
+
+/*
+Course Coordinator -- 1
+Erasmus Coordinator -- 2
+Erasmus Candidate -- 3
+Incoming Student -- 4
+ */
+
+const userTypeEnum = new Enum({'Course Coordinator' : 0 , 'Erasmus Coordinator' : 1, 'Erasmus Candidate' : 2, 'Incoming Student' : 3, 'Default User' : 4})
 
 // Mongoose creates id for SubDocuments automatically, create this method to override it
 const department = mongoose.Schema({
@@ -51,9 +61,12 @@ const erasmusCandidateSchema = new mongoose.Schema({
     },
     userType: {
         type: Number,
+        //enum: ['Erasmus Candidate'],
         default: 0,
+
+
         validate(value) {
-            if(value < 0) {
+            if(value < 0 || value > 5) {
                 throw new Error('User Type must be greater than zero')
             }
         }
