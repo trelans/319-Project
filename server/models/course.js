@@ -4,6 +4,13 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const alternativeCourse = mongoose.Schema({
+
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Course'
+}, {_id: false});
+
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -32,13 +39,9 @@ const courseSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    alternativeCourses: [{
-        course: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Course'
-        }
-    }],
+
+    alternativeCourses: [alternativeCourse],
+
     syllabusLink: {
         type: String,
         required: false,

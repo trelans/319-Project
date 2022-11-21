@@ -19,18 +19,15 @@ const department = mongoose.Schema({
 }, { _id : false });
 
 const preferredUniversity = mongoose.Schema({
-    University: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'University'
-    }
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'University'
 }, {_id : false});
 
 const token = mongoose.Schema({
-    token: {
-        type: String,
-        required: true
-    }
+    type: String,
+    required: true
+
 }, {_id : false});
 
 const erasmusCandidateSchema = new mongoose.Schema({
