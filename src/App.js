@@ -12,6 +12,7 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList";
 import CreateDepartment from "./pages/CreateDepartment/CreateDepartment";
 import ResetMailPage from "./pages/ResetMailPage/ResetMailPage";
+import ApplicationPage from "./pages/ApplicationPages/ApplicationPage";
 
 /*
 class App extends Component {
@@ -90,6 +91,7 @@ function App() {
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
+	  <Route exact path="/application-page" element={<ApplicationPage />} />
     </Routes>
   );
 }
