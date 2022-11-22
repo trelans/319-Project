@@ -37,7 +37,7 @@ body {
 
 .lp-button {
   background: #a5c9ca;
-  width: 100%;
+  width: 50%;
   border: 0;
   padding: 15px;
   color: #2c3333;
@@ -259,4 +259,56 @@ body {
 .sp-checkbox {
   width: 20px;
   height: 20px;
+}
+
+/* ResetPasswordPage (rpp) Styles */
+.rpp-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 5px;
+}
+
+.rpp-h1 {
+  font-size: 48px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+}
+
+.rpp-container {
+  width: 420px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.rpp-input {
+  background: #f2f2f2;
+  width: 80%;
+  margin: 0 0 20px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.rpp-button {
+  background: #a5c9ca;
+  width: 50%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-bottom: 15px;
+}
+
+.rpp-button:hover {
+  opacity: 75%;
 }
