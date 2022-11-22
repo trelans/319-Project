@@ -4,6 +4,45 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const appliedStudent = mongoose.Schema({
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'ErasmusCandidate'
+}, {_id: false});
+
+
+const feedback = mongoose.Schema({
+    feedbackContent: {
+        type: String,
+        required: true
+    },
+    feedbackOwner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ErasmusCandidate'
+    }
+}, {_id: false});
+
+
+const languageRequirement = mongoose.Schema({
+    type: String,
+    required: true
+}, {_id: false});
+
+
+const department = mongoose.Schema({
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: "noDepartment",
+        ref: 'Department'
+    },
+    //0 major, 1 minor
+    type: {
+        type: Number,
+        default: 0
+    }
+}, { _id : false });
+
+
 const universitySchema = new mongoose.Schema({
     name: {
         type: String,
@@ -11,13 +50,7 @@ const universitySchema = new mongoose.Schema({
         trim: true
     },
 
-    departments:[{
-        department: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Department',
-        },
-    }],
+    departments:[department],
 
     universityId: {
         type: Number,
@@ -54,24 +87,9 @@ const universitySchema = new mongoose.Schema({
     //     }
     // },
     
-    feedbacks: [{
-        feedback: {
-            type: String,
-            required: true
-        },
-        feedbackOwner: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'ErasmusCandidate'
-        }
-    }],
+    feedbacks: [feedback],
     
-    appliedStudents: [{
-        student: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'ErasmusCandidate'
-        }
-    }],
+    appliedStudents: [appliedStudent],
 
     erasmusCode: {
         type: Number,
@@ -93,16 +111,8 @@ const universitySchema = new mongoose.Schema({
         required: true
     },
 
+    languageRequirements: [languageRequirement]
 
-
-
-
-    languageRequirements: [{
-        language: {
-            type: String,
-            required: true
-        }
-    }]
 }, {
     timestamps: true
 })

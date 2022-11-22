@@ -3,6 +3,16 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
+const Enum = require('enum')
+
+/*
+Course Coordinator -- 1
+Erasmus Coordinator -- 2
+Erasmus Candidate -- 3
+Incoming Student -- 4
+ */
+
+const userTypeEnum = new Enum({'Course Coordinator' : 0 , 'Erasmus Coordinator' : 1, 'Erasmus Candidate' : 2, 'Incoming Student' : 3, 'Default User' : 4})
 
 // Mongoose creates id for SubDocuments automatically, create this method to override it
 const department = mongoose.Schema({
@@ -17,6 +27,18 @@ const department = mongoose.Schema({
         default: 0
     }
 }, { _id : false });
+
+const preferredUniversity = mongoose.Schema({
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'University'
+}, {_id : false});
+
+const token = mongoose.Schema({
+    type: String,
+    required: true
+
+}, {_id : false});
 
 const erasmusCandidateSchema = new mongoose.Schema({
     name: {
@@ -39,9 +61,12 @@ const erasmusCandidateSchema = new mongoose.Schema({
     },
     userType: {
         type: Number,
+        //enum: ['Erasmus Candidate'],
         default: 0,
+
+
         validate(value) {
-            if(value < 0) {
+            if(value < 0 || value > 5) {
                 throw new Error('User Type must be greater than zero')
             }
         }
@@ -73,15 +98,8 @@ const erasmusCandidateSchema = new mongoose.Schema({
         required: true
     },
 
-    //prefferred universities string arr mı olmalı
-    //yoksa university arrayi mi
-    preferredUniversities: [{
-        University: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'University'
-        }
-    }],
+    preferredUniversities: [preferredUniversity],
+    tokens: [token],
 
     departments:[department],
 
@@ -111,12 +129,7 @@ const erasmusCandidateSchema = new mongoose.Schema({
             }
         }
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
+
     avatar: {
         type: Buffer
     }

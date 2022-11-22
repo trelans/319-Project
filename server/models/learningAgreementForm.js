@@ -4,6 +4,144 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+/*
+componentOfStudyProgramAtReceivingIns
+componentOfRecognitionAtSendingIns
+componentOfChangedStudyProgram
+componentOfChangedRecognitionTable
+componentOfAcademicOutcomesAtReceivingIns
+componentOfRecognitionOfOutcomesAtSendingIns
+ */
+
+const componentOfStudyProgramAtReceivingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    semester: {
+        type: String,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    }
+}, {_id: false});
+
+
+const componentOfRecognitionAtSendingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    semester: {
+        type: String,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    }
+}, {_id: false});
+
+const componentOfChangedStudyProgram = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    isComponentAdded: {
+        type: Boolean,
+        required: true
+    },
+    isComponentDeleted: {
+        type: Boolean,
+        required: true
+    },
+    reasonForChange: {
+        type: String,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    }
+}, {_id: false});
+
+const componentOfChangedRecognitionTable = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    semester: {
+        type: String,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    }
+}, {_id: false});
+
+const componentOfAcademicOutcomesAtReceivingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    isComponentComplete: {
+        type: Boolean,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    },
+    grade: {
+        type: String,
+        required: true
+    }
+}, {_id: false});
+
+const componentOfRecognitionOfOutcomesAtSendingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        required: true
+    },
+    componentTitle: {
+        type: String,
+        required: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true
+    },
+    grade: {
+        type: String,
+        required: false
+    }
+}, {_id: false});
+
+
+
 const learningAgreementFormSchema = new mongoose.Schema({
     
     ownerApplication: {
@@ -114,24 +252,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
     }],
     */
     studyProgramAtReceivingIns: {
-        component: [{
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            semester: {
-                type: String,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            }
-        }],
+        componentsOfStudyProgramAtReceivingIns: [componentOfStudyProgramAtReceivingIns],
         totalEctsCredits: {
             type: Number,
             required: true
@@ -140,24 +261,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     recognitionAtSendingIns:  {
-        component: [{
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            semester: {
-                type: String,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            }
-        }],
+        componentsOfRecognitionAtSendingIns: [componentOfRecognitionAtSendingIns],
         totalEctsCredits: {
             type: Number,
             required: true
@@ -222,33 +326,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
     //change for study program and its approval tables
     changedStudyProgram: {
-        component: [{
-
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            isComponentAdded: {
-                type: Boolean,
-                required: true
-            },
-            isComponentDeleted: {
-                type: Boolean,
-                required: true
-            },
-            reasonForChange: {
-                type: String,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            }
-        }],
+        componentsOfChangedStudyProgram: [componentOfChangedStudyProgram],
         totalEctsCredits: {
             type: Number,
             required: true
@@ -257,24 +335,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     changedRecognitionTable:  {
-        component: [{
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            semester: {
-                type: String,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            }
-        }],
+        componentsOfChangedRecognitionTable: [componentOfChangedRecognitionTable],
         totalEctsCredits: {
             type: Number,
             required: true
@@ -337,28 +398,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
     //below parts is for "after mobility period".
     academicOutcomesAtReceivingIns: {
-        component: [{
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            isComponentComplete: {
-                type: Boolean,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            },
-            grade: {
-                type: String,
-                required: true
-            }
-        }],
+        componentsOfAcademicOutcomesAtReceivingIns: [componentOfAcademicOutcomesAtReceivingIns],
         totalPoints: {
             type: Number,
             required: true
@@ -367,33 +407,13 @@ const learningAgreementFormSchema = new mongoose.Schema({
 
 
     recognitionOfOutcomesAtSendingIns: {
-        component: [{
-            componentCode: {
-                type: String,
-                required: true
-            },
-            componentTitle: {
-                type: String,
-                required: true
-            },
-            ectsCredits: {
-                type: Number,
-                required: true
-            },
-            grade: {
-                type: String,
-                required: false
-            }
-        }],
+        componentsOfRecognitionOfOutcomesAtSendingIns: [componentOfRecognitionOfOutcomesAtSendingIns],
         totalPoints: {
             type: Number,
             required: true
         }
-    },
+    }
 
-
-
-    //
 
 }, {
     timestamps: true

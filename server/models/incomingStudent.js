@@ -4,6 +4,26 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const department = mongoose.Schema({
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: "noDepartment",
+        ref: 'Department'
+    },
+    //0 major, 1 minor
+    type: {
+        type: Number,
+        default: 0
+    }
+}, { _id : false });
+
+const token = mongoose.Schema({
+    type: String,
+    required: true
+
+}, {_id : false});
+
+
 const incomingStudentSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -28,18 +48,9 @@ const incomingStudentSchema = new mongoose.Schema({
             }
         }
     },
-    departments:[{
-        department: {
-            type: mongoose.Schema.Types.ObjectId,
-            default: "noDepartment",
-            ref: 'Department'
-        },
-        //0 major, 1 minor
-        type: {
-            type: Number,
-            default: 0
-        }
-    }],
+
+    departments:[department],
+
     studentId: {
         type: Number,
         default: 0
@@ -66,12 +77,7 @@ const incomingStudentSchema = new mongoose.Schema({
             }
         }
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
+    tokens: [token],
     avatar: {
         type: Buffer
     }

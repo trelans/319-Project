@@ -4,6 +4,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const wishedCourse = mongoose.Schema( {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Course'
+}, {_id: false});
+
 const incomingStudentWishedCoursesFormSchema = new mongoose.Schema({
     
     ownerApplication: {
@@ -20,16 +26,9 @@ const incomingStudentWishedCoursesFormSchema = new mongoose.Schema({
             }
         }
     },
-    wishedCourses: [{
-        course: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Course'
-        }
-    }]
-    
-    
-    
+
+    wishedCourses: [wishedCourse]
+
 }, {
     timestamps: true
 })

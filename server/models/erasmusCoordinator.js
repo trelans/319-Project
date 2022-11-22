@@ -4,6 +4,28 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const assignedUniversity = mongoose.Schema({
+    universityId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
+    }
+}, {_id: false});
+
+const assignedTask = mongoose.Schema({
+    task: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Task'
+    }
+}, {_id: false});
+
+const token = mongoose.Schema({
+        type: String,
+        required: true
+}, {_id: false});
+
+
 const erasmusCoordinatorSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -58,31 +80,11 @@ const erasmusCoordinatorSchema = new mongoose.Schema({
             }
         }
     },
-    
-    assignedUniversities: [mongoose.Schema({
-        universityId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'University'
-        }
-    }, {_id: false})],
-    assignedTasks: [{
-        task: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Task' 
-        }
-    }],
-    signature: {
-        type: String,
-        required: true,
-    },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
+
+    assignedUniversities: [assignedUniversity],
+    assignedTasks: [assignedTask],
+    tokens: [token],
+
     avatar: {
         type: Buffer
     }

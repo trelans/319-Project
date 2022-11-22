@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-
-import "./styles.css";
-
 import {handleRequests} from "../requests";
 import React, {useState} from "react";
 
