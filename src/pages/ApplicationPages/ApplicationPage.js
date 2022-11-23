@@ -1,6 +1,9 @@
+import MainNavigation from "../../components/ui/NavigationBar/NavigationBar";
+
 function ApplicationPage() {
   return (
     <div className="ap-container">
+      <MainNavigation />
       <div className="ap-center">
         <table>
           <tr>
