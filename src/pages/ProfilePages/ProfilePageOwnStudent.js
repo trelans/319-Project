@@ -1,4 +1,5 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import img from "./profile.png";
 
 function ProfilePageOwnStudent() {
   return (
@@ -6,7 +7,9 @@ function ProfilePageOwnStudent() {
       <NavigationBar />
       <div className="pp-container">
         <div className="pp-center">
-            
+          <div className="pp-img-container">
+            <img className="pp-img" alt="" src={img} />
+          </div>
         </div>
       </div>
     </div>

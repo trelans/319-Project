@@ -512,3 +512,15 @@ body {
 .pp-button:hover {
   opacity: 75%;
 }
+
+.pp-img-container {
+  width: 350px;
+  height: 350px;
+  padding: 1% 0 0;
+  margin: auto;
+}
+
+.pp-img {
+  max-width: 100%;
+  height: auto;
+}
