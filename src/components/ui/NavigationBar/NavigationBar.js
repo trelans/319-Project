@@ -1,24 +1,33 @@
 import { Link } from "react-router-dom";
 
-function MainNavigation() {
+function NavigationBar() {
   return (
-    <header className="nb-header">
+    <div className="nb-header">
       <div className="nb-name">Erasmus App</div>
       <nav>
         <ul>
           <li>
-            <Link to="/">All Meetups</Link>
+            <Link to="/main-page">Home</Link>
           </li>
           <li>
-            <Link to="/new-meetup">New Meetup</Link>
+            <Link to="/profile-page">Profile</Link>
           </li>
           <li>
-            <Link to="/favorites">Favorites</Link>
+            <Link to="/chat-page">DM</Link>
+          </li>
+          <li>
+            <Link to="/notification-popup">Notifications</Link>
+          </li>
+          <li>
+            <Link to="/settings-page">Settings</Link>
+          </li>
+          <li className="nb-logout">
+            <Link to="/login">Logout</Link>
           </li>
         </ul>
       </nav>
-    </header>
+    </div>
   );
 }
 
-export default MainNavigation;
+export default NavigationBar;

@@ -1,6 +1,8 @@
 import {Link, useLocation} from "react-router-dom";
 import {handleRequests} from "../requests";
 
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+
 function MainPage() {
   const state = useLocation()
   const id = state.id
@@ -12,7 +14,7 @@ function MainPage() {
   console.log(state)
   console.log(id)
   // Rerouting the user to the main page can be here if we do not see id or maybe can be doable using tokens
-  return <div><div>Main Page</div><Link to="/settings-page"><button>Settings</button></Link></div>;
+  return <div><NavigationBar /></div>;
 }
 
 export default MainPage;

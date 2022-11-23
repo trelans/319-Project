@@ -12,7 +12,9 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import ApplicantsList from "./pages/ApplicantsList/ApplicantsList";
 import CreateDepartment from "./pages/CreateDepartment/CreateDepartment";
 import ResetMailPage from "./pages/ResetMailPage/ResetMailPage";
-import ApplicationPage from "./pages/ApplicationPages/ApplicationPage";
+import ApplicationPage1 from "./pages/ApplicationPages/ApplicationPage1";
+import ApplicationPage2 from "./pages/ApplicationPages/ApplicationPage2";
+import ProfilePageOwnStudent from "./pages/ProfilePages/ProfilePageOwnStudent";
 
 /*
 class App extends Component {
@@ -91,7 +93,9 @@ function App() {
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
-	  <Route exact path="/application-page" element={<ApplicationPage />} />
+	  <Route exact path="/application-page1" element={<ApplicationPage1 />} />
+	  <Route exact path="/application-page2" element={<ApplicationPage2 />} />
+	  <Route exact path="/profile-own-student" element={<ProfilePageOwnStudent />} />
     </Routes>
   );
 }
