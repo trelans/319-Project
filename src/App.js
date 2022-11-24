@@ -1,5 +1,4 @@
 //import pageRoutes from './pageRoutes'
-import React, { Component } from "react";
 import { Routes, Route } from "react-router";
 import { Navigate } from "react-router-dom";
 
@@ -15,6 +14,10 @@ import ResetMailPage from "./pages/ResetMailPage/ResetMailPage";
 import ApplicationPage1 from "./pages/ApplicationPages/ApplicationPage1";
 import ApplicationPage2 from "./pages/ApplicationPages/ApplicationPage2";
 import ProfilePageOwnStudent from "./pages/ProfilePages/ProfilePageOwnStudent";
+import ProfilePageOthersStudent from "./pages/ProfilePages/ProfilePageOthersStudent";
+import ProfilePageOwnIncoming from "./pages/ProfilePages/ProfilePageOwnIncoming";
+import ProfilePageOthersIncoming from "./pages/ProfilePages/ProfilePageOthersIncoming";
+import ProfilePageOwnCoordinator from "./pages/ProfilePages/ProfilePageOwnCoordinator";
 
 /*
 class App extends Component {
@@ -66,7 +69,7 @@ class App extends Component {
 function App() {
   return (
     <Routes>
-      // TODO true will be changed to checking login
+      [// TODO true will be changed to checking login]
       <Route
         exact
         path="/"
@@ -96,6 +99,10 @@ function App() {
 	  <Route exact path="/application-page1" element={<ApplicationPage1 />} />
 	  <Route exact path="/application-page2" element={<ApplicationPage2 />} />
 	  <Route exact path="/profile-own-student" element={<ProfilePageOwnStudent />} />
+	  <Route exact path="/profile-others-student" element={<ProfilePageOthersStudent />} />
+	  <Route exact path="/profile-own-incoming" element={<ProfilePageOwnIncoming />} />
+	  <Route exact path="/profile-others-incoming" element={<ProfilePageOthersIncoming />} />
+	  <Route exact path="/profile-own-coordinator" element={<ProfilePageOwnCoordinator />} />
     </Routes>
   );
 }

@@ -1,7 +1,7 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import img from "./profile.png";
 
-function ProfilePageOwnStudent() {
+function ProfilePageOthersStudent() {
   return (
     <div>
       <NavigationBar />
@@ -82,10 +82,10 @@ function ProfilePageOwnStudent() {
         </div>
       </div>
       <div className="pp-button-container">
-        <button className="pp-button">Upload Image</button>
+        <button className="pp-button">Message</button>
       </div>
     </div>
   );
 }
 
-export default ProfilePageOwnStudent;
+export default ProfilePageOthersStudent;

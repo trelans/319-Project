@@ -1,7 +1,7 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import img from "./profile.png";
 
-function ProfilePageOwnStudent() {
+function ProfilePageOwnIncoming() {
   return (
     <div>
       <NavigationBar />
@@ -13,14 +13,14 @@ function ProfilePageOwnStudent() {
           <table className="pp-table">
             <tr>
               <td>
-                <h1 className="pp-header-name">İlker Özgen</h1>
+                <h1 className="pp-header-name">Michael Jordan</h1>
               </td>
             </tr>
             <tr>
               <td className="pp-header-other">Bilkent ID:</td>
             </tr>
             <tr>
-              <td className="pp-text-other">21902719</td>
+              <td className="pp-text-other">XXXXXXXX</td>
             </tr>
             <tr>
               <br />
@@ -29,7 +29,7 @@ function ProfilePageOwnStudent() {
               <td className="pp-header-other">E-Mail:</td>
             </tr>
             <tr>
-              <td className="pp-text-other">ilker.ozgen@ug.bilkent.edu.tr</td>
+              <td className="pp-text-other">michael.jordan@ug.bilkent.edu.tr</td>
             </tr>
             <tr>
               <br />
@@ -64,19 +64,10 @@ function ProfilePageOwnStudent() {
               <br />
             </tr>
             <tr>
-              <td className="pp-header-other">Receiving Institution:</td>
+              <td className="pp-header-other">Sending Institution:</td>
             </tr>
             <tr>
               <td className="pp-text-other">Kingston University</td>
-            </tr>
-            <tr>
-              <br />
-            </tr>
-            <tr>
-              <td className="pp-header-other">Erasmus Ranking:</td>
-            </tr>
-            <tr>
-              <td className="pp-text-other">6</td>
             </tr>
           </table>
         </div>
@@ -88,4 +79,4 @@ function ProfilePageOwnStudent() {
   );
 }
 
-export default ProfilePageOwnStudent;
+export default ProfilePageOwnIncoming;
