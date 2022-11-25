@@ -1,16 +1,16 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import img from "./profile.png";
 
-function ProfilePageOwnCoordinator() {
+function ProfilePageOwnOthers() {
   return (
     <div>
       <NavigationBar />
-      <div className="pp-container">
+      <div className="pp-container2">
         <div className="pp-img-container">
           <img className="pp-img" alt="" src={img} />
         </div>
-        <div className="pp-center">
-          <table className="pp-table">
+        <div>
+          <table className="pp-table2">
             <tr>
               <td>
                 <h1 className="pp-header-name">Can Alkan</h1>
@@ -44,10 +44,10 @@ function ProfilePageOwnCoordinator() {
         </div>
       </div>
       <div className="pp-button-container">
-        <button className="pp-button">Upload Image</button>
+        <button className="pp-button2">Upload Image</button>
       </div>
     </div>
   );
 }
 
-export default ProfilePageOwnCoordinator;
+export default ProfilePageOwnOthers;

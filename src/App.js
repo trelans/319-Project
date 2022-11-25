@@ -17,7 +17,10 @@ import ProfilePageOwnStudent from "./pages/ProfilePages/ProfilePageOwnStudent";
 import ProfilePageOthersStudent from "./pages/ProfilePages/ProfilePageOthersStudent";
 import ProfilePageOwnIncoming from "./pages/ProfilePages/ProfilePageOwnIncoming";
 import ProfilePageOthersIncoming from "./pages/ProfilePages/ProfilePageOthersIncoming";
-import ProfilePageOwnCoordinator from "./pages/ProfilePages/ProfilePageOwnCoordinator";
+import ProfilePageOwnOthers from "./pages/ProfilePages/ProfilePageOwnOthers";
+import ProfilePageOthersOthers from "./pages/ProfilePages/ProfilePageOthersOthers";
+import ProfilePageUniversity from "./pages/ProfilePages/ProfilePageUniversity";
+import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
 
 /*
 class App extends Component {
@@ -102,7 +105,10 @@ function App() {
 	  <Route exact path="/profile-others-student" element={<ProfilePageOthersStudent />} />
 	  <Route exact path="/profile-own-incoming" element={<ProfilePageOwnIncoming />} />
 	  <Route exact path="/profile-others-incoming" element={<ProfilePageOthersIncoming />} />
-	  <Route exact path="/profile-own-coordinator" element={<ProfilePageOwnCoordinator />} />
+	  <Route exact path="/profile-own-others" element={<ProfilePageOwnOthers />} />
+	  <Route exact path="/profile-others-others" element={<ProfilePageOthersOthers />} />
+	  <Route exact path="/profile-university" element={<ProfilePageUniversity />} />
+	  <Route exact path="/profile-course" element={<ProfilePageCourse />} />
     </Routes>
   );
 }

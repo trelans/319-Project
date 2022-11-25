@@ -493,6 +493,13 @@ body {
   padding: 1% 0 0;
   margin: auto;
   display: flex;
+
+}
+
+.pp-container2 {
+  width: 80%;
+  padding: 1% 0 0;
+  display: flex;
 }
 
 .pp-button {
@@ -508,6 +515,22 @@ body {
   font-weight: bold;
   font-family: sans-serif;
   margin-left: 14%;
+  margin-top: 0;
+}
+
+.pp-button2 {
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-left: 19.5%;
   margin-top: 0;
 }
 
@@ -536,6 +559,12 @@ body {
   empty-cells: show;
 }
 
+.pp-table2 {
+  margin: 30px;
+  padding: 20px;
+  empty-cells: show;
+}
+
 .pp-header-name {
   font-size: 32px;
   color: #2c3333;
@@ -559,4 +588,224 @@ body {
   font-family: sans-serif;
   padding-bottom: 0%;
   margin-left: 20px;
+}
+
+/* profile page university (ppu) styles */
+.ppu-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ppu-container {
+  width: 70%;
+  padding: 1% 0 0;
+  margin-left: 3%;
+  margin-bottom: -2%;
+  display: flex;
+}
+
+.ppu-button {
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-left: 14%;
+  margin-top: 0;
+}
+
+.ppu-button:hover {
+  opacity: 75%;
+}
+
+.ppu-img-container {
+  width: 330px;
+  height: 330px;
+  padding: auto;
+  margin: auto;
+  margin-bottom: 3%;
+  display: flex;
+}
+
+.ppu-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ppu-table {
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+}
+
+.ppu-table2, .ppu-td{
+  width: 90%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #a5c9ca;
+}
+
+.ppu-header-name {
+  font-size: 44px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: 800;
+  padding-bottom: 0%;
+  display: inline-table;
+}
+
+.ppu-header-other {
+  font-size: 32px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+}
+
+.ppu-text-other {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  margin-left: 20px;
+}
+
+.ppu-link {
+  color: blue;
+  font-size: 28px;
+  font-family: sans-serif;
+  margin-bottom: 1px;
+  margin-left: 1px;
+}
+
+.ppu-table-header {
+  margin-left: 1%;
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: 800;
+  padding-bottom: 0%;
+  display: inline-table;
+}
+
+.ppu-table-other {
+  margin-left: 1%;
+  font-size: 22px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  display: inline-table;
+}
+
+/* profile page course (ppc) styles */
+.ppc-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: -1%;
+}
+
+.ppc-container {
+  width: 90%x;
+  padding: 1% 0 0;
+  margin: auto;
+  display: flex;
+}
+
+.ppc-button {
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-left: 14%;
+  margin-top: 0;
+}
+
+.ppc-button:hover {
+  opacity: 75%;
+} 
+
+.ppc-table {
+  margin-top: -4%;
+  margin-left: 10%;
+  padding: 5%;
+  empty-cells: show;
+}
+
+.ppc-table2, .ppu-td{
+  width: 90%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #a5c9ca;
+}
+
+.ppc-header-name {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: 800;
+}
+
+.ppc-header-other {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+}
+
+.ppc-text-other {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+}
+
+.ppc-link {
+  color: blue;
+  font-size: 28px;
+  font-family: sans-serif;
+  margin-bottom: 1px;
+  margin-left: 1px;
+}
+
+.ppc-table-header {
+  margin-left: 1%;
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: 800;
+  padding-bottom: 0%;
+  display: inline-table;
+}
+
+.ppc-table-other {
+  margin-left: 1%;
+  font-size: 22px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  display: inline-table;
+}
+
+.ppc-line {
+  color: #2c3333;
 }
