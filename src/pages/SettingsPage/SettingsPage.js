@@ -12,8 +12,12 @@ function SettingsPage() {
             <h1 className="sp-h1">Settings</h1>
           </div>
           <div className="sp-btn-group">
-            <button className="sp-button">Change Password</button>
-            <button className="sp-button">Change E-Mail</button>
+            <Link className="sp-link" to="/reset-password-page">
+              <button className="sp-button">Change Password</button>
+            </Link>
+            <Link className="sp-link" to="/reset-mail-page">
+              <button className="sp-button">Change E-Mail</button>
+            </Link>
           </div>
           <div className="sp-center">
             <label class="container" className="sp-label">
