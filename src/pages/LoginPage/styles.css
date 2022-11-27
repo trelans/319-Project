@@ -209,7 +209,6 @@ body {
 }
 
 .sp-link {
-
   width: 100%;
   border: 0;
   padding: 15px;
@@ -510,7 +509,6 @@ body {
   padding: 1% 0 0;
   margin: auto;
   display: flex;
-
 }
 
 .pp-container2 {
@@ -662,7 +660,8 @@ body {
   empty-cells: show;
 }
 
-.ppu-table2, .ppu-td{
+.ppu-table2,
+.ppu-td {
   width: 90%;
   margin: auto;
   padding: auto;
@@ -758,7 +757,7 @@ body {
 
 .ppc-button:hover {
   opacity: 75%;
-} 
+}
 
 .ppc-table {
   margin-top: -4%;
@@ -767,7 +766,7 @@ body {
   empty-cells: show;
 }
 
-.ppc-table2, .ppu-td{
+.ppc-table2 {
   width: 90%;
   margin: auto;
   padding: auto;
