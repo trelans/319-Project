@@ -4,6 +4,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const wishedCourse = mongoose.Schema( {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Course'
+}, {_id: false});
+
 const preApprovalFormSchema = new mongoose.Schema({
     
     ownerApplication: {
@@ -11,7 +17,13 @@ const preApprovalFormSchema = new mongoose.Schema({
         required: true,
         ref: 'Application'
     },
-    
+
+    courses: [wishedCourse],
+
+    totalEctsCredits: {
+        type: Number,
+        required: true
+    }
 }, {
     timestamps: true
 })
