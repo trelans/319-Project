@@ -184,7 +184,7 @@ body {
 }
 
 .sp-h1 {
-  font-size: 64px;
+  font-size: 54px;
   color: #2c3333;
   font-family: sans-serif;
   font-weight: bold;
@@ -825,4 +825,64 @@ body {
 
 .ppc-line {
   color: #2c3333;
+}
+
+/*Info Page CSS*/
+
+.ip-container {
+  width: 90%x;
+  padding: 1% 0 0;
+  margin: auto;
+}
+
+.ip-h1{
+    font-size: 28px;
+    color: #2c3333;
+    font-family: sans-serif;
+    font-weight:bold;
+    padding-bottom: 0%;
+    padding-left: 1%;
+}
+
+.ip-h2{
+  font-size: 24px;
+  color: #bd0e22;
+  font-family: sans-serif;
+  font-weight:bold;
+  white-space: nowrap;
+  padding-left: 5%;
+}
+
+.ip-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding-top: 2%;
+}
+
+.ip-p{
+  font-size: 18px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-left: 8%;
+}
+
+.ip-button {
+  padding: 15px;
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.ip-button:hover{
+  opacity: 75%;
 }

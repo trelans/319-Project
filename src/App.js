@@ -21,6 +21,7 @@ import ProfilePageOwnOthers from "./pages/ProfilePages/ProfilePageOwnOthers";
 import ProfilePageOthersOthers from "./pages/ProfilePages/ProfilePageOthersOthers";
 import ProfilePageUniversity from "./pages/ProfilePages/ProfilePageUniversity";
 import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
+import InfoPage from "./pages/InfoPage/InfoPage";
 
 /*
 class App extends Component {
@@ -99,16 +100,45 @@ function App() {
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
-	  <Route exact path="/application-page1" element={<ApplicationPage1 />} />
-	  <Route exact path="/application-page2" element={<ApplicationPage2 />} />
-	  <Route exact path="/profile-own-student" element={<ProfilePageOwnStudent />} />
-	  <Route exact path="/profile-others-student" element={<ProfilePageOthersStudent />} />
-	  <Route exact path="/profile-own-incoming" element={<ProfilePageOwnIncoming />} />
-	  <Route exact path="/profile-others-incoming" element={<ProfilePageOthersIncoming />} />
-	  <Route exact path="/profile-own-others" element={<ProfilePageOwnOthers />} />
-	  <Route exact path="/profile-others-others" element={<ProfilePageOthersOthers />} />
-	  <Route exact path="/profile-university" element={<ProfilePageUniversity />} />
-	  <Route exact path="/profile-course" element={<ProfilePageCourse />} />
+      <Route exact path="/application-page1" element={<ApplicationPage1 />} />
+      <Route exact path="/application-page2" element={<ApplicationPage2 />} />
+      <Route
+        exact
+        path="/profile-own-student"
+        element={<ProfilePageOwnStudent />}
+      />
+      <Route
+        exact
+        path="/profile-others-student"
+        element={<ProfilePageOthersStudent />}
+      />
+      <Route
+        exact
+        path="/profile-own-incoming"
+        element={<ProfilePageOwnIncoming />}
+      />
+      <Route
+        exact
+        path="/profile-others-incoming"
+        element={<ProfilePageOthersIncoming />}
+      />
+      <Route
+        exact
+        path="/profile-own-others"
+        element={<ProfilePageOwnOthers />}
+      />
+      <Route
+        exact
+        path="/profile-others-others"
+        element={<ProfilePageOthersOthers />}
+      />
+      <Route
+        exact
+        path="/profile-university"
+        element={<ProfilePageUniversity />}
+      />
+      <Route exact path="/profile-course" element={<ProfilePageCourse />} />
+      <Route exact path="/info-page" element={<InfoPage />} />
     </Routes>
   );
 }
