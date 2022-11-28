@@ -209,7 +209,6 @@ body {
 }
 
 .sp-link {
-
   width: 100%;
   border: 0;
   padding: 15px;
@@ -510,7 +509,6 @@ body {
   padding: 1% 0 0;
   margin: auto;
   display: flex;
-
 }
 
 .pp-container2 {
@@ -662,7 +660,6 @@ body {
   empty-cells: show;
 }
 
-.ppu-table2, .ppu-td{
 .ppu-table2,
 .ppu-td {
   width: 90%;
@@ -760,7 +757,6 @@ body {
 
 .ppc-button:hover {
   opacity: 75%;
-} 
 }
 
 .ppc-table {
@@ -770,7 +766,6 @@ body {
   empty-cells: show;
 }
 
-.ppc-table2, .ppu-td{
 .ppc-table2 {
   width: 90%;
   margin: auto;
@@ -839,20 +834,20 @@ body {
   margin: auto;
 }
 
-.ip-h1{
-    font-size: 28px;
-    color: #2c3333;
-    font-family: sans-serif;
-    font-weight:bold;
-    padding-bottom: 0%;
-    padding-left: 1%;
+.ip-h1 {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+  padding-left: 1%;
 }
 
-.ip-h2{
+.ip-h2 {
   font-size: 24px;
   color: #bd0e22;
   font-family: sans-serif;
-  font-weight:bold;
+  font-weight: bold;
   white-space: nowrap;
   padding-left: 5%;
 }
@@ -865,7 +860,7 @@ body {
   padding-top: 2%;
 }
 
-.ip-p{
+.ip-p {
   font-size: 18px;
   color: #2c3333;
   font-family: sans-serif;
@@ -887,6 +882,6 @@ body {
   font-family: sans-serif;
 }
 
-.ip-button:hover{
+.ip-button:hover {
   opacity: 75%;
-}}
+}
