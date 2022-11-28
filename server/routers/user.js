@@ -144,6 +144,23 @@ router.post('/create/newDepartment', async (req, res) => {
     }
 })
 
+router.post('/dashboard', async (req, res) => {
+    console.log(req.body)
+    try {
+        const user = await User.findById(req.body.id)
+
+        // 0 POST, 1 GET
+        if(req.body.type === "0"){
+            // TODO IF there is any post, it will get there
+        }else {
+            res.status(302).send(user)
+        }
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
 /*
 router.get('/create/loginpage', async (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))

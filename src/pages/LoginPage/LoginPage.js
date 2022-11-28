@@ -26,9 +26,10 @@ function LoginPage() {
               <button className="lp-button" onClick={(e) => handleRequests(e, {"email": email, "password": password}, "login", "0",(res, status) => {
                 console.log(status)
                 console.log(res)
+                console.log(res.user._id)
                 if (status === 200){
-                  // TODO user bilgisi yolla diğer sayfaya, res'de var gerekli bilgiler
-                  navigate('/main-page');
+                  // Send any necessary data to other page here
+                  navigate('/main-page', {state: {id: res.user._id}});
                 }
               })}>LOGIN</button>
           </div>
