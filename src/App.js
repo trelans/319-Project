@@ -23,6 +23,7 @@ import ProfilePageUniversity from "./pages/ProfilePages/ProfilePageUniversity";
 import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
 import InfoPage from "./pages/InfoPage/InfoPage";
 import PreApprovalFormPage from "./pages/PreApprovalFormPage/PreApprovalFormPage";
+import LearningAgreementBeforeMobility1 from "./pages/LearningAgreement/LearningAgreementBeforeMobility1";
 
 /*
 class App extends Component {
@@ -145,6 +146,11 @@ function App() {
       />
       <Route exact path="/profile-course" element={<ProfilePageCourse />} />
       <Route exact path="/info-page" element={<InfoPage />} />
+      <Route
+        exact
+        path="/learning-agreement"
+        element={<LearningAgreementBeforeMobility1 />}
+      />
     </Routes>
   );
 }

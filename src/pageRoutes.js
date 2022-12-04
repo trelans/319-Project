@@ -16,6 +16,7 @@ import ApplicantsList from "./pages/ApplicantsList/ApplicantsList"
 
 //
 import jwt_decode from "jwt-decode"
+import learningAgreementBeforeMobility1 from "./pages/LearningAgreement/LearningAgreementBeforeMobility1";
 var token1 = localStorage.getItem("token")
 
 if(token1){
