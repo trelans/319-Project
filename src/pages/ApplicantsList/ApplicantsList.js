@@ -9,158 +9,110 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import {useTheme} from "@mui/material/styles";
+import AcceptedList from "../../components/ui/Tables/AcceptedList"
+import WaitingList from "../../components/ui/Tables/WaitingList"
+import RankedApplicantsList from "../../components/ui/Tables/RankedApplicants"
 
-interface Column {
-    id: 'name' | 'surname' | 'id' | 'duration' | 'gpa' | 'replacement'| 'total';
-    label: string;
-    minWidth?: number;
-    align?: 'right';
-    format?: (value: number) => string;
+
+
+
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    dir?: string;
+    index: number;
+    value: number;
+}
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
 }
 
-const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'surname', label: 'Surname', minWidth: 100 },
-    {
-        id: 'id',
-        label: 'ID',
-        minWidth: 170,
-        align: 'right',
-
-    },
-    {
-        id: 'duration',
-        label: 'Duration',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'gpa',
-        label: 'GPA',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toFixed(2),
-    },
-    {
-        id: 'replacement',
-        label: 'Replacement',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toFixed(2),
-    },
-    {
-        id: 'total',
-        label: 'Total',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toFixed(2),
-    },
-];
-
-interface Data {
-    name: string;
-    surname: string;
-    id: number;
-    duration: string;
-    gpa: number;
-    replacement: string;
-    total: number;
+function a11yProps(index: number) {
+    return {
+        id: `full-width-tab-${index}`,
+        'aria-controls': `full-width-tabpanel-${index}`,
+    };
 }
 
-function createData(
-    name: string,
-    surname: string,
-    id: number,
-    duration: string,
-    gpa: number,
-    replacement: string,
-    total: number,
-): Data {
-    // Data maybe fetched here??
-    return { name, surname, id, duration, gpa , replacement ,  total};
-}
 
-const rows = [
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-];
 
 export default function StickyHeadTable() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
+    const theme = useTheme();
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
     };
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
+    const handleChangeIndex = (index: number) => {
+        setValue(index);
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper>
+
+        <div className={"Page"}>
+            <NavigationBar />
+            <Box sx={{ bgcolor: 'background.paper', height: 600 }}>
+                <AppBar position="static">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="secondary"
+                        textColor="inherit"
+                        variant="fullWidth"
+                        aria-label="full width tabs example"
+                    >
+                        <Tab label="Ranked Applicants List" {...a11yProps(0)} />
+                        <Tab label="Waiting List" {...a11yProps(1)} />
+                        <Tab label="Accepted Students" {...a11yProps(2)} />
+                    </Tabs>
+                </AppBar>
+
+                <TabPanel value={value} index={0} dir={theme.direction}>
+                    <div className={"Table"}>
+                        <RankedApplicantsList></RankedApplicantsList>
+                    </div>
+                </TabPanel>
+                <TabPanel value={value} index={1} dir={theme.direction}>
+                    <div className={"Table"}>
+
+                        <WaitingList></WaitingList>
+                    </div>
+                </TabPanel>
+                <TabPanel value={value} index={2} dir={theme.direction}>
+                    <div className={"Table"}>
+                        <AcceptedList></AcceptedList>
+                    </div>
+                </TabPanel>
+
+            </Box>
+
+        </div>
+
     );
 }
 
