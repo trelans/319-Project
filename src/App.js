@@ -22,6 +22,7 @@ import ProfilePageOthersOthers from "./pages/ProfilePages/ProfilePageOthersOther
 import ProfilePageUniversity from "./pages/ProfilePages/ProfilePageUniversity";
 import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
 import InfoPage from "./pages/InfoPage/InfoPage";
+import PreApprovalFormPage from "./pages/PreApprovalFormPage/PreApprovalFormPage";
 
 /*
 class App extends Component {
@@ -98,6 +99,11 @@ function App() {
       />
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
       <Route exact path="/settings-page" element={<SettingsPage />} />
+      <Route
+        exact
+        path="/preapproval-form-page"
+        element={<PreApprovalFormPage />}
+      />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
