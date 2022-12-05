@@ -24,26 +24,38 @@ export default class App extends React.Component {
         super(props);
         this.options = countryList().getData();
         this.state = {
+
             startDate: new Date(),
             country: "",
-            region: "",
             options: this.options,
             countryVal: 2,
-            phone: "",
             complete: "",
             displayComplete: "none",
-            name: "Kutay",
-            lastName: "Senyigit",
-            email: "",
-            address: "",
-            gender: "male",
+            name: "Kingston University",
+            faculty: "Engineering",
+            academicYear: "2022",
+            studyCycle: "Onurcan",
+            address: "290 Street LA 2032  ",
+            subjectAreaCode: "onurcanatac@bilkent.edu.tr",
+            erasmusCode: "109091",
+            disabledName: true,
             disabledLastName: true,
-            disabledName: true
+            disabledDateOfBirth: true,
+            disabledNationality: true,
+            disabledGender: true,
+            disabledAcademicYear: true,
+            disabledStudyCycle: true,
+            disabledSubjectArea: true
         };
 
         this.flagsRef = React.createRef();
         this.lastnameRef = React.createRef();
-        this.nameRef = React.createRef();
+        this.dateOfBirthRef = React.createRef();
+        this.nationalityRef = React.createRef();
+        this.genderRef = React.createRef();
+        this.academicYearRef = React.createRef();
+        this.studyCycleRef = React.createRef();
+        this.subjectAreaCodeRef = React.createRef();
         this.handleChangeDate = this.handleChangeDate.bind(this);
 
     }
@@ -65,12 +77,36 @@ export default class App extends React.Component {
 
     handleEditNameClick() {
         this.setState({disabledName: !this.state.disabledName})
-        this.lastnameRef.current.text.select();
+
     }
 
     handleEditLastNameClick() {
         this.setState({disabledLastName: !this.state.disabledLastName})
-        this.lastnameRef.current.text.select();
+
+    }
+    handleEditDateOfBirthClick() {
+        this.setState({disabledDateOfBirth: !this.state.disabledDateOfBirth})
+
+    }
+    handleEditNationalityClick() {
+        this.setState({disabledNationality: !this.state.disabledNationality})
+
+    }
+    handleEditGenderClick() {
+        this.setState({disabledGender: !this.state.disabledGender})
+
+    }
+    handleEditAcademicYearClick() {
+        this.setState({disabledAcademicYear: !this.state.disabledAcademicYear})
+
+    }
+    handleEditStudyCycleClick() {
+        this.setState({disabledStudyCycle: !this.state.disabledStudyCycle})
+
+    }
+    handleSubjectAreaClick() {
+        this.setState({disabledSubjectArea: !this.state.disabledSubjectArea})
+
     }
 
 
@@ -93,29 +129,7 @@ export default class App extends React.Component {
         }
     }
 
-    handlerReset() {
-        this.setState({
-            startDate: new Date(),
-            country: "",
-            region: "",
-            options: this.options,
-            countryVal: null,
-            phone: "",
-            complete: "",
-            displayComplete: "none",
-            name: "",
-            lastName: "",
-            email: "",
-            address: "",
-            gender: null
-        });
 
-        window.scroll({
-            top: 0,
-            left: 0,
-            behavior: "smooth"
-        });
-    }
 
 
     render() {
@@ -125,213 +139,274 @@ export default class App extends React.Component {
             <div className={"App"}>
 
                 <h1 id="title" className="blackLetter">
-                    Student Info
+                    Sending Institution
                 </h1>
                 <p id="description" className="blackLetter">
                     Check your data
                 </p>
-                <div className="perfectCentered">
+                <div >
 
                     <div id="survey-form">
-                        <Grid>
-                            <div className={"row-cols-2"}>
+                        <Grid container spacing={2}>
+
+                            <Grid item xs={4}  >
                                 <label className={"textHeader"} id="name-label" htmlFor="name">
-                                    Name
+                                    Institution Name
                                 </label>
+                            </Grid>
 
-                                <Grid item xs={6} direction={"column"}>
+                            <Grid item xs={6} >
 
-                                    <div id="nameCircle" ref={div => (this.nameCircle = div)}/>
-                                    <input
-                                        ref={"this.nameRef"}
-                                        id="name"
-                                        maxLength="30"
-                                        placeholder="write your name"
-                                        pattern="[A-Za-z]"
-                                        className="styleInput"
-                                        defaultValue={this.state.name}
-                                        disabled={(this.state.disabledName) ? "disabledName" : ""}
-                                        required
-                                    />
+                                <div id="nameCircle" ref={div => (this.nameCircle = div)}/>
+                                <input
+                                    ref={"this.nameRef"}
+                                    id="name"
+                                    maxLength="30"
+                                    placeholder="write your name"
+                                    pattern="[A-Za-z]"
+                                    className="styleInput"
+                                    defaultValue={this.state.name}
+                                    disabled={(this.state.disabledName) ? "disabledName" : ""}
+                                    required
+                                />
+                            </Grid>
 
-                                    <button className="editButton" onClick={this.handleEditNameClick.bind(this)}
-                                            disabled={!this.state.disabledName}> Edit
-                                    </button>
+                            <Grid item xs={1} >
+                                <button className="editButton" onClick={this.handleEditNameClick.bind(this)}
+                                        disabled={!this.state.disabledName}> Edit
+                                </button>
+                            </Grid>
 
-                                </Grid>
 
-
+                            <Grid item xs={4}  >
                                 <label className={"textHeader"} id="lastName-label" htmlFor="Last name">
-                                    Last Name
+                                    Faculty
                                 </label>
+                            </Grid>
 
+                            <div/>
 
-                                <div/>
+                            <Grid item xs={6}>
+                                <input
+                                    ref={"this.lastnameRef"}
+                                    id="faculty"
+                                    maxLength="30"
+                                    pattern="[A-Za-z]"
+                                    defaultValue={this.state.faculty}
+                                    className="styleInput"
+                                    disabled={(this.state.disabledLastName) ? "disabledLastName" : ""}
+                                    required
+                                />
+                            </Grid >
 
-                                <Grid>
-                                    <input
-                                        ref={"this.lastnameRef"}
-                                        id="lastName"
-                                        maxLength="30"
-                                        pattern="[A-Za-z]"
-                                        defaultValue={this.state.lastName}
-                                        className="styleInput"
-                                        disabled={(this.state.disabledLastName) ? "disabledLastName" : ""}
-                                        required
-                                    />
-                                    <button className="editButton" onClick={this.handleEditLastNameClick.bind(this)}
-                                            disabled={!this.state.disabledLastName}> Edit
-                                    </button>
+                            <Grid item xs={1} >
+                                <button className="editButton" onClick={this.handleEditLastNameClick.bind(this)}
+                                        disabled={!this.state.disabledLastName}> Edit
+                                </button>
+                            </Grid>
 
-                                </Grid>
-
-
+                            <Grid item xs={4}  >
                                 <label className={"textHeader"} id="Dateofbirth-label" htmlFor="Date of Birth">
-                                    Date of Birth
+                                    Erasmus Code
                                 </label>
+                            </Grid>
 
-                                <Grid item >
+                            <Grid item xs={6}>
+                                <input
+                                    ref={"this.dateOfBirth"}
+                                    id="dateOfBirth"
+                                    maxLength="30"
+                                    pattern="[A-Za-z]"
+                                    defaultValue={this.state.erasmusCode}
+                                    className="styleInput"
+                                    disabled={(this.state.disabledDateOfBirth) ? "disabledDateOfBirth" : ""}
+                                    required
+                                />
+                            </Grid >
 
-                                    <div className="row-cols-auto">
-                                        <DatePicker
-                                            selected={this.state.startDate}
-                                            onChange={this.handleChangeDate}
-                                        />
-                                        <button className="editButton" onClick={this.handleEditLastNameClick.bind(this)}
-                                                disabled={!this.state.disabledLastName}> Edit
-                                        </button>
-                                    </div>
+                            <Grid item xs={1} >
+                                <button className="editButton" onClick={this.handleEditDateOfBirthClick.bind(this)}
+                                        disabled={!this.state.disabledDateOfBirth}> Edit
+                                </button>
+                            </Grid>
 
-                                </Grid>
-
+                            <Grid item xs={4}  >
                                 <label className={"textHeader"} id="lastName-label" htmlFor="country">
-                                    Nationality
+                                   Department
                                 </label>
+                            </Grid>
 
-                                <Grid item >
-                                    <div
-                                        id="countryFlag"
-                                        className="marginBottom"
-                                        style={{display: "flex", alignItems: "center", width: "70%"}}
-                                    >
 
-                                        <ReactCountryFlag
-                                            countryCode={
-                                                this.state.countryVal ? this.state.countryVal.value : ""
-                                            }
-                                            svg
-                                            cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
-                                            cdnSuffix="svg"
-                                            title={this.state.countryVal ? this.state.countryVal.value : ""}
-                                        />
-                                        <div
-                                            style={{marginLeft: "10px", color: "black", width: "100%"}}
-                                        >
-                                            <Select
-                                                isSearchable={true}
-                                                options={this.state.options}
-                                                defaultValue={this.state.value}
-                                                onChange={this.changeHandler}
-                                            />
+                            <Grid item xs={6} >
 
-                                        </div>
-                                    </div>
+                                <input
+                                    ref={"this.academicYear"}
+                                    id="name"
+                                    maxLength="30"
+                                    className="styleInput"
+                                    defaultValue={this.state.academicYear}
+                                    disabled={(this.state.disabledAcademicYear) ? "disabledAcademicYear" : ""}
+                                    required
+                                />
+                            </Grid>
 
-                                    <button className="editButton " onClick={this.handleEditLastNameClick.bind(this)}
-                                            disabled={!this.state.disabledLastName}> Edit
-                                    </button>
-                                </Grid>
+                            <Grid item xs={1} >
+                                <button className="editButton " onClick={this.handleEditAcademicYearClick.bind(this)}
+                                        disabled={!this.state.disabledAcademicYear}> Edit
+                                </button>
+                            </Grid>
 
+                            <Grid item xs={4} >
                                 <label className={"textHeader"} id="lastName-label" htmlFor="country">
-                                    Gender
-                                </label>
-
-                                <Grid item >
-                                    <div style={{marginLeft: "0px", color: "black", width: "50%"}}>
-                                        <Select
-                                            value={this.state.gender}
-                                            onChange={this.handleChangeGender}
-                                        >
-                                            {options.map((option) => (
-                                                <MenuItem key={option.value} value={option.value}>
-                                                    {option.label}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </div>
-
-                                    <button className="editButton " onClick={this.handleEditLastNameClick.bind(this)}
-                                            disabled={!this.state.disabledLastName}> Edit
-                                    </button>
-
-                                </Grid>
-
-                                <label className={"textHeader"} htmlFor="email">
-                                    Email
-                                </label>
-                                <Grid>
-                                    <div/>
-
-                                    <input
-                                        id="email"
-                                        type="email"
-                                        maxLength="50"
-                                        placeholder="write your email"
-                                        defaultValue={this.state.email}
-                                        className="styleInput"
-                                        required
-                                    />
-                                    <button className="editButton " onClick={this.handleEditLastNameClick.bind(this)}
-                                            disabled={!this.state.disabledLastName}> Edit
-                                    </button>
-                                </Grid>
-
-                                <label className={"textHeader"} id="lastName-label" htmlFor="Address">
                                     Address
                                 </label>
+                            </Grid>
 
-                                <div/>
+                            <Grid item xs={6}>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    maxLength="50"
+                                    defaultValue={this.state.address}
+                                    disabled={(this.state.disabledGender) ? "disabledGender" : ""}
+                                    className="styleInput"
+                                    required
+                                />
+                            </Grid>
 
-                                <Grid>
-                                    <input
-                                        id="address"
-                                        maxLength="50"
-                                        defaultValue={this.state.address}
-                                        className="styleInput"
-                                        required
+                            <Grid item xs={1}>
+                                <button className="editButton " onClick={this.handleEditGenderClick.bind(this)}
+                                        disabled={!this.state.disabledGender}> Edit
+                                </button>
+                            </Grid>
+
+                            <Grid item xs={4}>
+                                <label className={"textHeader"} id="name-label" htmlFor="name">
+                                    Country
+                                </label>
+                            </Grid>
+
+
+                            <Grid item xs={6} >
+                                <div
+                                    id="countryFlag"
+                                    className="marginBottom"
+                                    style={{display: "flex", alignItems: "center", width: "100%"}}
+                                >
+
+                                    <ReactCountryFlag
+                                        countryCode={
+                                            this.state.countryVal ? this.state.countryVal.value : ""
+                                        }
+                                        svg
+                                        cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
+                                        cdnSuffix="svg"
+                                        title={this.state.countryVal ? this.state.countryVal.value : ""}
                                     />
-                                    <button className="editButton " onClick={this.handleEditLastNameClick.bind(this)}
-                                            disabled={!this.state.disabledLastName}> Edit
-                                    </button>
-                                </Grid>
+                                    <div
+                                        style={{marginLeft: "10px", color: "black", width: "100%"}}
+                                    >
+                                        <Select
+                                            ref={"this.nationalityRef"}
+                                            isSearchable={true}
+                                            options={this.state.options}
+                                            defaultValue={this.state.value}
+                                            disabled={(this.state.disabledNationality) ? "disabledNationality" : ""}
+                                            onChange={this.changeHandler}
+                                        />
 
-                                <div className="marginBottom">
-                                    <label className={"textHeader"} id="number-label" htmlFor="number">
-                                        Phone Number
-                                    </label>
-                                    <PhoneInput
-                                        country={"us"}
-                                        className="marginBottom"
-                                        value={this.state.phone}
-                                        onChange={phone => this.setState({phone})}
-                                    />
+                                    </div>
                                 </div>
+                            </Grid>
 
 
-                                <div className={"textHeader"}>
-                                    <p>Subject Area Code</p>
-                                    <input
-                                        id="textarea"
-                                        rows="10"
-                                        className="marginBottom"
+                            <Grid item xs={1} >
+                                <button className="editButton " onClick={this.handleEditNationalityClick.bind(this)}
+                                        disabled={!this.state.disabledNationality}> Edit
+                                </button>
+                            </Grid>
 
-                                    />
-                                </div>
-                            </div>
+
+                            <Grid item xs={12} >
+                                <label className={"textHeader"} id="lastName-label" htmlFor="Address">
+                                    Contact Person Information
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={4} >
+                                <label className={"textHeader"} id="lastName-label" htmlFor="Address">
+                                    Name
+                                </label>
+                            </Grid>
+
+
+                            <Grid item xs={6} >
+                                <input
+                                    ref={"this.studyCycle"}
+                                    id="studyCycle"
+                                    maxLength="50"
+                                    defaultValue={this.state.studyCycle}
+                                    className="styleInput"
+                                    disabled={(this.state.disabledStudyCycle) ? "disabledStudyCycle" : ""}
+                                    required
+                                />
+                            </Grid>
+                            <Grid item xs={1}>
+                                <button className="editButton " onClick={this.handleEditStudyCycleClick.bind(this)}
+                                        disabled={!this.state.disabledStudyCycle}> Edit
+                                </button>
+                            </Grid>
+
+                            <Grid item xs={4} >
+                                <label className={"textHeader"} id="lastName-label" htmlFor="Address">
+                                    E-Mail
+                                </label>
+                            </Grid>
+                            <Grid item xs={6} >
+
+                                <input
+                                    id="subjectAreaCode"
+                                    className="styleInput"
+                                    defaultValue={this.state.subjectAreaCode}
+                                    disabled={(this.state.disabledSubjectArea) ? "disabledSubjectArea" : ""}
+                                    required
+                                />
+
+                            </Grid>
+
+                            <Grid item xs={1}>
+                                <button className="editButton " onClick={this.handleEditStudyCycleClick.bind(this)}
+                                        disabled={!this.state.disabledStudyCycle}> Edit
+                                </button>
+                            </Grid>
+
+                            <Grid item xs={4} >
+                                <label className={"textHeader"} id="lastName-label" htmlFor="Address">
+                                    Phone Number
+                                </label>
+                            </Grid>
+
+                            <Grid item xs={6} >
+
+                                <PhoneInput
+                                    country={"us"}
+                                    className="marginBottom"
+                                    value={this.state.phone}
+                                    onChange={phone => this.setState({phone})}
+                                />
+
+                            </Grid>
+
+                            <Grid item xs={1} >
+                                <button className="editButton " onClick={this.handleSubjectAreaClick.bind(this)}
+                                        disabled={!this.state.disabledSubjectArea}> Edit
+                                </button>
+                            </Grid>
+
                         </Grid>
                         <div className="perfectCentered">
                             <button className="buttons" onClick={this.handlerComplete}>
-                                Submit{" "}
+                                Save{" "}
                             </button>
                         </div>
                     </div>

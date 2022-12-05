@@ -143,7 +143,7 @@ export default class App extends React.Component {
                 <p id="description" className="blackLetter">
                     Check your data
                 </p>
-                <div className="perfectCentered">
+                <div >
 
                     <div id="survey-form">
                         <Grid container spacing={2}>
