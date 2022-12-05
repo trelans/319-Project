@@ -24,6 +24,8 @@ import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
 import InfoPage from "./pages/InfoPage/InfoPage";
 import PreApprovalFormPage from "./pages/PreApprovalFormPage/PreApprovalFormPage";
 import LearningAgreementBeforeMobility1 from "./pages/LearningAgreement/LearningAgreementBeforeMobility1";
+import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
+import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 
 /*
 class App extends Component {
@@ -102,8 +104,18 @@ function App() {
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route
         exact
-        path="/preapproval-form-page"
+        path="/preapproval-student"
         element={<PreApprovalFormPage />}
+      />
+      <Route
+        exact
+        path="/preapproval-coordinator"
+        element={<PreApprovalFormErasmusCoordinator />}
+      />
+      <Route
+        exact
+        path="/preapproval-fac-admin"
+        element={<PreApprovalFormFacAdmin />}
       />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
