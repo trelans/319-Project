@@ -1,5 +1,6 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import InfoPageItem from "./InfoPageItem";
+import { Link } from "react-router-dom";
 
 function InfoPage() {
   return (
@@ -43,7 +44,9 @@ function InfoPage() {
         ></InfoPageItem>
       </div>
       <div className="ip-center">
-        <button className="ip-button">I Accept The Terms</button>
+        <Link to="/preapproval-form-page">
+          <button className="ip-button">I Accept The Terms</button>
+        </Link>
       </div>
     </div>
   );

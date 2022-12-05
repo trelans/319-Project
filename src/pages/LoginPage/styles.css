@@ -868,9 +868,10 @@ body {
 }
 
 .ip-button {
-  padding: 15px;
+  padding: 0px;
   background: #a5c9ca;
-  width: 15%;
+  width: 200px;
+  height: 50px;
   border: 0;
 
   color: #2c3333;
