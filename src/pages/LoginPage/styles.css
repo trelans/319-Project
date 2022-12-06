@@ -1024,6 +1024,34 @@ body {
   font-family: sans-serif;
 }
 
+.pafp-button-blue {
+  background: #09c7d5;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.pafp-button-yellow {
+  background: #d5d209;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
 
 .pafp-button:hover {
   opacity: 75%;

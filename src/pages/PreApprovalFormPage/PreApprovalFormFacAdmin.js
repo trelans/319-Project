@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
-function PreApprovalFormPage() {
+function PreApprovalFormFacAdmin() {
   return (
     <div>
       <NavigationBar />
@@ -130,9 +130,7 @@ function PreApprovalFormPage() {
             </tr>
           </table>
         </div>
-        <div className="pafp-container">
-          <button className="pafp-button">Add Course</button>
-        </div>
+
         <div>
           <table className="pafp-first-table">
             <tr>
@@ -147,14 +145,11 @@ function PreApprovalFormPage() {
 
           <table className="pafp-table-last">
             <tr>
-              <td className="pafp-last-table-td"></td>
               <td className="pafp-last-table-td">
-                <label className="pafp-label">
-                  <Checkbox></Checkbox>I have read{" "}
-                  <Link to="/info-page" className="pafp-link">
-                    info
-                  </Link>
-                </label>
+                <button className="pafp-button">Convert to PDF</button>
+              </td>
+              <td className="pafp-last-table-td">
+                <button className="pafp-button">Edit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>
@@ -180,12 +175,10 @@ function PreApprovalFormPage() {
             </tr>
             <tr>
               <td className="pafp-last-table-td">
-                <button className="pafp-button">Convert to PDF</button>
+                <button className="pafp-button-blue">Approve Form</button>
               </td>
               <td className="pafp-last-table-td">
-                <button className="pafp-button-not-active">
-                  Send Pre-Approval Form
-                </button>
+                <button className="pafp-button-yellow">Reject Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>
@@ -207,4 +200,4 @@ function PreApprovalFormPage() {
   );
 }
 
-export default PreApprovalFormPage;
+export default PreApprovalFormFacAdmin;
