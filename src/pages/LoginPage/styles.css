@@ -868,9 +868,10 @@ body {
 }
 
 .ip-button {
-  padding: 15px;
+  padding: 0px;
   background: #a5c9ca;
-  width: 15%;
+  width: 200px;
+  height: 50px;
   border: 0;
 
   color: #2c3333;
@@ -884,4 +885,231 @@ body {
 
 .ip-button:hover {
   opacity: 75%;
+}
+
+/*PreApprovalFormPage*/
+
+.pafp-h1 {
+  font-size: 28px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+  padding-left: 1%;
+}
+
+.pafp-container {
+  width: 90%;
+  padding: 1% 0 0;
+  margin: auto;
+}
+
+.pafp-container2 {
+  width: 100%;
+  justify-content: space-evenly;
+  display: flex;
+  margin: auto;
+}
+
+.pafp-first-table {
+  padding-left: 5%;
+}
+
+.pafp-first-table-td {
+  padding-bottom: 0px;
+}
+
+.pafp-table-title {
+  font-size: 20px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.pafp-alert {
+  font-size: 20px;
+  color: #e10c41;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.pafp-second-table{
+  width: 90%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #a5c9ca;
+
+}
+
+.pafp-td {
+  width: 15%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #a5c9ca;
+
+}
+
+.pafp-button-td {
+  width: 15%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #e7f6f2
+
+}
+
+.pafp-header-other {
+  font-size: 20px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+}
+
+.pafp-text-other {
+  font-size: 20px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  margin-left: 20px;
+}
+
+.pafp-red-text {
+  font-size: 20px;
+  color: #d50909;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  font-weight: bold;
+}
+
+.pafp-button-x {
+  background: #d50909;
+  width: 100%;
+  height: 10%;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+
+}
+
+.pafp-button-x:hover {
+  opacity: 75%;
+}
+
+.pafp-button {
+  background: #d50909;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.pafp-button-blue {
+  background: #09c7d5;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.pafp-button-yellow {
+  background: #d5d209;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+
+.pafp-button:hover {
+  opacity: 75%;
+}
+
+.pafp-flex-div{
+  display: flex;
+}
+
+span.pafp-button-last {
+  float: right;
+  margin-right: -2.5em;
+  color: red;
+  font-weight: bold;
+}
+
+.pafp-label{
+  font-size: 16px;
+  color: #2c3333;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+}
+
+.pafp-link {
+  font-size: 16px;
+  color: #2f59f5;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+}
+
+.pafp-button-not-active {
+  background: #d50909;
+  width: 180px;
+  height:45px;
+  border: 0;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  opacity: 75%;
+}
+
+.pafp-lined-header {
+  font-size: 20px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+  text-decoration: underline;
+}
+
+.pafp-table-last {
+  padding-left: 5%;
+}
+
+.pafp-last-table-td {
+  padding-right: 50px;
 }
