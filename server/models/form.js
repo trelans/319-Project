@@ -18,8 +18,10 @@ const department = mongoose.Schema({
 }, { _id : false });
 
 const token = mongoose.Schema({
-    type: String,
-    required: true
+    token: {
+        type: String,
+        required: true
+    }
 
 }, {_id : false});
 

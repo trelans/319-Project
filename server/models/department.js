@@ -5,8 +5,11 @@ const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
 erasmusCoordinator = mongoose.Schema({
+    coordinator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ErasmusCoordinator',
+    }
+
 }, {_id: false});
 
 hostUniversity = mongoose.Schema({

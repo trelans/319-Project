@@ -29,14 +29,20 @@ const department = mongoose.Schema({
 }, { _id : false });
 
 const preferredUniversity = mongoose.Schema({
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'University'
+    university: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
+    }
+
 }, {_id : false});
 
 const token = mongoose.Schema({
-    type: String,
-    required: true
+    token: {
+        type: String,
+        required: true
+    }
+
 
 }, {_id : false});
 

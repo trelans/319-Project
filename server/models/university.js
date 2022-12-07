@@ -5,9 +5,11 @@ const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
 const appliedStudent = mongoose.Schema({
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: 'ErasmusCandidate'
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ErasmusCandidate'
+    }
+
 }, {_id: false});
 
 
@@ -24,8 +26,11 @@ const feedback = mongoose.Schema({
 
 
 const languageRequirement = mongoose.Schema({
-    type: String,
-    required: true
+    language: {
+        type: String,
+        required: true
+    }
+
 }, {_id: false});
 
 

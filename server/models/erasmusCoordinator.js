@@ -21,8 +21,11 @@ const assignedTask = mongoose.Schema({
 }, {_id: false});
 
 const token = mongoose.Schema({
+    token: {
         type: String,
         required: true
+    }
+
 }, {_id: false});
 
 

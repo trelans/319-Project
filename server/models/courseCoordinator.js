@@ -5,14 +5,20 @@ const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
 const assignedTask = mongoose.Schema({
+    task: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Task'
+    }
+
 }, {_id: false});
 
 const token = mongoose.Schema({
+    token: {
         type: String,
         required: true
+    }
+
 }, {_id: false});
 
 const courseCoordinatorSchema = new mongoose.Schema({
