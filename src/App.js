@@ -86,6 +86,10 @@ class App extends Component {
 	}
 }
 
+    {(localStorage.getItem("token") ? (
+      <Route exact path="/main-page" element={<MainPage />} />
+    ) : <Navigate to="/login" />)}
+
       <Route
         exact
         path="/"
@@ -112,8 +116,17 @@ function App() {
         element={localStorage.getItem("token") ?  <Navigate to="/main-page"/> : <Navigate to="/login" />}
     />
 
-    <Route exact path="/login" element={<LoginPage />} />
-    <Route exact path="/main-page" element={<MainPage />} />
+    <Route
+        exact
+        path="/login"
+        element={<LoginPage/>}
+    />
+
+    <Route
+        exact
+        path="/main-page"
+        element={localStorage.getItem("token") ?  <MainPage/> : <Navigate to="/login" />}
+    />
 
     <Route
         exact
@@ -194,6 +207,7 @@ function App() {
         path="/learning-agreement-1-3"
         element={<LearningAgreementBeforeMobility1 />}
       />
+
         <Route
             exact
             path="/learning-agreement-2-3"
