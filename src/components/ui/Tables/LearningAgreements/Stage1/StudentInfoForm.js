@@ -137,12 +137,7 @@ export default class App extends React.Component {
         return (
             <div className={"App"}>
 
-                <h1 id="title" className="blackLetter">
-                    Student Info
-                </h1>
-                <p id="description" className="blackLetter">
-                    Check your data
-                </p>
+
                 <div >
 
                     <div id="survey-form">

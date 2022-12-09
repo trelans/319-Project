@@ -54,6 +54,11 @@ body {
 .lp-button:hover {
   opacity: 75%;
 }
+.perfectCentered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* ForgotPasswordPage (fpp) Styles */
 .fpp-center {
