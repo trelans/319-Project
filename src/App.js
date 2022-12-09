@@ -24,6 +24,8 @@ import ProfilePageCourse from "./pages/ProfilePages/ProfilePageCourse";
 import InfoPage from "./pages/InfoPage/InfoPage";
 import PreApprovalFormPage from "./pages/PreApprovalFormPage/PreApprovalFormPage";
 import LearningAgreementBeforeMobility1 from "./pages/LearningAgreement/LearningAgreementBeforeMobility1";
+import LearningAgreementBeforeMobility2 from "./pages/LearningAgreement/LearningAgreementBeforeMobility2";
+import LearningAgreementBeforeMobility3 from "./pages/LearningAgreement/LearningAgreementBeforeMobility3";
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
@@ -162,9 +164,20 @@ function App() {
       <Route exact path="/info-page" element={<InfoPage />} />
       <Route
         exact
-        path="/learning-agreement"
+        path="/learning-agreement-1-3"
         element={<LearningAgreementBeforeMobility1 />}
       />
+        <Route
+            exact
+            path="/learning-agreement-2-3"
+            element={<LearningAgreementBeforeMobility2 />}
+        />
+
+        <Route
+            exact
+            path="/learning-agreement-3-3"
+            element={<LearningAgreementBeforeMobility3 />}
+        />
     </Routes>
   );
 }
