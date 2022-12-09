@@ -208,8 +208,6 @@ function App() {
         element={<LearningAgreementBeforeMobility1 />}
       />
 
-    <Route exact path="/login" element={<LoginPage />} />
-
         <Route
             exact
             path="/learning-agreement-2-3"
