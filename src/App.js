@@ -26,6 +26,7 @@ import PreApprovalFormPage from "./pages/PreApprovalFormPage/PreApprovalFormPage
 import LearningAgreementBeforeMobility1 from "./pages/LearningAgreement/LearningAgreementBeforeMobility1";
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
+import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
 
 /*
 class App extends Component {
@@ -117,6 +118,7 @@ function App() {
         path="/preapproval-fac-admin"
         element={<PreApprovalFormFacAdmin />}
       />
+      <Route exact path="/preapproval-tryout" element={<PreApprovalTryout />} />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
