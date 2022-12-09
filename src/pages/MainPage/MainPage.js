@@ -4,6 +4,7 @@ import {handleRequests} from "../requests";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
 function MainPage() {
+  /*
   const state = useLocation()
   const id = state.id
   handleRequests(state, {"id": id}, "dashboard", "1",(response, status) => {
@@ -14,7 +15,9 @@ function MainPage() {
   console.log(state)
   console.log(id)
   // Rerouting the user to the main page can be here if we do not see id or maybe can be doable using tokens
-  return <div><NavigationBar /></div>;
+  */
+      
+  return (<div><NavigationBar /></div>);
 }
 
 export default MainPage;
