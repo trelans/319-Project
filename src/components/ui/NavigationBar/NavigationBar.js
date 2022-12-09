@@ -21,7 +21,8 @@ function NavigationBar() {
           <li>
             <Link to="/settings-page">Settings</Link>
           </li>
-          <li className="nb-logout">
+          <li className="nb-logout"
+             onClick={() => {localStorage.clear()}}>
             <Link to="/login">Logout</Link>
           </li>
         </ul>

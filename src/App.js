@@ -1,5 +1,5 @@
 //import pageRoutes from './pageRoutes'
-import { Routes, Route } from "react-router";
+import { Routes, Route} from "react-router";
 import { Navigate } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -27,6 +27,16 @@ import LearningAgreementBeforeMobility1 from "./pages/LearningAgreement/Learning
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
+
+import jwt_decode from "jwt-decode"
+var token1 = localStorage.getItem("token")
+
+if(token1){
+  var decode = jwt_decode(token1)
+  console.log("decoded is :")
+  console.log(decode);
+}
+
 
 /*
 class App extends Component {
@@ -73,25 +83,42 @@ class App extends Component {
 		)
 	}
 }
-*/
 
-function App() {
-  return (
-    <Routes>
-      [// TODO true will be changed to checking login]
       <Route
         exact
         path="/"
         element={true ? <Navigate to="/login" /> : <Navigate to="/main-page" />}
       />
+
       <Route exact path="/login" element={<LoginPage />} />
+      <Route exact path="/main-page" element={<MainPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
         exact
+        path="/"
+        element={ localStorage.getItem("token") ? <Navigate to="/login" /> : <Navigate to="/main-page" />}
+      />
+
+*/
+
+function App() {
+  return (
+    <Routes>  
+    <Route
+        exact
+        path="/"
+        element={localStorage.getItem("token") ?  <Navigate to="/main-page"/> : <Navigate to="/login" />}
+    />
+
+    <Route exact path="/login" element={<LoginPage />} />
+    <Route exact path="/main-page" element={<MainPage />} />
+
+    <Route
+        exact
         path="/forgot-password-page"
         element={<ForgotPasswordPage />}
-      />
-      <Route
+    />
+    <Route
         exact
         path="/reset-password-confirm-page"
         element={<ResetPasswordConfirmPage />}

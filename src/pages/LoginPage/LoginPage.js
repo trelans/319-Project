@@ -29,6 +29,7 @@ function LoginPage() {
                 console.log(res.user._id)
                 if (status === 200){
                   // Send any necessary data to other page here
+                  localStorage.setItem("token", res.token);
                   navigate('/main-page', {state: {id: res.user._id}});
                 }
               })}>LOGIN</button>
