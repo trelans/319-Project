@@ -15,7 +15,7 @@ const applicationSchema = new mongoose.Schema({
     applicantCandidate: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'ErasmusCandidate'
     },
 
     appliedInstitution: {
@@ -27,7 +27,7 @@ const applicationSchema = new mongoose.Schema({
     responsibleErasmusCoord: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'ErasmusCoordinator'
     },
 }, {
     timestamps: true
