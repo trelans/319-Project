@@ -113,7 +113,7 @@ function App() {
     <Route
         exact
         path="/"
-        element={localStorage.getItem("token") ?  <Navigate to="/main-page"/> : <Navigate to="/login" />}
+        element={localStorage.getItem("token") ?  <Navigate to="/main-page"/> : <Navigate to="/login"/>}
     />
 
     <Route
@@ -125,7 +125,7 @@ function App() {
     <Route
         exact
         path="/main-page"
-        element={localStorage.getItem("token") ?  <MainPage/> : <Navigate to="/login" />}
+        element={ <MainPage/> }
     />
 
     <Route
