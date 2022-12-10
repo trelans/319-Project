@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 const Enum = require('enum')
+const User = require('./user')
 
 /*
 Course Coordinator -- 1
@@ -13,6 +14,8 @@ Incoming Student -- 4
  */
 
 const userTypeEnum = new Enum({'Course Coordinator' : 0 , 'Erasmus Coordinator' : 1, 'Erasmus Candidate' : 2, 'Incoming Student' : 3, 'Default User' : 4})
+
+
 
 // Mongoose creates id for SubDocuments automatically, create this method to override it
 const department = mongoose.Schema({
@@ -142,6 +145,8 @@ const erasmusCandidateSchema = new mongoose.Schema({
 }, {
     timestamps: true
 })
+
+//const erasmusCandidate = User.discriminator('ErasmusCandidate', erasmusCandidateSchema);
 
 // not stored in db for mongoose
 erasmusCandidateSchema.virtual('applications', {

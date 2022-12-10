@@ -4,6 +4,10 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+
+
+//var userKinds = { discriminatorKey: 'userType' };
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -90,7 +94,7 @@ const userSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true
-})
+});
 
 // not stored in db for mongoose
 userSchema.virtual('tasks', {
