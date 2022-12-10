@@ -34,7 +34,7 @@ const department = mongoose.Schema({
 const preferredUniversity = mongoose.Schema({
     university: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'University'
     }
 
@@ -43,13 +43,14 @@ const preferredUniversity = mongoose.Schema({
 const token = mongoose.Schema({
     token: {
         type: String,
-        required: true
+        //required: true
     }
 
 
 }, {_id : false});
 
-const erasmusCandidateSchema = new mongoose.Schema({
+const erasmusCandidateSchema = mongoose.Schema({
+    /*
     name: {
         type: String,
         required: true,
@@ -61,10 +62,6 @@ const erasmusCandidateSchema = new mongoose.Schema({
         trim: true
     },
     active: {
-        type: Boolean,
-        default: false
-    },
-    isActiveCandidate: {
         type: Boolean,
         default: false
     },
@@ -81,41 +78,6 @@ const erasmusCandidateSchema = new mongoose.Schema({
         }
     },
 
-    // ENG notes + cpga ile hesaplanan erasmus placement puanı
-    totalPoints: {
-        type: Number,
-        default: 0
-    },
-
-    preferredSemester: {
-        type: Number,
-        required: true
-    },
-    nominatedUniversityId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'University'
-    },
-
-    signature: {
-        type: String,
-        required: true
-    },
-
-    academicYear: {
-        type: Number,
-        required: true
-    },
-
-    preferredUniversities: [preferredUniversity],
-    tokens: [token],
-
-    departments:[department],
-
-    studentId: {
-        type: Number,
-        default: 0
-    },
     email: {
         type: String,
         unique: true,
@@ -134,14 +96,61 @@ const erasmusCandidateSchema = new mongoose.Schema({
         trim: true,
         validate(value) {
             if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
+                throw new Error('Invalid password')
             }
         }
     },
 
     avatar: {
         type: Buffer
+    },
+
+    tokens: [token],
+
+     */
+/*
+    isActiveCandidate: {
+        type: Boolean,
+        default: false
+    },
+
+
+    // ENG notes + cpga ile hesaplanan erasmus placement puanı
+    totalPoints: {
+        type: Number,
+        default: 0
+    },
+
+    preferredSemester: {
+        type: Number,
+        //required: true
+    },
+    nominatedUniversityId: {
+        type: mongoose.Schema.Types.ObjectId,
+        //required: true,
+        ref: 'University'
+    },
+
+    signature: {
+        type: String,
+        //required: true
+    },
+
+    academicYear: {
+        type: Number,
+        //required: true
+    },
+
+    preferredUniversities: [preferredUniversity],
+
+
+    departments:[department],
+*/
+    studentId: {
+        type: Number,
+        default: 0
     }
+
 }, {
     timestamps: true
 })
@@ -213,6 +222,6 @@ erasmusCandidateSchema.pre('remove', async function (next) {
     next()
 })
 
-const ErasmusCandidate = mongoose.model('ErasmusCandidate', erasmusCandidateSchema)
+const ErasmusCandidate = erasmusCandidateSchema
 
 module.exports = ErasmusCandidate
