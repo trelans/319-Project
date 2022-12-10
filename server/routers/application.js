@@ -12,6 +12,12 @@ router.get('/application', auth, async (req,res) => {
 router.patch('/application', auth, async (req,res) => {
 })
 
+router.post('/application', auth, async (req,res) => {
+
+
+})
+
+
 router.delete('/application', auth, async (req,res) => {
     try {
         if (req.deleteType == "discard"){

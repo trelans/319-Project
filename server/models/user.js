@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+const options = {discriminatorKey : 'kind'}
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -87,10 +89,10 @@ const userSchema = new mongoose.Schema({
     }],
     avatar: {
         type: Buffer
-    }
+    },
 }, {
     timestamps: true
-})
+}, options)
 
 // not stored in db for mongoose
 userSchema.virtual('tasks', {
@@ -120,7 +122,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function() {
     const user = this
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({_id: user._id.toString(), userType: user.userType}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
     user.tokens = user.tokens.concat({token})
     await user.save()

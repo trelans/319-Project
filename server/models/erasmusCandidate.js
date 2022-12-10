@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 const Enum = require('enum')
+const User = require('./user')
 
 /*
 Course Coordinator -- 1
@@ -46,7 +47,7 @@ const token = mongoose.Schema({
 
 }, {_id : false});
 
-const erasmusCandidateSchema = new mongoose.Schema({
+const erasmusCandidateSchema = User.discriminator('ErasmusCandidate', new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -141,14 +142,16 @@ const erasmusCandidateSchema = new mongoose.Schema({
     }
 }, {
     timestamps: true
-})
+}) )
 
 // not stored in db for mongoose
+/*
 erasmusCandidateSchema.virtual('applications', {
     ref: 'Application',
     localField: '_id',
     foreignField: 'applicantCandidate'
 })
+*/
 
 erasmusCandidateSchema.methods.toJSON = function () {
     const user = this
