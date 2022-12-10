@@ -15,6 +15,8 @@ Incoming Student -- 4
 
 const userTypeEnum = new Enum({'Course Coordinator' : 0 , 'Erasmus Coordinator' : 1, 'Erasmus Candidate' : 2, 'Incoming Student' : 3, 'Default User' : 4})
 
+
+
 // Mongoose creates id for SubDocuments automatically, create this method to override it
 const department = mongoose.Schema({
     id: {
@@ -143,6 +145,8 @@ const erasmusCandidateSchema = User.discriminator('ErasmusCandidate', new mongoo
 }, {
     timestamps: true
 }) )
+
+//const erasmusCandidate = User.discriminator('ErasmusCandidate', erasmusCandidateSchema);
 
 // not stored in db for mongoose
 /*
