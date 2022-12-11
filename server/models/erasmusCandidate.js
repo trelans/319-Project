@@ -55,7 +55,7 @@ const token = mongoose.Schema({
 }, {_id: false});
 
 const erasmusCandidateSchema = mongoose.Schema({
-
+    /*
     name: {
         type: String,
         required: true,
@@ -112,7 +112,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
     tokens: [token],
 
-     */
+    */
 
     isActiveCandidate: {
         type: Boolean,
@@ -237,6 +237,6 @@ erasmusCandidateSchema.pre('remove', async function (next) {
 })
 */
 
-const ErasmusCandidate = mongoose.model('ErasmusCandidate', erasmusCandidateSchema)
+const ErasmusCandidate =  erasmusCandidateSchema
 
 module.exports = ErasmusCandidate
