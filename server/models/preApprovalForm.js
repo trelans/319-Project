@@ -25,7 +25,8 @@ const preApprovalFormSchema = new mongoose.Schema({
 
     totalEctsCredits: {
         type: Number,
-        required: true
+        required: true,
+        default: 0
     }
 }, {
     timestamps: true

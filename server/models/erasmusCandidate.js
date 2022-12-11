@@ -13,8 +13,13 @@ Erasmus Candidate -- 3
 Incoming Student -- 4
  */
 
-const userTypeEnum = new Enum({'Course Coordinator' : 0 , 'Erasmus Coordinator' : 1, 'Erasmus Candidate' : 2, 'Incoming Student' : 3, 'Default User' : 4})
-
+const userTypeEnum = new Enum({
+    'Course Coordinator': 0,
+    'Erasmus Coordinator': 1,
+    'Erasmus Candidate': 2,
+    'Incoming Student': 3,
+    'Default User': 4
+})
 
 
 // Mongoose creates id for SubDocuments automatically, create this method to override it
@@ -29,7 +34,7 @@ const department = mongoose.Schema({
         type: Number,
         default: 0
     }
-}, { _id : false });
+}, {_id: false});
 
 const preferredUniversity = mongoose.Schema({
     university: {
@@ -38,7 +43,7 @@ const preferredUniversity = mongoose.Schema({
         ref: 'University'
     }
 
-}, {_id : false});
+}, {_id: false});
 
 const token = mongoose.Schema({
     token: {
@@ -47,10 +52,10 @@ const token = mongoose.Schema({
     }
 
 
-}, {_id : false});
+}, {_id: false});
 
 const erasmusCandidateSchema = mongoose.Schema({
-    /*
+
     name: {
         type: String,
         required: true,
@@ -72,7 +77,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
 
         validate(value) {
-            if(value < 0 || value > 5) {
+            if (value < 0 || value > 5) {
                 throw new Error('User Type must be greater than zero')
             }
         }
@@ -85,7 +90,7 @@ const erasmusCandidateSchema = mongoose.Schema({
         trim: true,
         lowercase: true,
         validate(value) {
-            if(!validator.isEmail(value)) {
+            if (!validator.isEmail(value)) {
                 throw new Error('Invalid email!')
             }
         }
@@ -95,7 +100,7 @@ const erasmusCandidateSchema = mongoose.Schema({
         required: true,
         trim: true,
         validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
+            if (!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
                 throw new Error('Invalid password')
             }
         }
@@ -107,8 +112,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
     tokens: [token],
 
-     */
-/*
+
     isActiveCandidate: {
         type: Boolean,
         default: false
@@ -144,8 +148,8 @@ const erasmusCandidateSchema = mongoose.Schema({
     preferredUniversities: [preferredUniversity],
 
 
-    departments:[department],
-*/
+    departments: [department],
+
     studentId: {
         type: Number,
         default: 0
@@ -175,9 +179,9 @@ erasmusCandidateSchema.methods.toJSON = function () {
     return userObject
 }
 
-erasmusCandidateSchema.methods.generateAuthToken = async function() {
+erasmusCandidateSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, {expiresIn: '1h'})
 
     user.tokens = user.tokens.concat({token})
     await user.save()
@@ -186,12 +190,14 @@ erasmusCandidateSchema.methods.generateAuthToken = async function() {
 }
 
 erasmusCandidateSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email})
-    if(!user) {
+    const user = await ErasmusCandidate.findOne({email})
+    console.log(user)
+
+    if (!user) {
         throw new Error('Unable to login')
     }
-    const isMatch = await bcrypt.compare(password,user.password)
-    if(!isMatch) {
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
         throw new Error('Unable to login')
     }
 
@@ -204,7 +210,7 @@ erasmusCandidateSchema.statics.findByCredentials = async (email, password) => {
 erasmusCandidateSchema.pre('save', async function (next) {
     const user = this
 
-    if(user.isModified('password')) {
+    if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
 
@@ -222,6 +228,6 @@ erasmusCandidateSchema.pre('remove', async function (next) {
     next()
 })
 
-const ErasmusCandidate = erasmusCandidateSchema
+const ErasmusCandidate = mongoose.model('ErasmusCandidate', erasmusCandidateSchema)
 
 module.exports = ErasmusCandidate

@@ -3,6 +3,7 @@ const Form = require('./form')
 const Department = require('./department')
 const PreApproval = require('./preApprovalForm')
 const LearningAgreement = require('./learningAgreementForm')
+const CourseTransfer = require('./courseTransferForm')
 const ErasmusCoordinator = require('./erasmusCoordinator')
 
 const applicationSchema = new mongoose.Schema({
@@ -29,6 +30,27 @@ const applicationSchema = new mongoose.Schema({
         required: true,
         ref: 'ErasmusCoordinator'
     },
+
+    /*
+    formsIds: {
+        PFId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'PreApprovalForm'
+        },
+
+        LAFId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'LearningAgreementForm'
+        },
+
+        CTFId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'CourseTransferForm'
+        }
+    },
+
+     */
+
 }, {
     timestamps: true
 })
@@ -69,6 +91,10 @@ applicationSchema.statics.createApplication = async function (user, applicationP
     })
     await form.save()
     form = new LearningAgreement({
+        ownerApplication: id
+    })
+    await form.save()
+    form = new CourseTransfer({
         ownerApplication: id
     })
     await form.save()

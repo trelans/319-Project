@@ -1,6 +1,33 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import {useState} from "react";
+import {handleRequests} from "../requests";
 
 function ApplicationPage1() {
+  const [status, setStatus] = useState('')
+  const [erasmusCoordinator, setErasmusCoordinator] = useState('')
+  const [appliedInstitution, setAppliedInstitution] = useState('')
+  const [mobilityPeriod, setMobilityPeriod] = useState('')
+  const [PFStatus, setPFStatus] = useState('')
+  const [PFDeadline, setPFDeadline] = useState('')
+  const [LAFStatus, setLAFStatus] = useState('')
+  const [LAFDeadline, setLAFDeadline] = useState('')
+  const [CTFStatus, setCTFStatus] = useState('')
+  const [CTFDeadline, setCTFDeadline] = useState('')
+
+  handleRequests(null,{}, "application-page1", "1",(response, status) => {
+    setStatus(response.status)
+    setErasmusCoordinator(response.erasmusCoordinator)
+    setAppliedInstitution(response.appliedInstitution)
+    setMobilityPeriod(response.mobilityPeriod)
+    setPFStatus(response.PFStatus)
+    setPFDeadline(response.PFDeadline)
+    setLAFStatus(response.LAFStatus)
+    setLAFDeadline(response.LAFDeadline)
+    setCTFStatus(response.CTFStatus)
+    setCTFDeadline(response.CTFDeadline)
+  })
+
+
   return (
     <div>
       <NavigationBar />
@@ -16,7 +43,7 @@ function ApplicationPage1() {
               </td>
               <td>
                 <p className="ap-text-application-status">
-                  Waiting for Academic <br /> Coordinator Inspection
+                  {status}
                 </p>
               </td>
             </tr>
@@ -25,7 +52,7 @@ function ApplicationPage1() {
                 <p className="ap-header-other">Applied Institution:</p>
               </td>
               <td>
-                <p className="ap-text-other">Kingston University</p>
+                <p className="ap-text-other">{appliedInstitution}</p>
               </td>
             </tr>
             <tr>
@@ -35,7 +62,7 @@ function ApplicationPage1() {
                 </p>
               </td>
               <td>
-                <p className="ap-text-other">Can ALKAN</p>
+                <p className="ap-text-other">{erasmusCoordinator}</p>
               </td>
             </tr>
             <tr>
@@ -43,7 +70,7 @@ function ApplicationPage1() {
                 <p className="ap-header-other">Mobility Period:</p>
               </td>
               <td>
-                <p className="ap-text-other">01.09.2023 - 01.01.2024</p>
+                <p className="ap-text-other">{mobilityPeriod}</p>
               </td>
             </tr>
             <tr>
@@ -51,10 +78,10 @@ function ApplicationPage1() {
                 <p className="ap-header-other">Pre-Approval Form:</p>
               </td>
               <td>
-                <p className="ap-text-other">Approved</p>
+                <p className="ap-text-other">{PFStatus}</p>
               </td>
               <td>
-                <p className="ap-text-other">(Deadline: Passed)</p>
+                <p className="ap-text-other">{PFDeadline}</p>
               </td>
               <td>
                 <button className="ap-button-table">View</button>
@@ -65,10 +92,10 @@ function ApplicationPage1() {
                 <p className="ap-header-other">Learning Agreement Form:</p>
               </td>
               <td>
-                <p className="ap-text-not-uploaded">Not Uploaded</p>
+                <p className="ap-text-not-uploaded">{LAFStatus}</p>
               </td>
               <td>
-                <p className="ap-text-other">(Deadline: 31.03.2023)</p>
+                <p className="ap-text-other">{LAFDeadline}</p>
               </td>
               <td>
                 <button className="ap-button-table">Edit</button>
@@ -79,7 +106,7 @@ function ApplicationPage1() {
                 <p className="ap-header-other">Course Transfer Form:</p>
               </td>
               <td>
-                <p className="ap-text-not-available">Not Yet Available</p>
+                <p className="ap-text-not-available">{CTFStatus}</p>
               </td>
               <td></td>
               <td>
