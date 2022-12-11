@@ -108,7 +108,7 @@ const erasmusCandidateSchema = mongoose.Schema({
     tokens: [token],
 
      */
-/*
+
     isActiveCandidate: {
         type: Boolean,
         default: false
@@ -123,8 +123,10 @@ const erasmusCandidateSchema = mongoose.Schema({
 
     preferredSemester: {
         type: Number,
+        default : 0
         //required: true
     },
+
     nominatedUniversityId: {
         type: mongoose.Schema.Types.ObjectId,
         //required: true,
@@ -137,15 +139,13 @@ const erasmusCandidateSchema = mongoose.Schema({
     },
 
     academicYear: {
-        type: Number,
+        type: Number,   
         //required: true
     },
 
     preferredUniversities: [preferredUniversity],
-
-
     departments:[department],
-*/
+
     studentId: {
         type: Number,
         default: 0
@@ -153,19 +153,20 @@ const erasmusCandidateSchema = mongoose.Schema({
 
 }, {
     timestamps: true
-}) )
+}) 
 
 //const erasmusCandidate = User.discriminator('ErasmusCandidate', erasmusCandidateSchema);
 
 // not stored in db for mongoose
-/*
+
 erasmusCandidateSchema.virtual('applications', {
     ref: 'Application',
     localField: '_id',
     foreignField: 'applicantCandidate'
 })
-*/
 
+
+/*
 erasmusCandidateSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
@@ -200,9 +201,11 @@ erasmusCandidateSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
+
 /**
  * Hash the plain text password before saving
  */
+/*
 erasmusCandidateSchema.pre('save', async function (next) {
     const user = this
 
@@ -212,10 +215,12 @@ erasmusCandidateSchema.pre('save', async function (next) {
 
     next()
 })
+*/
 
 /**
  * Delete user tasks when the user is removed
  */
+/*
 erasmusCandidateSchema.pre('remove', async function (next) {
     const user = this
 
@@ -223,6 +228,7 @@ erasmusCandidateSchema.pre('remove', async function (next) {
 
     next()
 })
+*/
 
 const ErasmusCandidate = erasmusCandidateSchema
 
