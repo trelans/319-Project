@@ -157,16 +157,18 @@ const erasmusCandidateSchema = mongoose.Schema({
 
 }, {
     timestamps: true
-})
+}) )
 
 //const erasmusCandidate = User.discriminator('ErasmusCandidate', erasmusCandidateSchema);
 
 // not stored in db for mongoose
+/*
 erasmusCandidateSchema.virtual('applications', {
     ref: 'Application',
     localField: '_id',
     foreignField: 'applicantCandidate'
 })
+*/
 
 erasmusCandidateSchema.methods.toJSON = function () {
     const user = this
