@@ -157,7 +157,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
 }, {
     timestamps: true
-}) )
+})
 
 //const erasmusCandidate = User.discriminator('ErasmusCandidate', erasmusCandidateSchema);
 
