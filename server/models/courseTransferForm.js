@@ -17,7 +17,7 @@ const courseToTransfer = mongoose.Schema( {
 const courseTransferForm = new mongoose.Schema({
 
     ownerApplication: {
-        type: mongoose.SchemaType.Type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Application'
     },
@@ -38,8 +38,9 @@ const courseTransferForm = new mongoose.Schema({
         required: true
     },
     approveExchangeCoordinator: {
-        type: ErasmusCoordinator,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'ErasmusCoordinator'
     },
     approveDean: {
         type: String,
@@ -65,7 +66,7 @@ userSchema.virtual('university', {
 })
 */
 
-courseTransferFormSchema.methods.toJSON = function () {
+courseTransferForm.methods.toJSON = function () {
     const form = this
     const formObject = form.toObject()
 
@@ -77,6 +78,6 @@ courseTransferFormSchema.methods.toJSON = function () {
 }
 
 
-const CourseTransferForm = mongoose.model('CourseTransferForm', courseTransferFormSchema)
+const CourseTransferForm = mongoose.model('CourseTransferForm', courseTransferForm)
 
 module.exports = CourseTransferForm

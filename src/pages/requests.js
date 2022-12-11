@@ -1,10 +1,14 @@
 import React from "react";
+import jwt_decode from "jwt-decode";
 
 // Type = 0 => POST Request, Type = 1 => GET Request
 export const handleRequests = (e, data, page, type, callback) => {
-    e.preventDefault();
+    if (e) {
+        e.preventDefault();
+    }
+    data.token = localStorage.getItem("token")
     data.type = type
-    console.log(data)
+    console.log("data:", data)
     const requestOptions = {
         method: "POST",
         mode: "cors",
