@@ -3,6 +3,7 @@ import {useState} from "react";
 import {handleRequests} from "../requests";
 
 function ApplicationPage1() {
+
   const [status, setStatus] = useState('')
   const [erasmusCoordinator, setErasmusCoordinator] = useState('')
   const [appliedInstitution, setAppliedInstitution] = useState('')
