@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function NavigationBar() {
   return (
     <div className="nb-header">
-      <div className="nb-name">Erasmus App</div>
+      <div className="nb-name">Toera</div>
       <nav>
         <ul>
           <li>
