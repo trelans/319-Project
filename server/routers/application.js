@@ -35,6 +35,7 @@ router.post('/application-page1', async (req, res) => {
         } else {
             response = res.status(302)
         }
+
         response.send({"status": application.status,
             "erasmusCoordinator": erasmusCoordinator.name + " " + erasmusCoordinator.surname,
             "appliedInstitution": appliedInstitution.name,

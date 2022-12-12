@@ -53,7 +53,7 @@ router.get('/tasks/:id', auth, async (req,res) => {
         res.status(500).send(e)
     }
 })
-//
+
 
 router.post('/create/newCandidate', async (req, res) => {
     const university = await University.findOne({ "name": req.body.nominatedUniversity })

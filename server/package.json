@@ -13,9 +13,11 @@
   "dependencies": {
     "bad-words": "^3.0.4",
     "bcryptjs": "^2.4.3",
+    "convert-excel-to-json": "^1.7.0",
     "cors": "^2.8.5",
     "enum": "^3.0.4",
     "express": "^4.18.1",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.8.1",
     "mongoose": "^6.5.0",

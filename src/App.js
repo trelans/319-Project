@@ -1,5 +1,5 @@
 //import pageRoutes from './pageRoutes'
-import { Routes, Route} from "react-router";
+import { Routes, Route } from "react-router";
 import { Navigate } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -30,15 +30,20 @@ import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreAp
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
 
-import jwt_decode from "jwt-decode"
-var token1 = localStorage.getItem("token")
+import jwt_decode from "jwt-decode";
+import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
+import UniversityListPage from "./pages/UniversityListPage/UniversityListPage";
+import LogsPage from "./pages/LogsPage/LogsPage";
+import CourseTransferFormPage from "./pages/CourseTransferFormPage/CourseTransferFormPage";
+import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
+import ChatPage from "./pages/ChatPage/ChatPage";
+var token1 = localStorage.getItem("token");
 
-if(token1){
-  var decode = jwt_decode(token1)
-  console.log("decoded is :")
+if (token1) {
+  var decode = jwt_decode(token1);
+  console.log("decoded is :");
   console.log(decode);
 }
-
 
 /*
 class App extends Component {
@@ -109,31 +114,29 @@ class App extends Component {
 
 function App() {
   return (
-    <Routes>  
-    <Route
+    <Routes>
+      <Route
         exact
         path="/"
-        element={localStorage.getItem("token") ?  <Navigate to="/main-page"/> : <Navigate to="/login"/>}
-    />
+        element={
+          localStorage.getItem("token") ? (
+            <Navigate to="/main-page" />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      />
 
-    <Route
-        exact
-        path="/login"
-        element={<LoginPage/>}
-    />
+      <Route exact path="/login" element={<LoginPage />} />
 
-    <Route
-        exact
-        path="/main-page"
-        element={ <MainPage/> }
-    />
+      <Route exact path="/main-page" element={<MainPage />} />
 
-    <Route
+      <Route
         exact
         path="/forgot-password-page"
         element={<ForgotPasswordPage />}
-    />
-    <Route
+      />
+      <Route
         exact
         path="/reset-password-confirm-page"
         element={<ResetPasswordConfirmPage />}
@@ -143,8 +146,21 @@ function App() {
         path="/reset-password-page"
         element={<ResetPasswordPage />}
       />
+      <Route
+        exact
+        path="/confirmed-courses"
+        element={<ConfirmedCoursesPage />}
+      />
+
+      <Route exact path="/logs-page" element={<LogsPage />} />
+      <Route exact path="/university-list" element={<UniversityListPage />} />
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
       <Route exact path="/settings-page" element={<SettingsPage />} />
+      <Route
+        exact
+        path="/course-transfer-page"
+        element={<CourseTransferFormPage />}
+      />
       <Route
         exact
         path="/preapproval-student"
@@ -160,11 +176,13 @@ function App() {
         path="/preapproval-fac-admin"
         element={<PreApprovalFormFacAdmin />}
       />
+      <Route exact path="/add-course" element={<AddCoursePage />} />
       <Route exact path="/preapproval-tryout" element={<PreApprovalTryout />} />
       <Route exact path="/applicants-list" element={<ApplicantsList />} />
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
       <Route exact path="/application-page2" element={<ApplicationPage2 />} />
+      <Route exact path="/chat" element={<ChatPage />} />
       <Route
         exact
         path="/profile-own-student"
@@ -208,17 +226,17 @@ function App() {
         element={<LearningAgreementBeforeMobility1 />}
       />
 
-        <Route
-            exact
-            path="/learning-agreement-2-3"
-            element={<LearningAgreementBeforeMobility2 />}
-        />
+      <Route
+        exact
+        path="/learning-agreement-2-3"
+        element={<LearningAgreementBeforeMobility2 />}
+      />
 
-        <Route
-            exact
-            path="/learning-agreement-3-3"
-            element={<LearningAgreementBeforeMobility3 />}
-        />
+      <Route
+        exact
+        path="/learning-agreement-3-3"
+        element={<LearningAgreementBeforeMobility3 />}
+      />
     </Routes>
   );
 }
