@@ -38,6 +38,7 @@ import CourseTransferFormPage from "./pages/CourseTransferFormPage/CourseTransfe
 import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
+import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 var token1 = localStorage.getItem("token");
 
 if (token1) {
@@ -195,7 +196,6 @@ function App() {
         path="/profile-others-student"
         element={<ProfilePageOthersStudent />}
       />
-      <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route
         exact
         path="/profile-others-incoming"
@@ -233,6 +233,9 @@ function App() {
         path="/learning-agreement-3-3"
         element={<LearningAgreementBeforeMobility3 />}
       />
+      //new multiple pages
+      <Route exact path="/profile-own" element={<ProfilePageOwn />} />
+      <Route exact path="/profile-other" element={<ProfilePageOthers />} />
     </Routes>
   );
 }
