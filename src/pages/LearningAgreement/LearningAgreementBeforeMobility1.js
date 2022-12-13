@@ -5,7 +5,7 @@ import InfoPageItem from "../InfoPage/InfoPageItem";
 import LABMStudentInfo from "../../components/ui/Tables/LearningAgreements/Stage1/StudentInfoForm"
 import LABMSendingInstution from "../../components/ui/Tables/LearningAgreements/Stage1/SendingInstutionForm"
 import LABMReceivingInstution from "../../components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm"
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import styles from "./LearningAgreementBeforeMobility.module.css"
 

@@ -5,7 +5,7 @@ import InfoPageItem from "../InfoPage/InfoPageItem";
 import LABMStudent from "../../components/ui/Tables/LearningAgreements/Stage3/Student"
 import LABMSending from "../../components/ui/Tables/LearningAgreements/Stage3/ResponsiblePersonAtSendingIns"
 import LABMReceiving from "../../components/ui/Tables/LearningAgreements/Stage3/ResponsiblePersonAtReceivingIns"
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import Card from "../../components/ui/Card"
 import styles from "./LearningAgreementBeforeMobility.module.css"

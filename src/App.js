@@ -39,6 +39,7 @@ import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
+import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
 var token1 = localStorage.getItem("token");
 
 if (token1) {
@@ -154,6 +155,7 @@ function App() {
       <Route exact path="/university-list" element={<UniversityListPage />} />
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
       <Route exact path="/settings-page" element={<SettingsPage />} />
+      <Route exact path="/upload-excel" element={<UploadExcel />} />
       <Route
         exact
         path="/course-transfer-page"
