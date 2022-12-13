@@ -9,6 +9,7 @@ const cors = require("cors");
 
 const app = express()
 const excelToJson = require('./convertor/convertToJson')
+const mailSender = require('./utils/mailSender')
 
 // required to send requests from client side that is run in the same pc with the server
 // (probably it will be deleted after deploying)
@@ -25,5 +26,6 @@ app.listen(port, () => {
 })
 
 //console.log(excelToJson)
+//mailSender.transporter
 
 module.exports = app
