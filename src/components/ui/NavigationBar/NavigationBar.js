@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import classes from "./NavigationBar.module.css";
 
 function NavigationBar() {
   return (
-    <div className="nb-header">
-      <div className="nb-name">Erasmus App</div>
+    <div className={classes["nb-header"]}>
+      <div className={classes["nb-name"]}>Erasmus App</div>
       <nav>
         <ul>
           <li>
@@ -21,8 +22,12 @@ function NavigationBar() {
           <li>
             <Link to="/settings-page">Settings</Link>
           </li>
-          <li className="nb-logout"
-             onClick={() => {localStorage.clear()}}>
+          <li
+            className={classes["nb-logout"]}
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
             <Link to="/login">Logout</Link>
           </li>
         </ul>
