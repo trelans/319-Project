@@ -7,7 +7,8 @@ import LABMSending from "../../components/ui/Tables/LearningAgreements/Stage3/Re
 import LABMReceiving from "../../components/ui/Tables/LearningAgreements/Stage3/ResponsiblePersonAtReceivingIns"
 import Grid from "@material-ui/core/Grid";
 import React from "react";
-
+import Card from "../../components/ui/Card"
+import styles from "./LearningAgreementBeforeMobility.module.css"
 function LearningAgreementBeforeMobility3() {
     return(
         <div>
@@ -16,10 +17,12 @@ function LearningAgreementBeforeMobility3() {
             <div className="ip-container">
                 <h1 className="ip-h1">Learning Agreement Form Before Mobility Part 3 of 3:</h1>
 
-                <Grid container   justifyContent="center" >
+             <div className={styles.learningAgreement3}>
+
+                <Grid container   justifyContent="center"  >
 
                     <Grid item xs={6} >
-                        <h1 style={ { marginLeft : 150}} >
+                        <h1 style={ { marginLeft : 170}} >
                             Student
                         </h1>
 
@@ -45,7 +48,7 @@ function LearningAgreementBeforeMobility3() {
                         <LABMReceiving></LABMReceiving>
                     </Grid>
                     <Grid item xs={12} >
-                      <div style={{ padding:30}}>
+                      <div >
                         <h6 >
                             By signing this document, the student, the sending institution and the receiving institution confirm that they approve the proposed Learning Agreement and that they will comply with all the arrangements agreed by all parties. Sending and receiving institutions undertake to apply all the principles of the Erasmus Charter for Higher Education relating to mobility for studies (or the principles agreed in the inter-institutional agreement for institutions located in Partner Countries). The sending institution and the student should also commit to what is set out in the Erasmus+ grant agreement. The receiving institution confirms that the educational components listed in Table A are in line with its course catalogue and should be available to the student. The sending institution commits to recognise all the credits gained at the receiving institution for the successfully completed educational components and to count them towards the student's degree as described in Table C. Any exceptions to this rule are documented in an annex of this Learning Agreement and agreed by all parties. The student and receiving institution will communicate to the sending institution any problems or changes regarding the proposed mobility programme, responsible persons and/or study period.
                         </h6>
@@ -54,7 +57,13 @@ function LearningAgreementBeforeMobility3() {
 
                 </Grid>
 
+                 <div className="perfectCentered">
+                     <button className = {styles.butConvert} >
+                         Convert To Pdf{" "}
+                     </button>
+                 </div>
 
+             </div>
             </div>
 
         </div>

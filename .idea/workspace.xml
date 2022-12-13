@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility3.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LearningAgreement/LearningAgreementBeforeMobility3.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IlOpJyVrtARNrgp7Z4Zem8atdC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Kutay/Desktop/319/319-Project",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="319-Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="319-Project" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="" />
+      <created>1670752885039</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670752885039</updated>
+      <workItem from="1670752886490" duration="4119000" />
+      <workItem from="1670849953856" duration="4697000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

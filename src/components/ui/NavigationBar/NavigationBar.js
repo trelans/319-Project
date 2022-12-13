@@ -4,7 +4,7 @@ import classes from "./NavigationBar.module.css";
 function NavigationBar() {
   return (
     <div className={classes["nb-header"]}>
-      <div className={classes["nb-name"]}>Erasmus App</div>
+      <div className={classes["nb-name"]}>Toera</div>
       <nav>
         <ul>
           <li>
