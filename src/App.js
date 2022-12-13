@@ -29,6 +29,7 @@ import LearningAgreementBeforeMobility3 from "./pages/LearningAgreement/Learning
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
+import TestPage from "./pages/testPage";
 
 import jwt_decode from "jwt-decode";
 import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
@@ -39,6 +40,12 @@ import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
+
+import io from 'socket.io-client';
+//export const socket = io.connect("http://localhost:8080");
+
+//console.log("test: " + socket)
+
 var token1 = localStorage.getItem("token");
 
 if (token1) {
@@ -128,6 +135,8 @@ function App() {
           )
         }
       />
+
+      <Route exact path="/test" element={<TestPage/>} />
       <Route exact path="/login" element={<LoginPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
@@ -241,3 +250,5 @@ function App() {
 }
 
 export default App;
+export const socket = io("http://localhost:8080");
+

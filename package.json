@@ -28,6 +28,7 @@
     "react-select": "^5.7.0",
     "react-select-country": "^0.0.15",
     "react-select-country-list": "^2.2.3",
+    "socket.io-client": "^4.5.4",
     "validator": "^13.7.0",
     "validatorjs": "^3.22.1",
     "web-vitals": "^2.1.4"
@@ -55,6 +56,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:8080"
+  }
 }
