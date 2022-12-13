@@ -62,16 +62,6 @@ const universitySchema = new mongoose.Schema({
         default: 0
     },
 
-    fallSuitability: {
-        type: Boolean,
-        required: true
-    },
-
-    springSuitability: {
-        type: Boolean,
-        required: true
-    },
-
     applicationLink: {
         type: String,
         default: 'No application link provided...'

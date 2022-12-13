@@ -32,6 +32,24 @@ const preferredUniversity = mongoose.Schema({
 
 }, {_id: false});
 
+// Erasmus Coordinator Schemas
+const assignedUniversity = mongoose.Schema({
+    universityId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
+    }
+}, {_id: false});
+
+const assignedTask = mongoose.Schema({
+    task: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Task'
+    }
+}, {_id: false});
+
+
 const token = mongoose.Schema({
     token: {
         type: String,
@@ -153,13 +171,34 @@ const userSchema = new mongoose.Schema({
             type: Number,
             default: 0
         },
+    },
+
+
+    erasmusCoordinator : {
+        department: {
+            type: String,
+            default: "noDepartment"
+        },
+        coordinatorID: {
+            type: Number,
+            required: true
+        },
+
+        password: {
+            type: String,
+            required: true,
+            trim: true,
+            validate(value) {
+                if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
+                    throw new Error('Invalid password')
+                }
+            }
+        },
+        assignedUniversities: [assignedUniversity],
+        assignedTasks: [assignedTask],
     }
 
     /*
-    erasmusCoordinator : {
-        data : ErasmusCoordinator
-    },
-
     courseCoordinator : {
         data : CourseCoordinator
     }
