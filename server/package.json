@@ -22,6 +22,7 @@
     "mongodb": "^4.8.1",
     "mongoose": "^6.5.0",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.8.0",
     "save-dev": "^0.0.1-security",
     "sharp": "^0.30.7",
     "socket.io": "^4.5.3",

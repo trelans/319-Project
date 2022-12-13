@@ -146,87 +146,87 @@ const learningAgreementFormSchema = new mongoose.Schema({
     
     ownerApplication: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'Application'
     },
     
     ownerStudent: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'ErasmusCandidate'
     },
 
     studyCycle: {
         type: String,
-        require: true
+        //require: true
     },
 
     subjectAreaCode: {
         type: String, //sample subject area code: 01.5 or 13.6 -- double / string ??
-        require: true
+        //require: true
     },
 
     sendingInstitution: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'University',
     },
 
     sendingFaculty: {
         type: String,
-        required: true,
+        //required: true,
     },
 
     sendingDepartment: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'Department'
     },
 
     sendingContactPerson: {
         sendingContactPersonName: {
             type: String,
-            required: true
+            //required: true
         },
         sendingContactPersonEmail: {
             type: String,
-            required: true
+            //required: true
          },
         sendingContactPersonPhone: {
             type: String,
-            required: true
+            //required: true
         }
     },
 
     receivingInstitution: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'University',
     },
 
     receivingFaculty: {
         type: String,
-        required: true,
+        //required: true,
     },
 
     receivingDepartment: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'Department'
     },
 
     receivingContactPerson: {
         receivingContactPersonName: {
             type: String,
-            required: true
+            //required: true
         },
         receivingContactPersonEmail: {
             type: String,
-            required: true
+            //required: true
         },
         receivingContactPersonPhone: {
             type: String,
-            required: true
+            //required: true
         }
     },
     /*
@@ -255,7 +255,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfStudyProgramAtReceivingIns: [componentOfStudyProgramAtReceivingIns],
         totalEctsCredits: {
             type: Number,
-            required: true
+            //required: true
         }
     },
 
@@ -264,61 +264,61 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfRecognitionAtSendingIns: [componentOfRecognitionAtSendingIns],
         totalEctsCredits: {
             type: Number,
-            required: true
+            //required: true
         }
     },
 
     responsiblePersonAtReceivingIns: {
         name: {
             type: String,
-            required: true
+            //required: true
         },
         personFunction: {
             type: String,
-            required: true
+            //required: true
         },
         phoneNumber: {
             type: String,
-            required: true
+            //required: true
         },
         email: {
             type: String,
-            required: true
+            //required: true
         },
         date: {
             type: String,
-            required: true
+            //required: true
         },
         signature: {
             type: String,
-            required: true
+            //required: true
         }
     },
 
     responsiblePersonFromSendingIns: {
         name: {
             type: String,
-            required: true
+            //required: true
         },
         personFunction: {
             type: String,
-            required: true
+            //required: true
         },
         phoneNumber: {
             type: String,
-            required: true
+            //required: true
         },
         email: {
             type: String,
-            required: true
+            //required: true
         },
         date: {
             type: String,
-            required: true
+            //required: true
         },
         signature: {
             type: String,
-            required: true
+            //required: true
         }
     },
 
@@ -329,7 +329,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfChangedStudyProgram: [componentOfChangedStudyProgram],
         totalEctsCredits: {
             type: Number,
-            required: true
+            //required: true
         }
     },
 
@@ -338,61 +338,61 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfChangedRecognitionTable: [componentOfChangedRecognitionTable],
         totalEctsCredits: {
             type: Number,
-            required: true
+            //required: true
         }
     },
 
     changedResponsiblePersonAtReceivingIns: {
         name: {
             type: String,
-            required: true
+            //required: true
         },
         personFunction: {
             type: String,
-            required: true
+            //required: true
         },
         phoneNumber: {
             type: String,
-            required: true
+            //required: true
         },
         email: {
             type: String,
-            required: true
+            //required: true
         },
         date: {
             type: String,
-            required: true
+            //required: true
         },
         signature: {
             type: String,
-            required: true
+            //required: true
         }
     },
 
     changedResponsiblePersonFromSendingIns: {
         name: {
             type: String,
-            required: true
+            //required: true
         },
         personFunction: {
             type: String,
-            required: true
+            //required: true
         },
         phoneNumber: {
             type: String,
-            required: true
+            //required: true
         },
         email: {
             type: String,
-            required: true
+            //required: true
         },
         date: {
             type: String,
-            required: true
+            //required: true
         },
         signature: {
             type: String,
-            required: true
+            //required: true
         }
     },
 
@@ -401,7 +401,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfAcademicOutcomesAtReceivingIns: [componentOfAcademicOutcomesAtReceivingIns],
         totalPoints: {
             type: Number,
-            required: true
+            //required: true
         }
     },
 
@@ -410,7 +410,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
         componentsOfRecognitionOfOutcomesAtSendingIns: [componentOfRecognitionOfOutcomesAtSendingIns],
         totalPoints: {
             type: Number,
-            required: true
+            //required: true
         }
     }
 

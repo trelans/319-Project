@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import RecognitionTable from "../../components/ui/Tables/LearningAgreements/Stage2/RecognitionAtSendingInst"
 import StudyProgrammeTable from "../../components/ui/Tables/LearningAgreements/Stage2/StudyProgrammeAtReceivingInst"

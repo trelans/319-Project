@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
+//const UserSchema = require('./user')
 
 const assignedTask = mongoose.Schema({
     task: {
@@ -93,7 +94,9 @@ const courseCoordinatorSchema = new mongoose.Schema({
 })
 
 // not stored in db for mongoose
-userSchema.virtual('tasks', {
+//userSchema = UserSchema
+
+courseCoordinatorSchema.virtual('tasks', {
     ref: 'Task',
     localField: '_id',
     foreignField: 'owner'
@@ -107,7 +110,7 @@ userSchema.virtual('university', {
 })
 */
 
-userSchema.methods.toJSON = function () {
+courseCoordinatorSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
 
@@ -118,7 +121,7 @@ userSchema.methods.toJSON = function () {
     return userObject
 }
 
-userSchema.methods.generateAuthToken = async function() {
+courseCoordinatorSchema.methods.generateAuthToken = async function() {
     const user = this
     const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
@@ -128,7 +131,7 @@ userSchema.methods.generateAuthToken = async function() {
     return token
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
+courseCoordinatorSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({email})
     if(!user) {
         throw new Error('Unable to login')
@@ -144,7 +147,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 /**
  * Hash the plain text password before saving
  */
-userSchema.pre('save', async function (next) {
+courseCoordinatorSchema.pre('save', async function (next) {
     const user = this
 
     if(user.isModified('password')) {
@@ -157,7 +160,7 @@ userSchema.pre('save', async function (next) {
 /**
  * Delete user tasks when the user is removed
  */
-userSchema.pre('remove', async function (next) {
+courseCoordinatorSchema.pre('remove', async function (next) {
     const user = this
 
     await Task.deleteMany({owner: user._id})
