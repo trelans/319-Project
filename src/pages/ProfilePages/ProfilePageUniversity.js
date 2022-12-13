@@ -63,9 +63,7 @@ function ProfilePageUniversity() {
             </p>
           </td>
           <td className="ppu-td">
-            <p className="ppu-table-other">
-              4/5
-            </p>
+            <p className="ppu-table-other">4/5</p>
           </td>
         </tr>
         <tr>
@@ -76,9 +74,7 @@ function ProfilePageUniversity() {
             </p>
           </td>
           <td className="ppu-td">
-            <p className="ppu-table-other">
-              3/5
-            </p>
+            <p className="ppu-table-other">3/5</p>
           </td>
         </tr>
         <tr>
@@ -89,9 +85,7 @@ function ProfilePageUniversity() {
             </p>
           </td>
           <td className="ppu-td">
-            <p className="ppu-table-other">
-              3.5/5
-            </p>
+            <p className="ppu-table-other">3.5/5</p>
           </td>
         </tr>
       </table>

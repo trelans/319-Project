@@ -37,6 +37,8 @@ import LogsPage from "./pages/LogsPage/LogsPage";
 import CourseTransferFormPage from "./pages/CourseTransferFormPage/CourseTransferFormPage";
 import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
+import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
+import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 var token1 = localStorage.getItem("token");
 
 if (token1) {
@@ -126,11 +128,8 @@ function App() {
           )
         }
       />
-
       <Route exact path="/login" element={<LoginPage />} />
-
       <Route exact path="/main-page" element={<MainPage />} />
-
       <Route
         exact
         path="/forgot-password-page"
@@ -151,7 +150,6 @@ function App() {
         path="/confirmed-courses"
         element={<ConfirmedCoursesPage />}
       />
-
       <Route exact path="/logs-page" element={<LogsPage />} />
       <Route exact path="/university-list" element={<UniversityListPage />} />
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
@@ -192,11 +190,11 @@ function App() {
         exact
         path="/profile-others-student"
         element={<ProfilePageOthersStudent />}
-      />
+      />{" "}
       <Route
         exact
-        path="/profile-own-incoming"
-        element={<ProfilePageOwnIncoming />}
+        path="/profile-others-student"
+        element={<ProfilePageOthersStudent />}
       />
       <Route
         exact
@@ -225,18 +223,19 @@ function App() {
         path="/learning-agreement-1-3"
         element={<LearningAgreementBeforeMobility1 />}
       />
-
       <Route
         exact
         path="/learning-agreement-2-3"
         element={<LearningAgreementBeforeMobility2 />}
       />
-
       <Route
         exact
         path="/learning-agreement-3-3"
         element={<LearningAgreementBeforeMobility3 />}
       />
+      //new multiple pages
+      <Route exact path="/profile-own" element={<ProfilePageOwn />} />
+      <Route exact path="/profile-other" element={<ProfilePageOthers />} />
     </Routes>
   );
 }
