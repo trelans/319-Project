@@ -5,6 +5,7 @@ const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
 const ErasmusCandidate = require('../models/erasmusCandidate')
+const Application = require('../models/application')
 
 router.post('/login', async (req,res) => {
     console.log(req.body)
@@ -25,10 +26,14 @@ router.post('/login', async (req,res) => {
 
 router.post('/create-account', async (req,res) => {
 
-    const user = new User(req.body);
+    const user = await new User(req.body);
 
     try {
         const token = await user.generateAuthToken()
+        if (user.userType === 0) {
+            const application = await Application.createApplication(user);
+            await application.save()
+        }
         await user.save()
         res.status(201).send({user,token})
     } catch (e) {

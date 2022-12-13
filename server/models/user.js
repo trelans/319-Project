@@ -9,6 +9,58 @@ const CourseCoordinator = require('./courseCoordinator')
 const {Model} = mongoose
 //var userKinds = { discriminatorKey: 'userType' };
 
+// Mongoose creates id for SubDocuments automatically, create this method to override it
+const department = mongoose.Schema({
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: "noDepartment",
+        ref: 'Department'
+    },
+    //0 major, 1 minor
+    type: {
+        type: Number,
+        default: 0
+    }
+}, {_id: false});
+
+const preferredUniversity = mongoose.Schema({
+    university: {
+        type: mongoose.Schema.Types.ObjectId,
+        //required: true,
+        ref: 'University'
+    }
+
+}, {_id: false});
+
+// Erasmus Coordinator Schemas
+const assignedUniversity = mongoose.Schema({
+    universityId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'University'
+    }
+}, {_id: false});
+
+const assignedTask = mongoose.Schema({
+    task: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Task'
+    }
+}, {_id: false});
+
+
+const token = mongoose.Schema({
+    token: {
+        type: String,
+        //required: true
+    }
+
+
+}, {_id: false});
+
+
+/*
 const erasmusCandidate = mongoose.Schema({
     data : {
         type : mongoose.Schema.Types.ObjectId,
@@ -16,7 +68,7 @@ const erasmusCandidate = mongoose.Schema({
         required : false,
     }
 }, {_id: false});
-
+*/
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -78,13 +130,75 @@ const userSchema = new mongoose.Schema({
 
     //optional part for other users
 
-    erasmusCandidateData : erasmusCandidate
+    erasmusCandidateData : {
+        isActiveCandidate: {
+            type: Boolean,
+            default: false
+        },
 
-    /*
-    erasmusCoordinator : {
-        data : ErasmusCoordinator
+        // ENG notes + cpga ile hesaplanan erasmus placement puanı
+        totalPoints: {
+            type: Number,
+            default: 0
+        },
+
+        preferredSemester: {
+            type: Number,
+            default : 0
+            //required: true
+        },
+
+        nominatedUniversityId: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'University'
+        },
+
+        signature: {
+            type: String,
+            //required: true
+        },
+
+        academicYear: {
+            type: Number,
+            //required: true
+        },
+
+        preferredUniversities: [preferredUniversity],
+        departments:[department],
+
+        studentId: {
+            type: Number,
+            default: 0
+        },
     },
 
+
+    erasmusCoordinator : {
+        department: {
+            type: String,
+            default: "noDepartment"
+        },
+        coordinatorID: {
+            type: Number,
+            required: true
+        },
+
+        password: {
+            type: String,
+            required: true,
+            trim: true,
+            validate(value) {
+                if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
+                    throw new Error('Invalid password')
+                }
+            }
+        },
+        assignedUniversities: [assignedUniversity],
+        assignedTasks: [assignedTask],
+    }
+
+    /*
     courseCoordinator : {
         data : CourseCoordinator
     }

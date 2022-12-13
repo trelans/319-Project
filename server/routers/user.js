@@ -104,6 +104,9 @@ router.post('/create/newUniversity', async (req, res) => {
         if (department) {
             department.hostUniversities.push({
                 universityId: req.body.universityId,
+                quota: req.body.quota,
+                fallSuitability: req.body.fallSuitability,
+                springSuitability: req.body.springSuitability
             })
             department.save()
         } else {
@@ -111,6 +114,9 @@ router.post('/create/newUniversity', async (req, res) => {
         }
     })
     delete req.body["departments"]
+    delete req.body["quota"]
+    delete req.body["fallSuitability"]
+    delete req.body["springSuitability"]
     const university = new University(req.body);
     try {
         await university.save()

@@ -7,7 +7,7 @@ const Task = require('./task')
 const courseToTransfer = mongoose.Schema( {
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'Course'
     },
     grade: String
@@ -18,7 +18,7 @@ const courseTransferForm = new mongoose.Schema({
 
     ownerApplication: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'Application'
     },
     userType: {
@@ -35,16 +35,16 @@ const courseTransferForm = new mongoose.Schema({
 
     approveChair: {
         type: String,
-        required: true
+        //required: true
     },
     approveExchangeCoordinator: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        //required: true,
         ref: 'ErasmusCoordinator'
     },
     approveDean: {
         type: String,
-        required: true
+        //required: true
     }
 
 }, {
