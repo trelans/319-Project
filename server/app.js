@@ -10,11 +10,16 @@ const cors = require("cors");
 
 const app = express()
 const excelToJson = require('./convertor/convertToJson')
+const bodyParser = require("body-parser");
+
 //const mailSender = require('./utils/mailSender')
 
 // required to send requests from client side that is run in the same pc with the server
 // (probably it will be deleted after deploying)
-app.use(cors());
+// middleware
+app.use (bodyParser.json ());
+app.use (bodyParser.urlencoded ({extended: true}));
+app.use (cors ());
 
 app.use(express.json())
 app.use(userRouter)

@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-import React,{Component} from 'react';
+//import React,{Component} from 'react';
+import React, {useState} from 'react';
 
+/*
 class UploadExcel extends Component {
-    /*
+
     state = {
 
         // Initially, no file is selected
@@ -89,45 +91,66 @@ class UploadExcel extends Component {
             </div>
         );
     }
-    */
-    constructor(props) {
-        super(props);
-        this.state ={
-            file: null
-        };
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-        this.onChange = this.onChange.bind(this);
-    }
-    onFormSubmit(e){
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('myfile',this.state.file);
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-        axios.post("http://localhost:5000/upload",formData,config)
-            .then((response) => {
-                alert("The file is successfully uploaded");
-            }).catch((error) => {
-        });
-    }
 
-    onChange(e) {
-        this.setState({file:e.target.files});
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.onFormSubmit}>
-                <h1>File Upload</h1>
-                <input type="file" className="custom-file-input" name="myImage" onChange= {this.onChange} />
-                {console.log(this.state.file)}
-                <button className="upload-button" type="submit">Upload to DB</button>
-            </form>
-        )
-    }
 }
+ */
 
+function UploadExcel () {
+    const [uploadedFile, setUploadedFile] = useState ('');
+    const [fileTitle, setFileTitle] = useState ('');
+
+    function handleFormSubmittion (e) {
+        e.preventDefault ();
+
+        let form = document.getElementById ('form');
+        let formData = new FormData (form);
+
+        // do something
+        axios.post ('http://localhost:8080/upload-excel', formData);
+        console.log("Form submitted")
+    }
+
+    function handleFileTitle (e) {
+        setFileTitle (e.target.value);
+    }
+
+    function handleUploadedFile (e) {
+        setUploadedFile (e.target.value);
+    }
+
+    return (
+        <React.Fragment>
+            <h1>File upload</h1>
+            <form
+                encType="multipart/form-data"
+                onSubmit={handleFormSubmittion}
+                id="form"
+            >
+                <input
+                    type="file"
+                    name="uploadedFile"
+                    value={uploadedFile}
+                    onChange={handleUploadedFile}
+                    required
+                />
+                <br />
+                <br />
+
+                <label>File title:</label><br />
+                <input
+                    type="text"
+                    placeholder="Enter file title"
+                    name="fileTitle"
+                    value={fileTitle}
+                    onChange={handleFileTitle}
+                    required
+                />
+                <br />
+                <br />
+
+                <button type="submit">Submit Form</button>
+            </form>
+        </React.Fragment>
+    );
+}
 export default UploadExcel;

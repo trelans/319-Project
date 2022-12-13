@@ -1,37 +1,41 @@
 const express = require('express')
 const User = require("../models/user");
 const router = new express.Router()
-const mongoose = require('mongoose');
-const path = require("path");
-const multer = require("multer");
-const File = require("../models/file");
+const path = require ('path');
+const multer = require ('multer');
 
-// destination /server/server.js
-const storage = multer.diskStorage({
-    destination: "./public/",
-    filename: function(req, file, cb){
-        cb(null,"IMAGE-" + Date.now() + path.extname(file.originalname));
-    }
+
+// storage engine for multer
+const storageEngine = multer.diskStorage ({
+    destination: './public/uploads/',
+    filename: function (req, file, callback) {
+        callback (
+            null,
+            file.fieldname + '-' + Date.now () + path.extname (file.originalname)
+        );
+    },
 });
 
-const upload = multer({
-    storage: storage,
-    limits:{fileSize: 1000000},
-}).single("myfile");
+// file filter for multer
+const fileFilter = (req, file, callback) => {
+    let pattern = /jpg|png|svg/; // reqex
 
-const obj =(req,res) => {
-    upload(req, res, () => {
-        console.log("Request ---", req.body);
-        console.log("Request file ---", req.file);//Here you get file.
-        const file = new File();
-        file.meta_data = req.file;
-        file.save().then(()=>{
-            res.send({message:"uploaded successfully"})
-        })
-        /*Now do where ever you want to do*/
-    });
-}
+    if (pattern.test (path.extname (file.originalname))) {
+        callback (null, true);
+    } else {
+        callback ('Error: not a valid file');
+    }
+};
 
-router.post("/upload-excel", obj);
+// initialize multer
+const upload = multer ({
+    storage: storageEngine,
+    fileFilter: fileFilter,
+});
+
+// routing
+router.post ('/upload-excel', upload.single ('uploadedFile'), (req, res) => {
+    res.json (req.file).status (200);
+});
 
 module.exports = router

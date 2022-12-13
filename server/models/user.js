@@ -181,19 +181,8 @@ const userSchema = new mongoose.Schema({
         },
         coordinatorID: {
             type: Number,
-            required: true
         },
 
-        password: {
-            type: String,
-            required: true,
-            trim: true,
-            validate(value) {
-                if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                    throw new Error('Invalid password')
-                }
-            }
-        },
         assignedUniversities: [assignedUniversity],
         assignedTasks: [assignedTask],
     }

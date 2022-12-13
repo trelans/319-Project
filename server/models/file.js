@@ -4,6 +4,6 @@ const fileSchema = new mongoose.Schema({
     meta_data:{}
 });
 
-mongoose.model("file", fileSchema);
+const File = mongoose.model("file", fileSchema);
 
-module.exports = fileSchema
+module.exports = File
