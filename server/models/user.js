@@ -4,9 +4,18 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 const ErasmusCandidate = require('./erasmusCandidate')
-
-
+const ErasmusCoordinator = require('./erasmusCoordinator')
+const CourseCoordinator = require('./courseCoordinator')
+const {Model} = mongoose
 //var userKinds = { discriminatorKey: 'userType' };
+
+const erasmusCandidate = mongoose.Schema({
+    data : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'ErasmusCandidateModel',
+        required : false,
+    }
+}, {_id: false});
 
 
 const userSchema = new mongoose.Schema({
@@ -69,11 +78,18 @@ const userSchema = new mongoose.Schema({
 
     //optional part for other users
 
+    erasmusCandidateData : erasmusCandidate
 
+    /*
+    erasmusCoordinator : {
+        data : ErasmusCoordinator
+    },
 
-    erasmusCandidate : {
-        data : ErasmusCandidate
+    courseCoordinator : {
+        data : CourseCoordinator
     }
+   */
+
 
     /*
     erasmusCoordinator: {

@@ -24,6 +24,6 @@ app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
 
-console.log(excelToJson)
+//console.log(excelToJson)
 
 module.exports = app
