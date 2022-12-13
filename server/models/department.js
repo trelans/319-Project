@@ -20,15 +20,18 @@ hostUniversity = mongoose.Schema({
     },
     quota: {
         type: Number,
-        default: 0,
+        required: true,
+        default: 0
     },
     fallSuitability: {
         type: Boolean,
+        required: true,
         default: false
     },
 
     springSuitability: {
         type: Boolean,
+        required: true,
         default: false
     }
 }, {_id: false});

@@ -99,14 +99,19 @@ router.post('/create/newErasmusCoordinator', async (req, res) => {
 
 router.post('/create/newUniversity', async (req, res) => {
     const departments = req.body.departments
+    const quota = req.body.quota
+    const universityId = req.body.universityId
+    const fallSuitability = req.body.fallSuitability
+    const springSuitability = req.body.springSuitability
     departments.forEach(async depName => {
         const department = await Department.findOne({ name: depName })
         if (department) {
+            console.log(req.body.quota)
             department.hostUniversities.push({
-                universityId: req.body.universityId,
-                quota: req.body.quota,
-                fallSuitability: req.body.fallSuitability,
-                springSuitability: req.body.springSuitability
+                universityId: universityId,
+                quota: quota,
+                fallSuitability: fallSuitability,
+                springSuitability: springSuitability
             })
             department.save()
         } else {

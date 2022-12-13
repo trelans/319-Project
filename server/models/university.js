@@ -87,7 +87,7 @@ const universitySchema = new mongoose.Schema({
     appliedStudents: [appliedStudent],
 
     erasmusCode: {
-        type: Number,
+        type: String,
         required: true
     },
 
