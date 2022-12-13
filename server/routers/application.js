@@ -24,7 +24,7 @@ router.post('/application-page1', async (req, res) => {
         let erasmusCoordinator;
         // 0 POST, 1 GET
         if (req.body.type === "1") {
-            const user = await ErasmusCandidate.findOne({'tokens.token': req.body.token})
+            const user = await User.findOne({'tokens.token': req.body.token})
             // The field after "," below is for getting only the required fields from database
             application = await Application.findOne({'applicantCandidate': user._id})
             erasmusCoordinator = await ErasmusCoordinator.findById(application.responsibleErasmusCoord)

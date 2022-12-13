@@ -63,8 +63,8 @@ applicationSchema.virtual('forms', {
 })
 
 applicationSchema.statics.cancelApplication = async function (_id) {
-    await Form.deleteMany({ owner: _id })
-    const query = await Application.deleteOne({ _id })
+    await Form.deleteMany({owner: _id})
+    const query = await Application.deleteOne({_id})
     // if (!application){
     //     throw new Error('Unable to find specified Application')
     // }
@@ -73,12 +73,12 @@ applicationSchema.statics.cancelApplication = async function (_id) {
 
 // applicationProgramType will be always 0 since student's minor application form will be evaluated by the corresponding Erasmus Coordinator of the major program
 applicationSchema.statics.createApplication = async function (user, applicationProgramType = 0) {
-    const erasmusCoord = await ErasmusCoordinator.findOne({ "assignedUniversities.universityId": user.nominatedUniversityId})
+    const erasmusCoord = await ErasmusCoordinator.findOne({"assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
 
     const application = new Application({
         status: 0,
         applicantCandidate: user._id,
-        appliedInstitution: user.nominatedUniversityId,
+        appliedInstitution: user.erasmusCandidateData.nominatedUniversityId,
         responsibleErasmusCoord: erasmusCoord._id
     })
 
@@ -102,8 +102,8 @@ applicationSchema.statics.createApplication = async function (user, applicationP
 }
 
 applicationSchema.statics.discardPlacement = async function (_id) {
-    await Form.deleteMany({ owner: _id })
-    const query = await Application.deleteOne({ _id })
+    await Form.deleteMany({owner: _id})
+    const query = await Application.deleteOne({_id})
     // if (!application){
     //     throw new Error('Unable to find specified Application')
     // }
@@ -111,7 +111,7 @@ applicationSchema.statics.discardPlacement = async function (_id) {
 }
 
 applicationSchema.statics.findByOwnerId = async (applicantUser) => {
-    const application = await Application.findOne({ applicantUser })
+    const application = await Application.findOne({applicantUser})
 
     if (!application) {
         throw new Error('Unable to find Application of the given user')
