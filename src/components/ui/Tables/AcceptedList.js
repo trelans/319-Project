@@ -92,8 +92,7 @@ let rows = [
 ];
 
 export default function StickyHeadTable(list) {
-    console.log(list)
-    rows = list.rows.data
+    rows = list.rows
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

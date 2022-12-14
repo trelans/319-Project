@@ -24,18 +24,17 @@ const upload = multer ({
     storage: storageEngine,
 });
 
-function createAcceptedList(students, placed_students) {
+function createAcceptedList(students, placedStudents) {
     const keys = Object.keys(students["Placed"][0]);
     const values = Object.values(students["Placed"][0]);
     for (let i = 1; i < students["Placed"].length; i++) {
-        let placed_student = {};
+        let placedStudent = {};
         for (let j = 0; j < keys.length; j++) {
-            placed_student[values[j]] = students["Placed"][i][keys[j]]
+            placedStudent[values[j]] = students["Placed"][i][keys[j]]
         }
-        placed_students.push(placed_student)
+        placedStudents.push(placedStudent)
     }
-    const placedStudentsJSON = {"data": placed_students}
-    const content = JSON.stringify(placedStudentsJSON)
+    const content = JSON.stringify(placedStudents)
     console.log(content)
 
     fs.writeFile('./public/files/acceptedStudents.txt', content, err => {
@@ -71,20 +70,7 @@ router.post ('/upload-excel', upload.single ('uploadedFile'), (req, res) => {
         }
         // file written successfully
     });
-
-    /*
-    const placedStudentsJSON = {"data": placed_students}
-    const content = JSON.stringify(placedStudentsJSON)
-    console.log(content)
-
-    fs.writeFile('./public/files/acceptedStudents.txt', content, err => {
-        if (err) {
-            console.error(err);
-        }
-        // file written successfully
-    });
-    //createAcceptedList(students, placed_students);
-     */
+    createAcceptedList(students, placed_students);
 });
 
 router.post('/applicants-list', async (req, res) => {

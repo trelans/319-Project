@@ -77,13 +77,6 @@ export default function StickyHeadTable() {
         loaded = true;
     }
 
-    useEffect(() => {
-        function fetchData() {
-
-        }
-        fetchData()
-    }, [])
-
     if (isLoading) {
         return <div className={"Page"}>
                 <NavigationBar/>
