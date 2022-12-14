@@ -7,6 +7,7 @@ const applicationRouter = require('./routers/application')
 const formRouter = require('./routers/form')
 const port = process.env.PORT || 8080
 const cors = require("cors");
+const messageRouter = require('./routers/message')
 
 const app = express()
 const excelToJson = require('./convertor/convertToJson')
@@ -27,6 +28,7 @@ app.use(taskRouter)
 app.use(loginRouter)
 app.use(applicationRouter)
 app.use(formRouter)
+app.use(messageRouter)
 
 /*
 app.listen(port, () => {

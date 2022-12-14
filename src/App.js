@@ -41,6 +41,7 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
+import Chat from "./pages/ChatPagee/Chat";
 
 import io from 'socket.io-client';
 //export const socket = io.connect("http://localhost:8080");
@@ -191,7 +192,7 @@ function App() {
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
       <Route exact path="/application-page2" element={<ApplicationPage2 />} />
-      <Route exact path="/chat" element={<ChatPage />} />
+      <Route exact path="/chat-page" element={<Chat/>} />
       <Route
         exact
         path="/profile-own-student"
