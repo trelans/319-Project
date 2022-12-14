@@ -34,7 +34,7 @@ function InfoPage() {
         course to provide exemption from one or more curriculum courses or vice versa."
         ></InfoPageItem>
         <InfoPageItem
-          text="Course Group in Pre-Approval Form Page is applicable only if there is a directly 
+          text="BilkentCourse Group in Pre-Approval Form Page is applicable only if there is a directly
         equivalent course in the elective group that the student is exempted from. The student will be 
         considered to have taken this course by the STARS system."
         ></InfoPageItem>
