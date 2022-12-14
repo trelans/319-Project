@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 
 
 interface Column {
-    id: 'name' | 'surname' | 'id' | 'duration' | 'gpa' | 'replacement'| 'total';
+    id: 'name' | 'surname' | 'id' | 'duration' | 'placement'| 'total';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -37,15 +37,8 @@ const columns = [
         format: (value: number) => value.toLocaleString('en-US'),
     },
     {
-        id: 'gpa',
-        label: 'GPA',
-        minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toFixed(2),
-    },
-    {
-        id: 'replacement',
-        label: 'Replacement',
+        id: 'placement',
+        label: 'Placement',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toFixed(2),
@@ -62,45 +55,45 @@ const columns = [
 interface Data {
     name: string;
     surname: string;
-    id: number;
+    id: string;
     duration: string;
-    gpa: number;
-    replacement: string;
+    placement: string;
     total: number;
 }
 
 function createData(
     name: string,
     surname: string,
-    id: number,
+    id: string,
     duration: string,
-    gpa: number,
-    replacement: string,
+    placement: string,
     total: number,
 ): Data {
     // Data maybe fetched here??
-    return { name, surname, id, duration, gpa , replacement ,  total};
+    return { name, surname, id, duration, placement ,  total};
 }
 
-const rows = [
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
+let rows = [
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
+    createData('Kutay', 'Şenyiğit', "21902377", "Fall", "Kingston University", 85.00),
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(list) {
+    console.log(list)
+    rows = list.rows.data
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

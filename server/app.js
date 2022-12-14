@@ -5,6 +5,7 @@ const taskRouter = require('./routers/task')
 const loginRouter = require('./routers/loginPages')
 const applicationRouter = require('./routers/application')
 const formRouter = require('./routers/form')
+const listRouter = require('./routers/list')
 const port = process.env.PORT || 8080
 const cors = require("cors");
 
@@ -27,6 +28,7 @@ app.use(taskRouter)
 app.use(loginRouter)
 app.use(applicationRouter)
 app.use(formRouter)
+app.use(listRouter)
 
 /*
 app.listen(port, () => {
