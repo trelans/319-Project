@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Card from "../../components/ui/Card"
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -20,9 +20,7 @@ import AcceptedList from "../../components/ui/Tables/AcceptedList"
 import WaitingList from "../../components/ui/Tables/WaitingList"
 import RankedApplicantsList from "../../components/ui/Tables/RankedApplicants"
 import {handleRequests} from "../requests";
-
-
-
+import {useEffect} from "react";
 
 
 interface TabPanelProps {
@@ -31,8 +29,9 @@ interface TabPanelProps {
     index: number;
     value: number;
 }
+
 function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -43,7 +42,7 @@ function TabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{p: 3}}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -65,15 +64,31 @@ export default function StickyHeadTable() {
     const [value, setValue] = React.useState(0);
     const [acceptedList, setAcceptedList] = React.useState();
     const [rankedList, setRankedList] = React.useState();
+    const [isLoading, setLoading] = React.useState(true);
 
-    if(!loaded){
-        handleRequests(null, {"listType": 1}, "applicants-list", "1",(response, status) => {
+    if (!loaded){
+        handleRequests(null, {"listType": 1}, "applicants-list", "1", (response, status) => {
             setRankedList(response);
+            setLoading(false);
         })
-        handleRequests(null, {"listType": 2}, "applicants-list", "1",(response, status) => {
+        handleRequests(null, {"listType": 2}, "applicants-list", "1", (response, status) => {
             setAcceptedList(response);
         })
         loaded = true;
+    }
+
+    useEffect(() => {
+        function fetchData() {
+
+        }
+        fetchData()
+    }, [])
+
+    if (isLoading) {
+        return <div className={"Page"}>
+                <NavigationBar/>
+                <div className="App">Loading...</div>
+        </div>;
     }
 
 
@@ -88,8 +103,8 @@ export default function StickyHeadTable() {
     return (
 
         <div className={"Page"}>
-            <NavigationBar />
-            <Box sx={{ bgcolor: 'background.paper', height: 600 }}>
+            <NavigationBar/>
+            <Box sx={{bgcolor: 'background.paper', height: 600}}>
                 <AppBar position="static">
                     <Tabs
                         value={value}
@@ -133,7 +148,7 @@ function ApplicantsList() {
 
     return (
         <Card>
-        <h1>Hello</h1>
+            <h1>Hello</h1>
         </Card>);
 };
 
