@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
+import Modal from "../../components/ui/CoursePopUp/Modal"
+import Backdrop from "../../components/ui/CoursePopUp/Backdrop"
 
 function PreApprovalFormPage() {
   return (
@@ -137,8 +139,13 @@ function PreApprovalFormPage() {
             </tr>
           </table>
         </div>
+
       </div>
+      <Backdrop />
+      <Modal/>
+
     </div>
+
   );
 }
 
