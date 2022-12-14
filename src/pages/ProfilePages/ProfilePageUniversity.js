@@ -46,6 +46,7 @@ function ProfilePageUniversity() {
           </table>
         </div>
       </div>
+      <div className="ppu-table-container">
       <table className="ppu-table2">
         <tr>
           <td className="ppu-td">
@@ -89,6 +90,7 @@ function ProfilePageUniversity() {
           </td>
         </tr>
       </table>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import style from "./coursePopUp.module.css"
-function Backdrop() {
-    return <div className={style.backdrop}></div>
+function Backdrop(props) {
+    return <div className={style.backdrop} onClick={props.cancel}></div>
 
 }
 export default Backdrop

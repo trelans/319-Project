@@ -2,10 +2,22 @@ import { Link } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
-import Modal from "../../components/ui/CoursePopUp/Modal"
-import Backdrop from "../../components/ui/CoursePopUp/Backdrop"
+import Modal from "../../components/ui/CoursePopUp/Modal";
+import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
+import { useState } from "react";
 
-function PreApprovalFormPage() {
+function PreApprovalFormPage(props) {
+  const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
+
+  function selectCourse() {
+    setCourseIsOpen(true);
+  }
+
+  function handleSelect() {}
+
+  function closeSelectCourse() {
+    setCourseIsOpen(false);
+  }
   return (
     <div>
       <NavigationBar />
@@ -73,6 +85,7 @@ function PreApprovalFormPage() {
         <div className="pafp-flex-div">
           <TableAddRows />
         </div>
+        <button onClick={selectCourse}>Add Course</button>
         <div>
           <table className="pafp-first-table">
             <tr>
@@ -139,13 +152,10 @@ function PreApprovalFormPage() {
             </tr>
           </table>
         </div>
-
       </div>
-      <Backdrop />
-      <Modal/>
-
+      {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} />}
+      {selectCourseIsOpen && <Backdrop />}
     </div>
-
   );
 }
 

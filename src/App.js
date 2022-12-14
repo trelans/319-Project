@@ -44,12 +44,15 @@ import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePag
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
 import Chat from "./pages/ChatPagee/Chat";
 import UploadCoursesExcel from "./pages/UploadExcelFilePage/UploadCoursesExcel";
-import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1"
-import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2"
-import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility"
-import CoursePage from "./pages/CoursePage/CoursePage"
+import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1";
+import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2";
+import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility";
+import CoursePage from "./pages/CoursePage/CoursePage";
+import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
+import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
 
-import io from 'socket.io-client';
+import io from "socket.io-client";
+
 //export const socket = io.connect("http://localhost:8080");
 
 //console.log("test: " + socket)
@@ -143,8 +146,7 @@ function App() {
           )
         }
       />
-
-      <Route exact path="/test" element={<TestPage/>} />
+      <Route exact path="/test" element={<TestPage />} />
       <Route exact path="/login" element={<LoginPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
@@ -172,17 +174,21 @@ function App() {
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route exact path="/upload-excel" element={<UploadExcel />} />
-      <Route exact path="/upload-courses-excel" element={<UploadCoursesExcel />} />
+      <Route
+        exact
+        path="/upload-courses-excel"
+        element={<UploadCoursesExcel />}
+      />
       <Route
         exact
         path="/course-transfer-page1"
         element={<CourseTransferFormPage1 />}
       />
-        <Route
-            exact
-            path="/course-transfer-page2"
-            element={<CourseTransferFormPage2 />}
-        />
+      <Route
+        exact
+        path="/course-transfer-page2"
+        element={<CourseTransferFormPage2 />}
+      />
       <Route
         exact
         path="/preapproval-student"
@@ -204,7 +210,7 @@ function App() {
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
       <Route exact path="/application-page2" element={<ApplicationPage2 />} />
-      <Route exact path="/chat" element={<Chat/>} />
+      <Route exact path="/chat" element={<Chat />} />
       <Route
         exact
         path="/profile-own-student"
@@ -258,28 +264,29 @@ function App() {
         element={<LearningAgreementBeforeMobility3 />}
       />
       <Route
-          exact
-          path="/learning-agreement-d-1-2"
-          element={<LearningAgreementDuringMobility1 />}
-          />
+        exact
+        path="/learning-agreement-d-1-2"
+        element={<LearningAgreementDuringMobility1 />}
+      />
       <Route
-          exact
-          path="/learning-agreement-d-2-2"
-          element={<LearningAgreementDuringMobility2 />}
-          />
+        exact
+        path="/learning-agreement-d-2-2"
+        element={<LearningAgreementDuringMobility2 />}
+      />
       <Route
-          exact
-          path="/learning-agreement-after"
-          element={<LearningAgreementAfterMobility />}
+        exact
+        path="/learning-agreement-after"
+        element={<LearningAgreementAfterMobility />}
       />
       //new multiple pages
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
       <Route exact path="/course-page" element={<CoursePage />} />
+      <Route exact path="/application-page-coordinator" element={<ApplicationPageCoordinator />} />
+      <Route exact path="/application-page-fac" element={<ApplicationPageFAC />} />
     </Routes>
   );
 }
 
 export default App;
 export const socket = io("http://localhost:8080");
-

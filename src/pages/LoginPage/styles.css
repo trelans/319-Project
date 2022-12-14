@@ -534,7 +534,7 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
-  margin-left: 14%;
+  margin-left: 17%;
   margin-top: 0;
 }
 
@@ -658,6 +658,13 @@ body {
   display: flex;
 }
 
+.ppu-table-container {
+  width: 90%;
+  height: 250px;
+  padding: 0 0 15% 15%;
+  overflow: scroll;
+}
+
 .ppu-img {
   max-width: 100%;
   height: auto;
@@ -671,7 +678,7 @@ body {
 
 .ppu-table2,
 .ppu-td {
-  width: 90%;
+  width: 100%;
   margin: auto;
   padding: auto;
   empty-cells: show;
@@ -943,7 +950,7 @@ body {
   text-decoration: underline;
 }
 
-.pafp-second-table{
+.pafp-second-table {
   width: 90%;
   margin: auto;
   padding: auto;
@@ -951,9 +958,8 @@ body {
   border: 1px solid black;
   border-collapse: collapse;
   background-color: #a5c9ca;
-
 }
-.pafp-se{
+.pafp-se {
   width: 70%;
   margin: auto;
   padding: auto;
@@ -962,7 +968,6 @@ body {
   border-collapse: collapse;
   background-color: #354259;
   color: white;
-
 }
 .alignAndWhite {
   text-align: center;
@@ -986,8 +991,7 @@ body {
   empty-cells: show;
   border: 1px solid black;
   border-collapse: collapse;
-  background-color: #e7f6f2
-
+  background-color: #e7f6f2;
 }
 
 .pafp-header-other {
@@ -1026,7 +1030,6 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
-
 }
 
 .pafp-button-x:hover {
@@ -1036,7 +1039,7 @@ body {
 .pafp-button {
   background: #d50909;
   width: 180px;
-  height:45px;
+  height: 45px;
   border: 0;
   color: #2c3333;
   font-size: 18px;
@@ -1050,7 +1053,7 @@ body {
 .pafp-button-blue {
   background: #09c7d5;
   width: 180px;
-  height:45px;
+  height: 45px;
   border: 0;
   color: #2c3333;
   font-size: 18px;
@@ -1064,7 +1067,7 @@ body {
 .pafp-button-yellow {
   background: #d5d209;
   width: 180px;
-  height:45px;
+  height: 45px;
   border: 0;
   color: #2c3333;
   font-size: 18px;
@@ -1075,12 +1078,11 @@ body {
   font-family: sans-serif;
 }
 
-
 .pafp-button:hover {
   opacity: 75%;
 }
 
-.pafp-flex-div{
+.pafp-flex-div {
   display: flex;
 }
 
@@ -1091,7 +1093,7 @@ span.pafp-button-last {
   font-weight: bold;
 }
 
-.pafp-label{
+.pafp-label {
   font-size: 16px;
   color: #2c3333;
   font-family: sans-serif;
@@ -1108,7 +1110,7 @@ span.pafp-button-last {
 .pafp-button-not-active {
   background: #d50909;
   width: 180px;
-  height:45px;
+  height: 45px;
   border: 0;
   color: #2c3333;
   font-size: 18px;
@@ -1143,245 +1145,243 @@ span.pafp-button-last {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap");
 
 .App {
-    font-family: sans-serif;
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+  font-family: sans-serif;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 #complete {
-    position: absolute;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #354259;
-    align-items: center;
-    height: 20%;
-    width: 40%;
-    color: white;
-    top: 30vh;
-    left: 30%;
-    text-align: center;
-    border: 5px solid black;
-    border-radius: 15px;
-    z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #354259;
+  align-items: center;
+  height: 20%;
+  width: 40%;
+  color: white;
+  top: 30vh;
+  left: 30%;
+  text-align: center;
+  border: 5px solid black;
+  border-radius: 15px;
+  z-index: 100;
 }
 #hijo {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 #title {
-    text-align: center;
-    font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 #description {
-    text-align: center;
-    font-family: "Poppins", sans-serif;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 #survey-form {
-    display: flex;
-    flex-direction: column;
-    background-color: #403a61;
-    padding: 4vh;
-    border-radius: 29px;
-    width: 500px;
-    font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: #403a61;
+  padding: 4vh;
+  border-radius: 29px;
+  width: 500px;
+  font-family: "Poppins", sans-serif;
 }
 #footer {
-    display: flex;
-    flex-direction: row;
-    height: 45vh;
-    background: black;
-    color: white;
-    text-align: start;
-    margin-top: 10vh;
+  display: flex;
+  flex-direction: row;
+  height: 45vh;
+  background: black;
+  color: white;
+  text-align: start;
+  margin-top: 10vh;
 }
 #contact {
-    text-align: center;
+  text-align: center;
 }
 #contenedorIconosContacto {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 #contenedorIconosContacto a {
-    font-size: 10vh;
-    color: #337ab7;
-    text-decoration: none;
+  font-size: 10vh;
+  color: #337ab7;
+  text-decoration: none;
 }
 #imgSwordVoice {
-    width: 10vh;
+  width: 10vh;
 }
 #madeBy {
-    padding-bottom: 0;
-    text-align: center;
+  padding-bottom: 0;
+  text-align: center;
 }
 #footer > div {
-    padding-top: 0;
-    width: 30%;
+  padding-top: 0;
+  width: 30%;
 }
 .react-datepicker-wrapper {
-    display: block !important;
+  display: block !important;
 }
 
 .marginBottom {
-    margin-bottom: 5vh;
+  margin-bottom: 5vh;
 }
 .blackLetter {
-    color: black;
+  color: black;
 }
 .whiteLetter {
-    color: white;
+  color: white;
 }
 .widthContainerInput {
-    position: relative;
-    width: 80%;
+  position: relative;
+  width: 80%;
 }
 .circleValidate {
-    position: absolute;
-    right: 5%;
-    top: 40%;
-    background: green;
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
+  position: absolute;
+  right: 5%;
+  top: 40%;
+  background: green;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
 }
 .circleInvalidate {
-    position: absolute;
-    right: 5%;
-    top: 40%;
-    background: red;
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
+  position: absolute;
+  right: 5%;
+  top: 40%;
+  background: red;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
 }
 .widthInput {
-    width: 100%;
+  width: 100%;
 }
 .react-tel-input .form-control {
-    height: 20px !important;
+  height: 20px !important;
 }
 .css-1hb7zxy-IndicatorsContainer {
-    height: 100% !important;
+  height: 100% !important;
 }
 .css-yk16xz-control {
-    height: 5vh !important;
-    min-height: 5vh !important;
+  height: 5vh !important;
+  min-height: 5vh !important;
 }
 .textHeader {
-    color: white;
+  color: white;
 }
 .styleInput {
-    font-size: 14px;
-    letter-spacing: 0.01rem;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0;
-    background: #ffffff;
-    border: 1px solid #cacaca;
-    border-radius: 5px;
-    line-height: 25px;
-    height: 5vh;
-    width: 100%;
-    outline: none;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0;
+  background: #ffffff;
+  border: 1px solid #cacaca;
+  border-radius: 5px;
+  line-height: 25px;
+  height: 5vh;
+  width: 100%;
+  outline: none;
 }
 .react-tel-input .form-control {
-    position: relative !important;
-    font-size: 14px !important;
-    letter-spacing: 0.01rem !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    margin-left: 0 !important;
-    background: #ffffff !important;
-    border: 1px solid #cacaca !important;
-    border-radius: 5px !important;
-    line-height: 25px !important;
-    height: 5vh !important;
-    width: 70% !important;
-    outline: none !important;
+  position: relative !important;
+  font-size: 14px !important;
+  letter-spacing: 0.01rem !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: 0 !important;
+  background: #ffffff !important;
+  border: 1px solid #cacaca !important;
+  border-radius: 5px !important;
+  line-height: 25px !important;
+  height: 5vh !important;
+  width: 70% !important;
+  outline: none !important;
 }
 .react-datepicker-wrapper input {
-    height: 5vh;
+  height: 5vh;
 }
 .react-tel-input .country-list .country-name {
-    color: black;
+  color: black;
 }
 
 #countryFlag {
-    outline: none;
-    position: relative;
-    width: 38px;
-    height: 100%;
-    padding: 0 0 0 8px;
-    border-radius: 3px 0 0 3px;
-    background-color: #f5f5f5;
+  outline: none;
+  position: relative;
+  width: 38px;
+  height: 100%;
+  padding: 0 0 0 8px;
+  border-radius: 3px 0 0 3px;
+  background-color: #f5f5f5;
 }
 #textarea {
-    width: 60%;
-    min-width: 60%;
-    max-width: 100%;
+  width: 60%;
+  min-width: 60%;
+  max-width: 100%;
 }
 .buttons {
-    height: 50px;
-    width: 100px;
-    font-family: "Poppins", sans-serif !important;
-    background-color: white;
-    border-radius: 28px;
-    border: 1px solid #4e6096;
-    display: inline-block;
-    cursor: pointer;
-    color: #403a61;
-    font-family: Arial;
-    font-size: 17px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #283966;
+  height: 50px;
+  width: 100px;
+  font-family: "Poppins", sans-serif !important;
+  background-color: white;
+  border-radius: 28px;
+  border: 1px solid #4e6096;
+  display: inline-block;
+  cursor: pointer;
+  color: #403a61;
+  font-family: Arial;
+  font-size: 17px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #283966;
 }
 .buttons:hover {
-    background-color: #476e9e;
+  background-color: #476e9e;
 }
 .buttons:active {
-    position: relative;
-    top: 1px;
+  position: relative;
+  top: 1px;
 }
 
-
 .editButton {
-    height: 30px;
-    width: 50px;
-    font-family: "Poppins", sans-serif !important;
-    background-color: #ff0000;
-    border-radius: 12px;
-    border: 1px solid #4e6096;
-    display: inline-block;
-    cursor: pointer;
-    color: #403a61;
-    font-family: Arial;
-    font-size: 17px;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #283966;
-    margin-left: 15px;
-
+  height: 30px;
+  width: 50px;
+  font-family: "Poppins", sans-serif !important;
+  background-color: #ff0000;
+  border-radius: 12px;
+  border: 1px solid #4e6096;
+  display: inline-block;
+  cursor: pointer;
+  color: #403a61;
+  font-family: Arial;
+  font-size: 17px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #283966;
+  margin-left: 15px;
 }
 
 .editButton:disabled {
-    visibility: hidden;
+  visibility: hidden;
 }
 @media only screen and (max-width: 600px) {
-    #hijo {
-        height: 100vh;
-        width: 90vw;
-    }
-    #complete {
-        height: 30%;
-        width: 70%;
-        left: 15%;
-        top: 45%;
-    }
-    #survey-form {
-        width: 95vw;
-    }
-    #textarea {
-        width: 100%;
-    }
+  #hijo {
+    height: 100vh;
+    width: 90vw;
+  }
+  #complete {
+    height: 30%;
+    width: 70%;
+    left: 15%;
+    top: 45%;
+  }
+  #survey-form {
+    width: 95vw;
+  }
+  #textarea {
+    width: 100%;
+  }
 
     #footer {
         display: flex;
@@ -1427,3 +1427,19 @@ span.pafp-button-last {
         min-height: 7vh !important;
     }
 }
+
+  /*UniversityListPage Styles*/
+
+  .ulp-container {
+    width: 90%;
+    padding: 1% 0 0;
+    margin: auto;
+  }
+
+  .ulp-alert {
+    font-size: 30px;
+    color: #e10c41;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+  }
