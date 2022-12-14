@@ -128,7 +128,7 @@ function UploadExcel () {
             >
                 <input
                     type="file"
-                    name="uploadedFile"
+                    name="applicantListsExcel"
                     value={uploadedFile}
                     onChange={handleUploadedFile}
                     required

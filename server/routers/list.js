@@ -14,7 +14,7 @@ const storageEngine = multer.diskStorage ({
     filename: function (req, file, callback) {
         callback (
             null,
-            file.fieldname + '-' + Date.now () + path.extname (file.originalname)
+            file.fieldname + path.extname (file.originalname)
         );
     },
 });
@@ -86,7 +86,6 @@ function createWaitingList(rankedApplicants, waitingList) {
         }
     }
     const content = JSON.stringify(waitingList)
-    console.log(content)
     fs.writeFile('./public/files/waitingList.txt', content, err => {
         if (err) {
             console.error(err);
@@ -96,9 +95,9 @@ function createWaitingList(rankedApplicants, waitingList) {
 }
 
 // routing
-router.post ('/upload-excel', upload.single ('uploadedFile'), (req, res) => {
+router.post ('/upload-excel', upload.single ('applicantListsExcel'), (req, res) => {
     res.json (req.file).status (200);
-    const students = convertToJson("uploadedFile-1670977312640.xlsx");
+    const students = convertToJson("applicantListsExcel.xlsx");
     let placedStudents = [];
     let rankedApplicants = []
     let waitingList = []
