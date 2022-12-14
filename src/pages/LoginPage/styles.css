@@ -953,7 +953,16 @@ body {
   background-color: #a5c9ca;
 
 }
+.pafp-se{
+  width: 70%;
+  margin: auto;
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #a5c9ca;
 
+}
 .pafp-td {
   width: 15%;
   margin: auto;

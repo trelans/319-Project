@@ -35,7 +35,8 @@ import jwt_decode from "jwt-decode";
 import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
 import UniversityListPage from "./pages/UniversityListPage/UniversityListPage";
 import LogsPage from "./pages/LogsPage/LogsPage";
-import CourseTransferFormPage from "./pages/CourseTransferFormPage/CourseTransferFormPage";
+import CourseTransferFormPage1 from "./pages/CourseTransferFormPage/CourseTransferFormPage1";
+import CourseTransferFormPage2 from "./pages/CourseTransferFormPage/CourseTransferFormPage2";
 import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
@@ -169,9 +170,14 @@ function App() {
       <Route exact path="/upload-excel" element={<UploadExcel />} />
       <Route
         exact
-        path="/course-transfer-page"
-        element={<CourseTransferFormPage />}
+        path="/course-transfer-page1"
+        element={<CourseTransferFormPage1 />}
       />
+        <Route
+            exact
+            path="/course-transfer-page2"
+            element={<CourseTransferFormPage2 />}
+        />
       <Route
         exact
         path="/preapproval-student"
