@@ -42,9 +42,13 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
+import Chat from "./pages/ChatPagee/Chat";
+import UploadCoursesExcel from "./pages/UploadExcelFilePage/UploadCoursesExcel";
 import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1";
 import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2";
 import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility";
+import CoursePage from "./pages/CoursePage/CoursePage";
+
 import io from "socket.io-client";
 //export const socket = io.connect("http://localhost:8080");
 
@@ -169,6 +173,11 @@ function App() {
       <Route exact path="/upload-excel" element={<UploadExcel />} />
       <Route
         exact
+        path="/upload-courses-excel"
+        element={<UploadCoursesExcel />}
+      />
+      <Route
+        exact
         path="/course-transfer-page1"
         element={<CourseTransferFormPage1 />}
       />
@@ -198,7 +207,7 @@ function App() {
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
       <Route exact path="/application-page2" element={<ApplicationPage2 />} />
-      <Route exact path="/chat" element={<ChatPage />} />
+      <Route exact path="/chat" element={<Chat />} />
       <Route
         exact
         path="/profile-own-student"
@@ -269,6 +278,7 @@ function App() {
       //new multiple pages
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
+      <Route exact path="/course-page" element={<CoursePage />} />
     </Routes>
   );
 }

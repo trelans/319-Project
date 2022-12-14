@@ -10,7 +10,7 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MenuItem } from "@mui/material";
 
-import Grid from "@mui/material/Grid";
+import Grid from "@material-ui/core/Grid";
 
 const options = [
   { value: "female", label: "Female" },
