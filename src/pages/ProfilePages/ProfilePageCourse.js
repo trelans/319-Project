@@ -70,49 +70,51 @@ function ProfilePageCourse() {
             </tr>
           </table>
         </div>
-        <table className="ppu-table2">
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-header">Comments</p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-header">Rate</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">4/5</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">3/5</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">3.5/5</p>
-            </td>
-          </tr>
-        </table>
+        <div className="ppu-table-container">
+          <table className="ppu-table2">
+            <tr>
+              <td className="ppu-td">
+                <p className="ppu-table-header">Comments</p>
+              </td>
+              <td className="ppu-td">
+                <p className="ppu-table-header">Rate</p>
+              </td>
+            </tr>
+            <tr>
+              <td className="ppu-td">
+                <p className="ppu-table-other">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+              </td>
+              <td className="ppu-td">
+                <p className="ppu-table-other">4/5</p>
+              </td>
+            </tr>
+            <tr>
+              <td className="ppu-td">
+                <p className="ppu-table-other">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+              </td>
+              <td className="ppu-td">
+                <p className="ppu-table-other">3/5</p>
+              </td>
+            </tr>
+            <tr>
+              <td className="ppu-td">
+                <p className="ppu-table-other">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
+              </td>
+              <td className="ppu-td">
+                <p className="ppu-table-other">3.5/5</p>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   );
