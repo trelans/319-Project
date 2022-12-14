@@ -38,7 +38,7 @@ function createAcceptedList(students, placedStudents) {
     for (let i = 1; i < students["Placed"].length; i++) {
         let placedStudent = {};
         for (let j = 0; j < keys.length; j++) {
-            placedStudent[values[j]] = students["Placed"][i][keys[j]].toString()
+            placedStudent[values[j]] = students["Placed"][i][keys[j]]
         }
         placedStudents.push(placedStudent)
         acceptedIdList.push(placedStudent.id)
@@ -144,7 +144,7 @@ router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, r
     createAcceptedList(students, placedStudents);
     createWaitingList(rankedApplicants, waitingList)
     saveApplicantsIDs()
-    await createCandidates(rankedApplicants, placedStudents)
+    //await createCandidates(rankedApplicants, placedStudents)
 });
 
 function parsePreviouslyAcceptedCourses(courseList) {
@@ -164,7 +164,7 @@ function parsePreviouslyAcceptedCourses(courseList) {
         'Exempted Bilkent Course Designation',
         'Exemption',
     ]
-    const csCourses = ["CS", "General Elective", "Social Science", "Arts"]
+    const csCourses = ["CS"]
     for (let i = 1; i < courses["PRE APPROVAL "].length; i++) {
         let course = {}
         if (courses["PRE APPROVAL "][i]['A'] !== "Erasmus" || !csCourses.some(item => {
