@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 
 
 interface Column {
-    id: 'name' | 'surname' | 'id' | 'duration' | 'gpa' | 'eng101' | 'eng102' | 'total';
+    id: 'Name' | 'Surname' | 'ID' | 'Faculty' | 'Department' | 'Duration' | 'Total Points' | "Preferred University #1" | "Preferred University #2" | "Preferred University #3" | "Preferred University #4" | "Preferred University #5";
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -20,52 +20,73 @@ interface Column {
 }
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'surname', label: 'Surname', minWidth: 100 },
+    {id: 'First Name', label: 'Name', minWidth: 170},
+    {id: 'Lastname', label: 'Surname', minWidth: 100},
     {
-        id: 'id',
+        id: 'Student ID Number',
         label: 'ID',
         minWidth: 170,
         align: 'right',
-
     },
     {
-        id: 'duration',
-        label: 'Duration',
+        id: 'Faculty',
+        label: 'Faculty',
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: 'Department',
+        label: 'Department',
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: 'Duration Preferred',
+        label: 'Duration Preferred',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
     },
     {
-        id: 'gpa',
-        label: 'GPA',
+        id: 'Total Points',
+        label: 'Total Points',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toFixed(2),
     },
     {
-        id: 'eng101',
-        label: 'ENG 101',
-        minWidth: 100,
+        id: "Preferred University #1",
+        label: "Preferred University #1",
+        minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
     },
     {
-        id: 'eng102',
-        label: 'ENG 102',
-        minWidth: 100,
+        id: "Preferred University #2",
+        label: "Preferred University #2",
+        minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
     },
     {
-        id: 'total',
-        label: 'Total',
-        minWidth: 100,
+        id: "Preferred University #3",
+        label: "Preferred University #3",
+        minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
+    },
+    {
+        id: "Preferred University #4",
+        label: "Preferred University #4",
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: "Preferred University #5",
+        label: "Preferred University #5",
+        minWidth: 170,
+        align: 'right',
     },
 ];
 
+/*
 interface Data {
     name: string;
     surname: string;
@@ -109,7 +130,10 @@ const rows = [
     createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "A", "A", 85.00),
 ];
 
-export default function StickyHeadTable() {
+ */
+
+export default function StickyHeadTable(list) {
+    const rows = list.rows
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

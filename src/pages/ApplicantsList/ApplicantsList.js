@@ -20,7 +20,6 @@ import AcceptedList from "../../components/ui/Tables/AcceptedList"
 import WaitingList from "../../components/ui/Tables/WaitingList"
 import RankedApplicantsList from "../../components/ui/Tables/RankedApplicants"
 import {handleRequests} from "../requests";
-import {useEffect} from "react";
 
 
 interface TabPanelProps {
@@ -64,8 +63,10 @@ export default function StickyHeadTable() {
     const [value, setValue] = React.useState(0);
     const [acceptedList, setAcceptedList] = React.useState();
     const [rankedList, setRankedList] = React.useState();
+    const [waitingList, setWaitingList] = React.useState();
     const [isLoading, setLoading] = React.useState(true);
 
+    // the if clause is required otherwise react continuously rerender the page
     if (!loaded){
         handleRequests(null, {"listType": 1}, "applicants-list", "1", (response, status) => {
             setRankedList(response);
@@ -73,6 +74,9 @@ export default function StickyHeadTable() {
         })
         handleRequests(null, {"listType": 2}, "applicants-list", "1", (response, status) => {
             setAcceptedList(response);
+        })
+        handleRequests(null, {"listType": 3}, "applicants-list", "1", (response, status) => {
+            setWaitingList(response);
         })
         loaded = true;
     }
@@ -121,7 +125,7 @@ export default function StickyHeadTable() {
                 <TabPanel value={value} index={1} dir={theme.direction}>
                     <div className={"Table"}>
 
-                        <WaitingList></WaitingList>
+                        <WaitingList rows={waitingList}></WaitingList>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>

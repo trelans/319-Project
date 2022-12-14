@@ -24,20 +24,70 @@ const upload = multer ({
     storage: storageEngine,
 });
 
+const acceptedIdList = []
+const applicantIdList = []
+
 function createAcceptedList(students, placedStudents) {
     const keys = Object.keys(students["Placed"][0]);
     const values = Object.values(students["Placed"][0]);
     for (let i = 1; i < students["Placed"].length; i++) {
         let placedStudent = {};
         for (let j = 0; j < keys.length; j++) {
-            placedStudent[values[j]] = students["Placed"][i][keys[j]]
+            placedStudent[values[j]] = students["Placed"][i][keys[j]].toString()
         }
         placedStudents.push(placedStudent)
+        acceptedIdList.push(placedStudent.id)
     }
     const content = JSON.stringify(placedStudents)
-    console.log(content)
 
     fs.writeFile('./public/files/acceptedStudents.txt', content, err => {
+        if (err) {
+            console.error(err);
+        }
+        // file written successfully
+    });
+}
+
+function createApplicantList(students, rankedApplicants) {
+    const keys = Object.keys(students["Sayfa1"][0]);
+    const values = Object.values(students["Sayfa1"][0]);
+    for (let i = 1; i < students["Sayfa1"].length; i++) {
+        let rankedApplicant = {};
+        for (let j = 1; j < keys.length; j++) {
+            let value = students["Sayfa1"][i][keys[j]] || "";
+            rankedApplicant[values[j]] = value.toString()
+        }
+        rankedApplicants.push(rankedApplicant)
+        applicantIdList.push(rankedApplicant["Student ID Number"])
+    }
+    const content = JSON.stringify(rankedApplicants)
+    fs.writeFile('./public/files/rankedApplicants.txt', content, err => {
+        if (err) {
+            console.error(err);
+        }
+        // file written successfully
+    });
+}
+
+function saveApplicantsIDs() {
+    const content = JSON.stringify(applicantIdList)
+    fs.writeFile('./public/files/applicantsIds.txt', content, err => {
+        if (err) {
+            console.error(err);
+        }
+        // file written successfully
+    });
+}
+
+function createWaitingList(rankedApplicants, waitingList) {
+    for (let i = 0; i < rankedApplicants.length; i++) {
+        if (!acceptedIdList.includes(rankedApplicants[i]["Student ID Number"])){
+            waitingList.push(rankedApplicants[i])
+        }
+    }
+    const content = JSON.stringify(waitingList)
+    console.log(content)
+    fs.writeFile('./public/files/waitingList.txt', content, err => {
         if (err) {
             console.error(err);
         }
@@ -49,28 +99,13 @@ function createAcceptedList(students, placedStudents) {
 router.post ('/upload-excel', upload.single ('uploadedFile'), (req, res) => {
     res.json (req.file).status (200);
     const students = convertToJson("uploadedFile-1670977312640.xlsx");
-    let placed_students = [];
+    let placedStudents = [];
     let rankedApplicants = []
-    console.log(students["Sayfa1"]);
-    const keys = Object.keys(students["Sayfa1"][0]);
-    const values = Object.values(students["Sayfa1"][0]);
-    for (let i = 1; i < students["Sayfa1"].length; i++) {
-        let rankedApplicant = {};
-        for (let j = 1; j < keys.length; j++) {
-            let value = students["Sayfa1"][i][keys[j]] || "";
-            rankedApplicant[values[j]] = value
-        }
-        rankedApplicants.push(rankedApplicant)
-    }
-    console.log(rankedApplicants)
-    const content = JSON.stringify(rankedApplicants)
-    fs.writeFile('./public/files/rankedApplicants.txt', content, err => {
-        if (err) {
-            console.error(err);
-        }
-        // file written successfully
-    });
-    createAcceptedList(students, placed_students);
+    let waitingList = []
+    createApplicantList(students, rankedApplicants);
+    createAcceptedList(students, placedStudents);
+    createWaitingList(rankedApplicants, waitingList)
+    saveApplicantsIDs()
 });
 
 router.post('/applicants-list', async (req, res) => {
@@ -94,6 +129,15 @@ router.post('/applicants-list', async (req, res) => {
                 });
             } else if(req.body.listType === 2){
                 fs.readFile('./public/files/acceptedStudents.txt', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    list = JSON.parse(data)
+                    res.status(302).send(list)
+                });
+            } else if(req.body.listType === 3){
+                fs.readFile('./public/files/waitingList.txt', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err);
                         return;

@@ -86,49 +86,9 @@ const columns = [
     },
 ];
 
-interface Data {
-    name: string;
-    surname: string;
-    id: number;
-    duration: string;
-    gpa: number;
-    replacement: string;
-    total: number;
-}
-
-function createData(
-    name: string,
-    surname: string,
-    id: number,
-    duration: string,
-    gpa: number,
-    replacement: string,
-    total: number,
-): Data {
-    // Data maybe fetched here??
-    return {name, surname, id, duration, gpa, replacement, total};
-}
-
-let rows = [
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-    createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
-];
 
 export default function StickyHeadTable(list) {
-    rows = list.rows
+    const rows = list.rows
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
