@@ -960,18 +960,23 @@ body {
   empty-cells: show;
   border: 1px solid black;
   border-collapse: collapse;
-  background-color: #a5c9ca;
+  background-color: #354259;
+  color: white;
 
+}
+.alignAndWhite {
+  text-align: center;
+  color: white;
 }
 .pafp-td {
   width: 15%;
   margin: auto;
   padding: auto;
   empty-cells: show;
-  border: 1px solid black;
+  border: 1px solid white;
   border-collapse: collapse;
-  background-color: #a5c9ca;
-
+  background-color: #354259;
+  color: white;
 }
 
 .pafp-button-td {
