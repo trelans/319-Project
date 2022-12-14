@@ -1,13 +1,16 @@
 import React from 'react'
 import "./ChatContainer.css"
+import jwt_decode from "jwt-decode";
 
 export default function ChatContainer() {
+
+    const userName = jwt_decode(localStorage.getItem('token')).name;
 
     return(
         <div className='MainChatContainer'>
             <div>
                 <div style={{display:"flex", marginLeft:"11px", marginTop:"10px", backgroundColor:"rgb(241 243 241)", width:"96.8%", padding:"5px", borderRadius:"10px"}}>
-                    <p style={{marginTop: "10px", marginLeft: "10px"}}>Utku</p>
+                    <p style={{marginTop: "10px", marginLeft: "10px"}}>{userName}</p>
                 </div>
 
                 <div className='msgContainer'>
