@@ -48,8 +48,10 @@ import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/Learning
 import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2";
 import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility";
 import CoursePage from "./pages/CoursePage/CoursePage";
+import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
 
 import io from "socket.io-client";
+
 //export const socket = io.connect("http://localhost:8080");
 
 //console.log("test: " + socket)
@@ -279,6 +281,7 @@ function App() {
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
       <Route exact path="/course-page" element={<CoursePage />} />
+      <Route exact path="/application-page-coordinator" element={<ApplicationPageCoordinator />} />
     </Routes>
   );
 }
