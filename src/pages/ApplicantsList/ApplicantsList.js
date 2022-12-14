@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Card from "../../components/ui/Card"
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -19,9 +19,7 @@ import {useTheme} from "@mui/material/styles";
 import AcceptedList from "../../components/ui/Tables/AcceptedList"
 import WaitingList from "../../components/ui/Tables/WaitingList"
 import RankedApplicantsList from "../../components/ui/Tables/RankedApplicants"
-
-
-
+import {handleRequests} from "../requests";
 
 
 interface TabPanelProps {
@@ -30,8 +28,9 @@ interface TabPanelProps {
     index: number;
     value: number;
 }
+
 function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -42,7 +41,7 @@ function TabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{p: 3}}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -57,12 +56,38 @@ function a11yProps(index: number) {
     };
 }
 
-
+let loaded = false;
 
 export default function StickyHeadTable() {
-
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [acceptedList, setAcceptedList] = React.useState();
+    const [rankedList, setRankedList] = React.useState();
+    const [waitingList, setWaitingList] = React.useState();
+    const [isLoading, setLoading] = React.useState(true);
+
+    // the if clause is required otherwise react continuously rerender the page
+    if (!loaded){
+        handleRequests(null, {"listType": 1}, "applicants-list", "1", (response, status) => {
+            setRankedList(response);
+            setLoading(false);
+        })
+        handleRequests(null, {"listType": 2}, "applicants-list", "1", (response, status) => {
+            setAcceptedList(response);
+        })
+        handleRequests(null, {"listType": 3}, "applicants-list", "1", (response, status) => {
+            setWaitingList(response);
+        })
+        loaded = true;
+    }
+
+    if (isLoading) {
+        return <div className={"Page"}>
+                <NavigationBar/>
+                <div className="App">Loading...</div>
+        </div>;
+    }
+
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -75,8 +100,8 @@ export default function StickyHeadTable() {
     return (
 
         <div className={"Page"}>
-            <NavigationBar />
-            <Box sx={{ bgcolor: 'background.paper', height: 600 }}>
+            <NavigationBar/>
+            <Box sx={{bgcolor: 'background.paper', height: 600}}>
                 <AppBar position="static">
                     <Tabs
                         value={value}
@@ -86,26 +111,26 @@ export default function StickyHeadTable() {
                         variant="fullWidth"
                         aria-label="full width tabs example"
                     >
-                        <Tab label="Ranked Applicants List" {...a11yProps(0)} />
-                        <Tab label="Waiting List" {...a11yProps(1)} />
-                        <Tab label="Accepted Students" {...a11yProps(2)} />
+                        <Tab label="Ranked Applicants List" {...a11yProps(0)}/>
+                        <Tab label="Waiting List" {...a11yProps(1)}/>
+                        <Tab label="Accepted Students" {...a11yProps(2)}/>
                     </Tabs>
                 </AppBar>
 
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     <div className={"Table"}>
-                        <RankedApplicantsList></RankedApplicantsList>
+                        <RankedApplicantsList rows={rankedList}></RankedApplicantsList>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                     <div className={"Table"}>
 
-                        <WaitingList></WaitingList>
+                        <WaitingList rows={waitingList}></WaitingList>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <div className={"Table"}>
-                        <AcceptedList></AcceptedList>
+                        <AcceptedList rows={acceptedList}></AcceptedList>
                     </div>
                 </TabPanel>
 
@@ -120,10 +145,7 @@ function ApplicantsList() {
 
     return (
         <Card>
-        <h1>Hello</h1>
+            <h1>Hello</h1>
         </Card>);
-
-
-
 };
 

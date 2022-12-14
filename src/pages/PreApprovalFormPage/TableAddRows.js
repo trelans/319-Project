@@ -71,6 +71,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="courseCode"
+                          disabled="true"
                           value={this.state.rows[idx].courseCode}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -80,6 +81,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="courseName"
+                          disabled="true"
                           value={this.state.rows[idx].courseName}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -89,6 +91,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="credits"
+                          disabled="true"
                           value={this.state.rows[idx].credits}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -98,6 +101,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="elective"
+                          disabled="true"
                           value={this.state.rows[idx].elective}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -107,6 +111,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="courseCodeBilkent"
+                          disabled="true"
                           value={this.state.rows[idx].courseCodeBilkent}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -116,6 +121,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="courseNameBilkent"
+                          disabled="true"
                           value={this.state.rows[idx].courseNameBilkent}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -125,6 +131,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="courseGroupBilkent"
+                          disabled="true"
                           value={this.state.rows[idx].courseGroupBilkent}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -134,6 +141,7 @@ class TableAddRows extends React.Component {
                         <input
                           type="text"
                           name="partNo"
+                          disabled="true"
                           value={this.state.rows[idx].partNo}
                           onChange={this.handleChange(idx)}
                           className="form-control"
@@ -152,7 +160,7 @@ class TableAddRows extends React.Component {
                 </tbody>
               </table>
               <button onClick={this.handleAddRow} className="btn btn-primary">
-                Add Row
+                Add Course
               </button>
             </div>
           </div>

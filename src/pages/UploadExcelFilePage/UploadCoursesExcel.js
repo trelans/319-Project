@@ -95,7 +95,7 @@ class UploadExcel extends Component {
 }
  */
 
-function UploadExcel () {
+function UploadCoursesExcel () {
     const [uploadedFile, setUploadedFile] = useState ('');
     const [fileTitle, setFileTitle] = useState ('');
 
@@ -106,7 +106,7 @@ function UploadExcel () {
         let formData = new FormData (form);
 
         // do something
-        axios.post ('http://localhost:8080/upload-excel', formData);
+        axios.post ('http://localhost:8080/upload-courses-excel', formData);
         console.log("Form submitted")
     }
 
@@ -128,7 +128,7 @@ function UploadExcel () {
             >
                 <input
                     type="file"
-                    name="applicantListsExcel"
+                    name="previouslyAcceptedCoursesExcel"
                     value={uploadedFile}
                     onChange={handleUploadedFile}
                     required
@@ -153,4 +153,4 @@ function UploadExcel () {
         </React.Fragment>
     );
 }
-export default UploadExcel;
+export default UploadCoursesExcel;

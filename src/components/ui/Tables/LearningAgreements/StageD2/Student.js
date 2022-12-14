@@ -1,4 +1,5 @@
 import React from "react";
+
 import validate from "validator/validator";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,15 +10,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MenuItem } from "@mui/material";
-
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 
 const options = [
   { value: "female", label: "Female" },
   { value: "male", label: "Male" },
   { value: "other", label: "Other" },
 ];
-export default class App extends React.Component {
+export default class Student extends React.Component {
   constructor(props) {
     super(props);
     this.options = countryList().getData();
@@ -29,12 +29,13 @@ export default class App extends React.Component {
       complete: "",
       displayComplete: "none",
       name: "Kingston University",
-      faculty: "Engineering",
+      function: "Engineering",
       academicYear: "2022",
       studyCycle: "Onurcan",
       address: "290 Street LA 2032  ",
       subjectAreaCode: "onurcanatac@bilkent.edu.tr",
-      erasmusCode: "109091",
+      email: "omer.oktay.gultekin@erasmusapp.com",
+
       disabledName: true,
       disabledLastName: true,
       disabledDateOfBirth: true,
@@ -117,12 +118,12 @@ export default class App extends React.Component {
   render() {
     return (
       <div className={"App"}>
-        <div className="perfectCentered">
+        <div>
           <div id="survey-form">
             <Grid container spacing={2}>
               <Grid item xs={4}>
                 <label className={"textHeader"} id="name-label" htmlFor="name">
-                  Institution Name
+                  Name
                 </label>
               </Grid>
 
@@ -158,7 +159,7 @@ export default class App extends React.Component {
                   id="lastName-label"
                   htmlFor="Last name"
                 >
-                  Faculty
+                  Function
                 </label>
               </Grid>
 
@@ -167,10 +168,10 @@ export default class App extends React.Component {
               <Grid item xs={6}>
                 <input
                   ref={"this.lastnameRef"}
-                  id="faculty"
+                  id="function"
                   maxLength="30"
                   pattern="[A-Za-z]"
-                  defaultValue={this.state.faculty}
+                  defaultValue={this.state.function}
                   className="styleInput"
                   disabled={
                     this.state.disabledLastName ? "disabledLastName" : ""
@@ -184,249 +185,6 @@ export default class App extends React.Component {
                   className="editButton"
                   onClick={this.handleEditLastNameClick.bind(this)}
                   disabled={!this.state.disabledLastName}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="Dateofbirth-label"
-                  htmlFor="Date of Birth"
-                >
-                  Erasmus Code
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.dateOfBirth"}
-                  id="dateOfBirth"
-                  maxLength="30"
-                  pattern="[A-Za-z]"
-                  defaultValue={this.state.erasmusCode}
-                  className="styleInput"
-                  disabled={
-                    this.state.disabledDateOfBirth ? "disabledDateOfBirth" : ""
-                  }
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditDateOfBirthClick.bind(this)}
-                  disabled={!this.state.disabledDateOfBirth}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="country"
-                >
-                  Department
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.academicYear"}
-                  id="name"
-                  maxLength="30"
-                  className="styleInput"
-                  defaultValue={this.state.academicYear}
-                  disabled={
-                    this.state.disabledAcademicYear
-                      ? "disabledAcademicYear"
-                      : ""
-                  }
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditAcademicYearClick.bind(this)}
-                  disabled={!this.state.disabledAcademicYear}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="country"
-                >
-                  Address
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  id="email"
-                  type="email"
-                  maxLength="50"
-                  defaultValue={this.state.address}
-                  disabled={this.state.disabledGender ? "disabledGender" : ""}
-                  className="styleInput"
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditGenderClick.bind(this)}
-                  disabled={!this.state.disabledGender}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label className={"textHeader"} id="name-label" htmlFor="name">
-                  Country
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <div
-                  id="countryFlag"
-                  className="marginBottom"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    width: "100%",
-                  }}
-                >
-                  <ReactCountryFlag
-                    countryCode={
-                      this.state.countryVal ? this.state.countryVal.value : ""
-                    }
-                    svg
-                    cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
-                    cdnSuffix="svg"
-                    title={
-                      this.state.countryVal ? this.state.countryVal.value : ""
-                    }
-                  />
-                  <div
-                    style={{
-                      marginLeft: "10px",
-                      color: "black",
-                      width: "100%",
-                    }}
-                  >
-                    <Select
-                      ref={"this.nationalityRef"}
-                      isSearchable={true}
-                      options={this.state.options}
-                      defaultValue={this.state.value}
-                      disabled={
-                        this.state.disabledNationality
-                          ? "disabledNationality"
-                          : ""
-                      }
-                      onChange={this.changeHandler}
-                    />
-                  </div>
-                </div>
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditNationalityClick.bind(this)}
-                  disabled={!this.state.disabledNationality}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={12}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="Address"
-                >
-                  Contact Person Information
-                </label>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="Address"
-                >
-                  Name
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.studyCycle"}
-                  id="studyCycle"
-                  maxLength="50"
-                  defaultValue={this.state.studyCycle}
-                  className="styleInput"
-                  disabled={
-                    this.state.disabledStudyCycle ? "disabledStudyCycle" : ""
-                  }
-                  required
-                />
-              </Grid>
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditStudyCycleClick.bind(this)}
-                  disabled={!this.state.disabledStudyCycle}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="Address"
-                >
-                  E-Mail
-                </label>
-              </Grid>
-              <Grid item xs={6}>
-                <input
-                  id="subjectAreaCode"
-                  className="styleInput"
-                  defaultValue={this.state.subjectAreaCode}
-                  disabled={
-                    this.state.disabledSubjectArea ? "disabledSubjectArea" : ""
-                  }
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditStudyCycleClick.bind(this)}
-                  disabled={!this.state.disabledStudyCycle}
                 >
                   {" "}
                   Edit
@@ -462,6 +220,111 @@ export default class App extends React.Component {
                   Edit
                 </button>
               </Grid>
+
+              <Grid item xs={4}>
+                <label
+                  className={"textHeader"}
+                  id="Dateofbirth-label"
+                  htmlFor="Date of Birth"
+                >
+                  Mail
+                </label>
+              </Grid>
+
+              <Grid item xs={6}>
+                <input
+                  ref={"this.mail"}
+                  id="mail"
+                  maxLength="30"
+                  defaultValue={this.state.email}
+                  className="styleInput"
+                  disabled={this.state.disabledGender ? "disabledGender" : ""}
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={1}>
+                <button
+                  className="editButton "
+                  onClick={this.handleEditGenderClick.bind(this)}
+                  disabled={!this.state.disabledGender}
+                >
+                  {" "}
+                  Edit
+                </button>
+              </Grid>
+
+              <Grid item xs={4}>
+                <label
+                  className={"textHeader"}
+                  id="Dateofbirth-label"
+                  htmlFor="Date of Birth"
+                >
+                  Date
+                </label>
+              </Grid>
+
+              <Grid item xs={6}>
+                <DatePicker
+                  ref={"this.dateOfBirthRef"}
+                  selected={this.state.startDate}
+                  onChange={this.handleChangeDate}
+                  className="styleInput"
+                  disabled={
+                    this.state.disabledDateOfBirth ? "disabledDateOfBirth" : ""
+                  }
+                />
+              </Grid>
+
+              <Grid item xs={1}>
+                <button
+                  className="editButton"
+                  onClick={this.handleEditDateOfBirthClick.bind(this)}
+                  disabled={!this.state.disabledDateOfBirth}
+                >
+                  {" "}
+                  Edit
+                </button>
+              </Grid>
+
+              <Grid item xs={4}>
+                <label
+                  className={"textHeader"}
+                  id="lastName-label"
+                  htmlFor="country"
+                >
+                  Signature
+                </label>
+              </Grid>
+
+              <Grid item xs={6}>
+                <input
+                  ref={"this.academicYear"}
+                  id="name"
+                  maxLength="30"
+                  className="styleInput"
+                  defaultValue={this.state.academicYear}
+                  disabled={
+                    this.state.disabledAcademicYear
+                      ? "disabledAcademicYear"
+                      : ""
+                  }
+                  required
+                />
+              </Grid>
+
+              <Grid item xs={1}>
+                <button
+                  className="editButton "
+                  onClick={this.handleEditAcademicYearClick.bind(this)}
+                  disabled={!this.state.disabledAcademicYear}
+                >
+                  {" "}
+                  Edit
+                </button>
+              </Grid>
+
+              <Grid item xs={12}></Grid>
             </Grid>
             <div className="perfectCentered">
               <button className="buttons" onClick={this.handlerComplete}>

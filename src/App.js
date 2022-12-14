@@ -35,13 +35,19 @@ import jwt_decode from "jwt-decode";
 import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
 import UniversityListPage from "./pages/UniversityListPage/UniversityListPage";
 import LogsPage from "./pages/LogsPage/LogsPage";
-import CourseTransferFormPage from "./pages/CourseTransferFormPage/CourseTransferFormPage";
+import CourseTransferFormPage1 from "./pages/CourseTransferFormPage/CourseTransferFormPage1";
+import CourseTransferFormPage2 from "./pages/CourseTransferFormPage/CourseTransferFormPage2";
 import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
 import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
 import Chat from "./pages/ChatPagee/Chat";
+import UploadCoursesExcel from "./pages/UploadExcelFilePage/UploadCoursesExcel";
+import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1"
+import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2"
+import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility"
+import CoursePage from "./pages/CoursePage/CoursePage"
 
 import io from 'socket.io-client';
 //export const socket = io.connect("http://localhost:8080");
@@ -166,11 +172,17 @@ function App() {
       <Route exact path="/reset-mail-page" element={<ResetMailPage />} />
       <Route exact path="/settings-page" element={<SettingsPage />} />
       <Route exact path="/upload-excel" element={<UploadExcel />} />
+      <Route exact path="/upload-courses-excel" element={<UploadCoursesExcel />} />
       <Route
         exact
-        path="/course-transfer-page"
-        element={<CourseTransferFormPage />}
+        path="/course-transfer-page1"
+        element={<CourseTransferFormPage1 />}
       />
+        <Route
+            exact
+            path="/course-transfer-page2"
+            element={<CourseTransferFormPage2 />}
+        />
       <Route
         exact
         path="/preapproval-student"
@@ -245,9 +257,25 @@ function App() {
         path="/learning-agreement-3-3"
         element={<LearningAgreementBeforeMobility3 />}
       />
+      <Route
+          exact
+          path="/learning-agreement-d-1-2"
+          element={<LearningAgreementDuringMobility1 />}
+          />
+      <Route
+          exact
+          path="/learning-agreement-d-2-2"
+          element={<LearningAgreementDuringMobility2 />}
+          />
+      <Route
+          exact
+          path="/learning-agreement-after"
+          element={<LearningAgreementAfterMobility />}
+      />
       //new multiple pages
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
+      <Route exact path="/course-page" element={<CoursePage />} />
     </Routes>
   );
 }
