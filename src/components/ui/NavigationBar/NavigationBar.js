@@ -14,7 +14,7 @@ function NavigationBar() {
             <Link to="/profile-page">Profile</Link>
           </li>
           <li>
-            <Link to="/chat-page">DM</Link>
+            <Link to="/chat">DM</Link>
           </li>
           <li>
             <Link to="/notification-popup">Notifications</Link>
