@@ -46,6 +46,8 @@ import UploadCoursesExcel from "./pages/UploadExcelFilePage/UploadCoursesExcel";
 import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1"
 import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2"
 import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility"
+import CoursePage from "./pages/CoursePage/CoursePage"
+
 import io from 'socket.io-client';
 //export const socket = io.connect("http://localhost:8080");
 
@@ -272,6 +274,7 @@ function App() {
       //new multiple pages
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
+      <Route exact path="/course-page" element={<CoursePage />} />
     </Routes>
   );
 }
