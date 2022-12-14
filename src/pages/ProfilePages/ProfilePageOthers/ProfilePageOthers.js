@@ -1,7 +1,7 @@
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
 
-//There should be restrictions for logged in user type, not implemented yet. Should we show a cannot be accessed screen?
+//There should be restrictions for logged in user type, not implemented yet.
 const loggedInUserType = 0;
 //0->outgoing student 1->incoming student 2->others
 const willDisplayType = 0;
