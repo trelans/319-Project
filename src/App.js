@@ -42,10 +42,10 @@ import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
-import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1"
-import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2"
-import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility"
-import io from 'socket.io-client';
+import LearningAgreementDuringMobility1 from "./pages/LearningAgreement/LearningAgreementDuringMobility1";
+import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/LearningAgreementDuringMobility2";
+import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility";
+import io from "socket.io-client";
 //export const socket = io.connect("http://localhost:8080");
 
 //console.log("test: " + socket)
@@ -139,8 +139,7 @@ function App() {
           )
         }
       />
-
-      <Route exact path="/test" element={<TestPage/>} />
+      <Route exact path="/test" element={<TestPage />} />
       <Route exact path="/login" element={<LoginPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
@@ -173,11 +172,11 @@ function App() {
         path="/course-transfer-page1"
         element={<CourseTransferFormPage1 />}
       />
-        <Route
-            exact
-            path="/course-transfer-page2"
-            element={<CourseTransferFormPage2 />}
-        />
+      <Route
+        exact
+        path="/course-transfer-page2"
+        element={<CourseTransferFormPage2 />}
+      />
       <Route
         exact
         path="/preapproval-student"
@@ -253,19 +252,19 @@ function App() {
         element={<LearningAgreementBeforeMobility3 />}
       />
       <Route
-          exact
-          path="/learning-agreement-d-1-2"
-          element={<LearningAgreementDuringMobility1 />}
-          />
+        exact
+        path="/learning-agreement-d-1-2"
+        element={<LearningAgreementDuringMobility1 />}
+      />
       <Route
-          exact
-          path="/learning-agreement-d-2-2"
-          element={<LearningAgreementDuringMobility2 />}
-          />
+        exact
+        path="/learning-agreement-d-2-2"
+        element={<LearningAgreementDuringMobility2 />}
+      />
       <Route
-          exact
-          path="/learning-agreement-after"
-          element={<LearningAgreementAfterMobility />}
+        exact
+        path="/learning-agreement-after"
+        element={<LearningAgreementAfterMobility />}
       />
       //new multiple pages
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
@@ -276,4 +275,3 @@ function App() {
 
 export default App;
 export const socket = io("http://localhost:8080");
-

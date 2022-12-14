@@ -1427,3 +1427,19 @@ span.pafp-button-last {
         min-height: 7vh !important;
     }
 }
+
+  /*UniversityListPage Styles*/
+
+  .ulp-container {
+    width: 90%;
+    padding: 1% 0 0;
+    margin: auto;
+  }
+
+  .ulp-alert {
+    font-size: 30px;
+    color: #e10c41;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: underline;
+  }
