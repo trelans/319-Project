@@ -204,7 +204,7 @@ function App() {
       <Route exact path="/create-department" element={<CreateDepartment />} />
       <Route exact path="/application-page1" element={<ApplicationPage1 />} />
       <Route exact path="/application-page2" element={<ApplicationPage2 />} />
-      <Route exact path="/chat-page" element={<Chat/>} />
+      <Route exact path="/chat" element={<Chat/>} />
       <Route
         exact
         path="/profile-own-student"
