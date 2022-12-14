@@ -160,7 +160,7 @@ class TableAddRows extends React.Component {
                 </tbody>
               </table>
               <button onClick={this.handleAddRow} className="btn btn-primary">
-                Add Row
+                Add Course
               </button>
             </div>
           </div>
