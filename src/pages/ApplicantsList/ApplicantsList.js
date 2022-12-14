@@ -19,6 +19,7 @@ import {useTheme} from "@mui/material/styles";
 import AcceptedList from "../../components/ui/Tables/AcceptedList"
 import WaitingList from "../../components/ui/Tables/WaitingList"
 import RankedApplicantsList from "../../components/ui/Tables/RankedApplicants"
+import {handleRequests} from "../requests";
 
 
 
@@ -57,12 +58,24 @@ function a11yProps(index: number) {
     };
 }
 
-
+let loaded = false;
 
 export default function StickyHeadTable() {
-
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [acceptedList, setAcceptedList] = React.useState();
+    const [rankedList, setRankedList] = React.useState();
+
+    if(!loaded){
+        handleRequests(null, {"listType": 1}, "applicants-list", "1",(response, status) => {
+            setRankedList(response);
+        })
+        handleRequests(null, {"listType": 2}, "applicants-list", "1",(response, status) => {
+            setAcceptedList(response);
+        })
+        loaded = true;
+    }
+
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -86,15 +99,15 @@ export default function StickyHeadTable() {
                         variant="fullWidth"
                         aria-label="full width tabs example"
                     >
-                        <Tab label="Ranked Applicants List" {...a11yProps(0)} />
-                        <Tab label="Waiting List" {...a11yProps(1)} />
-                        <Tab label="Accepted Students" {...a11yProps(2)} />
+                        <Tab label="Ranked Applicants List" {...a11yProps(0)}/>
+                        <Tab label="Waiting List" {...a11yProps(1)}/>
+                        <Tab label="Accepted Students" {...a11yProps(2)}/>
                     </Tabs>
                 </AppBar>
 
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     <div className={"Table"}>
-                        <RankedApplicantsList></RankedApplicantsList>
+                        <RankedApplicantsList rows={rankedList}></RankedApplicantsList>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
@@ -105,7 +118,7 @@ export default function StickyHeadTable() {
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <div className={"Table"}>
-                        <AcceptedList></AcceptedList>
+                        <AcceptedList rows={acceptedList}></AcceptedList>
                     </div>
                 </TabPanel>
 
@@ -122,8 +135,5 @@ function ApplicantsList() {
         <Card>
         <h1>Hello</h1>
         </Card>);
-
-
-
 };
 

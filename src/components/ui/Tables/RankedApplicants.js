@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 
 
 interface Column {
-    id: 'name' | 'surname' | 'id' | 'duration' | 'gpa' | 'replacement'| 'total';
+    id: 'Name' | 'Surname' | 'ID' | 'Faculty' | 'Department' | 'Duration' | 'Total Points' | "Preferred University #1" | "Preferred University #2" | "Preferred University #3" | "Preferred University #4" | "Preferred University #5";
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -20,42 +20,69 @@ interface Column {
 }
 
 const columns = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'surname', label: 'Surname', minWidth: 100 },
+    {id: 'First Name', label: 'Name', minWidth: 170},
+    {id: 'Lastname', label: 'Surname', minWidth: 100},
     {
-        id: 'id',
+        id: 'Student ID Number',
         label: 'ID',
         minWidth: 170,
         align: 'right',
-
     },
     {
-        id: 'duration',
-        label: 'Duration',
+        id: 'Faculty',
+        label: 'Faculty',
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: 'Department',
+        label: 'Department',
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: 'Duration Preferred',
+        label: 'Duration Preferred',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
     },
     {
-        id: 'gpa',
-        label: 'GPA',
+        id: 'Total Points',
+        label: 'Total Points',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toFixed(2),
     },
     {
-        id: 'replacement',
-        label: 'Replacement',
+        id: "Preferred University #1",
+        label: "Preferred University #1",
         minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
     },
     {
-        id: 'total',
-        label: 'Total',
+        id: "Preferred University #2",
+        label: "Preferred University #2",
         minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toFixed(2),
+    },
+    {
+        id: "Preferred University #3",
+        label: "Preferred University #3",
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: "Preferred University #4",
+        label: "Preferred University #4",
+        minWidth: 170,
+        align: 'right',
+    },
+    {
+        id: "Preferred University #5",
+        label: "Preferred University #5",
+        minWidth: 170,
+        align: 'right',
     },
 ];
 
@@ -79,10 +106,10 @@ function createData(
     total: number,
 ): Data {
     // Data maybe fetched here??
-    return { name, surname, id, duration, gpa , replacement ,  total};
+    return {name, surname, id, duration, gpa, replacement, total};
 }
 
-const rows = [
+let rows = [
     createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
     createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
     createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
@@ -100,7 +127,8 @@ const rows = [
     createData('Kutay', 'Şenyiğit', 21902377, "Fall", 3.55, "Kingston University", 85.00),
 ];
 
-export default function StickyHeadTable() {
+export default function StickyHeadTable(list) {
+    rows = list.rows
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -114,8 +142,8 @@ export default function StickyHeadTable() {
     };
 
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+        <Paper sx={{width: '100%', overflow: 'hidden'}}>
+            <TableContainer sx={{maxHeight: 440}}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -123,7 +151,7 @@ export default function StickyHeadTable() {
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth }}
+                                    style={{minWidth: column.minWidth}}
                                 >
                                     {column.label}
                                 </TableCell>
