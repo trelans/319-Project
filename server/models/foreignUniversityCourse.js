@@ -4,15 +4,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
-const alternativeCourse = mongoose.Schema({
-    course: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Course'
-    }
-
-}, {_id: false});
-
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,7 +11,7 @@ const courseSchema = new mongoose.Schema({
         trim: true,
         uppercase: true
     },
-    department: {
+    bilkentExemption: {
         type: String,
         required: true,
         trim: true
@@ -42,22 +33,21 @@ const courseSchema = new mongoose.Schema({
         trim: true
     },
 
-    alternativeCourses: [alternativeCourse],
-
     syllabusLink: {
         type: String,
         required: false,
         trim: true,
-        default: 'No link provided'   
+        default: 'No link provided'
     },
     courseWebPage: {
         type: String,
         required: false,
         trim: true,
-        default: 'No Webpage Provided'    
+        default: 'No Webpage Provided'
     },
-    universityID: {
-        type: Number,
+
+    universityName: {
+        type: String,
         required: true,
         trim: true
     },
@@ -84,26 +74,6 @@ const courseSchema = new mongoose.Schema({
     timestamps: true
 })
 
-// not stored in db for mongoose
-userSchema.virtual('tasks', {
-    ref: 'Task',
-    localField: '_id',
-    foreignField: 'owner'
-})
+const ForeignUniversityCourse = mongoose.model('ForeignUniversityCourse', courseSchema)
 
-userSchema.methods.toJSON = function () {
-    const user = this
-    const userObject = user.toObject()
-
-    delete userObject.password
-    delete userObject.tokens
-    delete userObject.avatar
-
-    return userObject
-}
-
-
-
-const Course = mongoose.model('Course', courseSchema)
-
-module.exports = Course
+module.exports = ForeignUniversityCourse
