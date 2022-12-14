@@ -63,11 +63,15 @@ let loaded = false;
 export default function StickyHeadTable() {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
-    const [list, setList] = React.useState();
+    const [acceptedList, setAcceptedList] = React.useState();
+    const [rankedList, setRankedList] = React.useState();
 
     if(!loaded){
+        handleRequests(null, {"listType": 1}, "applicants-list", "1",(response, status) => {
+            setRankedList(response);
+        })
         handleRequests(null, {"listType": 2}, "applicants-list", "1",(response, status) => {
-            setList(response);
+            setAcceptedList(response);
         })
         loaded = true;
     }
@@ -103,7 +107,7 @@ export default function StickyHeadTable() {
 
                 <TabPanel value={value} index={0} dir={theme.direction}>
                     <div className={"Table"}>
-                        <RankedApplicantsList></RankedApplicantsList>
+                        <RankedApplicantsList rows={rankedList}></RankedApplicantsList>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
@@ -114,7 +118,7 @@ export default function StickyHeadTable() {
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                     <div className={"Table"}>
-                        <AcceptedList rows={list}></AcceptedList>
+                        <AcceptedList rows={acceptedList}></AcceptedList>
                     </div>
                 </TabPanel>
 

@@ -51,9 +51,40 @@ router.post ('/upload-excel', upload.single ('uploadedFile'), (req, res) => {
     res.json (req.file).status (200);
     const students = convertToJson("uploadedFile-1670977312640.xlsx");
     let placed_students = [];
-    console.log(students["Sayfa1"])
+    let rankedApplicants = []
+    console.log(students["Sayfa1"]);
+    const keys = Object.keys(students["Sayfa1"][0]);
+    const values = Object.values(students["Sayfa1"][0]);
+    for (let i = 1; i < students["Sayfa1"].length; i++) {
+        let rankedApplicant = {};
+        for (let j = 1; j < keys.length; j++) {
+            let value = students["Sayfa1"][i][keys[j]] || "";
+            rankedApplicant[values[j]] = value
+        }
+        rankedApplicants.push(rankedApplicant)
+    }
+    console.log(rankedApplicants)
+    const content = JSON.stringify(rankedApplicants)
+    fs.writeFile('./public/files/rankedApplicants.txt', content, err => {
+        if (err) {
+            console.error(err);
+        }
+        // file written successfully
+    });
 
+    /*
+    const placedStudentsJSON = {"data": placed_students}
+    const content = JSON.stringify(placedStudentsJSON)
+    console.log(content)
+
+    fs.writeFile('./public/files/acceptedStudents.txt', content, err => {
+        if (err) {
+            console.error(err);
+        }
+        // file written successfully
+    });
     //createAcceptedList(students, placed_students);
+     */
 });
 
 router.post('/applicants-list', async (req, res) => {
@@ -66,7 +97,16 @@ router.post('/applicants-list', async (req, res) => {
             delete req.type
             response = res.status(201)
         }else {
-            if(req.body.listType === 2){
+            if(req.body.listType === 1){
+                fs.readFile('./public/files/rankedApplicants.txt', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err);
+                        return;
+                    }
+                    list = JSON.parse(data)
+                    res.status(302).send(list)
+                });
+            } else if(req.body.listType === 2){
                 fs.readFile('./public/files/acceptedStudents.txt', 'utf8', (err, data) => {
                     if (err) {
                         console.error(err);
