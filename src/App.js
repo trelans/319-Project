@@ -49,6 +49,7 @@ import LearningAgreementDuringMobility2 from "./pages/LearningAgreement/Learning
 import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAgreementAfterMobility";
 import CoursePage from "./pages/CoursePage/CoursePage";
 import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
+import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
 
 import io from "socket.io-client";
 
@@ -282,6 +283,7 @@ function App() {
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
       <Route exact path="/course-page" element={<CoursePage />} />
       <Route exact path="/application-page-coordinator" element={<ApplicationPageCoordinator />} />
+      <Route exact path="/application-page-fac" element={<ApplicationPageFAC />} />
     </Routes>
   );
 }

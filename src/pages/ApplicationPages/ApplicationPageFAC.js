@@ -2,7 +2,7 @@ import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import {useState} from "react";
 import {handleRequests} from "../requests";
 
-function ApplicationPageCoordinator() {
+function ApplicationPageFAC() {
   const [status, setStatus] = useState("");
   const [erasmusCoordinator, setErasmusCoordinator] = useState("");
   const [appliedInstitution, setAppliedInstitution] = useState("");
@@ -114,12 +114,9 @@ function ApplicationPageCoordinator() {
             </tr>
           </table>
         </div>
-        <div className="ap-center">
-          <button className="ap-button">Cancel Application</button>
-        </div>
       </div>
     </div>
   );
 }
 
-export default ApplicationPageCoordinator;
+export default ApplicationPageFAC;
