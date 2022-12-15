@@ -34,6 +34,7 @@
     "react-select": "^5.7.0",
     "react-select-country": "^0.0.15",
     "react-select-country-list": "^2.2.3",
+    "react-signature-canvas": "^1.0.6",
     "react-test-renderer": "^18.2.0",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.2",

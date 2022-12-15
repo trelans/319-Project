@@ -101,7 +101,7 @@ function createWaitingList(rankedApplicants, waitingList) {
 
 
 async function createCandidates(acceptedStudents) {
-    const counter = 0
+    let counter = 9
     for (let i = 0; i < acceptedStudents.length; i++) {
         const university = await University.findOne({"name": acceptedStudents[i].placement})
         const departments = ["CS"]
@@ -110,7 +110,7 @@ async function createCandidates(acceptedStudents) {
         const preferredUniversitiesFromExcel = []
 
         for (let i = 0; i < 5; i++) {
-            const preferredUniversity = await University.findOne({"name" : acceptedStudents[i]["Preferred University #" + i]})
+            const preferredUniversity = await University.findOne({"name": acceptedStudents[i]["Preferred University #" + i]})
             if (preferredUniversity === null) {
                 break;
             }
@@ -124,7 +124,6 @@ async function createCandidates(acceptedStudents) {
             if (department !== null) {
                 candidateDepartments.push({"id": department._id, "type": e.type})
             }
-
         }))
 
         let nominatedId = ""
@@ -137,7 +136,6 @@ async function createCandidates(acceptedStudents) {
 
 
         const userDict = {
-
             name: acceptedStudents[i].name,
             surname: acceptedStudents[i].surname,
             active: true,
@@ -154,10 +152,20 @@ async function createCandidates(acceptedStudents) {
                 studentId: acceptedStudents[i].id
             }
         }
-        const user = new User(userDict);
-        const application = await Application.createApplication(user)
+        console.log(userDict)
+        const user = await new User(userDict);
+
+        // Bu kısımı hoca uidan girecek
+        const deadLines = {
+            PADeadline: "30.01.23",
+            LAFDeadline: "30.02.23",
+            CTFDeadline: "30.05.23"
+        }
+
+        const application = await Application.createApplication(user, deadLines)
         await application.save()
         await user.save()
+        counter++
     }
 }
 
@@ -197,7 +205,7 @@ function parsePreviouslyAcceptedCourses(courseList) {
         let course = {}
         if (courses["PRE APPROVAL "][i]['A'] === "Erasmus" &&
             ((courses["PRE APPROVAL "][i]['L'] && courses["PRE APPROVAL "][i]['L'].includes("CS"))
-            || (courses["PRE APPROVAL "][i]['I'] && courses["PRE APPROVAL "][i]['I'].includes("CS")))
+                || (courses["PRE APPROVAL "][i]['I'] && courses["PRE APPROVAL "][i]['I'].includes("CS")))
             && (courses["PRE APPROVAL "][i]['F'] || courses["PRE APPROVAL "][i]['G'])
             && courses["PRE APPROVAL "][i]['K']
         ) {
@@ -222,62 +230,74 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
     const courseList = []
     res.json(req.file).status(200);
     parsePreviouslyAcceptedCourses(courseList);
-    console.log(courseList)
+
+    const list = new Set()
+    const list2 = new Set()
 
     // Do NOT use forEach with await functions, use this method instead
     await Promise.all(courseList.map(async (course) => {
         const university = await University.findOne({name: course["Host University's Name"]})
         if (university) {
-            let foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course["Host University's Course Code"]})
-            if (foreignCourse === null) {
-                const foreignCourseDict = {
-                    name: course["Host University's Course Name"],
-                    courseCode: course["Host University's Course Code"],
-                    universityName: course["Host University's Name"],
-                    ectsCredits: course["ECTS"] ? course["ECTS"] : course["Original"],
+            list2.add(university.name)
+            if (course["Host University's Course Code"] !== '') {
+                let foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course["Host University's Course Code"]})
+
+                if (foreignCourse === null) {
+                    console.log(course["Host University's Course Code"])
+                    const foreignCourseDict = {
+                        name: course["Host University's Course Name"],
+                        courseCode: course["Host University's Course Code"],
+                        universityName: course["Host University's Name"],
+                        ectsCredits: course["ECTS"] ? course["ECTS"] : course["Original"],
+                    }
+                    foreignCourse = await new ForeignUniversityCourse(foreignCourseDict)
+                    await foreignCourse.save()
                 }
-                foreignCourse = await new ForeignUniversityCourse(foreignCourseDict)
-                await foreignCourse.save()
-            }
-            if (course["Exempted Bilkent Course Code"] === "-" || course["Exempted Bilkent Course Code"] === ""){
-                course["Exempted Bilkent Course Code"] = course["Exemption"]
-            }
-            let bilkentCourse = await BilkentCourse.findOne({courseCode: course["Exempted Bilkent Course Code"]})
-            if (bilkentCourse === null) {
-                const bilkentCourseDict = {
-                    name: course["Exempted Bilkent Course Name"],
-                    department: "CS",
-                    courseCode: course["Exempted Bilkent Course Code"],
-                    courseType: course["Exempted Bilkent Course Designation"],
-                    ectsCredits: course["Exempted Bilkent Course Credit"],
-                    foreignUniversities: [
-                        {
-                            universityName: university.name,
-                            universityID: university._id,
-                            exemptedCourses: [{
+
+                if (course["Exempted Bilkent Course Code"] === "-" || course["Exempted Bilkent Course Code"] === "") {
+                    course["Exempted Bilkent Course Code"] = course["Exemption"]
+                }
+                let bilkentCourse = await BilkentCourse.findOne({courseCode: course["Exempted Bilkent Course Code"]})
+                if (bilkentCourse === null) {
+                    const bilkentCourseDict = {
+                        name: course["Exempted Bilkent Course Name"],
+                        department: "CS",
+                        courseCode: course["Exempted Bilkent Course Code"],
+                        courseType: course["Exempted Bilkent Course Designation"],
+                        ectsCredits: course["Exempted Bilkent Course Credit"],
+                        foreignUniversities: [
+                            {
+                                universityName: university.name,
+                                universityID: university._id,
+                                exemptedCourses: [{
+                                    courseName: foreignCourse.name,
+                                    courseID: foreignCourse._id
+                                }
+                                ]
+                            }
+                        ]
+                    }
+                    bilkentCourse = await new BilkentCourse(bilkentCourseDict)
+                } else {
+                    const foreignUnis = bilkentCourse.foreignUniversities
+                    foreignUnis.forEach((uni) => {
+                        if (uni.universityID === university._id) {
+                            uni.exemptedCourses.push({
                                 courseName: foreignCourse.name,
                                 courseID: foreignCourse._id
-                            }
-                            ]
+                            })
                         }
-                    ]
+                    })
+                    bilkentCourse.foreignUniversities = foreignUnis
                 }
-                bilkentCourse = await new BilkentCourse(bilkentCourseDict)
-            } else {
-                const foreignUnis = bilkentCourse.foreignUniversities
-                foreignUnis.forEach((uni) => {
-                    if(uni.universityID === university._id){
-                        uni.exemptedCourses.push({
-                            courseName: foreignCourse.name,
-                            courseID: foreignCourse._id
-                        })
-                    }
-                })
-                bilkentCourse.foreignUniversities = foreignUnis
+                await bilkentCourse.save()
             }
-            await bilkentCourse.save()
+        }else{
+            list.add(course["Host University's Name"])
         }
     }))
+    console.log(list)
+    console.log(list2)
 });
 
 

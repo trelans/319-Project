@@ -8,7 +8,6 @@ const Task = require('./task')
 const wishedCourse = mongoose.Schema( {
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Course'
     }
 
@@ -27,19 +26,19 @@ const courseToTransfer = mongoose.Schema( {
 const componentOfStudyProgramAtReceivingIns = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     semester: {
         type: String,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     }
 }, {_id: false});
 
@@ -47,107 +46,107 @@ const componentOfStudyProgramAtReceivingIns = mongoose.Schema({
 const componentOfRecognitionAtSendingIns = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     semester: {
         type: String,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     }
 }, {_id: false});
 
 const componentOfChangedStudyProgram = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     isComponentAdded: {
         type: Boolean,
-        required: true
+        //required: true
     },
     isComponentDeleted: {
         type: Boolean,
-        required: true
+        //required: true
     },
     reasonForChange: {
         type: String,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     }
 }, {_id: false});
 
 const componentOfChangedRecognitionTable = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     semester: {
         type: String,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     }
 }, {_id: false});
 
 const componentOfAcademicOutcomesAtReceivingIns = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     isComponentComplete: {
         type: Boolean,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     },
     grade: {
         type: String,
-        required: true
+        //required: true
     }
 }, {_id: false});
 
 const componentOfRecognitionOfOutcomesAtSendingIns = mongoose.Schema({
     componentCode: {
         type: String,
-        required: true
+        //required: true
     },
     componentTitle: {
         type: String,
-        required: true
+        //required: true
     },
     ectsCredits: {
         type: Number,
-        required: true
+        //required: true
     },
     grade: {
         type: String,
-        required: false
+        //required: false
     }
 }, {_id: false});
 
@@ -167,38 +166,37 @@ const department = mongoose.Schema({
     }
 }, { _id : false });
 
-const token = mongoose.Schema({
-    token: {
-        type: String,
-        required: true
-    }
-
-}, {_id : false});
-
-const ownerApplicant = mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-})
-
 //general form schema
 const formSchema = new mongoose.Schema({
 
     //owner user -- required data will be taken from the user.
-    owner: ownerApplicant,
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
+    ownerApplication: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Application'
+    },
+
+    status: {
+        type: Number,
+        default: 0
+    },
+
+    formType: {
+        type: Number,
+        default: 0
+    },
+
+    deadline: {
+        type: String,
+        required: true
+    },
 
     learningAgreementForm : {
-
-        status: {
-            type: Number,
-            default: 1
-        },
-
-        LAFDeadline: {
-            type: String,
-            required: true
-        },
 
         studyCycle: {
             type: String,
@@ -397,7 +395,7 @@ const formSchema = new mongoose.Schema({
                 type: String,
                 //required: true
             },
-            personFunction: {
+            personWorkPosition: {
                 type: String,
                 //required: true
             },
@@ -441,39 +439,17 @@ const formSchema = new mongoose.Schema({
 
     preApprovalForm : {
 
-        ownerApplication: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Application'
-        },
-
         courses: [wishedCourse],
 
         totalEctsCredits: {
             type: Number,
-            required: true,
             default: 0
         },
-
-        status: {
-            type: Number,
-            default: 1
-        },
-
-        PFDeadline: {
-            type: String,
-            required: true
-        }
 
     },
 
     courseTransferForm: {
 
-        ownerApplication: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true,
-            ref: 'Application'
-        },
         userType: {
             type: Number,
             default: 0,
@@ -495,25 +471,9 @@ const formSchema = new mongoose.Schema({
             //required: true,
             ref: 'ErasmusCoordinator'
         },
-
-        status: {
-            type: Number,
-            default: 1
-        },
-
-        PFDeadline: {
-            type: String,
-            required: true
-        }
-
     },
 
     incomingStudentsWishedCoursesForm: {
-        ownerApplication: {
-            type: mongoose.SchemaType.Type.ObjectId,
-            required: true,
-            ref: 'Application'
-        },
         userType: {
             type: Number,
             default: 0,
