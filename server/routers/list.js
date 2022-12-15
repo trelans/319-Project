@@ -195,11 +195,7 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
     res.json(req.file).status(200);
     parsePreviouslyAcceptedCourses(courseList);
     console.log(courseList)
-    const list1 = new Set()
-    const list2 = new Set()
-    const list3 = new Set()
-    const list4 = new Set()
-    const courses = []
+
     // Do NOT use forEach with await functions, use this method instead
     await Promise.all(courseList.map(async (course) => {
         const university = await University.findOne({name: course["Host University's Name"]})
@@ -254,28 +250,6 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
             await bilkentCourse.save()
         }
     }))
-    console.log(list1)
-    console.log(list2)
-    console.log(list3)
-    console.log(list4)
-
-    /*
-    departments.forEach(async depName => {
-        const department = await Department.findOne({ name: depName })
-        if (department) {
-            console.log(req.body.quota)
-            department.hostUniversities.push({
-                universityId: universityId,
-                quota: quota,
-                fallSuitability: fallSuitability,
-                springSuitability: springSuitability
-            })
-            department.save()
-        } else {
-            console.log("Given Department is not yet created!")
-        }
-    })
-    */
 });
 
 
