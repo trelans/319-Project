@@ -175,70 +175,18 @@ const token = mongoose.Schema({
 
 }, {_id : false});
 
-const formSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    surname: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    active: {
-        type: Boolean,
-        default: false
-    },
-    departments: [department],
-
-    appliedInstitution: {
+const ownerApplicant = mongoose.Schema({
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'University'
-    },
+        ref: 'User'
+    }
+})
 
-    studentId: {
-        type: Number,
-        default: 0
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Invalid email!')
-            }
-        }
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
-            }
-        }
-    },
-    userType: {
-        type: Number,
-        default: 0,
-        validate(value) {
-            if(value < 0) {
-                throw new Error('User Type must be greater than zero')
-            }
-        }
-    },
+//general form schema
+const formSchema = new mongoose.Schema({
 
-    tokens: [token],
-
-    avatar: {
-        type: Buffer
-    },
+    //owner user -- required data will be taken from the user.
+    owner: ownerApplicant,
 
     learningAgreementForm : {
 
