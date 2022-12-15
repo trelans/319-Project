@@ -7,10 +7,7 @@ const sharp = require('sharp')
 const Department = require("../models/department")
 const Application = require("../models/application")
 const University = require("../models/university")
-const LearningAgreement = require("../models/learningAgreementForm")
-const PreApproval = require("../models/preApprovalForm")
-const CourseTransfer = require("../models/courseTransferForm")
-const ErasmusCoordinator = require("../models/erasmusCoordinator")
+const Form = require("../models/form")
 const router = new express.Router()
 
 router.post('/application-page1', async (req, res) => {
@@ -27,10 +24,10 @@ router.post('/application-page1', async (req, res) => {
             const user = await User.findOne({'tokens.token': req.body.token})
             // The field after "," below is for getting only the required fields from database
             application = await Application.findOne({'applicantCandidate': user._id})
-            erasmusCoordinator = await ErasmusCoordinator.findById(application.responsibleErasmusCoord)
+            erasmusCoordinator = await User.findById(application.responsibleErasmusCoord)
             appliedInstitution = await University.findById(application.appliedInstitution)
-            preApproval = await PreApproval.findOne({'ownerApplication': application._id})
-            learningAgreement = await LearningAgreement.findOne({'ownerApplication': application._id})
+            preApproval = await Form.findOne({'ownerApplication': application._id})
+            learningAgreement = await Form.findOne({'ownerApplication': application._id})
             response = res.status(201)
         } else {
             response = res.status(302)

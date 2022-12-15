@@ -469,7 +469,7 @@ const formSchema = new mongoose.Schema({
         approveExchangeCoordinator: {
             type: mongoose.Schema.Types.ObjectId,
             //required: true,
-            ref: 'ErasmusCoordinator'
+            ref: 'User'
         },
     },
 
@@ -492,79 +492,6 @@ const formSchema = new mongoose.Schema({
     timestamps: true
 })
 
-// not stored in db for mongoose
-formSchema.virtual('tasks', {
-    ref: 'Task',
-    localField: '_id',
-    foreignField: 'owner'
-})
+const Form = mongoose.model('Form', formSchema)
 
-/*
-userSchema.virtual('university', {
-    ref: 'University',
-    localField: '_id',
-    foreignField: 'owner'
-})
-*/
-
-formSchema.methods.toJSON = function () {
-    const user = this
-    const userObject = user.toObject()
-
-    delete userObject.password
-    delete userObject.tokens
-    delete userObject.avatar
-
-    return userObject
-}
-
-formSchema.methods.generateAuthToken = async function() {
-    const user = this
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, { expiresIn: '1h' })
-
-    user.tokens = user.tokens.concat({token})
-    await user.save()
-
-    return token
-}
-
-formSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email})
-    if(!user) {
-        throw new Error('Unable to login')
-    }
-    const isMatch = await bcrypt.compare(password,user.password)
-    if(!isMatch) {
-        throw new Error('Unable to login')
-    }
-
-    return user
-}
-
-/**
- * Hash the plain text password before saving
- */
-formSchema.pre('save', async function (next) {
-    const user = this
-
-    if(user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
-    }
-
-    next()
-})
-
-/**
- * Delete user tasks when the user is removed
- */
-formSchema.pre('remove', async function (next) {
-    const user = this
-
-    await Task.deleteMany({owner: user._id})
-
-    next()
-})
-
-const User = mongoose.model('Form', formSchema)
-
-module.exports = User
+module.exports = Form

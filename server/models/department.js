@@ -7,7 +7,7 @@ const Task = require('./task')
 erasmusCoordinator = mongoose.Schema({
     coordinator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ErasmusCoordinator',
+        ref: 'User',
     }
 
 }, {_id: false});
@@ -15,23 +15,19 @@ erasmusCoordinator = mongoose.Schema({
 hostUniversity = mongoose.Schema({
     universityId: {
         type: Number,
-        required: true,
         ref: 'University'
     },
     quota: {
         type: Number,
-        required: true,
         default: 0
     },
     fallSuitability: {
         type: Boolean,
-        required: true,
         default: false
     },
 
     springSuitability: {
         type: Boolean,
-        required: true,
         default: false
     }
 }, {_id: false});

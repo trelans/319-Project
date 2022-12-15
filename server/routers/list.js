@@ -34,14 +34,14 @@ const applicantIdList = []
 
 function createAcceptedList(students, placedStudents) {
     const keys = Object.keys(students["Placed"][0]);
-    const values = Object.values(students["Placed"][0]);
+    const values = Object.values(students["Placed"][0]).map(String);
     for (let i = 1; i < students["Placed"].length; i++) {
         let placedStudent = {};
         for (let j = 0; j < keys.length; j++) {
             placedStudent[values[j]] = students["Placed"][i][keys[j]]
         }
         placedStudents.push(placedStudent)
-        acceptedIdList.push(placedStudent.id)
+        acceptedIdList.push(placedStudent.id.toString())
     }
     const content = JSON.stringify(placedStudents)
 
@@ -53,17 +53,22 @@ function createAcceptedList(students, placedStudents) {
     });
 }
 
-function createApplicantList(students, rankedApplicants) {
+function createApplicantList(students, rankedApplicants, placedStudents) {
     const keys = Object.keys(students["Sayfa1"][0]);
-    const values = Object.values(students["Sayfa1"][0]);
+    const values = Object.values(students["Sayfa1"][0]).map(String);
     for (let i = 1; i < students["Sayfa1"].length; i++) {
         let rankedApplicant = {};
         for (let j = 1; j < keys.length; j++) {
             let value = students["Sayfa1"][i][keys[j]] || "";
             rankedApplicant[values[j]] = value.toString()
         }
+        let index = acceptedIdList.indexOf(rankedApplicant["Student ID Number"].toString())
+        if (index !== -1) {
+            // Assuming acceptedIdList is contains candidates in order they appear in Excel sheet
+            rankedApplicant["placement"] = placedStudents[index]["placement"]
+        }
         rankedApplicants.push(rankedApplicant)
-        applicantIdList.push(rankedApplicant["Student ID Number"])
+        applicantIdList.push(rankedApplicant["Student ID Number"].toString())
     }
     const content = JSON.stringify(rankedApplicants)
     fs.writeFile('./public/files/rankedApplicants.txt', content, err => {
@@ -100,73 +105,62 @@ function createWaitingList(rankedApplicants, waitingList) {
 }
 
 
-async function createCandidates(acceptedStudents) {
-    let counter = 9
-    for (let i = 0; i < acceptedStudents.length; i++) {
-        const university = await University.findOne({"name": acceptedStudents[i].placement})
-        const departments = ["CS"]
+async function createCandidates(rankedApplicants) {
+    let counter = 100
+    const indexes = [1, 2, 3, 4, 5]
+    for (let i = 0; i < rankedApplicants.length; i++) {
+        let nominatedId = null
+        if (rankedApplicants[i].hasOwnProperty("placement")) {
+            const university = await University.findOne({"name": rankedApplicants[i].placement})
+            if (university != null) {
+                nominatedId = university._id
+            }
+        }
         const candidateDepartments = []
 
-        const preferredUniversitiesFromExcel = []
-
-        for (let i = 0; i < 5; i++) {
-            const preferredUniversity = await University.findOne({"name": acceptedStudents[i]["Preferred University #" + i]})
-            if (preferredUniversity === null) {
-                break;
+        let preferredUniversitiesFromExcel = []
+        await Promise.all(indexes.map(async (e) => {
+            const preferredUniversity = await University.findOne({"name": rankedApplicants[i]["Preferred University #" + e]})
+            if (preferredUniversity !== null) {
+                preferredUniversitiesFromExcel.push({"university": preferredUniversity._id})
             }
-            preferredUniversitiesFromExcel[i] = preferredUniversity._id
-        }
+        }))
 
-
+        const departments = ["CS"] // Assuming only CS candidates for now (dataset restriction)
         // Do NOT use forEach with await functions,fg use this method instead
         await Promise.all(departments.map(async (e) => {
-            const department = await Department.findOne({"name": e.name})
+            const department = await Department.findOne({"name": e})
             if (department !== null) {
                 candidateDepartments.push({"id": department._id, "type": e.type})
             }
         }))
 
-        let nominatedId = ""
-
-        if (university === null) {
-            nominatedId = ""
-        } else {
-            nominatedId: university._id
-        }
-
-
         const userDict = {
-            name: acceptedStudents[i].name,
-            surname: acceptedStudents[i].surname,
+            name: rankedApplicants[i]["First Name"],
+            surname: rankedApplicants[i]["Lastname"],
             active: true,
             email: "mail" + counter + "@example.com",
             password: "abcd123.",
 
             erasmusCandidateData: {
                 isActiveCandidate: true,
-                totalPoints: acceptedStudents[i].total,
-                preferredSemester: acceptedStudents[i].duration.includes("Bahar") ? 1 : 0,
+                totalPoints: rankedApplicants[i]["Total Points"],
+                preferredSemester: rankedApplicants[i]["Duration Preferred"].includes("Güz") ? 0 : rankedApplicants[i]["Duration Preferred"].includes("Bahar") ? 1 : 2,
                 preferredUniversities: preferredUniversitiesFromExcel,
                 nominatedUniversityId: nominatedId,
                 departments: candidateDepartments,
-                studentId: acceptedStudents[i].id
+                studentId: rankedApplicants[i]["Student ID Number"]
             }
         }
-        console.log(userDict)
         const user = await new User(userDict);
-
-        // Bu kısımı hoca uidan girecek
-        const deadLines = {
-            PADeadline: "30.01.23",
-            LAFDeadline: "30.02.23",
-            CTFDeadline: "30.05.23"
+        if (nominatedId) {
+            const application = await Application.createApplication(user)
+            await application.save()
         }
-
-        const application = await Application.createApplication(user, deadLines)
-        await application.save()
         await user.save()
         counter++
     }
+    console.log("All users are created successfully")
 }
 
 // routing
@@ -176,11 +170,11 @@ router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, r
     let placedStudents = [];
     let rankedApplicants = []
     let waitingList = []
-    createApplicantList(students, rankedApplicants);
     createAcceptedList(students, placedStudents);
+    createApplicantList(students, rankedApplicants, placedStudents);
     createWaitingList(rankedApplicants, waitingList)
     saveApplicantsIDs()
-    await createCandidates(placedStudents)
+    await createCandidates(rankedApplicants, placedStudents)
 });
 
 
@@ -232,13 +226,17 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
     parsePreviouslyAcceptedCourses(courseList);
 
     const list = new Set()
-    const list2 = new Set()
+    const list2 = {}
 
     // Do NOT use forEach with await functions, use this method instead
     await Promise.all(courseList.map(async (course) => {
         const university = await University.findOne({name: course["Host University's Name"]})
         if (university) {
-            list2.add(university.name)
+            if (list2.hasOwnProperty(university.name)) {
+                list2[university.name] += 1
+            } else {
+                list2[university.name] = 1
+            }
             if (course["Host University's Course Code"] !== '') {
                 let foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course["Host University's Course Code"]})
 
@@ -292,7 +290,7 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
                 }
                 await bilkentCourse.save()
             }
-        }else{
+        } else {
             list.add(course["Host University's Name"])
         }
     }))

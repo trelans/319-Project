@@ -31,7 +31,6 @@ router.post('/create-account', async (req,res) => {
     const user = await new User(req.body);
 
     try {
-        const token = await user.generateAuthToken()
         if (user.userType === 0) {
             const application = await Application.createApplication(user);
             await application.save()

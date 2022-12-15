@@ -1,9 +1,6 @@
 const mongoose = require('mongoose')
 const Form = require('./form')
 const Department = require('./department')
-const PreApproval = require('./preApprovalForm')
-const LearningAgreement = require('./learningAgreementForm')
-const CourseTransfer = require('./courseTransferForm')
 const User = require('./user')
 
 const applicationSchema = new mongoose.Schema({
@@ -72,9 +69,15 @@ applicationSchema.statics.cancelApplication = async function (_id) {
 }
 
 // applicationProgramType will be always 0 since student's minor application form will be evaluated by the corresponding Erasmus Coordinator of the major program
-applicationSchema.statics.createApplication = async function (user, formDeadlines, applicationProgramType = 0) {
-    //const erasmusCoord = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
-    const erasmusCoord = null
+applicationSchema.statics.createApplication = async function (user,applicationProgramType = 0) {
+    // Bu kısımı hoca uidan girecek
+    const formDeadlines = {
+        PADeadline: "30.01.23",
+        LAFDeadline: "30.02.23",
+        CTFDeadline: "30.05.23"
+    }
+
+    const erasmusCoord = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
     let coordId
 
     if (erasmusCoord === null) {
@@ -83,10 +86,11 @@ applicationSchema.statics.createApplication = async function (user, formDeadline
         coordId = erasmusCoord._id
     }
 
+    console.log("CoordID: " + coordId)
     const application = new Application({
         applicantCandidate: user._id,
         appliedInstitution: user.erasmusCandidateData.nominatedUniversityId,
-        responsibleErasmusCoord: coordId
+        responsibleErasmusCoord: coordId? coordId: undefined
     })
 
     // Manually creating object id and storing it on database after usage
