@@ -106,7 +106,7 @@ function createWaitingList(rankedApplicants, waitingList) {
 
 
 async function createCandidates(rankedApplicants) {
-    let counter = 100
+    let counter = 0
     const indexes = [1, 2, 3, 4, 5]
     for (let i = 0; i < rankedApplicants.length; i++) {
         let nominatedId = null
