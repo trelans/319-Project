@@ -230,6 +230,31 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 })
 
 
+router.post('/users/initContacts', async (req, res) => {
+    try {
+        var users = await User.find();
+
+        contacts = users.map((cnt) => {
+            return {
+                name: cnt.name,
+                surname: cnt.surname,
+                objectId : cnt._id
+            }
+        })
+
+        //update contacts
+        for(let i = 0; i < users.length; i++) {
+            users[i].contacts = contacts
+            await users[i].save()
+        }
+
+        res.send("successful")
+    } catch (e) {
+        console.log(e)
+        res.status(500).send(e)
+    }
+})
+
 router.post('/users/contacts', auth, async (req, res) => {
     try {
         const type = req.user.userType
