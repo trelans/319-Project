@@ -23,6 +23,7 @@ export const handleRequests = (e, data, page, type, callback) => {
             return res.json()
         })
         .then(res => {
+            res.userType = localStorage.getItem("userType")
             callback(res, status)
         });
 };

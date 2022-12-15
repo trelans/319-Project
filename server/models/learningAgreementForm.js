@@ -143,7 +143,17 @@ const componentOfRecognitionOfOutcomesAtSendingIns = mongoose.Schema({
 
 
 const learningAgreementFormSchema = new mongoose.Schema({
-    
+
+    status: {
+        type: Number,
+        default: 1
+    },
+
+    LAFDeadline: {
+        type: String,
+        required: true
+    },
+
     ownerApplication: {
         type: mongoose.Schema.Types.ObjectId,
         //required: true,
@@ -413,6 +423,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
             //required: true
         }
     }
+
 
 
 }, {
