@@ -17,7 +17,8 @@ class TableAddRows extends React.Component {
 
   state = {
     rows: [],
-    currentAddedCourse:[]
+    addingEquivalentCourse: false,
+    currentCourseNameForEq: "",
   };
 
 
@@ -81,6 +82,13 @@ class TableAddRows extends React.Component {
     rows.splice(idx, 1);
     this.setState({ rows });
   };
+  handleAddEquivalentCourse = (idx) => () => {
+    console.log(this.state.rows[idx])
+    this.props.currentCourseForEq(this.state.rows[idx])
+     // this.setState(...this.state.addingEquivalentCourse, true)
+     // this.setState(...this.state.currentCourseNameForEq, this.state.rows[idx])
+  };
+
 
 
   render() {
@@ -200,11 +208,19 @@ class TableAddRows extends React.Component {
                           Remove
                         </button>
                       </td>
+                      <td>
+                        <button
+                            className="btn btn-outline-danger btn-sm"
+                            onClick={this.handleAddEquivalentCourse(idx)}
+                        >
+                          Add Equivalent Course
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-          
+
             </div>
           </div>
         </div>

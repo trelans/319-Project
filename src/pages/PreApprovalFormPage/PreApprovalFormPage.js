@@ -6,11 +6,13 @@ import Modal from "../../components/ui/CoursePopUp/Modal";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 import { useState , useRef } from "react";
 import * as React from "react";
-
+import EqPopUp from "../../components/ui/CoursePopUp/PopUpForEquivalentCourse"
 function PreApprovalFormPage(props) {
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = React.useState();
   const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
+  const [eqCourse, setEqCourse] = React.useState();
+
 
   const childRef = useRef();
 
@@ -30,7 +32,9 @@ function PreApprovalFormPage(props) {
   function closeSelectCourse() {
     setCourseIsOpen(false);
   }
-
+  function closeSelectEqCourse() {
+    setEqCourse(false);
+  }
   return (
 
     <div>
@@ -97,7 +101,7 @@ function PreApprovalFormPage(props) {
           <p className="pafp-alert">Course or Requirement to be Exempted</p>
         </div>
         <div className="pafp-flex-div">
-          <TableAddRows getArrFunc={selectedCourse} selected={selectedCourse} ref={childRef} />
+          <TableAddRows getArrFunc={selectedCourse} selected={selectedCourse} ref={childRef} currentCourseForEq={setEqCourse}/>
         </div>
         <button className="btn btn-primary" onClick={selectCourse}>Add Course</button>
         <div>
@@ -170,6 +174,7 @@ function PreApprovalFormPage(props) {
       {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} onSelect={handleSelect} setArrFunc={setSelectedCourse}/>}
       {selectCourseIsOpen && <Backdrop />}
       {selectedCourse && handleSelect()}
+      {eqCourse && <EqPopUp onCancel={closeSelectEqCourse}  bilkentCourse={eqCourse}/>}
     </div>
   );
 }
