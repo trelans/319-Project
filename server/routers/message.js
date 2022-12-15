@@ -9,6 +9,8 @@ router.post("/msg", auth, async(req, res) => {
     try {
         const {from, to, message} = req.body;
 
+        console.log("body")
+        console.log(req.body)
         console.log("from: " + from);
         console.log("to " + to);
         console.log("message " + message);
@@ -47,7 +49,7 @@ router.get("/get/chat/msg/:user1Id/:user2Id", async(req, res) => {
             Chatusers: {
                 $all:[from,to]
             }
-        }).sort({updatedAt: -1})
+        }).sort({updatedAt: 1})
 
         const allmessage = messages.map((msg)=> {
             return {

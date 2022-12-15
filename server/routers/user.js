@@ -258,7 +258,8 @@ router.post('/users/contacts', auth, async (req, res) => {
         contacts = contacts.map((cnt) => {
             return {
                 name: cnt.name,
-                surname: cnt.surname
+                surname: cnt.surname,
+                objectId : cnt._id
             }
         })
 

@@ -38,7 +38,6 @@ import LogsPage from "./pages/LogsPage/LogsPage";
 import CourseTransferFormPage1 from "./pages/CourseTransferFormPage/CourseTransferFormPage1";
 import CourseTransferFormPage2 from "./pages/CourseTransferFormPage/CourseTransferFormPage2";
 import AddCoursePage from "./pages/AddCoursePage/AddCoursePage";
-import ChatPage from "./pages/ChatPage/ChatPage";
 import ProfilePageOwn from "./pages/ProfilePages/ProfilePageOwn/ProfilePageOwn";
 import ProfilePageOthers from "./pages/ProfilePages/ProfilePageOthers/ProfilePageOthers";
 import UploadExcel from "./pages/UploadExcelFilePage/UploadExcel";
