@@ -434,6 +434,14 @@ body {
   margin-left: 20px;
 }
 
+.ap-text-granted {
+  font-size: 20px;
+  color: grey;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  margin-left: 20px;
+}
+
 .ap-header-other {
   font-size: 20px;
   color: #2c3333;
@@ -749,7 +757,7 @@ body {
 }
 
 .ppc-container {
-  width: 90%x;
+  width: 90%;
   padding: 1% 0 0;
   margin: auto;
   display: flex;

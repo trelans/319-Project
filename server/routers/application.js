@@ -46,7 +46,7 @@ router.post('/application-page1', async (req, res) => {
             "LAFDeadline": "12.12.12", // change later
             "CTFStatus": 0, // change later
             "CTFDeadline": "12.12.12" // change later
-            })
+        })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

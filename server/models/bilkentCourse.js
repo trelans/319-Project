@@ -6,6 +6,10 @@ const Task = require('./task')
 
 
 const exemptedCourse = mongoose.Schema({
+    courseName: {
+        type: String,
+        trim: true,
+    },
     courseID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -14,6 +18,10 @@ const exemptedCourse = mongoose.Schema({
 }, {_id: false});
 
 const university = mongoose.Schema({
+    universityName: {
+        type: String,
+        trim: true,
+    },
     universityID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -36,12 +44,11 @@ const courseSchema = new mongoose.Schema({
     },
     courseCode: {
         type: String,
-        required: true,
         trim: true,
         uppercase: true
     },
     courseType: {
-        type: Number,
+        type: String,
         required: true,
         trim: true
     },

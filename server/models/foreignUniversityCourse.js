@@ -11,37 +11,28 @@ const courseSchema = new mongoose.Schema({
         trim: true,
         uppercase: true
     },
-    bilkentExemption: {
-        type: String,
-        required: true,
-        trim: true
-    },
+
     courseCode: {
         type: String,
         required: true,
         trim: true,
         uppercase: true
     },
-    courseType: {
-        type: Number,
-        required: true,
-        trim: true
-    },
+    /*
     courseID: {
         type: Number,
         required: true,
         trim: true
     },
+     */
 
     syllabusLink: {
         type: String,
-        required: false,
         trim: true,
         default: 'No link provided'
     },
     courseWebPage: {
         type: String,
-        required: false,
         trim: true,
         default: 'No Webpage Provided'
     },
@@ -58,15 +49,10 @@ const courseSchema = new mongoose.Schema({
     },
     courseLanguage: {
         type: String,
-        required: true,
-        trim: true
-    },
-    previousAcceptance: {
-        type: Boolean,
-        required: false,
         trim: true,
-        default: false
+        default: "English"
     },
+
     avatar: {
         type: Buffer
     }

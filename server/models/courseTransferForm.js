@@ -42,9 +42,15 @@ const courseTransferForm = new mongoose.Schema({
         //required: true,
         ref: 'ErasmusCoordinator'
     },
-    approveDean: {
+
+    status: {
+        type: Number,
+        default: 1
+    },
+
+    PFDeadline: {
         type: String,
-        //required: true
+        required: true
     }
 
 }, {
