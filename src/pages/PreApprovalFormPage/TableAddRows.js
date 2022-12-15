@@ -1,9 +1,26 @@
 import React from "react";
 
+
 class TableAddRows extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+
+    this.bar = (ar) =>  {
+
+     this.handleAddCourse(ar )
+
+    }
+  }
+
+
   state = {
-    rows: [{}],
+    rows: [],
+    currentAddedCourse:[]
   };
+
+
   handleChange = (idx) => (e) => {
     const { name, value } = e.target;
     const rows = [...this.state.rows];
@@ -29,6 +46,31 @@ class TableAddRows extends React.Component {
       rows: [...this.state.rows, item],
     });
   };
+
+  handleAddCourse = (row) => {
+
+      if (row["courseCode"] === undefined) {
+        console.log("Prevent")
+        return
+      }
+
+      const item = {
+        courseCode: row["courseCode"],
+        courseName:  row["courseName"],
+        credits:  row["credit"],
+        elective: "",
+        courseCodeBilkent: "",
+        courseNameBilkent: "",
+        courseGroupBilkent: "",
+        partNo: "",
+      };
+      this.setState({
+        rows: [...this.state.rows, item],
+      });
+
+
+  };
+
   handleRemoveRow = () => {
     this.setState({
       rows: this.state.rows.slice(0, -1),
@@ -39,7 +81,10 @@ class TableAddRows extends React.Component {
     rows.splice(idx, 1);
     this.setState({ rows });
   };
+
+
   render() {
+
     return (
       <div>
         <div className="container">
@@ -159,9 +204,7 @@ class TableAddRows extends React.Component {
                   ))}
                 </tbody>
               </table>
-              <button onClick={this.handleAddRow} className="btn btn-primary">
-                Add Course
-              </button>
+          
             </div>
           </div>
         </div>

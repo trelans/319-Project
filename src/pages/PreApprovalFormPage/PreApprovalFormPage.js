@@ -4,23 +4,35 @@ import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
 import Modal from "../../components/ui/CoursePopUp/Modal";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
-import { useState } from "react";
+import { useState , useRef } from "react";
 import * as React from "react";
 
 function PreApprovalFormPage(props) {
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = React.useState();
+  const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
+
+  const childRef = useRef();
 
   function selectCourse() {
     setCourseIsOpen(true);
   }
 
-  function handleSelect() {}
+  function handleSelect() {
+    if (lastSelectedCourse === selectedCourse) {
+       return
+    }
+      console.log(selectedCourse)
+      childRef.current.bar(selectedCourse)
+      setLastSelectedCourse(selectedCourse)
+  }
 
   function closeSelectCourse() {
     setCourseIsOpen(false);
   }
+
   return (
+
     <div>
       <NavigationBar />
       <div className="pafp-container">
@@ -85,9 +97,9 @@ function PreApprovalFormPage(props) {
           <p className="pafp-alert">Course or Requirement to be Exempted</p>
         </div>
         <div className="pafp-flex-div">
-          <TableAddRows />
+          <TableAddRows getArrFunc={selectedCourse} selected={selectedCourse} ref={childRef} />
         </div>
-        <button onClick={selectCourse}>Add Course</button>
+        <button className="btn btn-primary" onClick={selectCourse}>Add Course</button>
         <div>
           <table className="pafp-first-table">
             <tr>
@@ -155,8 +167,9 @@ function PreApprovalFormPage(props) {
           </table>
         </div>
       </div>
-      {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} onSelect={handleSelect()} />}
+      {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} onSelect={handleSelect} setArrFunc={setSelectedCourse}/>}
       {selectCourseIsOpen && <Backdrop />}
+      {selectedCourse && handleSelect()}
     </div>
   );
 }
