@@ -10,7 +10,7 @@ import Card from "../../components/ui/Card";
 import styles from "./LearningAgreementBeforeMobility.module.css";
 import { useState } from "react";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
-import UploadSignaturePage from "../UploadSignaturePage";
+import UploadSignaturePage from "../../components/UploadSignaturePage";
 
 function LearningAgreementDuringMobility2() {
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);

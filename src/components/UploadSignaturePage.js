@@ -7,7 +7,7 @@ function UploadSignaturePage(props) {
   }
 
   return (
-    <div className={"perfectCentered"}>
+    <div className="perfectCentered">
       <div className={style.modal}>
         <h4>Draw your signature:</h4>
 
