@@ -75,11 +75,19 @@ applicationSchema.statics.cancelApplication = async function (_id) {
 applicationSchema.statics.createApplication = async function (user, applicationProgramType = 0) {
     const erasmusCoord = await ErasmusCoordinator.findOne({"assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
 
+    let coordId = ""
+
+    if(erasmusCoord === null) {
+        coordId = ""
+    } else {
+        coordId = erasmusCoord._id
+    }
+
     const application = new Application({
         status: 0,
         applicantCandidate: user._id,
         appliedInstitution: user.erasmusCandidateData.nominatedUniversityId,
-        responsibleErasmusCoord: erasmusCoord._id
+        responsibleErasmusCoord: coordId
     })
 
     // Manually creating object id and storing it on database after usage

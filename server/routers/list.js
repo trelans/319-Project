@@ -100,30 +100,58 @@ function createWaitingList(rankedApplicants, waitingList) {
 }
 
 
-async function createCandidates(rankedApplicants, placedStudents) {
+async function createCandidates(acceptedStudents) {
     const counter = 0
-    for (let i = 0; i < placedStudents.length; i++) {
-        const university = await University.findOne({"name": placedStudents[i].placement})
+    for (let i = 0; i < acceptedStudents.length; i++) {
+        const university = await University.findOne({"name": acceptedStudents[i].placement})
         const departments = ["CS"]
         const candidateDepartments = []
-        // Do NOT use forEach with await functions, use this method instead
+
+        const preferredUniversitiesFromExcel = []
+
+        for (let i = 0; i < 5; i++) {
+            const preferredUniversity = await University.findOne({"name" : acceptedStudents[i]["Preferred University #" + i]})
+            if (preferredUniversity === null) {
+                break;
+            }
+            preferredUniversitiesFromExcel[i] = preferredUniversity._id
+        }
+
+
+        // Do NOT use forEach with await functions,fg use this method instead
         await Promise.all(departments.map(async (e) => {
             const department = await Department.findOne({"name": e.name})
-            candidateDepartments.push({"id": department._id, "type": e.type})
+            if (department !== null) {
+                candidateDepartments.push({"id": department._id, "type": e.type})
+            }
+
         }))
+
+        let nominatedId = ""
+
+        if (university === null) {
+            nominatedId = ""
+        } else {
+            nominatedId: university._id
+        }
+
+
         const userDict = {
-            name: placedStudents[i].name,
-            surname: placedStudents[i].surname,
+
+            name: acceptedStudents[i].name,
+            surname: acceptedStudents[i].surname,
             active: true,
             email: "mail" + counter + "@example.com",
             password: "abcd123.",
+
             erasmusCandidateData: {
                 isActiveCandidate: true,
-                totalPoints: placedStudents[i].total,
-                preferredSemester: placedStudents[i].duration.includes("Bahar") ? 1 : 0,
-                nominatedUniversityId: university._id,
+                totalPoints: acceptedStudents[i].total,
+                preferredSemester: acceptedStudents[i].duration.includes("Bahar") ? 1 : 0,
+                preferredUniversities: preferredUniversitiesFromExcel,
+                nominatedUniversityId: nominatedId,
                 departments: candidateDepartments,
-                studentId: placedStudents[i].id
+                studentId: acceptedStudents[i].id
             }
         }
         const user = new User(userDict);
@@ -144,7 +172,7 @@ router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, r
     createAcceptedList(students, placedStudents);
     createWaitingList(rankedApplicants, waitingList)
     saveApplicantsIDs()
-    //await createCandidates(rankedApplicants, placedStudents)
+    await createCandidates(placedStudents)
 });
 
 
