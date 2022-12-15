@@ -14,7 +14,8 @@ const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
-        methods: ["GET", "POST"]
+        methods: ["GET", "POST"],
+        credentials: true
     }
 })
 
@@ -22,27 +23,26 @@ server.listen(port, () => {
     console.log(`Server started on ${port}`)
 });
 
+global.onlineUsers = new Map();
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`)
+
+    global.chatsocket = socket;
+
+    socket.on("addUser", (id) => {
+        onlineUsers.set(id, socket.id)
+    })
+
+    socket.on("send-msg", (data) => {
+        const sendUserSocket = onlineUsers.get(data.to)
+        if(sendUserSocket) {
+            socket.to(sendUserSocket).emit("msg-receive", data.message)
+        }
+    })
 
     socket.on("send_message", (data) => {
         console.log(data)
     })
-    
-    /*
-    global.chatSocket = socket;
-
-    socket.on("add-user", (userId) => {
-      onlineUsers.set(userId, socket.id);
-    });
-  
-    socket.on("send-msg", (data) => {
-      const sendUserSocket = onlineUsers.get(data.to);
-      if (sendUserSocket) {
-        socket.to(sendUserSocket).emit("msg-recieve", data.msg);
-      }
-    });
-    */
 });
 
 

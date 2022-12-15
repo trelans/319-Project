@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import "./ChatContainer.css"
 import jwt_decode from "jwt-decode";
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
+import {io} from 'socket.io-client'
 
 export default function ChatContainer({currentChatUser}) {
     console.log(currentChatUser)
     const user = jwt_decode(localStorage.getItem('token'));
-    const msgContainer = []
+    const id = user._id
 
+    const scrollRef = useRef()
+    const socket = useRef()
     const [message, setMessage] = useState([]);
     const [inputmessage, setinputmessage] = useState('')
+    const [arrivalMessage, setarrivalMessage] = useState(null)
 
     useEffect(() => {
 
         const getmessage = async () => {
             try {
-                const res = await axios.get( `http://localhost:8080/get/chat/msg/${user._id}/${currentChatUser.objectId}`, {
+                const res = await axios.get( `http://localhost:8080/get/chat/msg/${id}/${currentChatUser.objectId}`, {
 
                 })
                 setMessage(res.data)
@@ -28,22 +32,66 @@ export default function ChatContainer({currentChatUser}) {
         getmessage()
     }, [currentChatUser.objectId])
 
-    const sendmsg = () => {
-
-        const myMessage = {
-            myself: true,
-            message: inputmessage
+    useEffect(() => {
+        if(JSON.stringify(currentChatUser) === '{}') {
+            socket.current = io("http://localhost:8080")
+            socket.current.emit("addUser", id)
         }
-        fetch("http://localhost:8080/msg", {method:"POST", mode: "cors",  headers:{'Content-Type': 'application/JSON', 'Authorization': `Bearer ${localStorage.getItem('token')}`}, body: JSON.stringify({
-            from: user._id,
-            to: currentChatUser.objectId,
-            message: inputmessage
-        }) })
+    }, [id])
 
-        setMessage(message.concat(myMessage))
+    console.log(socket)
+
+    useEffect(() => {
+        if(scrollRef.current) {
+            scrollRef.current.scrollIntoView({behavior:"smooth"})
+        }
+    }, [message])
+
+    const sendmsg = () => {
+        try {   
+            
+            if(JSON.stringify(currentChatUser) === '{}') {
+                throw new Error('No contact is selected')
+            }
+
+            const myMessage = {
+                myself: true,
+                message: inputmessage
+            }
+
+            socket.current.emit("send-msg", {
+                to: currentChatUser._id,
+                from: id,
+                message: inputmessage
+            })
+
+            fetch("http://localhost:8080/msg", {method:"POST", mode: "cors",  headers:{'Content-Type': 'application/JSON', 'Authorization': `Bearer ${localStorage.getItem('token')}`}, body: JSON.stringify({
+                from: id,
+                to: currentChatUser.objectId,
+                message: inputmessage
+            }) })
+
+            setMessage(message.concat(myMessage)) 
+
+        } catch (error) {
+            console.log(error)
+            alert(error)
+        }
+
     }
 
-    console.log(message)
+    useEffect (() => {
+        if(socket.current) {
+            socket.current.on("msg-receive", (msg) => {
+                console.log(msg)
+                setarrivalMessage({myself:false, message:msg})
+            })
+        }
+    }, [arrivalMessage])
+
+    useEffect(() => {
+        arrivalMessage && setMessage((pre) => [...pre, arrivalMessage])
+    }, [arrivalMessage])
 
     return(
         <div className='MainChatContainer'>
@@ -54,7 +102,7 @@ export default function ChatContainer({currentChatUser}) {
 
                 <div className='msgContainer'>
                 {message?.map( (item) => (
-                    <div>
+                    <div ref={scrollRef}>
                         {item?.myself === false ?
                             <div className= "msg">
                                 <p className='msgTxt'>
