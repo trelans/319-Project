@@ -5,9 +5,11 @@ import TableAddRows from "./TableAddRows";
 import Modal from "../../components/ui/CoursePopUp/Modal";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 import { useState } from "react";
+import * as React from "react";
 
 function PreApprovalFormPage(props) {
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = React.useState();
 
   function selectCourse() {
     setCourseIsOpen(true);
@@ -153,7 +155,7 @@ function PreApprovalFormPage(props) {
           </table>
         </div>
       </div>
-      {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} />}
+      {selectCourseIsOpen && <Modal onCancel={closeSelectCourse} onSelect={handleSelect()} />}
       {selectCourseIsOpen && <Backdrop />}
     </div>
   );

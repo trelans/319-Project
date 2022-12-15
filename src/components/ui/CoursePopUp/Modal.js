@@ -5,9 +5,15 @@ import CoursesTable from "./Tables/BilkentCourses"
 
 function Modal(props) {
 
+    let items = null;
+
     function cancelHandler() {
         props.onCancel();
     }
+    function selectHandler() {
+        props.onSelect();
+    }
+
 
 
     return(
@@ -16,7 +22,7 @@ function Modal(props) {
             <h4>Select a Bilkent Course From The List</h4>
             <a className={style.close} onClick={cancelHandler}>×</a>
             <br/> <br/>
-            <CoursesTable></CoursesTable>
+            <CoursesTable items={props.item} closePopUp={selectHandler} ></CoursesTable>
         </div>
       </div>
     )
