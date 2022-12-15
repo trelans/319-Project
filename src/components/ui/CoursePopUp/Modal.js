@@ -1,20 +1,33 @@
 import "../../../index"
 import style from "./coursePopUp.module.css"
 import CoursesTable from "./Tables/BilkentCourses"
+import {useEffect} from "react";
 
 
+
+import React, {useState} from 'react';
 function Modal(props) {
 
-    let items = null;
+
+    const [arr, setArr] = useState();
+    const [closePop, setPop] = useState();
+    var willClose = false;
 
     function cancelHandler() {
         props.onCancel();
     }
     function selectHandler() {
-        props.onSelect();
+
+        props.setArrFunc(arr)
+
+        props.onCancel()
     }
 
+    if (closePop) {
+        selectHandler()
+        setPop(false)
 
+    }
 
     return(
       <div className={"perfectCentered"} >
@@ -22,7 +35,8 @@ function Modal(props) {
             <h4>Select a Bilkent Course From The List</h4>
             <a className={style.close} onClick={cancelHandler}>×</a>
             <br/> <br/>
-            <CoursesTable items={props.item} closePopUp={selectHandler} ></CoursesTable>
+            <CoursesTable setArrFunc={setArr} closePopUp={setPop} ></CoursesTable>
+
         </div>
       </div>
     )

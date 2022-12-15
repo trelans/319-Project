@@ -20,6 +20,9 @@
   top: 0;
   left: 0;
 }
+.tableCt {
+  height: 80%;
+}
 .close {
   position: absolute;
   top: 5px;
