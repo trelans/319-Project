@@ -65,18 +65,17 @@ router.post('/create/newCandidate', async (req, res) => {
         departments.push({"id": department._id, "type": e.type})
     }))
 
-    delete req.body.universityName
+    delete req.body.nominatedUniversity
     delete req.body.departments
 
-    req.body.departments = departments
+    req.body.erasmusCandidateData.departments = departments
 
-    req.body.nominatedUniversityId = university._id
-    const user = new ErasmusCandidate(req.body);
+    req.body.erasmusCandidateData.nominatedUniversityId = university._id
+    const user = new User(req.body);
 
     try {
         const application = await Application.createApplication(user)
         await application.save()
-        const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({ user, token, application })
     } catch (e) {
@@ -86,10 +85,9 @@ router.post('/create/newCandidate', async (req, res) => {
 })
 
 router.post('/create/newErasmusCoordinator', async (req, res) => {
-    const user = new ErasmusCoordinator(req.body);
+    const user = new User(req.body);
     console.log(user)
     try {
-        const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({ user, token })
     } catch (e) {
@@ -182,7 +180,6 @@ router.post('/users', async (req,res) => {
     const user = new User(req.body);
 
     try {
-        const token = await user.generateAuthToken()
         await user.save()
         res.status(201).send({user,token})
     } catch (e) {
@@ -258,7 +255,8 @@ router.post('/users/contacts', auth, async (req, res) => {
         contacts = contacts.map((cnt) => {
             return {
                 name: cnt.name,
-                surname: cnt.surname
+                surname: cnt.surname,
+                objectId : cnt._id
             }
         })
 

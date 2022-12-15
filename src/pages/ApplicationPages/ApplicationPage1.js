@@ -1,6 +1,7 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import {useState} from "react";
 import {handleRequests} from "../requests";
+import * as React from "react";
 
 function returnButtonText(status) {
     if (status < 2 || status === 3) {
@@ -90,6 +91,13 @@ function ApplicationPage1() {
         setCTFStatusClass(returnStatusClass(response.CTFStatus))
     })
 
+    // No application found (possibly user is not placed in any university)
+    if (status === -1){
+        return <div className={"Page"}>
+            <NavigationBar/>
+            <div className="App">No application found</div>
+        </div>;
+    }
 
     return (
         <div>

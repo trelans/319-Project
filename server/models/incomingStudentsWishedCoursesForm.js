@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -49,7 +50,7 @@ userSchema.virtual('university', {
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 incomingStudentWishedCoursesFormSchema.methods.toJSON = function () {
     const form = this
@@ -66,3 +67,4 @@ incomingStudentWishedCoursesFormSchema.methods.toJSON = function () {
 const IncomingStudentsWishedCoursesForm = mongoose.model('IncomingStudentsWishedCoursesForm', incomingStudentWishedCoursesFormSchema)
 
 module.exports = IncomingStudentsWishedCoursesForm
+*/

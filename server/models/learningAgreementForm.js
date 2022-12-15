@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -11,7 +12,7 @@ componentOfChangedStudyProgram
 componentOfChangedRecognitionTable
 componentOfAcademicOutcomesAtReceivingIns
 componentOfRecognitionOfOutcomesAtSendingIns
- */
+
 
 const componentOfStudyProgramAtReceivingIns = mongoose.Schema({
     componentCode: {
@@ -260,7 +261,7 @@ const learningAgreementFormSchema = new mongoose.Schema({
             }
         }
     }],
-    */
+
     studyProgramAtReceivingIns: {
         componentsOfStudyProgramAtReceivingIns: [componentOfStudyProgramAtReceivingIns],
         totalEctsCredits: {
@@ -437,3 +438,4 @@ const learningAgreementFormSchema = new mongoose.Schema({
 const LearningAgreementForm = mongoose.model('Forms/LearningAgreement', learningAgreementFormSchema)
 
 module.exports = LearningAgreementForm
+*/

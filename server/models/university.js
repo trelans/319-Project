@@ -7,7 +7,7 @@ const Task = require('./task')
 const appliedStudent = mongoose.Schema({
     student: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ErasmusCandidate'
+        ref: 'User'
     }
 
 }, {_id: false});
@@ -20,7 +20,7 @@ const feedback = mongoose.Schema({
     },
     feedbackOwner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ErasmusCandidate'
+        ref: 'User'
     }
 }, {_id: false});
 

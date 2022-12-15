@@ -13,7 +13,6 @@ const {Model} = mongoose
 const department = mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId,
-        default: "noDepartment",
         ref: 'Department'
     },
     //0 major, 1 minor
@@ -26,7 +25,6 @@ const department = mongoose.Schema({
 const preferredUniversity = mongoose.Schema({
     university: {
         type: mongoose.Schema.Types.ObjectId,
-        //required: true,
         ref: 'University'
     }
 
@@ -88,12 +86,12 @@ const userSchema = new mongoose.Schema({
 
     email: {
         type: String,
-        unique: true,
+        //unique: true,
         required: true,
         trim: true,
         lowercase: true,
         validate(value) {
-            if(!validator.isEmail(value)) {
+            if (!validator.isEmail(value)) {
                 throw new Error('Invalid email!')
             }
         }
@@ -103,8 +101,8 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
         validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
+            if (!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
+                throw new Error('Invalid password')
             }
         }
     },
@@ -112,7 +110,7 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0,
         validate(value) {
-            if(value < 0) {
+            if (value < 0) {
                 throw new Error('User Type must be greater than zero')
             }
         }
@@ -127,14 +125,14 @@ const userSchema = new mongoose.Schema({
         type: Buffer
     },
     contacts: {
-        type : Array,
-        default : []
+        type: Array,
+        default: []
     },
 
 
     //optional part for other users
 
-    erasmusCandidateData : {
+    erasmusCandidateData: {
         isActiveCandidate: {
             type: Boolean,
             default: false
@@ -148,7 +146,7 @@ const userSchema = new mongoose.Schema({
 
         preferredSemester: {
             type: Number,
-            default : 0
+            default: 0
             //required: true
         },
 
@@ -169,7 +167,7 @@ const userSchema = new mongoose.Schema({
         },
 
         preferredUniversities: [preferredUniversity],
-        departments:[department],
+        departments: [department],
 
         studentId: {
             type: Number,
@@ -178,7 +176,7 @@ const userSchema = new mongoose.Schema({
     },
 
 
-    erasmusCoordinator : {
+    erasmusCoordinatorData: {
         department: {
             type: String,
             default: "noDepartment"
@@ -189,60 +187,35 @@ const userSchema = new mongoose.Schema({
 
         assignedUniversities: [assignedUniversity],
         assignedTasks: [assignedTask],
-    }
-
-    /*
-    courseCoordinator : {
-        data : CourseCoordinator
-    }
-   */
-
-
-    /*
-    erasmusCoordinator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ErasmusCoordinator'
     },
 
-    courseCoordinator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CourseCoordinator'
+    facultyMemberData: {
+        faculty: {
+            type: String
+        }
     },
 
-    incomingStudent: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'IncomingStudent'
-    }
+    courseCoordinatorData: {
 
-*/
-
-    /*
-    //erasmusCandidate
-    erasmusCandidate: {
-        preferredSemester: {
-            type: Number,
-            required: true
-        },
-        nominatedUniversityId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'University'
-        },
-
-        signature: {
+        department: {
             type: String,
-            required: true
         },
+        coordinatorID: {
+            type: Number,
+        },
+
+        assignedTasks: [assignedTask],
     },
 
 
+    incomingStudentData: {
 
-     */
+        departments: [department],
 
-
-
-
-
+        studentId: {
+            type: Number,
+        },
+    }
 
 }, {
     timestamps: true
@@ -274,9 +247,15 @@ userSchema.methods.toJSON = function () {
     return userObject
 }
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({_id: user._id.toString(), name: user.name, surname: user.surname, userType: user.userType, contacts: user.contacts}, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({
+        _id: user._id.toString(),
+        name: user.name,
+        surname: user.surname,
+        userType: user.userType,
+        contacts: user.contacts
+    }, process.env.JWT_SECRET, {expiresIn: '1h'})
 
     user.tokens = user.tokens.concat({token})
     await user.save()
@@ -288,11 +267,11 @@ userSchema.statics.findByCredentials = async (email, password) => {
     const user = await User.findOne({email})
 
     console.log("user:" + user)
-    if(!user) {
+    if (!user) {
         throw new Error('Unable to login')
     }
-    const isMatch = await bcrypt.compare(password,user.password)
-    if(!isMatch) {
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
         throw new Error('Unable to login (passwords not match)')
     }
 
@@ -304,7 +283,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
  */
 userSchema.pre('save', async function (next) {
     const user = this
-    if(user.isModified('password')) {
+    if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
 

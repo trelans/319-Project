@@ -12,7 +12,7 @@ const exemptedCourse = mongoose.Schema({
     },
     courseID: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'ForeignUniversityCourse'
     }
 }, {_id: false});
@@ -24,7 +24,7 @@ const university = mongoose.Schema({
     },
     universityID: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: 'University'
     },
     exemptedCourses: [exemptedCourse]
@@ -49,7 +49,6 @@ const courseSchema = new mongoose.Schema({
     },
     courseType: {
         type: String,
-        required: true,
         trim: true
     },
 

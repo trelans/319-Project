@@ -2,129 +2,17 @@ import React from 'react'
 import "./contact.css"
 import ChatContainer from '../ChatContainer/ChatContainer'
 import jwt_decode from "jwt-decode";
+import { useState } from 'react';
 
 export default function Contact() {
 
+    const user = jwt_decode(localStorage.getItem('token'))
+    const contacts = user.contacts;
+    const[currentChatUser, setcurrentChatUser] = useState({})
+
     const handleUser = (e) => {
-        console.log(e)
+        setcurrentChatUser(e)
     }
-
-    
-    const getContacts = () => {
-        const contacts = jwt_decode(localStorage.getItem('token')).contacts;
-
-        const Print = contacts.map( (item, index) => {
-            return (<div className='userContainer'>
-                <div style={{marginLeft: "10px"}}>
-                    <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>{item.name}  {item.surname}</p>
-                    <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                </div>
-            </div>)
-        })
-
-        console.log(Print)
-        return Print
-
-        /*
-        const userContainer = []
-
-        /*
-        for(let i = 0; i < contacts.length; i++) {
-
-            userContainer.push(
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>{contacts[i].name}  {contacts[i].surname}</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-            )
-        }
-                        <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-                <div className='userContainer'>
-                    <div style={{marginLeft: "10px"}}>
-                        <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>Kutay</p>
-                        <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
-                    </div>
-                </div>
-        */
-
-        //return userContainer;
-    }
-    
-
-    //const contacts = jwt_decode(localStorage.getItem('token')).contacts;
 
     return(
     <div className='mainContactContainer'>
@@ -134,10 +22,21 @@ export default function Contact() {
             </div>
 
             <div className='usersDetailContainer'>
-                {getContacts()}
+                {contacts?.map( (item) => (
+                <div>
+                {item?.objectId !== user._id ?
+                    <div className='userContainer' onClick={(e) => handleUser(item)}>
+                        <div style={{marginLeft: "10px"}}>
+                            <p style={{color:"black", textAlign:"start", marginTop:"5px", fontSize:"15px"}}>{item.name}  {item.surname}</p>
+                            <p style={{color:"black", textAlign:"start", marginTop:"-16px", fontSize:"14px"}}>Open your message</p>   
+                        </div>
+                    </div> : ""
+                }
+                </div>
+                ))}
             </div>
         </div>
-        <ChatContainer/> 
+        <ChatContainer currentChatUser={currentChatUser}/> 
     </div>)
 
 }

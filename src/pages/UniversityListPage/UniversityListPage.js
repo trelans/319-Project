@@ -1,6 +1,8 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar.js";
 import UniversityTable from "./UniversityTable.js";
 
+import SearchBar from "material-ui-search-bar";
+
 function UniversityListPage() {
   return (
     <div>
@@ -10,6 +12,7 @@ function UniversityListPage() {
           <span>Universities Available for </span>
           <span>CS</span>
         </p>
+        <SearchBar />
         <UniversityTable />
       </div>
     </div>
