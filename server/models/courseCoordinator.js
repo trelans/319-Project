@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -102,13 +103,13 @@ courseCoordinatorSchema.virtual('tasks', {
     foreignField: 'owner'
 })
 
-/*
+
 userSchema.virtual('university', {
     ref: 'University',
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 courseCoordinatorSchema.methods.toJSON = function () {
     const user = this
@@ -144,9 +145,9 @@ courseCoordinatorSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-/**
- * Hash the plain text password before saving
- */
+
+// * Hash the plain text password before saving
+
 courseCoordinatorSchema.pre('save', async function (next) {
     const user = this
 
@@ -157,9 +158,9 @@ courseCoordinatorSchema.pre('save', async function (next) {
     next()
 })
 
-/**
- * Delete user tasks when the user is removed
- */
+
+ //* Delete user tasks when the user is removed
+
 courseCoordinatorSchema.pre('remove', async function (next) {
     const user = this
 
@@ -171,3 +172,4 @@ courseCoordinatorSchema.pre('remove', async function (next) {
 const CourseCoordinator = mongoose.model('CourseCoordinator', courseCoordinatorSchema)
 
 module.exports = CourseCoordinator
+*/

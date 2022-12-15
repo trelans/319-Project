@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -102,13 +103,13 @@ erasmusCoordinatorSchema.virtual('tasks', {
     foreignField: 'owner'
 })
 
-/*
+
 userSchema.virtual('university', {
     ref: 'University',
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 erasmusCoordinatorSchema.methods.toJSON = function () {
     const user = this
@@ -144,9 +145,9 @@ erasmusCoordinatorSchema.statics.findByCredentials = async (email, password) => 
     return user
 }
 
-/**
- * Hash the plain text password before saving
- */
+
+// * Hash the plain text password before saving
+
  erasmusCoordinatorSchema.pre('save', async function (next) {
     const user = this
 
@@ -157,9 +158,9 @@ erasmusCoordinatorSchema.statics.findByCredentials = async (email, password) => 
     next()
 })
 
-/**
- * Delete user tasks when the user is removed
- */
+
+//* Delete user tasks when the user is removed
+
  erasmusCoordinatorSchema.pre('remove', async function (next) {
     const user = this
 
@@ -171,3 +172,5 @@ erasmusCoordinatorSchema.statics.findByCredentials = async (email, password) => 
 const ErasmusCoordinator = mongoose.model('ErasmusCoordinator', erasmusCoordinatorSchema)
 
 module.exports = ErasmusCoordinator
+
+ */

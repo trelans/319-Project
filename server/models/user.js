@@ -189,59 +189,44 @@ const userSchema = new mongoose.Schema({
 
         assignedUniversities: [assignedUniversity],
         assignedTasks: [assignedTask],
-    }
+    },
 
-    /*
+    facultyMember : {
+        facultyMemberData: {
+
+            faculty: {
+                type: String
+            }
+        }
+    },
+
     courseCoordinator : {
-        data : CourseCoordinator
-    }
-   */
+        courseCoordinatorData : {
 
+            department: {
+                type: String,
+                default: "noDepartment"
+            },
+            coordinatorID: {
+                type: Number,
+            },
 
-    /*
-    erasmusCoordinator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ErasmusCoordinator'
+            assignedTasks: [assignedTask],
+        }
     },
 
-    courseCoordinator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CourseCoordinator'
-    },
 
     incomingStudent: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'IncomingStudent'
+        incomingStudentData: {
+
+            departments:[department],
+
+            studentId: {
+                type: Number,
+                default: 0
+            },
+        }
     }
-
-*/
-
-    /*
-    //erasmusCandidate
-    erasmusCandidate: {
-        preferredSemester: {
-            type: Number,
-            required: true
-        },
-        nominatedUniversityId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'University'
-        },
-
-        signature: {
-            type: String,
-            required: true
-        },
-    },
-
-
-
-     */
-
-
-
-
 
 
 }, {
