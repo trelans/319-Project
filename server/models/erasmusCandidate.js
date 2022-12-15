@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -6,12 +7,12 @@ const Task = require('./task')
 const Enum = require('enum')
 const User = require('./user')
 
-/*
+
 Course Coordinator -- 1
 Erasmus Coordinator -- 2
 Erasmus Candidate -- 3
 Incoming Student -- 4
- */
+
 
 const userTypeEnum = new Enum({
     'Course Coordinator': 0,
@@ -112,7 +113,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
     tokens: [token],
 
-    */
+
 
     isActiveCandidate: {
         type: Boolean,
@@ -177,7 +178,7 @@ const erasmusCandidateSchema = mongoose.Schema({
 
             return token
         }
-        */
+
 
 
 
@@ -237,9 +238,9 @@ erasmusCandidateSchema.statics.findByCredentials = async (email, password) => {
 }
 
 
-/**
- * Hash the plain text password before saving
- */
+
+// * Hash the plain text password before saving
+
 
 erasmusCandidateSchema.pre('save', async function (next) {
     const user = this
@@ -252,9 +253,9 @@ erasmusCandidateSchema.pre('save', async function (next) {
 })
 
 
-/**
- * Delete user tasks when the user is removed
- */
+
+// * Delete user tasks when the user is removed
+
 
 erasmusCandidateSchema.pre('remove', async function (next) {
     const user = this
@@ -269,3 +270,5 @@ erasmusCandidateSchema.pre('remove', async function (next) {
 const ErasmusCandidate = mongoose.model('ErasmusCandidateModel', erasmusCandidateSchema);
 
 module.exports = ErasmusCandidate
+
+ */

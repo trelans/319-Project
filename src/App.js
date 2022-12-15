@@ -282,8 +282,16 @@ function App() {
       <Route exact path="/profile-own" element={<ProfilePageOwn />} />
       <Route exact path="/profile-other" element={<ProfilePageOthers />} />
       <Route exact path="/course-page" element={<CoursePage />} />
-      <Route exact path="/application-page-coordinator" element={<ApplicationPageCoordinator />} />
-      <Route exact path="/application-page-fac" element={<ApplicationPageFAC />} />
+      <Route
+        exact
+        path="/application-page-coordinator"
+        element={<ApplicationPageCoordinator />}
+      />
+      <Route
+        exact
+        path="/application-page-fac"
+        element={<ApplicationPageFAC />}
+      />
     </Routes>
   );
 }

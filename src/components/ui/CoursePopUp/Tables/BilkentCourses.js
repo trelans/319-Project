@@ -61,7 +61,7 @@ const originalRows: courses[] = [
   },
 ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
   const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState("");
   const classes = useStyles();
@@ -77,6 +77,12 @@ export default function BasicTable() {
     setSearched("");
     requestSearch(searched);
   };
+
+  const handleItemClick = item => {
+    console.log(item)
+    props.item = item
+    props.closePopUp();
+  }
 
   return (
     <>
@@ -94,7 +100,7 @@ export default function BasicTable() {
 
                 <TableCell align="right">Course Name</TableCell>
                 <TableCell align="right">ECTS Credits</TableCell>
-                <TableCell align="right">Equivalent Course</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -102,8 +108,8 @@ export default function BasicTable() {
                 <TableRow key={row.name}>
                   <TableCell align="right">{row.courseCode}</TableCell>
                   <TableCell align="right">{row.courseName}</TableCell>
-                  <TableCell align="right">{row.credit}</TableCell>
-                  <TableCell align="right">{row.eqCourse}</TableCell>
+                  <TableCell align="center">{row.credit}</TableCell>
+                  <TableCell align="right"><button onClick={() => handleItemClick(row)}>Select Course</button></TableCell>
                 </TableRow>
               ))}
             </TableBody>

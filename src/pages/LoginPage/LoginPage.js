@@ -47,6 +47,7 @@ function LoginPage() {
                     if (status === 200) {
                       // Send any necessary data to other page here
                       localStorage.setItem("token", res.token);
+                      localStorage.setItem("userType", res.user.userType);
                       navigate("/main-page");
                     }
                   }

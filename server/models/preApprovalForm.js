@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -27,7 +28,18 @@ const preApprovalFormSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+
+    status: {
+        type: Number,
+        default: 1
+    },
+
+    PFDeadline: {
+        type: String,
+        required: true
     }
+
 }, {
     timestamps: true
 })
@@ -45,10 +57,12 @@ userSchema.virtual('university', {
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 
 
 const PreApprovalForm = mongoose.model('Forms/PreApprovalForm', preApprovalFormSchema)
 
 module.exports = PreApprovalForm
+
+*/

@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -42,9 +43,15 @@ const courseTransferForm = new mongoose.Schema({
         //required: true,
         ref: 'ErasmusCoordinator'
     },
-    approveDean: {
+
+    status: {
+        type: Number,
+        default: 1
+    },
+
+    PFDeadline: {
         type: String,
-        //required: true
+        required: true
     }
 
 }, {
@@ -64,7 +71,7 @@ userSchema.virtual('university', {
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 courseTransferForm.methods.toJSON = function () {
     const form = this
@@ -81,3 +88,4 @@ courseTransferForm.methods.toJSON = function () {
 const CourseTransferForm = mongoose.model('CourseTransferForm', courseTransferForm)
 
 module.exports = CourseTransferForm
+*/

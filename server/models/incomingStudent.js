@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
@@ -95,13 +96,13 @@ userSchema.virtual('tasks', {
     foreignField: 'owner'
 })
 
-/*
+
 userSchema.virtual('university', {
     ref: 'University',
     localField: '_id',
     foreignField: 'owner'
 })
-*/
+
 
 userSchema.methods.toJSON = function () {
     const user = this
@@ -137,9 +138,9 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 }
 
-/**
- * Hash the plain text password before saving
- */
+
+// * Hash the plain text password before saving
+
 userSchema.pre('save', async function (next) {
     const user = this
 
@@ -150,9 +151,9 @@ userSchema.pre('save', async function (next) {
     next()
 })
 
-/**
- * Delete user tasks when the user is removed
- */
+
+// * Delete user tasks when the user is removed
+
 userSchema.pre('remove', async function (next) {
     const user = this
 
@@ -164,3 +165,4 @@ userSchema.pre('remove', async function (next) {
 const IncomingStudent = mongoose.model('IncomingStudent', incomingStudentSchema)
 
 module.exports = IncomingStudent
+*/

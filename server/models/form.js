@@ -4,6 +4,155 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
 
+
+const wishedCourse = mongoose.Schema( {
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course'
+    }
+
+}, {_id: false});
+
+const courseToTransfer = mongoose.Schema( {
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        //required: true,
+        ref: 'Course'
+    },
+    grade: String
+
+}, {_id: false});
+
+const componentOfStudyProgramAtReceivingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    semester: {
+        type: String,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    }
+}, {_id: false});
+
+
+const componentOfRecognitionAtSendingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    semester: {
+        type: String,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    }
+}, {_id: false});
+
+const componentOfChangedStudyProgram = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    isComponentAdded: {
+        type: Boolean,
+        //required: true
+    },
+    isComponentDeleted: {
+        type: Boolean,
+        //required: true
+    },
+    reasonForChange: {
+        type: String,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    }
+}, {_id: false});
+
+const componentOfChangedRecognitionTable = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    semester: {
+        type: String,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    }
+}, {_id: false});
+
+const componentOfAcademicOutcomesAtReceivingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    isComponentComplete: {
+        type: Boolean,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    },
+    grade: {
+        type: String,
+        //required: true
+    }
+}, {_id: false});
+
+const componentOfRecognitionOfOutcomesAtSendingIns = mongoose.Schema({
+    componentCode: {
+        type: String,
+        //required: true
+    },
+    componentTitle: {
+        type: String,
+        //required: true
+    },
+    ectsCredits: {
+        type: Number,
+        //required: true
+    },
+    grade: {
+        type: String,
+        //required: false
+    }
+}, {_id: false});
+
+
+
+
 const department = mongoose.Schema({
     id: {
         type: mongoose.Schema.Types.ObjectId,
@@ -17,78 +166,328 @@ const department = mongoose.Schema({
     }
 }, { _id : false });
 
-const token = mongoose.Schema({
-    token: {
-        type: String,
-        required: true
-    }
-
-}, {_id : false});
-
+//general form schema
 const formSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    surname: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    active: {
-        type: Boolean,
-        default: false
-    },
-    departments: [department],
 
-    appliedInstitution: {
+    //owner user -- required data will be taken from the user.
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+
+    ownerApplication: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'University'
+        ref: 'Application'
     },
 
-    studentId: {
+    status: {
         type: Number,
         default: 0
     },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
-        validate(value) {
-            if(!validator.isEmail(value)) {
-                throw new Error('Invalid email!')
-            }
-        }
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-        validate(value) {
-            if(!(value.length > 6 && !(value.toLowerCase().includes("password")))) {
-                throw new Error('Invalid password')    
-            }
-        }
-    },
-    userType: {
+
+    formType: {
         type: Number,
-        default: 0,
-        validate(value) {
-            if(value < 0) {
-                throw new Error('User Type must be greater than zero')
-            }
-        }
+        default: 0
     },
 
-    tokens: [token],
+    deadline: {
+        type: String,
+        required: true
+    },
 
-    avatar: {
-        type: Buffer
+    learningAgreementForm : {
+
+        studyCycle: {
+            type: String,
+            //require: true
+        },
+
+        subjectAreaCode: {
+            type: String, //sample subject area code: 01.5 or 13.6 -- double / string ??
+            //require: true
+        },
+
+        sendingInstitution: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'University',
+        },
+
+        sendingFaculty: {
+            type: String,
+            //required: true,
+        },
+
+        sendingDepartment: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'Department'
+        },
+
+        sendingContactPerson: {
+            sendingContactPersonName: {
+                type: String,
+                //required: true
+            },
+            sendingContactPersonEmail: {
+                type: String,
+                //required: true
+            },
+            sendingContactPersonPhone: {
+                type: String,
+                //required: true
+            }
+        },
+
+        receivingInstitution: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'University',
+        },
+
+        receivingFaculty: {
+            type: String,
+            //required: true,
+        },
+
+        receivingDepartment: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'Department'
+        },
+
+        receivingContactPerson: {
+            receivingContactPersonName: {
+                type: String,
+                //required: true
+            },
+            receivingContactPersonEmail: {
+                type: String,
+                //required: true
+            },
+            receivingContactPersonPhone: {
+                type: String,
+                //required: true
+            }
+        },
+
+        studyProgramAtReceivingIns: {
+            componentsOfStudyProgramAtReceivingIns: [componentOfStudyProgramAtReceivingIns],
+            totalEctsCredits: {
+                type: Number,
+                //required: true
+            }
+        },
+
+
+        recognitionAtSendingIns:  {
+            componentsOfRecognitionAtSendingIns: [componentOfRecognitionAtSendingIns],
+            totalEctsCredits: {
+                type: Number,
+                //required: true
+            }
+        },
+
+        responsiblePersonAtReceivingIns: {
+            name: {
+                type: String,
+                //required: true
+            },
+            personFunction: {
+                type: String,
+                //required: true
+            },
+            phoneNumber: {
+                type: String,
+                //required: true
+            },
+            email: {
+                type: String,
+                //required: true
+            },
+            date: {
+                type: String,
+                //required: true
+            },
+            signature: {
+                type: String,
+                //required: true
+            }
+        },
+
+        responsiblePersonFromSendingIns: {
+            name: {
+                type: String,
+                //required: true
+            },
+            personFunction: {
+                type: String,
+                //required: true
+            },
+            phoneNumber: {
+                type: String,
+                //required: true
+            },
+            email: {
+                type: String,
+                //required: true
+            },
+            date: {
+                type: String,
+                //required: true
+            },
+            signature: {
+                type: String,
+                //required: true
+            }
+        },
+
+        //below is needed for "during mobility period", most of above was for "before mobility period".
+
+        //change for study program and its approval tables
+        changedStudyProgram: {
+            componentsOfChangedStudyProgram: [componentOfChangedStudyProgram],
+            totalEctsCredits: {
+                type: Number,
+                //required: true
+            }
+        },
+
+
+        changedRecognitionTable:  {
+            componentsOfChangedRecognitionTable: [componentOfChangedRecognitionTable],
+            totalEctsCredits: {
+                type: Number,
+                //required: true
+            }
+        },
+
+        changedResponsiblePersonAtReceivingIns: {
+            name: {
+                type: String,
+                //required: true
+            },
+            personFunction: {
+                type: String,
+                //required: true
+            },
+            phoneNumber: {
+                type: String,
+                //required: true
+            },
+            email: {
+                type: String,
+                //required: true
+            },
+            date: {
+                type: String,
+                //required: true
+            },
+            signature: {
+                type: String,
+                //required: true
+            }
+        },
+
+        changedResponsiblePersonFromSendingIns: {
+            name: {
+                type: String,
+                //required: true
+            },
+            personWorkPosition: {
+                type: String,
+                //required: true
+            },
+            phoneNumber: {
+                type: String,
+                //required: true
+            },
+            email: {
+                type: String,
+                //required: true
+            },
+            date: {
+                type: String,
+                //required: true
+            },
+            signature: {
+                type: String,
+                //required: true
+            }
+        },
+
+        //below parts is for "after mobility period".
+        academicOutcomesAtReceivingIns: {
+            componentsOfAcademicOutcomesAtReceivingIns: [componentOfAcademicOutcomesAtReceivingIns],
+            totalPoints: {
+                type: Number,
+                //required: true
+            }
+        },
+
+
+        recognitionOfOutcomesAtSendingIns: {
+            componentsOfRecognitionOfOutcomesAtSendingIns: [componentOfRecognitionOfOutcomesAtSendingIns],
+            totalPoints: {
+                type: Number,
+                //required: true
+            }
+        }
+
+    },
+
+    preApprovalForm : {
+
+        courses: [wishedCourse],
+
+        totalEctsCredits: {
+            type: Number,
+            default: 0
+        },
+
+    },
+
+    courseTransferForm: {
+
+        userType: {
+            type: Number,
+            default: 0,
+            validate(value) {
+                if(value < 0) {
+                    throw new Error('User Type must be greater than zero')
+                }
+            }
+        },
+
+        coursesToTransfer: [courseToTransfer],
+
+        approveChair: {
+            type: String,
+            //required: true
+        },
+        approveExchangeCoordinator: {
+            type: mongoose.Schema.Types.ObjectId,
+            //required: true,
+            ref: 'ErasmusCoordinator'
+        },
+    },
+
+    incomingStudentsWishedCoursesForm: {
+        userType: {
+            type: Number,
+            default: 0,
+            validate(value) {
+                if(value < 0) {
+                    throw new Error('User Type must be greater than zero')
+                }
+            }
+        },
+
+        wishedCourses: [wishedCourse]
     }
+
+
 }, {
     timestamps: true
 })
