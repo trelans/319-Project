@@ -6,6 +6,8 @@ const sharp = require('sharp')
 const router = new express.Router()
 const ErasmusCandidate = require('../models/erasmusCandidate')
 const Application = require('../models/application')
+const BilkentCourse = require('../models/bilkentCourse')
+const ForeignUniversityCourse = require('../models/foreignUniversityCourse')
 
 router.post('/login', async (req,res) => {
     console.log(req.body)
@@ -39,6 +41,16 @@ router.post('/create-account', async (req,res) => {
     } catch (e) {
         res.status(400).send(e)
     }
+})
+
+router.post('/create-bilkent-course', async (req,res) => {
+    const bilkentCourse = await new BilkentCourse(req.body)
+    await bilkentCourse.save()
+})
+
+router.post('/create-foreign-course', async (req,res) => {
+    const foreignCourse = await new ForeignUniversityCourse(req.body)
+    await foreignCourse.save()
 })
 
 module.exports = router

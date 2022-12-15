@@ -147,17 +147,17 @@ router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, r
     //await createCandidates(rankedApplicants, placedStudents)
 });
 
+
 function parsePreviouslyAcceptedCourses(courseList) {
     const courses = convertToJson("previouslyAcceptedCoursesExcel.xlsx");
     // Desired Keys
-    const keys = ['B', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M'];
+    const keys = ['B', 'D', 'E', 'F', 'G', 'I', 'J', 'K', 'L', 'M'];
     const values = [
         "Host University's Name",
         "Host University's Course Code",
-        "Host University's Course name",
+        "Host University's Course Name",
         'ECTS',
         'Original',
-        'Q/S',
         'Exempted Bilkent Course Code',
         'Exempted Bilkent Course Name',
         'Exempted Bilkent Course Credit',
@@ -167,19 +167,18 @@ function parsePreviouslyAcceptedCourses(courseList) {
     const csCourses = ["CS"]
     for (let i = 1; i < courses["PRE APPROVAL "].length; i++) {
         let course = {}
-        if (courses["PRE APPROVAL "][i]['A'] !== "Erasmus" || !csCourses.some(item => {
-            if (courses["PRE APPROVAL "][i]['L']) {
-                return courses["PRE APPROVAL "][i]['L'].includes(item) && !courses["PRE APPROVAL "][i]['L'].includes("EEE")
+        if (courses["PRE APPROVAL "][i]['A'] === "Erasmus" &&
+            ((courses["PRE APPROVAL "][i]['L'] && courses["PRE APPROVAL "][i]['L'].includes("CS"))
+            || (courses["PRE APPROVAL "][i]['I'] && courses["PRE APPROVAL "][i]['I'].includes("CS")))
+            && (courses["PRE APPROVAL "][i]['F'] || courses["PRE APPROVAL "][i]['G'])
+            && courses["PRE APPROVAL "][i]['K']
+        ) {
+            for (let j = 0; j < keys.length; j++) {
+                let value = courses["PRE APPROVAL "][i][keys[j]] || "";
+                course[values[j]] = value.toString()
             }
-            return false;
-        }) || courses["PRE APPROVAL "][i]['K'] === "") {
-            continue
+            courseList.push(course)
         }
-        for (let j = 0; j < keys.length; j++) {
-            let value = courses["PRE APPROVAL "][i][keys[j]] || "";
-            course[values[j]] = value.toString()
-        }
-        courseList.push(course)
     }
     const content = JSON.stringify(courseList)
     fs.writeFile('./public/files/previouslyAcceptedCourses.txt', content, err => {
@@ -190,23 +189,69 @@ function parsePreviouslyAcceptedCourses(courseList) {
     });
 }
 
+
 router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExcel'), async (req, res) => {
     const courseList = []
     res.json(req.file).status(200);
     parsePreviouslyAcceptedCourses(courseList);
+    console.log(courseList)
     const list1 = new Set()
     const list2 = new Set()
     const list3 = new Set()
     const list4 = new Set()
+    const courses = []
     // Do NOT use forEach with await functions, use this method instead
     await Promise.all(courseList.map(async (course) => {
         const university = await University.findOne({name: course["Host University's Name"]})
         if (university) {
-            list1.add(course["Exempted Bilkent Course Code"])
-            list2.add(course["Exempted Bilkent Course Name"])
-            list3.add(course["Exempted Bilkent Course Credit"])
-            list4.add(course["Exempted Bilkent Course Designation"])
-            //const bilkentCourse = await BilkentCourse.findOne({courseCode: })
+            let foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course["Host University's Course Code"]})
+            if (foreignCourse === null) {
+                const foreignCourseDict = {
+                    name: course["Host University's Course Name"],
+                    courseCode: course["Host University's Course Code"],
+                    universityName: course["Host University's Name"],
+                    ectsCredits: course["ECTS"] ? course["ECTS"] : course["Original"],
+                }
+                foreignCourse = await new ForeignUniversityCourse(foreignCourseDict)
+                await foreignCourse.save()
+            }
+            if (course["Exempted Bilkent Course Code"] === "-" || course["Exempted Bilkent Course Code"] === ""){
+                course["Exempted Bilkent Course Code"] = course["Exemption"]
+            }
+            let bilkentCourse = await BilkentCourse.findOne({courseCode: course["Exempted Bilkent Course Code"]})
+            if (bilkentCourse === null) {
+                const bilkentCourseDict = {
+                    name: course["Exempted Bilkent Course Name"],
+                    department: "CS",
+                    courseCode: course["Exempted Bilkent Course Code"],
+                    courseType: course["Exempted Bilkent Course Designation"],
+                    ectsCredits: course["Exempted Bilkent Course Credit"],
+                    foreignUniversities: [
+                        {
+                            universityName: university.name,
+                            universityID: university._id,
+                            exemptedCourses: [{
+                                courseName: foreignCourse.name,
+                                courseID: foreignCourse._id
+                            }
+                            ]
+                        }
+                    ]
+                }
+                bilkentCourse = await new BilkentCourse(bilkentCourseDict)
+            } else {
+                const foreignUnis = bilkentCourse.foreignUniversities
+                foreignUnis.forEach((uni) => {
+                    if(uni.universityID === university._id){
+                        uni.exemptedCourses.push({
+                            courseName: foreignCourse.name,
+                            courseID: foreignCourse._id
+                        })
+                    }
+                })
+                bilkentCourse.foreignUniversities = foreignUnis
+            }
+            await bilkentCourse.save()
         }
     }))
     console.log(list1)
@@ -230,11 +275,11 @@ router.post('/upload-courses-excel', upload.single('previouslyAcceptedCoursesExc
             console.log("Given Department is not yet created!")
         }
     })
-     */
+    */
 });
 
+
 router.post('/applicants-list', async (req, res) => {
-    console.log(req.body)
     try {
         let response;
         let list;
