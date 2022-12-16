@@ -7,6 +7,10 @@ import TodoWidget from "./TodoWidget";
 import Grid from "@mui/material/Grid";
 import SearchBarMain from "./SearchBarMain";
 import BookData from "./Data.json";
+import { useState } from "react";
+
+import RatingPopup from "../../components/ui/CoursePopUp/UniversityRatingPopup";
+import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 
 function MainPage() {
   /*
@@ -21,6 +25,16 @@ function MainPage() {
   console.log(id)
   // Rerouting the user to the main page can be here if we do not see id or maybe can be doable using tokens
   */
+
+  const [popupOpen, setPopup] = useState(false);
+
+  function openUniversityRatingPopup() {
+    setPopup(true);
+  }
+
+  function closePopup() {
+    setPopup(false);
+  }
 
   return (
     <div>
@@ -47,7 +61,18 @@ function MainPage() {
                 <button className="fpp-button">Application Status</button>
               </Link>
             </Grid>
+            <Grid item xs={1}>
+              <button
+                className="fpp-button"
+                onClick={openUniversityRatingPopup}
+              >
+                ratingsPopup check
+              </button>
+            </Grid>
           </Grid>
+
+          {popupOpen && <RatingPopup onCancel={closePopup} />}
+          {popupOpen && <Backdrop />}
         </div>
       </div>
     </div>
