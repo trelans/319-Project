@@ -275,8 +275,8 @@ body {
   font-size: 25px;
   font-weight: bold;
   font-family: sans-serif;
-  margin-top: 20%;
-  margin-bottom: 20%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .sp-checkbox {
@@ -1484,14 +1484,15 @@ span.pafp-button-last {
 
 .cp-row {
   margin: auto;
-  padding: auto;
+  padding: 10%;
   border: 1px solid black;
 }
 
 .cp-col {
   margin: auto;
-  padding: auto;
-  padding-left: 0;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   border: 1px solid black;
 }
 
@@ -1509,7 +1510,7 @@ span.pafp-button-last {
 }
 
 .cp-container {
-  width: 50%;
+  width: 90%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -1632,5 +1633,5 @@ a:hover {
 
 .main-margined {
   margin-top: -25px;
-  margin-left: 200px;
+  margin-left: 285px;
 }

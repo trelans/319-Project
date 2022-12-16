@@ -8,10 +8,12 @@ export default function App() {
     const [story, setStory] = useState({})
     const [inputFields, setInputFields] = useState([
         {
-            title: "",
-            image: "",
-            description: "",
-            location: ""
+            courseCode: "",
+            courseName: "",
+            credits: "",
+            website: "",
+            syllabus: ""
+
         }
     ])
 
@@ -38,9 +40,13 @@ export default function App() {
         setInputFields([
             ...inputFields,
             {
-                title: "",
-                description: "",
-                location: ""
+
+                courseCode: "",
+                courseName: "",
+                credits: "",
+                website: "",
+                syllabus: ""
+
             }
         ])
     }
@@ -57,19 +63,12 @@ export default function App() {
     return (
         <>
             <Container maxWidth="xs">
-                <h4>Add Story</h4>
+                <h4>Add Course Info</h4>
                 <form onSubmit={handleSubmit}>
                     <Stack spacing={2}>
-                        <TextField
-                            name="name"
-                            required
-                            fullWidth
-                            label="Story Name"
-                            onChange={(event) => handleName(event)}
-                            value={name}
-                        />
+
                         <Divider style={{ marginBottom: 10, marginTop: 20 }} />
-                        <h4>Add Locations</h4>
+
                         {inputFields.map((item, index) => (
                             <div key={index}>
                                 <InputRow

@@ -14,7 +14,7 @@ export const InputRow = ({
     return (
         <Stack spacing={2} style={{ alignItems: "center" }}>
             <TextField
-                name="title"
+                name="courseCode"
                 required
                 fullWidth
                 label="Course Code"
@@ -22,7 +22,7 @@ export const InputRow = ({
                 value={item.courseCode}
             />
             <TextField
-                name="title"
+                name="courseName"
                 required
                 fullWidth
                 label="Course Name"
@@ -31,7 +31,7 @@ export const InputRow = ({
             />
 
             <TextField
-                name="number"
+                name="credits"
 
                 fullWidth
                 label="ECTS Credits"
@@ -39,7 +39,7 @@ export const InputRow = ({
                 value={item.credits}
             />
             <TextField
-                name="link"
+                name="website"
                 multiline
 
                 fullWidth
@@ -48,7 +48,7 @@ export const InputRow = ({
                 value={item.website}
             />
             <TextField
-                name="link"
+                name="syllabus"
                 fullWidth
                 label="Syllabus Link"
                 onChange={(event) => handleChange(event, index)}
