@@ -42,6 +42,78 @@ router.post('/profile-others-incoming', async (req, res) => {
     }
 })
 
+
+router.post('/profile-others-others', async (req, res) => {
+    console.log("entered profile others-others router")
+    try {
+
+        let response;
+        let user;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            user = await User.findOne({'surname': req.body.surname})
+            console.log("user found: " + user.name + " " + user.surname)
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        console.log("sending responses...")
+
+        response.send({
+
+            "name": user.name,
+            "surname": user.surname,
+            "email": user.email,
+            "studentId": user.studentId,
+            "role": "Coordinator"
+
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+
+
+router.post('/profile-others-student', async (req, res) => {
+    console.log("entered profile others-student router")
+    try {
+
+        let response;
+        let user;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            user = await User.findOne({'surname': req.body.surname})
+            console.log("user found: " + user.name + " " + user.surname)
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        console.log("sending responses...")
+
+        response.send({
+
+            "name": user.name,
+            "surname": user.surname,
+            "email": user.email,
+            "studentId": user.studentId,
+            "department": user.department,
+            "receivingInstitution": user.receivingInstitution,
+            "totalPoints": user.totalPoints,
+            "studyCycle": "Bachelor's"
+
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
 router.post('/profile-university', async (req, res) => {
     console.log("entered profile university router")
     try {
