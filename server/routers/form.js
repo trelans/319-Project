@@ -58,4 +58,42 @@ router.post('/preapproval-student', async (req, res) => {
     }
 })
 
+router.post('/learning-agreement-1-3', async (req, res) => {
+    console.log(req.body)
+    try {
+        let application
+        let LAF
+        let response
+        let candidate
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            application = await Application.findOne({'applicantCandidate': user._id})
+            candidate = await User.findById(application.applicantCandidate)
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        response.send({
+            studentInfo: {
+                name: candidate.name,
+                lastName: candidate.surname,
+                dateOfBirth: LAF.learningAgreementForm.dateOfBirth,
+                nationality: LAF.learningAgreementForm.nationality,
+                gender: LAF.learningAgreementForm.gender,
+                academicYear: candidate.erasmusCandidateData.academicYear,
+                studyCycle: LAF.learningAgreementForm.studyCycle,
+                subjectAreaCode: LAF.learningAgreementForm.subjectAreaCode
+            },
+            sendingInstitutionInfo: LAF.learningAgreementForm.sendingInstitution,
+            receivingInstitutionInfo: LAF.learningAgreementForm.receivingInstitution
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router
