@@ -4,6 +4,7 @@ const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
 const BilkentCourse = require("../models/bilkentCourse")
+const University = require("../models/university")
 const router = new express.Router()
 
 router.post('/profile-others-incoming', async (req, res) => {
@@ -33,6 +34,40 @@ router.post('/profile-others-incoming', async (req, res) => {
             "department": user.department,
             "studyCycle": user.incomingStudentData.studyCycle,
             "sendingInstitution": user.incomingStudentData.sendingInstitution,
+
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.post('/profile-university', async (req, res) => {
+    console.log("entered profile university router")
+    try {
+
+        let response;
+        let university;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            university = await University.findOne({'name': req.body.name})
+            console.log("university found: " + university.name)
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        console.log("sending responses...")
+
+        response.send({
+
+            "name": university.name,
+            "country": university.country,
+            "mobilityPeriod": university.mobilityPeriod,
+            "erasmusCode": university.erasmusCode,
+            "feedbacks": university.feedbacks,
+            "websiteLink": "no link provided"
 
         })
     } catch (e) {
