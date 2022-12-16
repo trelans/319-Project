@@ -231,6 +231,11 @@ function App() {
       />
       <Route
         exact
+        path="/profile-own-incoming"
+        element={<ProfilePageOwnIncoming />}
+      />
+      <Route
+        exact
         path="/profile-own-others"
         element={<ProfilePageOwnOthers />}
       />

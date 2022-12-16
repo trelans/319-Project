@@ -1,8 +1,9 @@
 import { handleRequests } from "../requests";
-import { useState } from "react";
-import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import { useState, useRef} from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
+import TableAddRows from "../PreApprovalFormPage/TableAddRows";
+
 
 const durationTable = {
   0: "Fall",
@@ -15,6 +16,12 @@ let loaded = false;
 const ref = React.createRef();
 
 function PreApprovalFormConvert() {
+  const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = React.useState();
+  const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
+  const [eqCourse, setEqCourse] = React.useState();
+  const childRef = useRef();
+
   const [candName, setCandName] = useState("");
   const [candSurname, setCandSurname] = useState("");
   const [candID, setCandID] = useState("");
@@ -117,6 +124,14 @@ function PreApprovalFormConvert() {
               </tr>
             </table>
           </div>
+        </div>
+        <div className="pafp-flex-div">
+          <TableAddRows
+            getArrFunc={selectedCourse}
+            selected={selectedCourse}
+            ref={childRef}
+            currentCourseForEq={setEqCourse}
+          />
         </div>
       </div>
     </div>

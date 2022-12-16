@@ -1,5 +1,6 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import img from "./profile.png";
+import { Link } from "react-router-dom";
 
 function ProfilePageOthersStudent() {
   return (
@@ -84,6 +85,11 @@ function ProfilePageOthersStudent() {
       <div className="pp-button-container">
         <button className="pp-button">Message</button>
       </div>
+      <Link to="/application-page-coordinator">
+        <div className="pp-button-container">
+          <button className="pp-button">See Application Status</button>
+        </div>
+      </Link>
     </div>
   );
 }

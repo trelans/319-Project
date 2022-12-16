@@ -8,7 +8,6 @@ import { useState, useRef } from "react";
 import * as React from "react";
 import EqPopUp from "../../components/ui/CoursePopUp/PopUpForEquivalentCourse";
 import { handleRequests } from "../requests";
-import { ReactToPdf } from "react-to-pdf";
 
 const durationTable = {
   0: "Fall",
