@@ -234,6 +234,12 @@ userSchema.virtual('tasks', {
     foreignField: 'owner'
 })
 
+userSchema.virtual('notifications', {
+    ref: 'Notification',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 /*
 userSchema.virtual('university', {
     ref: 'University',
