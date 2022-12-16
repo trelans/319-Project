@@ -12,7 +12,6 @@ function ProfilePageOthersOthers() {
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
-  const [studentId, setStudentId] = useState('')
   const [role, setRole] = useState('')
 
   const [isLoading, setLoading] = React.useState(true)
@@ -24,7 +23,6 @@ function ProfilePageOthersOthers() {
       setName(response.name)
       setSurname(response.surname)
       setEmail(response.email)
-      setStudentId(response.studentId)
       setRole(response.role)
 
       console.log("other name: " + name + " " + surname)

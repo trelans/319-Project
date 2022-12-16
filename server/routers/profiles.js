@@ -42,9 +42,74 @@ router.post('/profile-others-incoming', async (req, res) => {
     }
 })
 
+router.post('/profile-own-incoming', async (req, res) => {
+    console.log("entered profile own incoming router")
+    try {
 
+        let response;
+        let user;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            user = await User.findOne({'tokens.token': req.body.token})
+            console.log("user found: " + user.name + " " + user.surname)
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        console.log("sending responses...")
+
+        response.send({
+
+            "name": user.name,
+            "surname": user.surname,
+            "email": user.email,
+            "studentId": user.studentId,
+            "department": user.department,
+            "studyCycle": user.incomingStudentData.studyCycle,
+            "sendingInstitution": user.incomingStudentData.sendingInstitution,
+
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
 router.post('/profile-others-others', async (req, res) => {
     console.log("entered profile others-others router")
+    try {
+
+        let response;
+        let user;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            user = await User.findOne({'surname': req.body.surname})
+            console.log("user found: " + user.name + " " + user.surname)
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        console.log("sending responses...")
+
+        response.send({
+
+            "name": user.name,
+            "surname": user.surname,
+            "email": user.email,
+            "studentId": user.studentId,
+            "role": "Coordinator"
+
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+router.post('/profile-own-others', async (req, res) => {
+    console.log("entered profile own-others router")
     try {
 
         let response;
