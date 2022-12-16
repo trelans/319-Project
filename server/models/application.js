@@ -60,6 +60,7 @@ applicationSchema.virtual('forms', {
     foreignField: 'owner'
 })
 
+
 applicationSchema.statics.cancelApplication = async function (_id) {
     await Form.deleteMany({owner: _id})
     const query = await Application.deleteOne({_id})
