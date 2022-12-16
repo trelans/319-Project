@@ -18,6 +18,11 @@ class TableAddRows extends React.Component {
       this.handleEqCourse(zar )
 
     }
+    this.getTableInfo = () =>  {
+
+      return this.state.rows
+
+    }
   }
 
 
@@ -27,6 +32,7 @@ class TableAddRows extends React.Component {
     currentCourseNameForEq: "",
   };
 
+  
 
   handleChange = (idx) => (e) => {
     const { name, value } = e.target;

@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Form = require('./form')
 const Department = require('./department')
 const User = require('./user')
+const University = require('./university')
 
 const applicationSchema = new mongoose.Schema({
     status: {
@@ -79,24 +80,22 @@ applicationSchema.statics.createApplication = async function (user,applicationPr
     }
 
     const erasmusCoord = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
-    let coordId
-
     if (erasmusCoord === null) {
-        coordId = ""
-    } else {
-        coordId = erasmusCoord._id
+        return
     }
 
-    console.log("CoordID: " + coordId)
+    const department = await Department.findOne({"name": erasmusCoord.erasmusCoordinatorData.department})
+    const hostUniversity = await University.findById(user.erasmusCandidateData.nominatedUniversityId)
+
     const application = new Application({
         applicantCandidate: user._id,
         appliedInstitution: user.erasmusCandidateData.nominatedUniversityId,
-        responsibleErasmusCoord: coordId? coordId: undefined
+        responsibleErasmusCoord: erasmusCoord._id
     })
 
     // Manually creating object id and storing it on database after usage
     var id = new mongoose.Types.ObjectId();
-    console.log(id)
+
     application["_id"] = id
     let form = new Form({
         owner: user._id,
@@ -110,7 +109,34 @@ applicationSchema.statics.createApplication = async function (user,applicationPr
         ownerApplication: id,
         deadline: formDeadlines.LAFDeadline,
         formType: 1,
+        learningAgreementForm: {
+            subjectAreaCode: department.areaCode,
+            sendingInstitution: {
+                name: "İhsan Doğramacı Bilkent University",
+                faculty: department.faculty,
+                erasmusCode: "TR ANKARA07",
+                departmentName: department.name,
+                address: "University Street Bilkent University",
+                country: "Turkey",
+                contactPerson: {
+                    name: "Ayşegül Başol",
+                    email: "exchange@bilkent.edu.tr",
+                    phoneNumber: "+90 312 290 2435"
+                }
+            },
+
+            receivingInstitution: {
+                name: hostUniversity.name,
+                // If host department name is not Cs, it is candidate responsibility to update later
+                faculty: department.faculty, // If host department name is not Cs, it is candidate responsibility to update later
+                departmentName: department.name,
+                erasmusCode: hostUniversity.erasmusCode,
+                address: hostUniversity.address,
+                country: hostUniversity.country,
+            }
+        }
     })
+
     await form.save()
     form = new Form({
         owner: user._id,

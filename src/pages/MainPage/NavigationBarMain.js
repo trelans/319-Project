@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
-import classes from "./NavigationBar.module.css";
+import classes from "../../components/ui/NavigationBar/NavigationBar.module.css";
+import SearchBarMain from "./SearchBarMain";
+import BookData from "./Data.json";
 
 function NavigationBar() {
   return (
     <div className={classes["nb-header"]}>
       <div className={classes["nb-name"]}>Toera</div>
+
       <nav>
         <ul>
           <li>
             <Link to="/main-page">Home</Link>
           </li>
           <li>
-            <Link to="/profile-own">Profile</Link>
+            <Link to="/profile-page">Profile</Link>
           </li>
           <li>
             <Link to="/chat">DM</Link>

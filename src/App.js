@@ -49,6 +49,10 @@ import CoursePage from "./pages/CoursePage/CoursePage";
 import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
 import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
 import PreApprovalFormConvert from "./pages/ConvertToPdfPages/PreApprovalFormConvert";
+import CourseTransferFormConvert from "./pages/ConvertToPdfPages/CourseTransferFormConvert";
+import LearningAgreementBeforeMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementBeforeMobilityConvert";
+import LearningAgreementDuringMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementDuringMobilityConvert";
+import LearningAgreementAfterMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementAfterMobilityConvert";
 
 //import io from "socket.io-client";
 
@@ -299,6 +303,26 @@ function App() {
         exact
         path="/pre-approval-form-convert"
         element={<PreApprovalFormConvert />}
+      />
+      <Route
+        exact
+        path="/course-transfer-form-convert"
+        element={<CourseTransferFormConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-before-mobility-convert"
+        element={<LearningAgreementBeforeMobilityConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-during-mobility-convert"
+        element={<LearningAgreementDuringMobilityConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-after-mobility-convert"
+        element={<LearningAgreementAfterMobilityConvert />}
       />
     </Routes>
   );

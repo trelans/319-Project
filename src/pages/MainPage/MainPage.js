@@ -1,10 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import { handleRequests } from "../requests";
 
-import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import NavigationBarMain from "./NavigationBarMain";
 import TodoWidget from "./TodoWidget";
 
 import Grid from "@mui/material/Grid";
+import SearchBarMain from "./SearchBarMain";
+import BookData from "./Data.json";
+
+import DropDown from "./DropDown.js";
 
 function MainPage() {
   /*
@@ -22,13 +26,31 @@ function MainPage() {
 
   return (
     <div>
-      <div div>
-        <NavigationBar />
-        <Grid container spacing={2}>
-          <Grid item xs={5}>
-            <TodoWidget />
+      <div>
+        <NavigationBarMain />
+        <div>
+          <SearchBarMain placeholder="Search..." data={BookData} />
+        </div>
+        <div className="main-margined">
+          <form>
+            <select id="cars" name="cars">
+              <option value="volvo">User</option>
+              <option value="saab">University</option>
+            </select>
+          </form>
+        </div>
+        <div className="main-absolute">
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <TodoWidget />
+            </Grid>
+            <Grid item xs={2}>
+              <Link to="/application-page1">
+                <button className="fpp-button">Application Status</button>
+              </Link>
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       </div>
     </div>
   );
