@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
@@ -40,6 +40,8 @@ function PreApprovalFormPage() {
   const [isLoading, setLoading] = React.useState(true);
   const childRef = useRef();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     handleSelect();
   }, [selectedCourse]);
@@ -54,7 +56,9 @@ function PreApprovalFormPage() {
 
   function handleConvertPdf() {
     console.log(childRef.current.getTableInfo());
-    childRef.current.getTableInfo();
+    navigate("/pre-approval-form-convert", {
+      state: childRef.current.getTableInfo(),
+    });
   }
 
   function handleSelect() {
@@ -82,6 +86,10 @@ function PreApprovalFormPage() {
 
   function closeSelectEqCourse() {
     setEqCourse(false);
+  }
+
+  function closeNominationPopup() {
+    setNomNewCourse(false);
   }
 
   // the if clause is required otherwise react continuously rerender the page
@@ -228,9 +236,9 @@ function PreApprovalFormPage() {
             </tr>
             <tr>
               <td className="pafp-last-table-td">
-                <Link to="/pre-approval-form-convert">
-                  <button className="pafp-button">Convert to PDF</button>
-                </Link>
+                <button className="pafp-button" onClick={handleConvertPdf}>
+                  Convert to PDF
+                </button>
               </td>
               <td className="pafp-last-table-td">
                 <button className="pafp-button-not-active">Submit Form</button>
@@ -271,7 +279,12 @@ function PreApprovalFormPage() {
           setNumFunc={setNomNewCourse}
         />
       )}
-      {nomNewCourse && <NomNewCoursePopUp bilkentCourse={nomNewCourse} />}
+      {nomNewCourse && (
+        <NomNewCoursePopUp
+          bilkentCourse={nomNewCourse}
+          onCancel={closeNominationPopup}
+        />
+      )}
     </div>
   );
 }

@@ -13,6 +13,7 @@ function Modal(props) {
     const [arr, setArr] = useState();
     const [closePop, setPop] = useState();
     const [bilkentCourse, setBilkentCourse] = useState();
+ 
 
 
     var willClose = false;
@@ -47,9 +48,10 @@ function Modal(props) {
 
                 <a className={style.close} onClick={cancelHandler}>×</a>
                 <br/> <br/>
-            <NominateACourse />
+            <NominateACourse onCancel={cancelHandler} />
 
             </div>
+
         </div>
     )
 

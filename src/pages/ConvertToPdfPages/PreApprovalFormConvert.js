@@ -1,8 +1,9 @@
 import { handleRequests } from "../requests";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
 import PreApprovalFormCoursesTable from "./PdfTables/PreApprovalFormCoursesTable";
+import {useLocation} from 'react-router-dom';
 
 const durationTable = {
   0: "Fall",
@@ -66,6 +67,12 @@ function PreApprovalFormConvert() {
     setLoading(false);
   }
 
+  const location = useLocation();
+
+  function x() {
+    console.log(location.state);
+  }
+
   if (isLoading) {
     return (
       <div className={"Page"}>
@@ -85,6 +92,9 @@ function PreApprovalFormConvert() {
           )}
         </Pdf>
       </div>
+      <button onClick={x}>
+        asfasd
+      </button>
       <div ref={ref}>
         <div className="cp-container">
           <div className="cp-center">
