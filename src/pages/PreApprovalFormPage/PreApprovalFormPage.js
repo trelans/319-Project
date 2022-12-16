@@ -8,6 +8,7 @@ import {useState, useRef} from "react";
 import * as React from "react";
 import {useEffect} from "react";
 import EqPopUp from "../../components/ui/CoursePopUp/PopUpForEquivalentCourse"
+import NomNewCoursePopUp from "../../components/ui/CoursePopUp/PopUpForNominateNewCourse"
 import {handleRequests} from "../requests";
 
 
@@ -36,6 +37,7 @@ function PreApprovalFormPage() {
     const [courses, setCourses] = useState([])
     const [bilkentCourses, setBilkentCourses] = useState({})
     const [eqCourseGot, setEqCourseGot] = useState({})
+    const [nomNewCourse, setNomNewCourse] = useState(false)
     const [isLoading, setLoading] = React.useState(true);
     const childRef = useRef();
 
@@ -241,9 +243,10 @@ function PreApprovalFormPage() {
             {selectCourseIsOpen &&
                 <Modal courses={bilkentCourses} onCancel={closeSelectCourse} onSelect={handleSelect} setArrFunc={setSelectedCourse}/>}
             {selectCourseIsOpen && <Backdrop/>}
-
-            {eqCourse && <EqPopUp onCancel={closeSelectEqCourse} bilkentCourse={eqCourse} setArrFunc={setEqCourseGot} onSelect={handleSelectEq}/>}
-
+            {eqCourse && <Backdrop/>}
+            {nomNewCourse && <Backdrop/>}
+            {eqCourse &&  <EqPopUp onCancel={closeSelectEqCourse} bilkentCourse={eqCourse} setArrFunc={setEqCourseGot} onSelect={handleSelectEq} setNumFunc={setNomNewCourse}/>}
+            {nomNewCourse && <NomNewCoursePopUp  bilkentCourse={nomNewCourse} />}
         </div>
     );
 }
