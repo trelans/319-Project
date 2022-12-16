@@ -8,6 +8,8 @@ import Grid from "@mui/material/Grid";
 import SearchBarMain from "./SearchBarMain";
 import BookData from "./Data.json";
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 import RatingPopup from "../../components/ui/CoursePopUp/UniversityRatingPopup";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
@@ -25,6 +27,61 @@ function MainPage() {
   console.log(id)
   // Rerouting the user to the main page can be here if we do not see id or maybe can be doable using tokens
   */
+  const [users, setUsers] = useState();
+  const [universities, setUniversities] = useState();
+  const [data, setData] = useState(users);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        console.log("Getting users!!");
+        const res = await axios.get(`http://localhost:8080/getAllUsers`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setUsers(
+          res.data.map((val) => {
+            return {
+              name: val.name + " " + val.surname,
+              id: val._id,
+            };
+          })
+        );
+      } catch (error) {}
+    };
+    getUsers();
+  }, []);
+
+  useEffect(() => {
+    const getUniversities = async () => {
+      try {
+        console.log("Getting universities!!");
+        const res = await axios.get(`http://localhost:8080/universities`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setUniversities(
+          res.data.map((val) => {
+            return {
+              name: val.name,
+              id: val._id,
+            };
+          })
+        );
+      } catch (error) {}
+    };
+    getUniversities();
+  }, []);
+
+  const handeSelect = (option) => {
+    if (option == 0) {
+      setData(users);
+    } else {
+      setData(universities);
+    }
+  };
 
   const [popupOpen, setPopup] = useState(false);
 
@@ -41,11 +98,15 @@ function MainPage() {
       <div>
         <NavigationBarMain />
         <div>
-          <SearchBarMain placeholder="Search..." data={BookData} />
+          <SearchBarMain placeholder="Search..." data={data} />
         </div>
         <div className="main-margined">
           <form>
-            <select id="searchParameter" name="searchParameter">
+            <select
+              onChange={(e) => handeSelect(e.target.options.selectedIndex)}
+              id="searchParameter"
+              name="searchParameter"
+            >
               <option value="user">User</option>
               <option value="university">University</option>
             </select>

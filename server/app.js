@@ -11,6 +11,7 @@ const cors = require("cors");
 const messageRouter = require('./routers/message')
 const profileRouter = require('./routers/profiles')
 const notificationRouter = require('./routers/notification')
+const universityRouter = require('./routers/university')
 
 const app = express()
 const excelToJson = require('./convertor/convertToJson')
@@ -35,6 +36,7 @@ app.use(messageRouter)
 app.use(listRouter)
 app.use(profileRouter)
 app.use(notificationRouter)
+app.use(universityRouter)
 
 /*
 app.listen(port, () => {

@@ -93,6 +93,7 @@ router.post('/create/newErasmusCoordinator', async (req, res) => {
     }
 })
 
+/*
 router.post('/create/newUniversity', async (req, res) => {
     const departments = req.body.departments
     const quota = req.body.quota
@@ -126,6 +127,7 @@ router.post('/create/newUniversity', async (req, res) => {
         res.status(400).send(e)
     }
 })
+*/
 
 // Only in dev mode (once every department in Bilkent created, the method will serve its purpose)
 router.post('/create/newDepartment', async (req, res) => {
@@ -173,6 +175,18 @@ router.get('/create/loginpage', async (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/login.html'))
 })
 */
+
+
+router.get('/getAllUsers', auth, async (req,res) => {
+
+    try {
+        const users = await User.find();
+        res.send(users)
+    } catch(e) {
+        console.log(e)
+        res.status(500).send(e)
+    }
+})
 
 router.post('/users', async (req,res) => {
     const user = new User(req.body);
