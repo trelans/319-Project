@@ -8,6 +8,9 @@ function SearchBarMain({ placeholder, data }) {
   const [wordEntered, setWordEntered] = useState("");
 
   const handleFilter = (event) => {
+    const element = document.querySelector(".main-absolute");
+    element.style.zIndex = -1;
+
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = data.filter((value) => {
@@ -24,6 +27,8 @@ function SearchBarMain({ placeholder, data }) {
   const clearInput = () => {
     setFilteredData([]);
     setWordEntered("");
+    const element = document.querySelector(".main-absolute");
+    element.style.zIndex = 0;
   };
 
   return (

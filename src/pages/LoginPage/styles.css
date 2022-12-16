@@ -104,6 +104,7 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
+  
 }
 
 .fpp-button:hover {
@@ -1625,7 +1626,6 @@ a:hover {
   top: 0;
   left: 0;
 
-  z-index: -1;
   position: relative;
   
 }
