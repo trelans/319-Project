@@ -156,6 +156,7 @@ export default class App extends React.Component {
     handlerComplete = (e) => {
         const sendingInstitutionInfo = {
             id: this.state.id,
+            info: 1,
             sendingInstitution: {
                 name: this.state.name,
                 faculty: this.state.faculty,
