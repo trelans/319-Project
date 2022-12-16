@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="incomingStudent model class updated&#10;profilep page courses bağlandı&#10;profile page others incoming bağlandı&#10;app'e router bağlantısı eklendi&#10;router/profile.js updated">
+    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="&#10;router/profile.js updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routers/profiles.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers/profiles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageCourse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageUniversity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageUniversity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageOthersOthers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageOthersOthers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageOthersStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProfilePages/ProfilePageOthersStudent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +76,7 @@
       <workItem from="1670752886490" duration="4119000" />
       <workItem from="1670849953856" duration="4697000" />
       <workItem from="1671088987457" duration="394000" />
-      <workItem from="1671089771071" duration="23058000" />
+      <workItem from="1671089771071" duration="25216000" />
     </task>
     <task id="LOCAL-00001" summary="user router -- create user">
       <created>1671103781135</created>
@@ -118,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671185681532</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&#10;router/profile.js updated">
+      <created>1671189562060</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671189562060</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +151,7 @@
     <MESSAGE value="sub-user models are put into main user model...&#10;sub-user models are commented." />
     <MESSAGE value="unused model classes are deleted" />
     <MESSAGE value="incomingStudent model class updated&#10;profilep page courses bağlandı&#10;profile page others incoming bağlandı&#10;app'e router bağlantısı eklendi&#10;router/profile.js updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="incomingStudent model class updated&#10;profilep page courses bağlandı&#10;profile page others incoming bağlandı&#10;app'e router bağlantısı eklendi&#10;router/profile.js updated" />
+    <MESSAGE value="&#10;router/profile.js updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;router/profile.js updated" />
   </component>
 </project>
