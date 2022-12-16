@@ -95,6 +95,7 @@ body {
   background: #a5c9ca;
   width: 100%;
   border: 0;
+  margin-top: 50%;
   padding: 15px;
   color: #2c3333;
   font-size: 18px;
@@ -1579,10 +1580,7 @@ input:focus {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
-
-
   position: absolute;
-
 }
 
 .dataResult::-webkit-scrollbar {
@@ -1613,25 +1611,26 @@ a:hover {
 }
 
 .main-absolute {
-
   position: absolute;
   left: 0;
   right: 0;
   padding: 10px;
   background: inherit;
   margin-top: 50px;
-  padding-top:100px;
+  padding-top: 100px;
 
   width: 100%;
   height: 100%;
-  position: absolute;
+
   top: 0;
   left: 0;
 
   z-index: -1;
   position: relative;
+  
 }
 
-.main-margined{  
+.main-margined {
   margin-top: -25px;
-  margin-left: 200px;}
+  margin-left: 200px;
+}

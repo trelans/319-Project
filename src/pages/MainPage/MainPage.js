@@ -45,6 +45,11 @@ function MainPage() {
             <Grid item xs={5}>
               <TodoWidget />
             </Grid>
+            <Grid item xs={2}>
+              <Link to="/application-page1">
+                <button className="fpp-button">Application Status</button>
+              </Link>
+            </Grid>
           </Grid>
         </div>
       </div>
