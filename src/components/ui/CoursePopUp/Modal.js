@@ -35,7 +35,7 @@ function Modal(props) {
             <h4>Select a Bilkent Course From The List</h4>
             <a className={style.close} onClick={cancelHandler}>×</a>
             <br/> <br/>
-            <CoursesTable setArrFunc={setArr} closePopUp={setPop} courses={props.bilkentCourses}></CoursesTable>
+            <CoursesTable setArrFunc={setArr} closePopUp={setPop} courses={props.courses}></CoursesTable>
 
         </div>
       </div>

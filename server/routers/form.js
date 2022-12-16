@@ -23,8 +23,17 @@ router.post('/preapproval-student', async (req, res) => {
             const courseMap = {"CS Required Course":[], "CS Technical Elective":[], "CS HSS Elective": [], "CS General Elective": []};
             await BilkentCourse.find({}).then(function(courses) {
                 courses.forEach(function(course) {
-                });
-            });
+                    if(course.courseType === "CS Required Course"){
+                        courseMap["CS Required Course"].push(course)
+                    }else if (course.courseType === "CS Technical Elective"){
+                        courseMap["CS Technical Elective"].push(course)
+                    }else if (course.courseType === "CS HSS Elective"){
+                        courseMap["CS HSS Elective"].push(course)
+                    }else {
+                        courseMap["CS General Elective"].push(course)
+                    }
+                })
+            })
             PAF = await Form.findOne({'owner': user._id, 'formType': 0})
             response = res.status(201)
             response.send({
@@ -35,7 +44,8 @@ router.post('/preapproval-student', async (req, res) => {
                 "appliedInstitution": appliedInstitution.name,
                 "duration": user.erasmusCandidateData.preferredSemester,
                 "ECTSCredits": PAF.preApprovalForm.totalEctsCredits,
-                "courses": PAF.preApprovalForm.courses
+                "courses": PAF.preApprovalForm.courses,
+                "bilkentCourses": courseMap
             })
         } else {
             response = res.status(302)

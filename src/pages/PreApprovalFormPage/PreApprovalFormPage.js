@@ -31,7 +31,7 @@ function PreApprovalFormPage() {
     const [duration, setDuration] = useState('')
     const [ECTSCredits, setECTSCredits] = useState('')
     const [courses, setCourses] = useState([])
-    const [bilkentCourses, setBilkentCourses] = useState([])
+    const [bilkentCourses, setBilkentCourses] = useState({})
     const [isLoading, setLoading] = React.useState(true);
     const childRef = useRef();
 
@@ -79,7 +79,6 @@ function PreApprovalFormPage() {
             <div className="App">Loading...</div>
         </div>;
     }
-
 
     return (
 
