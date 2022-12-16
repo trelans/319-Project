@@ -6,9 +6,7 @@ import TodoWidget from "./TodoWidget";
 
 import Grid from "@mui/material/Grid";
 import SearchBarMain from "./SearchBarMain";
-import BookData from "./Data.json";
 
-import DropDown from "./DropDown.js";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -92,7 +90,7 @@ function MainPage() {
         </div>
         <div className="main-margined">
           <form>
-            <select onChange={(e) => handeSelect(e.target.options.selectedIndex)} id="cars" name="cars">
+            <select onChange={(e) => handeSelect(e.target.options.selectedIndex)} id="searchParameter" name="searchParameter">
               <option value="user">User</option>
               <option value="university">University</option>
             </select>
