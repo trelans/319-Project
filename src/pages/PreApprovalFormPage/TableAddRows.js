@@ -66,7 +66,7 @@ class TableAddRows extends React.Component {
         courseCode: row["courseCode"],
         courseName:  row["courseName"],
         credits:  row["credit"],
-        elective: "",
+        elective: row["courseType"],
         courseCodeEq: "",
         courseNameEq: "",
         partNo: "",
@@ -90,10 +90,10 @@ class TableAddRows extends React.Component {
       courseCode: this.state.rows[zar["idx"]]["courseCode"],
       courseName: this.state.rows[zar["idx"]]["courseName"] ,
       credits: this.state.rows[zar["idx"]]["credits"],
-      elective: "",
+      elective:  this.state.rows[zar["idx"]]["courseType"],
       courseCodeEq: zar["courseCode"],
       courseNameEq: zar["courseName"],
-      partNo: "",
+      partNo: zar["mergeNo"],
     };
 
 
