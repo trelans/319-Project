@@ -6,8 +6,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-
-
 function Todo({ todo, index, markTodo, removeTodo }) {
   return (
     <div className="todo">
@@ -65,7 +63,6 @@ function TodoInside() {
     },
   ]);
 
-
   const addTodo = (text) => {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
@@ -84,29 +81,27 @@ function TodoInside() {
   };
 
   useEffect(() => {
-
     const getTasks = async () => {
       try {
-          const res = await axios.get( `http://localhost:8080/tasks`,  {
-            headers: {
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-          console.log("succesful")
-          console.log(res)
-          setTodos(res.data.map( (val) => {
+        const res = await axios.get(`http://localhost:8080/tasks`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        console.log("succesful");
+        console.log(res);
+        setTodos(
+          res.data.map((val) => {
             return {
               text: val.description,
-              isDone: val.completed
-            }
-          }))
-      } catch (error) {
-          
-      }
-    }
-    getTasks()
-  
-  }, [])
+              isDone: val.completed,
+            };
+          })
+        );
+      } catch (error) {}
+    };
+    getTasks();
+  }, []);
 
   return (
     <div className="todo-app">
