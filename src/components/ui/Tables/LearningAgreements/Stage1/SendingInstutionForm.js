@@ -45,12 +45,12 @@ export default class App extends React.Component {
             disabledContactPersonEmail: true,
             disabledContactPersonPhoneNumber: true,
         };
-        this.updateInput = this.updateInput.bind(this);
+        this.updateInputContactPersonName = this.updateInputContactPersonName.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
     }
 
-    updateInputName(event) {
-        this.setState({name: event.target.value})
+    updateInputContactPersonName(event) {
+        this.setState({contactPersonName: event.target.value})
     }
 
     changeHandler = (countryVal) => {
@@ -412,7 +412,7 @@ export default class App extends React.Component {
                                     maxLength="50"
                                     defaultValue={this.state.contactPersonName}
                                     className="styleInput"
-                                    onChange={this.updateInput}
+                                    onChange={this.updateInputContactPersonName}
                                     disabled={
                                         this.state.disabledContactPersonName ? "disabledContactPersonName" : ""
                                     }
