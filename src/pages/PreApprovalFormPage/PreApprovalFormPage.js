@@ -36,6 +36,8 @@ function PreApprovalFormPage() {
     const [ECTSCredits, setECTSCredits] = useState('')
     const [courses, setCourses] = useState([])
     const [bilkentCourses, setBilkentCourses] = useState({})
+    const [pdf, setPdf] = useState({})
+    const [requestedPdf, setRequestedPdf] = useState(false)
     const [eqCourseGot, setEqCourseGot] = useState({})
     const [nomNewCourse, setNomNewCourse] = useState(false)
     const [isLoading, setLoading] = React.useState(true);
@@ -170,7 +172,7 @@ function PreApprovalFormPage() {
                 </div>
                 <div className="pafp-flex-div">
                     <TableAddRows getArrFunc={selectedCourse} selected={selectedCourse} ref={childRef}
-                                  currentCourseForEq={setEqCourse}/>
+                                  currentCourseForEq={setEqCourse} getPdfArr={setPdf} requestPdf={requestedPdf}/>
                 </div>
                 <button className="btn btn-primary" onClick={selectCourse}>Add Course</button>
                 <div>
