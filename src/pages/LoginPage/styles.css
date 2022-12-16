@@ -630,7 +630,7 @@ body {
 }
 
 .ppu-container {
-  width: 70%;
+  width: 85%;
   padding: 1% 0 0;
   margin-left: 3%;
   margin-bottom: -2%;
@@ -661,7 +661,8 @@ body {
   width: 330px;
   height: 330px;
   padding: auto;
-  margin: auto;
+  margin-left: 16%;
+  margin-right: 5%;
   margin-bottom: 3%;
   display: flex;
 }
@@ -680,6 +681,7 @@ body {
 
 .ppu-table {
   margin: auto;
+  margin-bottom: 5%;
   padding: auto;
   empty-cells: show;
 }
@@ -726,6 +728,7 @@ body {
   font-family: sans-serif;
   margin-bottom: 1px;
   margin-left: 1px;
+  margin-top: 23%;
 }
 
 .ppu-table-header {
