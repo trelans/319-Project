@@ -102,7 +102,6 @@ function ApplicationPage1() {
     return (
         <div>
             <NavigationBar/>
-
             <div className="ap-container">
                 <div className="ap-center">
                     <table>

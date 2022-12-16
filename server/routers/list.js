@@ -10,7 +10,6 @@ const Department = require("../models/department")
 const University = require("../models/university")
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
-const ErasmusCandidate = require("../models/erasmusCandidate");
 const Application = require("../models/application");
 
 // storage engine for multer

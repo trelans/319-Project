@@ -3,9 +3,6 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Task = require('./task')
-const ErasmusCandidate = require('./erasmusCandidate')
-const ErasmusCoordinator = require('./erasmusCoordinator')
-const CourseCoordinator = require('./courseCoordinator')
 const {Model} = mongoose
 //var userKinds = { discriminatorKey: 'userType' };
 
@@ -178,11 +175,10 @@ const userSchema = new mongoose.Schema({
 
     erasmusCoordinatorData: {
         department: {
-            type: String,
-            default: "noDepartment"
+            type: String
         },
         coordinatorID: {
-            type: Number,
+            type: Number
         },
 
         assignedUniversities: [assignedUniversity],

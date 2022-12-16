@@ -4,7 +4,6 @@ const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
 const router = new express.Router()
-const ErasmusCandidate = require('../models/erasmusCandidate')
 const Application = require('../models/application')
 const Department = require("../models/department");
 

@@ -1,6 +1,5 @@
 const express = require('express')
 const User = require('../models/user')
-const ErasmusCandidate = require("../models/erasmusCandidate")
 const auth = require('../middleware/auth')
 const multer = require('multer')
 const sharp = require('sharp')
@@ -16,9 +15,9 @@ router.post('/application-page1', async (req, res) => {
         let response;
         let application;
         let appliedInstitution;
-        let preApproval;
-        let learningAgreement;
-        let erasmusCoordinator;
+        let PAF;
+        let LAF;
+        let CTF;
         // 0 POST, 1 GET
         if (req.body.type === "1") {
             const user = await User.findOne({'tokens.token': req.body.token})
@@ -26,23 +25,25 @@ router.post('/application-page1', async (req, res) => {
             application = await Application.findOne({'applicantCandidate': user._id})
             erasmusCoordinator = await User.findById(application.responsibleErasmusCoord)
             appliedInstitution = await University.findById(application.appliedInstitution)
-            preApproval = await Form.findOne({'ownerApplication': application._id})
-            learningAgreement = await Form.findOne({'ownerApplication': application._id})
+            PAF = await Form.findOne({'ownerApplication': application._id, 'formType': 0})
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            CTF = await Form.findOne({'ownerApplication': application._id, 'formType': 2})
             response = res.status(201)
         } else {
             response = res.status(302)
         }
 
-        response.send({"status": application.status,
+        response.send({
+            "status": application.status,
             "erasmusCoordinator": erasmusCoordinator.name + " " + erasmusCoordinator.surname,
             "appliedInstitution": appliedInstitution.name,
             "mobilityPeriod": appliedInstitution.mobilityPeriod,
-            "PFStatus": 0, // change later
-            "PFDeadline": "12.12.12", // change later
-            "LAFStatus": 0, // change later
-            "LAFDeadline": "12.12.12", // change later
-            "CTFStatus": 0, // change later
-            "CTFDeadline": "12.12.12" // change later
+            "PFStatus": PAF.status,
+            "PFDeadline": PAF.deadline,
+            "LAFStatus": LAF.status,
+            "LAFDeadline": LAF.deadline,
+            "CTFStatus": CTF.status,
+            "CTFDeadline": CTF.deadline
         })
     } catch (e) {
         console.log(e)
@@ -50,10 +51,10 @@ router.post('/application-page1', async (req, res) => {
     }
 })
 
-router.patch('/application', auth, async (req, res) => {
+router.patch('/application-page1', auth, async (req, res) => {
 })
 
-router.delete('/application', auth, async (req, res) => {
+router.delete('/application-page1', auth, async (req, res) => {
     try {
         if (req.deleteType == "discard") {
             // TODO: Add student to the waiting list

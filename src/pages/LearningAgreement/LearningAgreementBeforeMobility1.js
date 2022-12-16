@@ -9,6 +9,7 @@ import React from "react";
 import styles from "./LearningAgreementBeforeMobility.module.css";
 
 function LearningAgreementBeforeMobility1() {
+
   return (
     <div>
       <NavigationBar></NavigationBar>
