@@ -12,6 +12,12 @@ class TableAddRows extends React.Component {
      this.handleAddCourse(ar )
 
     }
+
+    this.car = (zar) =>  {
+
+      this.handleEqCourse(zar )
+
+    }
   }
 
 
@@ -34,13 +40,13 @@ class TableAddRows extends React.Component {
   };
   handleAddRow = () => {
     const item = {
+      idx:"",
       courseCode: "",
       courseName: "",
       credits: "",
       elective: "",
-      courseCodeBilkent: "",
-      courseNameBilkent: "",
-      courseGroupBilkent: "",
+      courseCodeEq: "",
+      courseNameEq: "",
       partNo: "",
     };
     this.setState({
@@ -56,19 +62,44 @@ class TableAddRows extends React.Component {
       }
 
       const item = {
+        idx: "",
         courseCode: row["courseCode"],
         courseName:  row["courseName"],
         credits:  row["credit"],
         elective: "",
-        courseCodeBilkent: "",
-        courseNameBilkent: "",
-        courseGroupBilkent: "",
+        courseCodeEq: "",
+        courseNameEq: "",
         partNo: "",
       };
       this.setState({
         rows: [...this.state.rows, item],
       });
 
+
+  };
+
+  handleEqCourse = (zar) => {
+
+    if (zar["courseCode"] === undefined) {
+      console.log("Prevent")
+      return
+    }
+
+    const item = {
+      idx: "",
+      courseCode: this.state.rows[zar["idx"]]["courseCode"],
+      courseName: this.state.rows[zar["idx"]]["courseName"] ,
+      credits: this.state.rows[zar["idx"]]["credits"],
+      elective: "",
+      courseCodeEq: zar["courseCode"],
+      courseNameEq: zar["courseName"],
+      partNo: "",
+    };
+
+
+    const newIds = this.state.rows.slice() //copy the array
+    newIds[zar["idx"]] = item //execute the manipulations
+    this.setState({rows: newIds}) //set the new state
 
   };
 
@@ -83,8 +114,10 @@ class TableAddRows extends React.Component {
     this.setState({ rows });
   };
   handleAddEquivalentCourse = (idx) => () => {
-    console.log(this.state.rows[idx])
-    this.props.currentCourseForEq(this.state.rows[idx])
+
+    let arr = this.state.rows[idx]
+    arr["idx"] = idx
+    this.props.currentCourseForEq(arr)
      // this.setState(...this.state.addingEquivalentCourse, true)
      // this.setState(...this.state.currentCourseNameForEq, this.state.rows[idx])
   };
@@ -108,10 +141,9 @@ class TableAddRows extends React.Component {
                     <th className="text-center"> Course Code</th>
                     <th className="text-center"> Course Name </th>
                     <th className="text-center"> Credits </th>
-                    <th className="text-center"> Elective </th>
+                    <th className="text-center"> Course Type </th>
                     <th className="text-center"> Course Code </th>
                     <th className="text-center"> Course Name </th>
-                    <th className="text-center"> Course Group </th>
                     <th className="text-center"> Part No </th>
                     <th />
                   </tr>
@@ -165,7 +197,7 @@ class TableAddRows extends React.Component {
                           type="text"
                           name="courseCodeBilkent"
                           disabled="true"
-                          value={this.state.rows[idx].courseCodeBilkent}
+                          value={this.state.rows[idx].courseCodeEq}
                           onChange={this.handleChange(idx)}
                           className="form-control"
                         />
@@ -175,21 +207,12 @@ class TableAddRows extends React.Component {
                           type="text"
                           name="courseNameBilkent"
                           disabled="true"
-                          value={this.state.rows[idx].courseNameBilkent}
+                          value={this.state.rows[idx].courseNameEq}
                           onChange={this.handleChange(idx)}
                           className="form-control"
                         />
                       </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="courseGroupBilkent"
-                          disabled="true"
-                          value={this.state.rows[idx].courseGroupBilkent}
-                          onChange={this.handleChange(idx)}
-                          className="form-control"
-                        />
-                      </td>
+
                       <td>
                         <input
                           type="text"

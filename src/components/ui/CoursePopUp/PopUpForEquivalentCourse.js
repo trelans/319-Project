@@ -16,6 +16,9 @@ function Modal(props) {
 
     var willClose = false;
 
+
+
+
     function cancelHandler() {
         props.onCancel();
     }
@@ -26,6 +29,7 @@ function Modal(props) {
         props.onCancel()
     }
 
+
     if (closePop) {
         selectHandler()
         setPop(false)
@@ -35,13 +39,13 @@ function Modal(props) {
     return(
         <div className={"perfectCentered"} >
             <div className={style.modal}>
-                <h4>Select a Equivalent Course For {arr} From The List</h4>
+                <h4>Select a Equivalent Course For  From The List</h4>
                 <h6>or</h6>
                 <button>Nominate A New Course</button>
                 <a className={style.close} onClick={cancelHandler}>×</a>
                 <br/> <br/>
 
-                <CoursesTable setArrFunc={setArr} closePopUp={setPop} ></CoursesTable>
+                <CoursesTable setArrFunc={setArr} closePopUp={setPop} selectedBilkentCourse={props.bilkentCourse} ></CoursesTable>
 
             </div>
         </div>

@@ -21,6 +21,7 @@ function Modal(props) {
         props.setArrFunc(arr)
 
         props.onCancel()
+
     }
 
     if (closePop) {

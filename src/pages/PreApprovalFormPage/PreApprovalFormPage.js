@@ -6,6 +6,7 @@ import Modal from "../../components/ui/CoursePopUp/Modal";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 import {useState, useRef} from "react";
 import * as React from "react";
+import {useEffect} from "react";
 import EqPopUp from "../../components/ui/CoursePopUp/PopUpForEquivalentCourse"
 import {handleRequests} from "../requests";
 
@@ -21,7 +22,9 @@ let loaded = false;
 function PreApprovalFormPage() {
     const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = React.useState();
+    const [selectedCourseEq, setSelectedCourseEq] = React.useState();
     const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
+    const [lastSelectedEq, setLastSelectedEq] = React.useState();
     const [eqCourse, setEqCourse] = React.useState();
     const [candName, setCandName] = useState('')
     const [candSurname, setCandSurname] = useState('')
@@ -32,8 +35,19 @@ function PreApprovalFormPage() {
     const [ECTSCredits, setECTSCredits] = useState('')
     const [courses, setCourses] = useState([])
     const [bilkentCourses, setBilkentCourses] = useState({})
+    const [eqCourseGot, setEqCourseGot] = useState({})
     const [isLoading, setLoading] = React.useState(true);
     const childRef = useRef();
+
+
+    useEffect(() => {
+        handleSelect()
+    },[selectedCourse])
+
+    useEffect(() => {
+        handleSelectEq()
+    },[eqCourseGot])
+
 
     function selectCourse() {
         setCourseIsOpen(true);
@@ -43,11 +57,21 @@ function PreApprovalFormPage() {
         if (lastSelectedCourse === selectedCourse) {
             return
         }
-        console.log(selectedCourse)
+
         childRef.current.bar(selectedCourse)
+
         setLastSelectedCourse(selectedCourse)
     }
 
+    function handleSelectEq() {
+        console.log("KKKK")
+        if (lastSelectedEq === eqCourseGot) {
+            return
+        }
+        console.log(eqCourseGot)
+        childRef.current.car(eqCourseGot)
+        //setLastSelectedEq(selectedCourse)
+    }
     function closeSelectCourse() {
         setCourseIsOpen(false);
     }
@@ -217,8 +241,9 @@ function PreApprovalFormPage() {
             {selectCourseIsOpen &&
                 <Modal courses={bilkentCourses} onCancel={closeSelectCourse} onSelect={handleSelect} setArrFunc={setSelectedCourse}/>}
             {selectCourseIsOpen && <Backdrop/>}
-            {selectedCourse && handleSelect()}
-            {eqCourse && <EqPopUp onCancel={closeSelectEqCourse} bilkentCourse={eqCourse} />}
+
+            {eqCourse && <EqPopUp onCancel={closeSelectEqCourse} bilkentCourse={eqCourse} setArrFunc={setEqCourseGot} onSelect={handleSelectEq}/>}
+
         </div>
     );
 }
