@@ -228,9 +228,9 @@ function PreApprovalFormPage() {
             </tr>
             <tr>
               <td className="pafp-last-table-td">
-                <button className="pafp-button" onClick={handleConvertPdf}>
-                  Convert to PDF
-                </button>
+                <Link to="/pre-approval-form-convert">
+                  <button className="pafp-button">Convert to PDF</button>
+                </Link>
               </td>
               <td className="pafp-last-table-td">
                 <button className="pafp-button-not-active">Submit Form</button>
