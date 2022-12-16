@@ -8,6 +8,7 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Grid from "@material-ui/core/Grid";
+import {handleRequests} from "../../../../../pages/requests";
 
 
 export default class App extends React.Component {
@@ -21,6 +22,7 @@ export default class App extends React.Component {
             countryVal: 2,
             complete: "",
             displayComplete: "none",
+
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
@@ -41,6 +43,23 @@ export default class App extends React.Component {
             disabledContactPersonEmail: true,
             disabledContactPersonPhoneNumber: true,
         };
+
+        this.updateInputName = this.updateInputName.bind(this);
+
+        this.updateInputFaculty = this.updateInputFaculty.bind(this);
+        this.updateInputDepartment = this.updateInputDepartment.bind(this);
+
+        this.updateInputAddress = this.updateInputAddress.bind(this);
+        this.updateInputCountry = this.updateInputCountry.bind(this);
+        this.updateInputErasmusCode = this.updateInputErasmusCode.bind(this);
+
+        this.updateInputContactPersonName = this.updateInputContactPersonName.bind(this);
+        this.updateInputContactPersonEmail = this.updateInputContactPersonEmail.bind(this);
+        this.updateInputContactContactPersonPhoneNumber = this.updateInputContactContactPersonPhoneNumber.bind(this);
+
+
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+
 
     }
 
@@ -89,7 +108,32 @@ export default class App extends React.Component {
     handleEditContactPersonPhoneNumberClick() {
         this.setState({disabledContactPersonPhoneNumber: !this.state.disabledContactPersonPhoneNumber});
     }
+    handlerComplete = (e) => {
+        const receivingInstitutionInfo = {
+            id: this.state.id,
+            infoType: 2,
+            receivingInstitution: {
+                name: this.state.name,
+                faculty: this.state.faculty,
+                departmentName: this.state.department,
+                address: this.state.address,
+                country: this.state.country,
+                erasmusCode: this.state.erasmusCode,
+                contactPerson: {
+                    name: this.state.contactPersonName,
+                    email: this.state.contactPersonEmail,
+                    phoneNumber: this.state.contactPersonPhoneNumber
+                }
+            }
+        }
 
+        handleRequests(e, receivingInstitutionInfo, "learning-agreement-1-3", "2", (response, status) => {
+            if (response.status === 200) {
+                this.savedInfo = <div><p>Fields are saved!</p></div>
+            }
+        })
+    }
+    /*
     handlerComplete(e) {
         if (
             this.state.countryVal !== null &&
@@ -108,7 +152,7 @@ export default class App extends React.Component {
             alert("You have not yet completed the form");
         }
     }
-
+*/
     render() {
         return (
             <div className={"App"}>

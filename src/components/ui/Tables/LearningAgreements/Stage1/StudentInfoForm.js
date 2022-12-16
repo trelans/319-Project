@@ -32,7 +32,7 @@ export default class App extends React.Component {
             countryVal: 2,
             complete: "",
             displayComplete: "none",
-
+            id: props.id,
             name: props.fields.name,
             lastName: props.fields.lastName,
 
@@ -70,30 +70,30 @@ export default class App extends React.Component {
 
 
     updateInputName(event) {
-        this.setState({name: event.target.name})
+        this.setState({name: event.target.value})
     }
     updateInputLastName(event) {
-        this.setState({lastName: event.target.lastName})
+        this.setState({lastName: event.target.value})
     }
 
 
 
     updateInputAcademicYear(event) {
-        this.setState({academicYear: event.target.name})
+        this.setState({academicYear: event.target.value})
     }
     updateInputStudyCycle(event) {
-        this.setState({studyCycle: event.target.lastName})
+        this.setState({studyCycle: event.target.value})
     }
     updateInputSubjectAreaCode(event) {
-        this.setState({subjectAreaCode: event.target.lastName})
+        this.setState({subjectAreaCode: event.target.value})
     }
 
 
     updateInputGender(event) {
-        this.setState({gender: event.target.name})
+        this.setState({gender: event.target.value})
     }
     updateInputNationality(event) {
-        this.setState({nationality: event.target.lastName})
+        this.setState({nationality: event.target.value})
     }
 
 
@@ -323,7 +323,6 @@ export default class App extends React.Component {
                                             isSearchable={true}
                                             options={this.state.options}
                                             defaultValue={this.state.value}
-                                            onChange={this.updateInputNationality}
                                             disabled={
                                                 this.state.disabledNationality
                                                     ? "disabledNationality"
