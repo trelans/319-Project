@@ -29,7 +29,6 @@ import LearningAgreementBeforeMobility3 from "./pages/LearningAgreement/Learning
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
-import TestPage from "./pages/testPage";
 
 import jwt_decode from "jwt-decode";
 import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
@@ -49,8 +48,9 @@ import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAg
 import CoursePage from "./pages/CoursePage/CoursePage";
 import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
 import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
+import PreApprovalFormConvert from "./pages/ConvertToPdfPages/PreApprovalFormConvert";
 
-import io from "socket.io-client";
+//import io from "socket.io-client";
 
 //export const socket = io.connect("http://localhost:8080");
 
@@ -145,7 +145,6 @@ function App() {
           )
         }
       />
-      <Route exact path="/test" element={<TestPage />} />
       <Route exact path="/login" element={<LoginPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
@@ -232,6 +231,11 @@ function App() {
       />
       <Route
         exact
+        path="/profile-own-incoming"
+        element={<ProfilePageOwnIncoming />}
+      />
+      <Route
+        exact
         path="/profile-own-others"
         element={<ProfilePageOwnOthers />}
       />
@@ -291,9 +295,14 @@ function App() {
         path="/application-page-fac"
         element={<ApplicationPageFAC />}
       />
+      <Route
+        exact
+        path="/pre-approval-form-convert"
+        element={<PreApprovalFormConvert />}
+      />
     </Routes>
   );
 }
 
 export default App;
-export const socket = io("http://localhost:8080");
+//export const socket = io("http://localhost:8080");

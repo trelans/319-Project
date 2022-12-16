@@ -36,6 +36,7 @@
     "react-select-country-list": "^2.2.3",
     "react-signature-canvas": "^1.0.6",
     "react-test-renderer": "^18.2.0",
+    "react-to-pdf": "^0.0.14",
     "redux": "^4.2.0",
     "redux-saga": "^1.2.2",
     "socket.io-client": "^4.5.4",

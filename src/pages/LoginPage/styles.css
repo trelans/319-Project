@@ -543,7 +543,7 @@ body {
   font-weight: bold;
   font-family: sans-serif;
   margin-left: 17%;
-  margin-top: 0;
+  margin-top: 1%;
 }
 
 .pp-button2 {
@@ -558,7 +558,7 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
-  margin-left: 22%;
+  margin-left: 21%;
   margin-top: 0;
 }
 
@@ -630,7 +630,7 @@ body {
 }
 
 .ppu-container {
-  width: 70%;
+  width: 85%;
   padding: 1% 0 0;
   margin-left: 3%;
   margin-bottom: -2%;
@@ -661,7 +661,8 @@ body {
   width: 330px;
   height: 330px;
   padding: auto;
-  margin: auto;
+  margin-left: 16%;
+  margin-right: 5%;
   margin-bottom: 3%;
   display: flex;
 }
@@ -680,6 +681,7 @@ body {
 
 .ppu-table {
   margin: auto;
+  margin-bottom: 5%;
   padding: auto;
   empty-cells: show;
 }
@@ -726,6 +728,7 @@ body {
   font-family: sans-serif;
   margin-bottom: 1px;
   margin-left: 1px;
+  margin-top: 23%;
 }
 
 .ppu-table-header {
@@ -758,7 +761,7 @@ body {
 
 .ppc-container {
   width: 90%;
-  padding: 1% 0 0;
+  padding: 5% 0 3%;
   margin: auto;
   display: flex;
 }
@@ -785,7 +788,7 @@ body {
 
 .ppc-table {
   margin-top: -4%;
-  margin-left: 10%;
+  margin-left: 15%;
   padding: 5%;
   empty-cells: show;
 }
@@ -805,6 +808,7 @@ body {
   color: #2c3333;
   font-family: sans-serif;
   font-weight: 800;
+  margin-top: 5%;
 }
 
 .ppc-header-other {
@@ -1195,7 +1199,6 @@ span.pafp-button-last {
   border-radius: 29px;
   width: 500px;
   font-family: "Poppins", sans-serif;
-
 }
 #footer {
   display: flex;
@@ -1392,77 +1395,140 @@ span.pafp-button-last {
     width: 100%;
   }
 
-    #footer {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        background: black;
-        color: white;
-        text-align: center;
-        padding-bottom: 10vh;
-    }
-    #footer > div {
-        padding-top: 10vh;
-        width: 100%;
-        height: 30%;
-    }
-    #contenedorIconosContacto {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #contenedorIconosContacto a {
-        font-size: 10vh;
-    }
-    #madeBy {
-        padding-bottom: 15vh;
-        text-align: center;
-    }
-    .widthContainerInput {
-        position: relative;
-        width: 95%;
-    }
-    .styleInput {
-        height: 7vh;
-    }
-    .react-datepicker-wrapper input {
-        height: 7vh;
-    }
-    .react-tel-input .form-control {
-        height: 7vh !important;
-    }
-    .css-yk16xz-control {
-        height: 7vh !important;
-        min-height: 7vh !important;
-    }
+  #footer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: black;
+    color: white;
+    text-align: center;
+    padding-bottom: 10vh;
+  }
+  #footer > div {
+    padding-top: 10vh;
+    width: 100%;
+    height: 30%;
+  }
+  #contenedorIconosContacto {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  #contenedorIconosContacto a {
+    font-size: 10vh;
+  }
+  #madeBy {
+    padding-bottom: 15vh;
+    text-align: center;
+  }
+  .widthContainerInput {
+    position: relative;
+    width: 95%;
+  }
+  .styleInput {
+    height: 7vh;
+  }
+  .react-datepicker-wrapper input {
+    height: 7vh;
+  }
+  .react-tel-input .form-control {
+    height: 7vh !important;
+  }
+  .css-yk16xz-control {
+    height: 7vh !important;
+    min-height: 7vh !important;
+  }
 }
 
-  /*UniversityListPage Styles*/
+/*UniversityListPage Styles*/
 
-  .ulp-container {
-    width: 90%;
-    padding: 1% 0 0;
-    margin: auto;
-  }
+.ulp-container {
+  width: 90%;
+  padding: 1% 0 0;
+  margin: auto;
+}
 
-  .ulp-alert {
-    font-size: 30px;
-    color: #e10c41;
-    font-family: sans-serif;
-    font-weight: bold;
-    text-decoration: underline;
-  }
+.ulp-alert {
+  font-size: 30px;
+  color: #e10c41;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
 
-  /*TODO styles*/
+/*TODO styles*/
 
-  .todo-app {
-    padding: 30px;
-    background-color: floralwhite;
-  }
-  
-  .todo {
-    align-items: center;
-    display: flex;
-    font-size: 12px;
-    justify-content: space-between;
-  }
+.todo-app {
+  padding: 30px;
+  background-color: floralwhite;
+}
+
+.todo {
+  align-items: center;
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+}
+
+/*convert pdf styles*/
+.cp-table {
+  padding: auto;
+  empty-cells: show;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cp-row {
+  margin: auto;
+  padding: auto;
+  border: 1px solid black;
+}
+
+.cp-col {
+  margin: auto;
+  padding: auto;
+  padding-left: 0;
+  border: 1px solid black;
+}
+
+.cp-center {
+  display: flex;
+  margin: 5px;
+}
+
+.cp-h1 {
+  font-size: 24px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+}
+
+.cp-container {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+.cp-button {
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-bottom: 15px;
+}
+
+.cp-button:hover {
+  opacity: 75%;
+}
