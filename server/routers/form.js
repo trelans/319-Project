@@ -113,9 +113,11 @@ router.post('/learning-agreement-1-3', async (req, res) => {
                     })
             } else if (req.body.infoType === 2) {
 
-                console.log(req.body.name)
+                console.log("name:" + req.body.name)
+                console.log(id)
 
-                await Form.findByIdAndUpdate(id, {
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.receivingInstitution": req.body.receivingInstitution
+                    /*
                     "learningAgreementForm.receivingInstitution.name": req.body.receivingInstitution.name,
                     "learningAgreementForm.receivingInstitution.faculty": req.body.receivingInstitution.faculty,
                     "learningAgreementForm.receivingInstitution.erasmusCode": req.body.receivingInstitution.erasmusCode,
@@ -125,6 +127,8 @@ router.post('/learning-agreement-1-3', async (req, res) => {
                     "learningAgreementForm.receivingInstitution.contactPerson.name": req.body.receivingInstitution.contactPerson.name,
                     "learningAgreementForm.receivingInstitution.contactPerson.email": req.body.receivingInstitution.contactPerson.email,
                     "learningAgreementForm.receivingInstitution.contactPerson.phoneNumber": req.body.receivingInstitution.contactPerson.phoneNumber,
+                    */
+
                 })
             }
         }

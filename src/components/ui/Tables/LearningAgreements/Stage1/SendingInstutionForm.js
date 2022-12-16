@@ -23,6 +23,7 @@ export default class App extends React.Component {
             complete: "",
             displayComplete: "none",
             id: props.id,
+
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,

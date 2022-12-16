@@ -19,10 +19,10 @@ export default class App extends React.Component {
         this.state = {
             startDate: new Date(),
             options: this.options,
-            countryVal: 2,
+            countryVal: "",
             complete: "",
             displayComplete: "none",
-
+            id: props.id,
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
@@ -151,7 +151,7 @@ export default class App extends React.Component {
                 faculty: this.state.faculty,
                 departmentName: this.state.department,
                 address: this.state.address,
-                country: this.state.country,
+                country: this.state.countryVal,
                 erasmusCode: this.state.erasmusCode,
                 contactPerson: {
                     name: this.state.contactPersonName,
