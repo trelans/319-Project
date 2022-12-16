@@ -42,7 +42,8 @@ router.post('/application-page1', async (req, res) => {
             "LAFStatus": LAF.status,
             "LAFDeadline": LAF.deadline,
             "CTFStatus": CTF.status,
-            "CTFDeadline": CTF.deadline
+            "CTFDeadline": CTF.deadline,
+            "applicationID": application._id
         })
     } catch (e) {
         console.log(e)

@@ -1,21 +1,25 @@
 import "../../../index"
 import style from "./coursePopUp.module.css"
-import CoursesTable from "./Tables/HostCourses"
+import nomCourse from "./Tables/NominateACourse"
 import {useEffect} from "react";
 
 
 
 import React, {useState} from 'react';
+import NominateACourse from "./Tables/NominateACourse";
 function Modal(props) {
 
 
     const [arr, setArr] = useState();
     const [closePop, setPop] = useState();
+    const [bilkentCourse, setBilkentCourse] = useState();
 
 
+    var willClose = false;
 
-    var bilkentCourse = props.bilkentCourse
-
+    useEffect(() => {
+       setBilkentCourse(props.bilkentCourse)
+    },[bilkentCourse])
 
 
 
@@ -25,12 +29,6 @@ function Modal(props) {
     function selectHandler() {
 
         props.setArrFunc(arr)
-
-        props.onCancel()
-    }
-    function handleNominateNewCourse() {
-
-        props.setNumFunc(bilkentCourse)
 
         props.onCancel()
     }
@@ -44,14 +42,12 @@ function Modal(props) {
 
     return(
         <div className={"perfectCentered"} >
-            <div className={style.modal}>
-                <h4>Select a Equivalent Course For  From The List</h4>
-                <h6>or</h6>
-                <button onClick={handleNominateNewCourse}>Nominate A New Course</button>
+            <div className={style.modal} style={{overflowY : "scroll"}}>
+                <h4>Nominate New Course for {props.bilkentCourse["courseCode"]} </h4>
+
                 <a className={style.close} onClick={cancelHandler}>×</a>
                 <br/> <br/>
-
-                <CoursesTable setArrFunc={setArr} closePopUp={setPop} selectedBilkentCourse={props.bilkentCourse} ></CoursesTable>
+            <NominateACourse />
 
             </div>
         </div>

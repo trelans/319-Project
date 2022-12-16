@@ -41,6 +41,17 @@ const departmentSchema = new mongoose.Schema({
         trim: true
     },
 
+    areaCode: {
+        type: String,
+        required: true,
+        trim: true
+    },
+
+    faculty: {
+        type: String,
+        trim: true
+    },
+
     erasmusCoordinators: [erasmusCoordinator],
 
     hostUniversities: [hostUniversity]
