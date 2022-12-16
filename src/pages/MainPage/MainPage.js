@@ -8,8 +8,6 @@ import Grid from "@mui/material/Grid";
 import SearchBarMain from "./SearchBarMain";
 import BookData from "./Data.json";
 
-import DropDown from "./DropDown.js";
-
 function MainPage() {
   /*
   const state = useLocation()
@@ -33,9 +31,9 @@ function MainPage() {
         </div>
         <div className="main-margined">
           <form>
-            <select id="cars" name="cars">
-              <option value="volvo">User</option>
-              <option value="saab">University</option>
+            <select id="searchParameter" name="searchParameter">
+              <option value="user">User</option>
+              <option value="university">University</option>
             </select>
           </form>
         </div>
