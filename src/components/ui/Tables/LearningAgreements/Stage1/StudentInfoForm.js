@@ -18,6 +18,7 @@ const options = [
 ];
 export default class App extends React.Component {
   constructor(props) {
+    console.log(props)
     super(props);
     this.options = countryList().getData();
     this.state = {
@@ -28,12 +29,12 @@ export default class App extends React.Component {
       countryVal: 2,
       complete: "",
       displayComplete: "none",
-      name: "Kutay",
-      lastName: "Senyigit",
-      academicYear: "2022",
-      studyCycle: "Unknown",
-      subjectAreaCode: "Unknown",
-      gender: "male",
+      name: props.fields.name,
+      lastName: props.fields.lastName,
+      academicYear: props.fields.academicYear,
+      studyCycle: props.fields.studyCycle,
+      subjectAreaCode: props.fields.subjectAreaCode,
+      gender: props.fields.gender,
       disabledName: true,
       disabledLastName: true,
       disabledDateOfBirth: true,

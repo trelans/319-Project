@@ -20,39 +20,35 @@ const options = [
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.fields)
     this.options = countryList().getData();
     this.state = {
       startDate: new Date(),
-      country: "",
       options: this.options,
       countryVal: 2,
       complete: "",
       displayComplete: "none",
-      name: "Kingston University",
-      faculty: "Engineering",
-      academicYear: "2022",
-      studyCycle: "Onurcan",
-      address: "290 Street LA 2032  ",
-      subjectAreaCode: "onurcanatac@bilkent.edu.tr",
-      erasmusCode: "109091",
+      name: props.fields.name,
+      faculty: props.fields.faculty,
+      department: props.fields.departmentName,
+      address: props.fields.address,
+      country: props.fields.country,
+      erasmusCode: props.fields.erasmusCode,
+      contactPersonName: props.fields.contactPerson.name,
+      contactPersonEmail: props.fields.contactPerson.email,
+      contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber,
+
       disabledName: true,
-      disabledLastName: true,
-      disabledDateOfBirth: true,
-      disabledNationality: true,
-      disabledGender: true,
-      disabledAcademicYear: true,
-      disabledStudyCycle: true,
-      disabledSubjectArea: true,
+      disabledFaculty: true,
+      disabledDepartment: true,
+      disabledAddress: true,
+      disabledCountry: true,
+      disabledErasmusCode: true,
+      disabledPersonName: true,
+      disabledPersonEmail: true,
+      disabledPersonPhoneNumber: true,
     };
 
-    this.flagsRef = React.createRef();
-    this.lastnameRef = React.createRef();
-    this.dateOfBirthRef = React.createRef();
-    this.nationalityRef = React.createRef();
-    this.genderRef = React.createRef();
-    this.academicYearRef = React.createRef();
-    this.studyCycleRef = React.createRef();
-    this.subjectAreaCodeRef = React.createRef();
     this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
@@ -86,7 +82,7 @@ export default class App extends React.Component {
     this.setState({ disabledGender: !this.state.disabledGender });
   }
   handleEditAcademicYearClick() {
-    this.setState({ disabledAcademicYear: !this.state.disabledAcademicYear });
+    this.setState({ disabledDepartment: !this.state.disabledAcademicYear });
   }
   handleEditStudyCycleClick() {
     this.setState({ disabledStudyCycle: !this.state.disabledStudyCycle });

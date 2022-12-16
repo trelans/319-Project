@@ -82,7 +82,9 @@ function LearningAgreementDuringMobility2() {
           </Grid>
 
           <div className="perfectCentered">
-            <button className={styles.butConvert}>Convert To Pdf </button>
+            <Link to="/learning-agreement-during-mobility-convert">
+              <button className={styles.butConvert}>Convert To Pdf </button>
+            </Link>
           </div>
         </div>
       </div>

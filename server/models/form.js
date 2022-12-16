@@ -197,86 +197,107 @@ const formSchema = new mongoose.Schema({
     },
 
     learningAgreementForm : {
-
         studyCycle: {
             type: String,
-            //require: true
+            default: "Bachelor" // Alpha Version of the application is for only Bachelor students
         },
 
         subjectAreaCode: {
-            type: String, //sample subject area code: 01.5 or 13.6 -- double / string ??
-            //require: true
+            type: String
+        },
+
+        dateofBirth: {
+            type: String
+        },
+
+        nationality: {
+            type: String
+        },
+
+        gender: {
+            type: String
         },
 
         sendingInstitution: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true,
-            ref: 'University',
-        },
-
-        sendingFaculty: {
-            type: String,
-            //required: true,
-        },
-
-        sendingDepartment: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true,
-            ref: 'Department'
-        },
-
-        sendingContactPerson: {
-            sendingContactPersonName: {
-                type: String,
-                //required: true
+            name: {
+                type: String
             },
-            sendingContactPersonEmail: {
-                type: String,
-                //required: true
+
+            faculty: {
+                type: String
             },
-            sendingContactPersonPhone: {
-                type: String,
-                //required: true
+
+            erasmusCode: {
+                type: String
+            },
+
+            departmentName: {
+                type: String
+            },
+
+            address: {
+                type: String
+            },
+
+            country: {
+                type: String
+            },
+
+            contactPerson: {
+                name: {
+                    type: String
+                },
+                email: {
+                    type: String
+                },
+                phoneNumber: {
+                    type: String
+                }
             }
         },
 
         receivingInstitution: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true,
-            ref: 'University',
-        },
-
-        receivingFaculty: {
-            type: String,
-            //required: true,
-        },
-
-        receivingDepartment: {
-            type: mongoose.Schema.Types.ObjectId,
-            //required: true,
-            ref: 'Department'
-        },
-
-        receivingContactPerson: {
-            receivingContactPersonName: {
-                type: String,
-                //required: true
+            name: {
+                type: String
             },
-            receivingContactPersonEmail: {
-                type: String,
-                //required: true
+
+            faculty: {
+                type: String
             },
-            receivingContactPersonPhone: {
-                type: String,
-                //required: true
+
+            erasmusCode: {
+                type: String
+            },
+
+            departmentName: {
+                type: String
+            },
+
+            address: {
+                type: String
+            },
+
+            country: {
+                type: String
+            },
+
+            contactPerson: {
+                name: {
+                    type: String
+                },
+                email: {
+                    type: String
+                },
+                phoneNumber: {
+                    type: String
+                }
             }
         },
 
         studyProgramAtReceivingIns: {
             componentsOfStudyProgramAtReceivingIns: [componentOfStudyProgramAtReceivingIns],
             totalEctsCredits: {
-                type: Number,
-                //required: true
+                type: Number
             }
         },
 
@@ -284,8 +305,7 @@ const formSchema = new mongoose.Schema({
         recognitionAtSendingIns:  {
             componentsOfRecognitionAtSendingIns: [componentOfRecognitionAtSendingIns],
             totalEctsCredits: {
-                type: Number,
-                //required: true
+                type: Number
             }
         },
 
