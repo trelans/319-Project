@@ -33,7 +33,6 @@ function MainPage() {
         </div>
         <div className="main-margined">
           <form>
-            <label for="cars">Choose a car:</label>
             <select id="cars" name="cars">
               <option value="volvo">User</option>
               <option value="saab">University</option>

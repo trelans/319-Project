@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,8 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
-import styles from "../coursePopUp.module.css"
-
+import styles from "../coursePopUp.module.css";
 
 const useStyles = makeStyles({
   table: {
@@ -69,11 +68,15 @@ export default function BasicTable(props) {
   const classes = useStyles();
 
   props.courses["CS Required Course"].forEach((course) => {
-    rows.push({courseCode: course.courseCode, courseName: course.name, credit: course.ectsCredits, courseType: course.courseType})
-  })
+    rows.push({
+      courseCode: course.courseCode,
+      courseName: course.name,
+      credit: course.ectsCredits,
+      courseType: course.courseType,
+    });
+  });
 
-
-  props.closePopUp(false)
+  props.closePopUp(false);
 
   const requestSearch = (searchedVal: string) => {
     const filteredRows = originalRows.filter((row) => {
@@ -87,18 +90,15 @@ export default function BasicTable(props) {
     requestSearch(searched);
   };
 
-  const handleRemoveSpecificRow =  idx => {
-
+  const handleRemoveSpecificRow = (idx) => {
     rows.splice(idx, 1);
     setRows(rows);
   };
 
-
-  const handleItemClick = item => {
-
-    props.setArrFunc(item)
-    props.closePopUp(true)
-  }
+  const handleItemClick = (item) => {
+    props.setArrFunc(item);
+    props.closePopUp(true);
+  };
 
   return (
     <>
@@ -108,8 +108,8 @@ export default function BasicTable(props) {
           onChange={(searchVal) => requestSearch(searchVal)}
           onCancelSearch={() => cancelSearch()}
         />
-        <TableContainer style={{height: 450}}>
-          <Table className={styles.tableCt} aria-label="simple table" >
+        <TableContainer style={{ height: 450 }}>
+          <Table className={styles.tableCt} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align={"right"}>Course Code</TableCell>
@@ -120,12 +120,21 @@ export default function BasicTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row,idx) => (
-                <TableRow key={idx} >
+              {rows.map((row, idx) => (
+                <TableRow key={idx}>
                   <TableCell align="right">{row.courseCode}</TableCell>
                   <TableCell align="right">{row.courseName}</TableCell>
                   <TableCell align="center">{row.credit}</TableCell>
-                  <TableCell align="right"><button onClick={() => { handleItemClick(row); handleRemoveSpecificRow(idx)}}>Select Course</button></TableCell>
+                  <TableCell align="right">
+                    <button
+                      onClick={() => {
+                        handleItemClick(row);
+                        handleRemoveSpecificRow(idx);
+                      }}
+                    >
+                      Select Course
+                    </button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
