@@ -51,7 +51,7 @@ function ProfilePageCourse() {
           </table>
           <table className="ppc-table">
             <tr>
-              <td className="ppc-header-other">Required Language: </td>
+              <td className="ppc-header-other">Required Language:</td>
               <td className="ppc-header-other">English</td>
             </tr>
             <tr>

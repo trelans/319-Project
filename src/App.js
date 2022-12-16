@@ -49,6 +49,7 @@ import LearningAgreementAfterMobility from "./pages/LearningAgreement/LearningAg
 import CoursePage from "./pages/CoursePage/CoursePage";
 import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
 import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
+import PreApprovalFormConvert from "./pages/ConvertToPdfPages/PreApprovalFormConvert";
 
 import io from "socket.io-client";
 
@@ -290,6 +291,11 @@ function App() {
         exact
         path="/application-page-fac"
         element={<ApplicationPageFAC />}
+      />
+      <Route
+        exact
+        path="/pre-approval-form-convert"
+        element={<PreApprovalFormConvert />}
       />
     </Routes>
   );
