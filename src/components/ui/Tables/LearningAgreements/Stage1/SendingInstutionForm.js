@@ -20,18 +20,15 @@ export default class App extends React.Component {
         this.state = {
             startDate: new Date(),
             options: this.options,
-            countryVal: 2,
             complete: "",
             displayComplete: "none",
             id: props.id,
-
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
             address: props.fields.address,
-            country: props.fields.country,
+            countryVal: props.fields.country,
             erasmusCode: props.fields.erasmusCode,
-
             contactPersonName: props.fields.contactPerson.name,
             contactPersonEmail: props.fields.contactPerson.email,
             contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber,
@@ -156,13 +153,13 @@ export default class App extends React.Component {
     handlerComplete = (e) => {
         const sendingInstitutionInfo = {
             id: this.state.id,
-            info: 1,
+            infoType: 1,
             sendingInstitution: {
                 name: this.state.name,
                 faculty: this.state.faculty,
                 departmentName: this.state.department,
                 address: this.state.address,
-                country: this.state.country,
+                country: this.state.countryVal,
                 erasmusCode: this.state.erasmusCode,
                 contactPerson: {
                     name: this.state.contactPersonName,

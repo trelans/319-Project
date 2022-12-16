@@ -98,7 +98,6 @@ router.post('/learning-agreement-1-3', async (req, res) => {
             if (req.body.infoType === 1) {
                 await Form.findByIdAndUpdate(id, {"learningAgreementForm.sendingInstitution": req.body.sendingInstitution})
             } else if (req.body.infoType === 0) {
-
                 await User.findOneAndUpdate({"name": req.body.name}, {
                     "name": req.body.name,
                     "lastName": req.body.lastName,

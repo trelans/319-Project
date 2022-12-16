@@ -12,7 +12,7 @@ import {MenuItem} from "@mui/material";
 import Grid from "@material-ui/core/Grid";
 import {handleRequests} from "../../../../../pages/requests";
 
-const options = [
+const genderOptions = [
     {value: "female", label: "Female"},
     {value: "male", label: "Male"},
     {value: "other", label: "Other"},
@@ -22,11 +22,13 @@ export default class App extends React.Component {
         console.log(props)
         super(props);
         this.options = countryList().getData();
+        this.genderOptions = genderOptions
         this.state = {
             startDate: new Date(),
             country: "",
             region: "",
             options: this.options,
+            genderOptions: this.genderOptions,
             countryVal: 2,
             complete: "",
             displayComplete: "none",
@@ -359,12 +361,13 @@ export default class App extends React.Component {
                                     style={{marginLeft: "0px", color: "black", width: "50%"}}
                                 >
                                     <Select
+                                        options={this.state.genderOptions}
                                         value={this.state.gender}
                                         onChange={this.handleChangeGender}
                                         disabled={this.state.disabledGender ? "disabledGender" : ""}
                                     >
-                                        {options.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
+                                        {this.genderOptions.map((option) => (
+                                            <MenuItem key={option.label} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))}
