@@ -16,6 +16,7 @@ function LearningAgreementBeforeMobility1() {
     const [receivingInstitutionInfo, setReceivingInstitutionInfo] = useState()
     const [isLoading, setLoading] = useState(true)
     const [sendingInstitutionInfo, setSendingInstitutionInfo] = useState()
+    const [formID, setFormID] = useState('')
 
     // the if clause is required otherwise react continuously rerender the page
     if (!loaded) {
@@ -24,6 +25,7 @@ function LearningAgreementBeforeMobility1() {
             setStudentInfo(response.studentInfo)
             setSendingInstitutionInfo(response.sendingInstitutionInfo)
             setReceivingInstitutionInfo(response.receivingInstitutionInfo)
+            setFormID(response.formID)
             loaded = true
             setLoading(false)
         })
@@ -65,7 +67,7 @@ function LearningAgreementBeforeMobility1() {
                             >
                                 Check your data
                             </p>
-                            <LABMStudentInfo fields={studentInfo}></LABMStudentInfo>
+                            <LABMStudentInfo id={formID} fields={studentInfo}></LABMStudentInfo>
                         </Grid>
 
                         <Grid item xs={4}>
@@ -80,9 +82,9 @@ function LearningAgreementBeforeMobility1() {
                                 Sending Institution
                             </h1>
                             <p id="description" className="blackLetter">
-                                Check your data (Contact with Erasmus Coordinator if necessary)
+                                Check your data
                             </p>
-                            <LABMSendingInstution fields={sendingInstitutionInfo}></LABMSendingInstution>
+                            <LABMSendingInstution id={formID} fields={sendingInstitutionInfo}></LABMSendingInstution>
                         </Grid>
 
                         <Grid item xs={12}>
@@ -92,7 +94,7 @@ function LearningAgreementBeforeMobility1() {
                             <p id="description" className="blackLetter">
                                 Check your data
                             </p>
-                            <LABMReceivingInstution fields={receivingInstitutionInfo}></LABMReceivingInstution>
+                            <LABMReceivingInstution id={formID} fields={receivingInstitutionInfo}></LABMReceivingInstution>
                         </Grid>
                     </Grid>
                 </div>
