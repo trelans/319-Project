@@ -1,8 +1,9 @@
 import { handleRequests } from "../requests";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
 import PreApprovalFormCoursesTable from "./PdfTables/PreApprovalFormCoursesTable";
+import {useLocation} from 'react-router-dom';
 
 const durationTable = {
   0: "Fall",
@@ -65,6 +66,8 @@ function PreApprovalFormConvert() {
     loaded = true;
     setLoading(false);
   }
+
+  const location = useLocation();
 
   if (isLoading) {
     return (

@@ -2,6 +2,7 @@ import style from "./NominateACourse.module.css";
 import { Button, Container, Divider, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { InputRow } from "../../../InputRow";
+import { PropaneSharp } from "@mui/icons-material";
 
 const arr = [
   { value: "", text: "--Choose an option--" },
@@ -10,7 +11,7 @@ const arr = [
   { value: "kiwi", text: "Kiwi 🥝" },
 ];
 
-export default function App() {
+export default function App(props) {
   const [name, setName] = useState("");
   const [story, setStory] = useState({});
   const [inputFields, setInputFields] = useState([
@@ -64,6 +65,10 @@ export default function App() {
     }
   };
 
+  function handleClose() {
+    props.onCancel();
+  }
+
   return (
     <>
       <Container maxWidth="xs">
@@ -103,7 +108,7 @@ export default function App() {
             <Button type="submit" variant="contained" disableElevation>
               Send
             </Button>
-            <Button disableElevation>Cancel</Button>
+            <Button disableElevation onClick={handleClose}>Cancel</Button>
           </Stack>
         </form>
       </Container>
