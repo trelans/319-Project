@@ -214,12 +214,12 @@ const userSchema = new mongoose.Schema({
 
         sendingInstitution: {
             type: String,
-            required: true
+            //required: true
         },
 
         studyCycle: {
             type: String,
-            required: true
+            //required: true
         }
     }
 
