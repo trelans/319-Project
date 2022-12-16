@@ -112,16 +112,19 @@ router.post('/learning-agreement-1-3', async (req, res) => {
                     "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
                     })
             } else if (req.body.infoType === 2) {
+
+                console.log(req.body.name)
+
                 await Form.findByIdAndUpdate(id, {
-                    "learningAgreementForm.receivingInstitution.name": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.faculty": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.erasmusCode": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.departmentName": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.address": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.country": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.contactPerson.name": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.contactPerson.email": req.body.dateofBirth,
-                    "learningAgreementForm.receivingInstitution.contactPerson.phoneNumber": req.body.dateofBirth,
+                    "learningAgreementForm.receivingInstitution.name": req.body.receivingInstitution.name,
+                    "learningAgreementForm.receivingInstitution.faculty": req.body.receivingInstitution.faculty,
+                    "learningAgreementForm.receivingInstitution.erasmusCode": req.body.receivingInstitution.erasmusCode,
+                    "learningAgreementForm.receivingInstitution.departmentName": req.body.receivingInstitution.departmentName,
+                    "learningAgreementForm.receivingInstitution.address": req.body.receivingInstitution.address,
+                    "learningAgreementForm.receivingInstitution.country": req.body.receivingInstitution.country,
+                    "learningAgreementForm.receivingInstitution.contactPerson.name": req.body.receivingInstitution.contactPerson.name,
+                    "learningAgreementForm.receivingInstitution.contactPerson.email": req.body.receivingInstitution.contactPerson.email,
+                    "learningAgreementForm.receivingInstitution.contactPerson.phoneNumber": req.body.receivingInstitution.contactPerson.phoneNumber,
                 })
             }
         }

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="&#10;SendingInstutionForm.js&#10;onChange method added for all editables.">
+    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="&#10;receivingInstutionForm.js&#10;onChange method added for all editables.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routers/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers/form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/StudentInfoForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/StudentInfoForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +74,7 @@
       <workItem from="1670849953856" duration="4697000" />
       <workItem from="1671088987457" duration="394000" />
       <workItem from="1671089771071" duration="30594000" />
-      <workItem from="1671218960009" duration="6951000" />
+      <workItem from="1671218960009" duration="8070000" />
     </task>
     <task id="LOCAL-00001" summary="user router -- create user">
       <created>1671103781135</created>
@@ -153,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671224784193</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="&#10;receivingInstutionForm.js&#10;onChange method added for all editables.">
+      <created>1671227983286</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671227983286</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +187,7 @@
     <MESSAGE value="&#10;router/profile.js updated" />
     <MESSAGE value="&#10;router/profile.js updated&#10;&#10;profile pages connected with routers&#10;&#10;comment sections are not done!" />
     <MESSAGE value="&#10;SendingInstutionForm.js&#10;onChange method added for all editables." />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;SendingInstutionForm.js&#10;onChange method added for all editables." />
+    <MESSAGE value="&#10;receivingInstutionForm.js&#10;onChange method added for all editables." />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;receivingInstutionForm.js&#10;onChange method added for all editables." />
   </component>
 </project>
