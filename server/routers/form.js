@@ -101,11 +101,23 @@ router.post('/learning-agreement-1-3', async (req, res) => {
 
                 await User.findOneAndUpdate({"name": req.body.name}, {
                     "name": req.body.name,
-                    "lastName": req.body.lastName
+                    "lastName": req.body.lastName,
+                    "erasmusCandidateData.academicYear": req.body.academicYear
+
                 })
+                await Form.findByIdAndUpdate(id, {
+
+                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
+                    "learningAgreementForm.nationality": req.body.nationality,
+                    "learningAgreementForm.gender": req.body.gender,
+                    "learningAgreementForm.studyCycle": req.body.studyCycle,
+                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
+
+                    })
+                }
             }
             res.status(200).send({status: "Ok"})
-        }
+
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

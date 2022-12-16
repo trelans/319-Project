@@ -30,12 +30,17 @@ export default class App extends React.Component {
             countryVal: 2,
             complete: "",
             displayComplete: "none",
+
             name: props.fields.name,
             lastName: props.fields.lastName,
+
             academicYear: props.fields.academicYear,
             studyCycle: props.fields.studyCycle,
             subjectAreaCode: props.fields.subjectAreaCode,
+
             gender: props.fields.gender,
+            nationality: props.fields.nationality,
+
             disabledName: true,
             disabledLastName: true,
             disabledDateOfBirth: true,
@@ -46,8 +51,54 @@ export default class App extends React.Component {
             disabledSubjectArea: true,
         };
 
+        this.updateInputName = this.updateInputName.bind(this);
+        this.updateInputLastName = this.updateInputLastName.bind(this);
+
+        this.updateInputAcademicYear = this.updateInputAcademicYear.bind(this);
+        this.updateInputStudyCycle = this.updateInputStudyCycle.bind(this);
+        this.updateInputSubjectAreaCode = this.updateInputSubjectAreaCode.bind(this);
+
+        this.updateInputGender = this.updateInputGender.bind(this);
+        this.updateInputNationality = this.updateInputNationality.bind(this);
+
+
+
         this.handleChangeDate = this.handleChangeDate.bind(this);
     }
+
+
+    updateInputName(event) {
+        this.setState({name: event.target.name})
+    }
+    updateInputLastName(event) {
+        this.setState({lastName: event.target.lastName})
+    }
+
+
+
+    updateInputAcademicYear(event) {
+        this.setState({academicYear: event.target.name})
+    }
+    updateInputStudyCycle(event) {
+        this.setState({studyCycle: event.target.lastName})
+    }
+    updateInputSubjectAreaCode(event) {
+        this.setState({subjectAreaCode: event.target.lastName})
+    }
+
+
+    updateInputGender(event) {
+        this.setState({gender: event.target.name})
+    }
+    updateInputNationality(event) {
+        this.setState({nationality: event.target.lastName})
+    }
+
+
+
+
+
+
 
     handleChangeGender = (gender) => {
         this.setState({gender});
@@ -103,7 +154,9 @@ export default class App extends React.Component {
             academicYear: this.state.academicYear,
             studyCycle: this.state.studyCycle,
             subjectAreaCode: this.state.subjectAreaCode,
-            gender: this.state.gender
+            gender: this.state.gender,
+            dateofBirth: this.state.dateofBirth,
+            nationality: this.state.nationality
         }
 
         handleRequests(e, studentInfo, "learning-agreement-1-3", "2", (response, status) => {
@@ -136,6 +189,7 @@ export default class App extends React.Component {
                                     pattern="[A-Za-z]"
                                     className="styleInput"
                                     defaultValue={this.state.name}
+                                    onChange={this.updateInputName}
                                     disabled={this.state.disabledName ? "disabledName" : ""}
                                     required
                                 />
@@ -171,6 +225,7 @@ export default class App extends React.Component {
                                     maxLength="30"
                                     pattern="[A-Za-z]"
                                     defaultValue={this.state.lastName}
+                                    onChange={this.updateInputLastName}
                                     className="styleInput"
                                     disabled={
                                         this.state.disabledLastName ? "disabledLastName" : ""
@@ -266,6 +321,7 @@ export default class App extends React.Component {
                                             isSearchable={true}
                                             options={this.state.options}
                                             defaultValue={this.state.value}
+                                            onChange={this.updateInputNationality}
                                             disabled={
                                                 this.state.disabledNationality
                                                     ? "disabledNationality"
@@ -340,6 +396,7 @@ export default class App extends React.Component {
                                     maxLength="30"
                                     className="styleInput"
                                     defaultValue={this.state.academicYear}
+                                    onChange={this.updateInputAcademicYear}
                                     disabled={
                                         this.state.disabledAcademicYear
                                             ? "disabledAcademicYear"
@@ -376,6 +433,7 @@ export default class App extends React.Component {
                                     id="studyCycle"
                                     maxLength="50"
                                     defaultValue={this.state.studyCycle}
+                                    onChange={this.updateInputStudyCycle}
                                     className="styleInput"
                                     disabled={
                                         this.state.disabledStudyCycle ? "disabledStudyCycle" : ""
@@ -408,6 +466,7 @@ export default class App extends React.Component {
                                     id="subjectAreaCode"
                                     className="styleInput"
                                     defaultValue={this.state.subjectAreaCode}
+                                    onChange={this.updateInputSubjectAreaCode}
                                     disabled={
                                         this.state.disabledSubjectArea ? "disabledSubjectArea" : ""
                                     }
