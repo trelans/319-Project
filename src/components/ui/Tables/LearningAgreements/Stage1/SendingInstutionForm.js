@@ -24,15 +24,18 @@ export default class App extends React.Component {
             complete: "",
             displayComplete: "none",
             id: props.id,
+
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
             address: props.fields.address,
             country: props.fields.country,
             erasmusCode: props.fields.erasmusCode,
+
             contactPersonName: props.fields.contactPerson.name,
             contactPersonEmail: props.fields.contactPerson.email,
             contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber,
+
             savedInfo: "",
 
             disabledName: true,
@@ -45,13 +48,64 @@ export default class App extends React.Component {
             disabledContactPersonEmail: true,
             disabledContactPersonPhoneNumber: true,
         };
+
+
+
+        this.updateInputName = this.updateInputName.bind(this);
+
+        this.updateInputFaculty = this.updateInputFaculty.bind(this);
+        this.updateInputDepartment = this.updateInputDepartment.bind(this);
+
+        this.updateInputAddress = this.updateInputAddress.bind(this);
+        this.updateInputCountry = this.updateInputCountry.bind(this);
+        this.updateInputErasmusCode = this.updateInputErasmusCode.bind(this);
+
         this.updateInputContactPersonName = this.updateInputContactPersonName.bind(this);
+        this.updateInputContactPersonEmail = this.updateInputContactPersonEmail.bind(this);
+        this.updateInputContactContactPersonPhoneNumber = this.updateInputContactContactPersonPhoneNumber.bind(this);
+
+
         this.handleChangeDate = this.handleChangeDate.bind(this);
+
     }
+
+
+
+    updateInputAddress(event) {
+        this.setState({address: event.target.value})
+    }
+    updateInputCountry(event) {
+        this.setState({country: event.target.value})
+    }
+    updateInputErasmusCode(event) {
+        this.setState({erasmusCode: event.target.value})
+    }
+
 
     updateInputContactPersonName(event) {
         this.setState({contactPersonName: event.target.value})
     }
+    updateInputContactPersonEmail(event) {
+        this.setState({contactPersonEmail: event.target.value})
+    }
+    updateInputContactContactPersonPhoneNumber(event) {
+        this.setState({contactPersonPhoneNumber: event.target.value})
+    }
+
+
+
+    updateInputName(event) {
+        this.setState({name: event.target.value})
+    }
+    updateInputFaculty(event) {
+        this.setState({faculty: event.target.value})
+    }
+    updateInputDepartment(event) {
+        this.setState({department: event.target.value})
+    }
+
+
+
 
     changeHandler = (countryVal) => {
         this.setState({countryVal});
@@ -164,6 +218,7 @@ export default class App extends React.Component {
                                     placeholder="write your name"
                                     pattern="[A-Za-z]"
                                     className="styleInput"
+                                    onChange={this.updateInputName}
                                     defaultValue={this.state.name}
                                     disabled={this.state.disabledName ? "disabledName" : ""}
                                     required
@@ -200,6 +255,7 @@ export default class App extends React.Component {
                                     pattern="[A-Za-z]"
                                     defaultValue={this.state.faculty}
                                     className="styleInput"
+                                    onChange={this.updateInputFaculty}
                                     disabled={
                                         this.state.disabledFaculty ? "disabledFaculty" : ""
                                     }
@@ -236,6 +292,7 @@ export default class App extends React.Component {
                                     pattern="[A-Za-z]"
                                     defaultValue={this.state.erasmusCode}
                                     className="styleInput"
+                                    onChange={this.updateInputErasmusCode}
                                     disabled={
                                         this.state.disabledErasmusCode ? "disabledErasmusCode" : ""
                                     }
@@ -270,6 +327,7 @@ export default class App extends React.Component {
                                     id="name"
                                     maxLength="30"
                                     className="styleInput"
+                                    onChange={this.updateInputDepartment}
                                     defaultValue={this.state.department}
                                     disabled={
                                         this.state.disabledDepartment
@@ -307,6 +365,7 @@ export default class App extends React.Component {
                                     type="text"
                                     maxLength="50"
                                     defaultValue={this.state.address}
+                                    onChange={this.updateInputAddress}
                                     disabled={this.state.disabledAddress ? "disabledAddress" : ""}
                                     className="styleInput"
                                     required
@@ -444,6 +503,7 @@ export default class App extends React.Component {
                                     id="subjectAreaCode"
                                     className="styleInput"
                                     defaultValue={this.state.contactPersonEmail}
+                                    onChange={this.updateInputContactPersonEmail}
                                     disabled={
                                         this.state.disabledContactPersonEmail ? "disabledContactPersonEmail" : ""
                                     }
