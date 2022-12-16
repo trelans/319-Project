@@ -60,7 +60,7 @@ export default function ChatContainer({currentChatUser}) {
             }
 
             socket.current.emit("send-msg", {
-                to: currentChatUser._id,
+                to: currentChatUser.objectId,
                 from: id,
                 message: inputmessage
             })
