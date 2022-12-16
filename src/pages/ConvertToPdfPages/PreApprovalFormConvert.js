@@ -1,14 +1,20 @@
 import { handleRequests } from "../requests";
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
-import TableAddRows from "../PreApprovalFormPage/TableAddRows";
-
+import PreApprovalFormCoursesTable from "./PdfTables/PreApprovalFormCoursesTable";
 
 const durationTable = {
   0: "Fall",
   1: "Spring",
   2: "Year",
+};
+
+const options = {
+  orientation: "landscape",
+  unit: "in",
+  format: [10, 15],
+  scale: 1,
 };
 
 let loaded = false;
@@ -30,6 +36,9 @@ function PreApprovalFormConvert() {
   const [academicYear, setAcademicYear] = useState("");
   const [semester, setSemester] = useState("");
   const [duration, setDuration] = useState("");
+  const [coordinatorName, setCoordinatorName] = useState("");
+  const [signature, setSignature] = useState(""); // will be the digital signature of the coordinator
+  const [date, setDate] = useState("");
   const [ECTSCredits, setECTSCredits] = useState("");
   const [courses, setCourses] = useState([]);
   const [bilkentCourses, setBilkentCourses] = useState([]);
@@ -43,15 +52,18 @@ function PreApprovalFormConvert() {
       setCandID(response.id);
       setCandDepartment(response.department);
       setHostUniName(response.appliedInstitution);
-      setAcademicYear(response.academicYear);
-      setSemester(response.semester);
+      setAcademicYear(response.academicYear); // to be added
+      setSemester(response.semester); // to be added
       setDuration(durationTable[response.duration]);
+      setCoordinatorName(response.coordinatorName); // to be added
+      setSignature(response.signature); // to be added
+      setDate(response.date); // to be added
       setECTSCredits(response.ECTSCredits);
       setCourses(response.courses);
       setBilkentCourses(response.bilkentCourses);
     });
     loaded = true;
-    setLoading(false);  
+    setLoading(false);
   }
 
   if (isLoading) {
@@ -65,7 +77,7 @@ function PreApprovalFormConvert() {
   return (
     <div>
       <div className="cp-center">
-        <Pdf targetRef={ref} filename="PreApprovalForm.pdf">
+        <Pdf targetRef={ref} filename="PreApprovalForm.pdf" options={options}>
           {({ toPdf }) => (
             <button className="cp-button" onClick={toPdf}>
               Download PDF
@@ -102,12 +114,10 @@ function PreApprovalFormConvert() {
               </tr>
             </table>
           </div>
-        </div>
-        <div className="cp-container">
           <div className="cp-center">
             <table className="cp-table">
               <tr className="cp-row">
-                <td className="cp-col">Name of the host institution:</td>
+                <td className="cp-col">Host Institution:</td>
                 <td className="cp-col">{hostUniName}</td>
               </tr>
               <tr className="cp-row">
@@ -124,12 +134,31 @@ function PreApprovalFormConvert() {
               </tr>
             </table>
           </div>
+          <div className="cp-center">
+            <table className="cp-table">
+              <tr className="cp-row">
+                <td className="cp-col">Approved by:</td>
+                <td className="cp-col">Exchange Coordinator</td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Name:</td>
+                <td className="cp-col">{coordinatorName}</td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Signature:</td>
+                <td className="cp-col">{signature}</td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Date:</td>
+                <td className="cp-col">{date}</td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <div className="pafp-flex-div">
-          <TableAddRows
-              getPdf={selectedCourse}
-
-          />
+        <div className="cp-container">
+          <div className="cp-center">
+            <PreApprovalFormCoursesTable />
+          </div>
         </div>
       </div>
     </div>
