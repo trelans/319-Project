@@ -543,7 +543,7 @@ body {
   font-weight: bold;
   font-family: sans-serif;
   margin-left: 17%;
-  margin-top: 0;
+  margin-top: 1%;
 }
 
 .pp-button2 {
@@ -630,7 +630,7 @@ body {
 }
 
 .ppu-container {
-  width: 70%;
+  width: 85%;
   padding: 1% 0 0;
   margin-left: 3%;
   margin-bottom: -2%;
@@ -661,7 +661,8 @@ body {
   width: 330px;
   height: 330px;
   padding: auto;
-  margin: auto;
+  margin-left: 16%;
+  margin-right: 5%;
   margin-bottom: 3%;
   display: flex;
 }
@@ -680,6 +681,7 @@ body {
 
 .ppu-table {
   margin: auto;
+  margin-bottom: 5%;
   padding: auto;
   empty-cells: show;
 }
@@ -726,6 +728,7 @@ body {
   font-family: sans-serif;
   margin-bottom: 1px;
   margin-left: 1px;
+  margin-top: 23%;
 }
 
 .ppu-table-header {
@@ -1469,28 +1472,65 @@ span.pafp-button-last {
 
 /*convert pdf styles*/
 .cp-table {
-  margin: auto;
   padding: auto;
   empty-cells: show;
   border: 1px solid black;
-  border-collapse: collapse;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
+
 .cp-row {
   margin: auto;
   padding: auto;
-  empty-cells: show;
   border: 1px solid black;
-  border-collapse: collapse;
-  font-weight: bolder;
 }
 
 .cp-col {
   margin: auto;
   padding: auto;
-  empty-cells: show;
+  padding-left: 0;
   border: 1px solid black;
-  border-collapse: collapse;
-  font-weight: lighter;
+}
+
+.cp-center {
+  display: flex;
+  margin: 5px;
+}
+
+.cp-h1 {
+  font-size: 24px;
+  color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding-bottom: 0%;
+}
+
+.cp-container {
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: flex;
+}
+
+.cp-button {
+  background: #a5c9ca;
+  width: 15%;
+  border: 0;
+  padding: 15px;
+  color: #2c3333;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 20px;
+  border-color: #2c3333;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin-bottom: 15px;
+}
+
+.cp-button:hover {
+  opacity: 75%;
 }
 
 /*SearchBarMain styles*/

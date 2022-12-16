@@ -1,25 +1,25 @@
 const express = require('express')
-const Task = require('../models/task')
+const Notification = require('../models/notification')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
-router.post('/tasks', auth, async (req,res) => {
-    //const task = new Task(req.body);
 
-    const task = new Task({
+router.post('/createNotification', auth, async (req,res) => {
+    const notification = new Notification({
         ...req.body,
         owner: req.user._id
     })
 
     try {
-        await task.save()
-        res.send(task)
+        await notification.save()
+        res.send(notification)
     } catch(e) {
         res.status(400)
         res.send(e)
     }
 })
 
+/*
 router.get('/tasks', auth, async (req,res) => {
 
     const match = {}
@@ -117,5 +117,6 @@ router.delete('/tasks/:id', auth, async (req,res) => {
         res.status(500).send()
     }
 })
+*/
 
 module.exports = router

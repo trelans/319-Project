@@ -69,8 +69,9 @@ export default function BasicTable(props) {
   const classes = useStyles();
 
   props.courses["CS Required Course"].forEach((course) => {
-    rows.push({courseCode: course.courseCode, courseName: course.name, credit: course.ectsCredits, id: course._id})
+    rows.push({courseCode: course.courseCode, courseName: course.name, credit: course.ectsCredits, courseType: course.courseType})
   })
+
 
   props.closePopUp(false)
 

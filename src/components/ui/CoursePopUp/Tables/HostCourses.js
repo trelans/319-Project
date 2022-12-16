@@ -13,11 +13,9 @@ import styles from "../coursePopUp.module.css"
 interface food {
     id: number;
     courseCode: string;
-    courseName: string;
     credit: number;
-    eqCourse: string;
-    isElective: boolean;
-    courseGroup: string;
+    courseName: string;
+    isMultiple: boolean;
 }
 
 const useStyles = makeStyles({
@@ -32,42 +30,42 @@ const originalRows: courses[] = [
         courseCode: "CS 202 <br /> CS 201  CS 103",
         courseName: " Fundamental Structures of Computer Science IFundamental Structures of Computer Science I",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: true,
     },
     {
         id: "",
         courseCode: "CS 224",
         courseName: "Computer Organization",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: false,
     },
     {
         id: "",
         courseCode: "CS 342",
         courseName: "Operating Systems",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: false,
     },
     {
         id: "",
         courseCode: "IE 400",
         courseName: "Principles of Engineering Management",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: false,
     },
     {
         id: "",
         courseCode: "None",
         courseName: "Arts Core Elective",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: false,
     },
     {
         id: "",
         courseCode: "None",
         courseName: "Technical Elective",
         credit: 6.0,
-        eqCourse: "Select",
+        isMultiple: false,
     },
 ];
 
@@ -77,6 +75,7 @@ export default function BasicTable(props ) {
 
     const classes = useStyles();
 
+    const bilkentCourse = props.selectedBilkentCourse
 
     props.closePopUp(false)
 
@@ -100,7 +99,7 @@ export default function BasicTable(props ) {
 
 
     const handleItemClick = item => {
-
+        item["idx"] = bilkentCourse["idx"]
         props.setArrFunc(item)
         props.closePopUp(true)
     }

@@ -29,7 +29,6 @@ import LearningAgreementBeforeMobility3 from "./pages/LearningAgreement/Learning
 import PreApprovalFormErasmusCoordinator from "./pages/PreApprovalFormPage/PreApprovalFormErasmusCoordinator";
 import PreApprovalFormFacAdmin from "./pages/PreApprovalFormPage/PreApprovalFormFacAdmin";
 import PreApprovalTryout from "./pages/PreApprovalFormPage/PreApprovalTryout";
-import TestPage from "./pages/testPage";
 
 import jwt_decode from "jwt-decode";
 import ConfirmedCoursesPage from "./pages/ConfirmedCoursesPage/ConfirmedCoursesPage";
@@ -50,8 +49,12 @@ import CoursePage from "./pages/CoursePage/CoursePage";
 import ApplicationPageCoordinator from "./pages/ApplicationPages/ApplicationPageCoordinator";
 import ApplicationPageFAC from "./pages/ApplicationPages/ApplicationPageFAC";
 import PreApprovalFormConvert from "./pages/ConvertToPdfPages/PreApprovalFormConvert";
+import CourseTransferFormConvert from "./pages/ConvertToPdfPages/CourseTransferFormConvert";
+import LearningAgreementBeforeMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementBeforeMobilityConvert";
+import LearningAgreementDuringMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementDuringMobilityConvert";
+import LearningAgreementAfterMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementAfterMobilityConvert";
 
-import io from "socket.io-client";
+//import io from "socket.io-client";
 
 //export const socket = io.connect("http://localhost:8080");
 
@@ -146,7 +149,6 @@ function App() {
           )
         }
       />
-      <Route exact path="/test" element={<TestPage />} />
       <Route exact path="/login" element={<LoginPage />} />
       <Route exact path="/main-page" element={<MainPage />} />
       <Route
@@ -233,6 +235,11 @@ function App() {
       />
       <Route
         exact
+        path="/profile-own-incoming"
+        element={<ProfilePageOwnIncoming />}
+      />
+      <Route
+        exact
         path="/profile-own-others"
         element={<ProfilePageOwnOthers />}
       />
@@ -297,9 +304,29 @@ function App() {
         path="/pre-approval-form-convert"
         element={<PreApprovalFormConvert />}
       />
+      <Route
+        exact
+        path="/course-transfer-form-convert"
+        element={<CourseTransferFormConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-before-mobility-convert"
+        element={<LearningAgreementBeforeMobilityConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-during-mobility-convert"
+        element={<LearningAgreementDuringMobilityConvert />}
+      />
+      <Route
+        exact
+        path="/learning-agreement-after-mobility-convert"
+        element={<LearningAgreementAfterMobilityConvert />}
+      />
     </Routes>
   );
 }
 
 export default App;
-export const socket = io("http://localhost:8080");
+//export const socket = io("http://localhost:8080");

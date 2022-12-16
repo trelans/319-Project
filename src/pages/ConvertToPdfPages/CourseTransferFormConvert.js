@@ -1,9 +1,7 @@
 import { handleRequests } from "../requests";
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
-import TableAddRows from "../PreApprovalFormPage/TableAddRows";
-
 
 const durationTable = {
   0: "Fall",
@@ -15,7 +13,7 @@ let loaded = false;
 
 const ref = React.createRef();
 
-function PreApprovalFormConvert() {
+function CourseTransferFormConvert() {
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = React.useState();
   const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
@@ -35,37 +33,10 @@ function PreApprovalFormConvert() {
   const [bilkentCourses, setBilkentCourses] = useState([]);
   const [isLoading, setLoading] = React.useState(true);
 
-  // the if clause is required otherwise react continuously rerender the page
-  if (!loaded) {
-    handleRequests(null, {}, "preapproval-student", "1", (response, status) => {
-      setCandName(response.name);
-      setCandSurname(response.surname);
-      setCandID(response.id);
-      setCandDepartment(response.department);
-      setHostUniName(response.appliedInstitution);
-      setAcademicYear(response.academicYear);
-      setSemester(response.semester);
-      setDuration(durationTable[response.duration]);
-      setECTSCredits(response.ECTSCredits);
-      setCourses(response.courses);
-      setBilkentCourses(response.bilkentCourses);
-    });
-    loaded = true;
-    setLoading(false);  
-  }
-
-  if (isLoading) {
-    return (
-      <div className={"Page"}>
-        <div className="App">Loading...</div>
-      </div>
-    );
-  }
-
   return (
     <div>
       <div className="cp-center">
-        <Pdf targetRef={ref} filename="PreApprovalForm.pdf">
+        <Pdf targetRef={ref} filename="LearningAgreementBeforeMobility.pdf">
           {({ toPdf }) => (
             <button className="cp-button" onClick={toPdf}>
               Download PDF
@@ -77,7 +48,7 @@ function PreApprovalFormConvert() {
         <div className="cp-container">
           <div className="cp-center">
             <h1 className="cp-h1">
-              Course Exemption Pre-Approval Form for Outgoing Students
+              Course Transfer Form
             </h1>
           </div>
         </div>
@@ -125,15 +96,9 @@ function PreApprovalFormConvert() {
             </table>
           </div>
         </div>
-        <div className="pafp-flex-div">
-          <TableAddRows
-              getPdf={selectedCourse}
-
-          />
-        </div>
       </div>
     </div>
   );
 }
 
-export default PreApprovalFormConvert;
+export default CourseTransferFormConvert;

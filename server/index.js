@@ -30,18 +30,24 @@ io.on("connection", (socket) => {
     global.chatsocket = socket;
 
     socket.on("addUser", (id) => {
+        console.log("addUser request")
+        console.log(id)
         onlineUsers.set(id, socket.id)
+        console.log(onlineUsers)
     })
 
     socket.on("send-msg", (data) => {
+        console.log("hintli")
+        console.log(onlineUsers)
+        console.log(data)
+        console.log(data.to)
         const sendUserSocket = onlineUsers.get(data.to)
+        console.log("here")
+        console.log(sendUserSocket)
         if(sendUserSocket) {
+            console.log("I am ")
             socket.to(sendUserSocket).emit("msg-receive", data.message)
         }
-    })
-
-    socket.on("send_message", (data) => {
-        console.log(data)
     })
 });
 

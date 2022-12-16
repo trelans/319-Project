@@ -31,6 +31,8 @@ function returnStatusClass(formStatus) {
     return textClasses[formStatus]
 }
 
+let loaded = false;
+
 function ApplicationPage1() {
 
     const [status, setStatus] = useState('')
@@ -50,6 +52,7 @@ function ApplicationPage1() {
     const [CTFStatusClass, setCTFStatusClass] = useState('')
     const [PFButtonStatus, setPFButtonStatus] = useState('')
     const [LAFButtonStatus, setLAFButtonStatus] = useState('')
+    const [isLoading, setLoading] = React.useState(true);
 
     const appStatusTable = {
         0: "Waiting For Erasmus Candidate to Upload Preapproval Form",
@@ -71,32 +74,34 @@ function ApplicationPage1() {
         4: "Approved"
     }
 
+    if (!loaded) {
+        handleRequests(null, {}, "application-page1", "1", (response, status) => {
+            setStatus(appStatusTable[response.status])
+            setErasmusCoordinator(response.erasmusCoordinator)
+            setAppliedInstitution(response.appliedInstitution)
+            setMobilityPeriod(response.mobilityPeriod)
+            setPFStatus(formStatusTable[response.PFStatus])
+            setPFDeadline(response.PFDeadline)
+            setLAFStatus(formStatusTable[response.LAFStatus])
+            setLAFDeadline(response.LAFDeadline)
+            setCTFStatus(formStatusTable[response.CTFStatus])
+            setCTFDeadline(response.CTFDeadline)
+            setPFButtonText(returnButtonText(response.PFStatus))
+            setLAFButtonText(returnButtonText(response.LAFStatus))
+            setPFStatusClass(returnStatusClass(response.PFStatus))
+            setPFButtonStatus(returnButtonStatus(response.PFStatus))
+            setLAFStatusClass(returnStatusClass(response.LAFStatus))
+            setLAFButtonStatus(returnButtonStatus(response.LAFStatus))
+            setCTFStatusClass(returnStatusClass(response.CTFStatus))
+            loaded = true
+            setLoading(false)
+        })
+    }
 
-    handleRequests(null, {}, "application-page1", "1", (response, status) => {
-        setStatus(appStatusTable[response.status])
-        setErasmusCoordinator(response.erasmusCoordinator)
-        setAppliedInstitution(response.appliedInstitution)
-        setMobilityPeriod(response.mobilityPeriod)
-        setPFStatus(formStatusTable[response.PFStatus])
-        setPFDeadline(response.PFDeadline)
-        setLAFStatus(formStatusTable[response.LAFStatus])
-        setLAFDeadline(response.LAFDeadline)
-        setCTFStatus(formStatusTable[response.CTFStatus])
-        setCTFDeadline(response.CTFDeadline)
-        setPFButtonText(returnButtonText(response.PFStatus))
-        setLAFButtonText(returnButtonText(response.LAFStatus))
-        setPFStatusClass(returnStatusClass(response.PFStatus))
-        setPFButtonStatus(returnButtonStatus(response.PFStatus))
-        setLAFStatusClass(returnStatusClass(response.LAFStatus))
-        setLAFButtonStatus(returnButtonStatus(response.LAFStatus))
-        setCTFStatusClass(returnStatusClass(response.CTFStatus))
-    })
-
-    // No application found (possibly user is not placed in any university)
-    if (status === -1) {
+    if (isLoading) {
         return <div className={"Page"}>
             <NavigationBar/>
-            <div className="App">No application found</div>
+            <div className="App">Loading...</div>
         </div>;
     }
 
@@ -171,7 +176,7 @@ function ApplicationPage1() {
                                 <p className="ap-text-other">{LAFDeadline}</p>
                             </td>
                             <td>
-                                {LAFButtonStatus === "ap-button-not-active" ? (
+                                {LAFButtonStatus !== "ap-button-not-active" ? ( // change later
                                     <button className={LAFButtonStatus}>{LAFButtonText}</button>
                                 ) : (
                                     <Link to="/learning-agreement-1-3">
