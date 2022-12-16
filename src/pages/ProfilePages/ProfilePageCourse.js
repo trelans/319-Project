@@ -1,6 +1,54 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import {useRef, useState} from "react";
+import {handleRequests} from "../requests";
+import * as React from "react";
+import {Link} from "react-router-dom";
+
+
+let loaded = false;
 
 function ProfilePageCourse() {
+
+
+  const [courseName, setCourseName] = useState('')
+  const [courseCode, setCourseCode] = useState('')
+  const [requiredLanguage, setRequiredLanguage] = useState('')
+  const [websiteLink, setWebsiteLink] = useState('')
+  const [syllabusLink, setSyllabusLink] = useState('')
+  const [university, setUniversity] = useState('')
+  const [ectsCredits, setEctsCredits] = useState(0)
+  const [comments, setComments] = useState([])
+  const [isLoading, setLoading] = React.useState(true)
+
+  if(!loaded) {
+    handleRequests(null, {"courseCode": "CS315"}, "profile-course", "1", (response, status) => {
+
+      setCourseName(response.courseName,)
+      setCourseCode(response.courseCode)
+      setRequiredLanguage(response.requiredLanguage)
+      setWebsiteLink(response.websiteLink)
+      setSyllabusLink(response.syllabusLink)
+      setUniversity(response.university)
+      setEctsCredits(response.ectsCredits)
+      setComments(response.comments)
+
+      console.log(courseName)
+      console.log(courseCode)
+      console.log(university)
+
+    })
+    loaded = true
+    setLoading(false)
+  }
+
+  if (isLoading) {
+    return <div className={"Page"}>
+      <NavigationBar/>
+      <div className="App">Loading...</div>
+    </div>;
+  }
+
+
   return (
     <div>
       <NavigationBar />
@@ -9,7 +57,7 @@ function ProfilePageCourse() {
           <div>
             <p className="ppc-header-name">Course Name:</p>
             <p className="ppc-header-other">
-              Object Oriented Software Engineeering
+              {courseName}
             </p>
           </div>
         </div>
@@ -18,7 +66,7 @@ function ProfilePageCourse() {
           <table className="ppc-table">
             <tr>
               <td className="ppc-header-other">Course Code: </td>
-              <td className="ppc-text-other">CS 319</td>
+              <td className="ppc-text-other">{courseCode}</td>
             </tr>
             <tr>
               <br />
@@ -51,22 +99,22 @@ function ProfilePageCourse() {
           </table>
           <table className="ppc-table">
             <tr>
-              <td className="ppc-header-other">Required Language:</td>
-              <td className="ppc-header-other">English</td>
+              <td className="ppc-header-other">Required Language: </td>
+              <td className="ppc-header-other">{requiredLanguage}</td>
             </tr>
             <tr>
               <br />
             </tr>
             <tr>
               <td className="ppc-header-other">ECTS Credits: </td>
-              <td className="ppc-header-other">6.5</td>
+              <td className="ppc-header-other">{ectsCredits}</td>
             </tr>
             <tr>
               <br />
             </tr>
             <tr>
               <td className="ppc-header-other">University: </td>
-              <td className="ppc-header-other">Bilkent University</td>
+              <td className="ppc-header-other">{university}</td>
             </tr>
           </table>
         </div>
@@ -83,8 +131,7 @@ function ProfilePageCourse() {
             <tr>
               <td className="ppu-td">
                 <p className="ppu-table-other">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  {comments}
                 </p>
               </td>
               <td className="ppu-td">

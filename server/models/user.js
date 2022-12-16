@@ -211,6 +211,16 @@ const userSchema = new mongoose.Schema({
         studentId: {
             type: Number,
         },
+
+        sendingInstitution: {
+            type: String,
+            required: true
+        },
+
+        studyCycle: {
+            type: String,
+            required: true
+        }
     }
 
 }, {
