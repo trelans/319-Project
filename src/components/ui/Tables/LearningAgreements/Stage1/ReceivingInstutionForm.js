@@ -8,6 +8,7 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Grid from "@material-ui/core/Grid";
+import { handleRequests } from "../../../../../pages/requests";
 
 export default class App extends React.Component {
   constructor(props) {
