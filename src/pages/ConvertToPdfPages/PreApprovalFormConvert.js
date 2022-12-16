@@ -127,10 +127,8 @@ function PreApprovalFormConvert() {
         </div>
         <div className="pafp-flex-div">
           <TableAddRows
-            getArrFunc={selectedCourse}
-            selected={selectedCourse}
-            ref={childRef}
-            currentCourseForEq={setEqCourse}
+              getPdf={selectedCourse}
+
           />
         </div>
       </div>
