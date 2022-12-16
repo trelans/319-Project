@@ -6,24 +6,42 @@ const sharp = require('sharp')
 const router = new express.Router()
 const Application = require('../models/application')
 const Department = require("../models/department");
+const University = require("../models/university");
+const Form = require("../models/form");
+const BilkentCourse = require("../models/bilkentCourse")
 
-router.post('/create/newDepartment', async (req, res) => {
-    console.log(req.body)
+router.post('/preapproval-student', async (req, res) => {
     try {
-        let department;
         let response;
+        let appliedInstitution;
+        let PAF;
         // 0 POST, 1 GET
-        if(req.body.type === "0"){
-            delete req.type
-            department = new Department(req.body);
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            const department = await Department.findById(user.erasmusCandidateData.departments[0]["id"])
+            appliedInstitution = await University.findById(user.erasmusCandidateData.nominatedUniversityId)
+            const courseMap = {"CS Required Course":[], "CS Technical Elective":[], "CS HSS Elective": [], "CS General Elective": []};
+            await BilkentCourse.find({}).then(function(courses) {
+                courses.forEach(function(course) {
+                });
+            });
+            PAF = await Form.findOne({'owner': user._id, 'formType': 0})
             response = res.status(201)
-        }else {
-            department = await Department.findById(req.body.depId);
+            response.send({
+                "name": user.name,
+                "surname": user.surname,
+                "id": user.erasmusCandidateData.studentId,
+                "department": department.name,
+                "appliedInstitution": appliedInstitution.name,
+                "duration": user.erasmusCandidateData.preferredSemester,
+                "ECTSCredits": PAF.preApprovalForm.totalEctsCredits,
+                "courses": PAF.preApprovalForm.courses
+            })
+        } else {
             response = res.status(302)
+            response.send("No Preapproval form found")
         }
-        await department.save()
-        console.log(department)
-        response.send(department)
+
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

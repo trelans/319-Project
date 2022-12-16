@@ -10,13 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
 import styles from "../coursePopUp.module.css"
 
-interface food {
-  id: number;
-  courseCode: string;
-  courseName: string;
-  credit: number;
-  eqCourse: string;
-}
 
 const useStyles = makeStyles({
   table: {
@@ -69,12 +62,15 @@ const originalRows: courses[] = [
   },
 ];
 
-export default function BasicTable(props ) {
-  const [rows, setRows] = useState(originalRows);
+export default function BasicTable(props) {
+  const [rows, setRows] = useState([]);
   const [searched, setSearched] = useState("");
 
   const classes = useStyles();
 
+  props.courses.forEach((course) => {
+    rows.push(course)
+  })
 
   props.closePopUp(false)
 

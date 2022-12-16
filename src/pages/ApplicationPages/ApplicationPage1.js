@@ -2,6 +2,7 @@ import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import {useState} from "react";
 import {handleRequests} from "../requests";
 import * as React from "react";
+import {Link} from "react-router-dom";
 
 function returnButtonText(status) {
     if (status < 2 || status === 3) {
@@ -92,7 +93,7 @@ function ApplicationPage1() {
     })
 
     // No application found (possibly user is not placed in any university)
-    if (status === -1){
+    if (status === -1) {
         return <div className={"Page"}>
             <NavigationBar/>
             <div className="App">No application found</div>
@@ -154,7 +155,9 @@ function ApplicationPage1() {
                                 <p className="ap-text-other">{PFDeadline}</p>
                             </td>
                             <td>
-                                <button className={PFButtonStatus}>{PFButtonText}</button>
+                                <Link to="/preapproval-student">
+                                    <button className={PFButtonStatus}>{PFButtonText}</button>
+                                </Link>
                             </td>
                         </tr>
                         <tr>
@@ -168,7 +171,13 @@ function ApplicationPage1() {
                                 <p className="ap-text-other">{LAFDeadline}</p>
                             </td>
                             <td>
-                                <button className={LAFButtonStatus}>{LAFButtonText}</button>
+                                {LAFButtonStatus === "ap-button-not-active" ? (
+                                    <button className={LAFButtonStatus}>{LAFButtonText}</button>
+                                ) : (
+                                    <Link to="/learning-agreement-1-3">
+                                        <button className={LAFButtonStatus}>{LAFButtonText}</button>
+                                    </Link>
+                                )}
                             </td>
                         </tr>
                         <tr>
