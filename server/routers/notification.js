@@ -19,8 +19,8 @@ router.post('/createNotification', auth, async (req,res) => {
     }
 })
 
-/*
-router.get('/tasks', auth, async (req,res) => {
+
+router.get('/notifications', auth, async (req,res) => {
 
     const match = {}
     const sort = {}
@@ -37,7 +37,7 @@ router.get('/tasks', auth, async (req,res) => {
     try {
 
         await req.user.populate({
-            path: 'tasks', 
+            path: 'notifications', 
             match,
             options: {
                 limit: parseInt(req.query.limit),
@@ -46,13 +46,15 @@ router.get('/tasks', auth, async (req,res) => {
             }
         })
         
-        res.send(req.user.tasks)
+        res.send(req.user.notifications)
     } catch(e) {
         console.log(e)
         res.status(500).send(e)
     }
     
 })
+
+/*
 
 router.get('/tasks/:id', auth, async (req,res) => {
 
@@ -101,22 +103,21 @@ router.patch('/tasks/:id', auth, async (req,res) => {
         res.status(400).send(e)
     }
 })
+*/
 
-router.delete('/tasks/:id', auth, async (req,res) => {
-
+router.delete('/notifications/:id', auth, async (req,res) => {
     try {
-        //const task = await Task.findByIdAndDelete(req.params.id)
-        const task = await Task.findOneAndDelete({_id: req.params.id, owner: req.user._id})
+        const notification = await Notification.findOneAndDelete({_id: req.params.id, owner: req.user._id})
 
-        if(!task) {
+        if(!notification) {
             return res.status(404).send()
         }
 
-        res.send(task)
+        res.send(notification)
     }catch(e) { 
         res.status(500).send()
     }
 })
-*/
+
 
 module.exports = router
