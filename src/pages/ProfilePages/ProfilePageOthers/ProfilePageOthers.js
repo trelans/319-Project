@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
+import classes from "../ProfilePageOwn/ProfilePageOwn.module.css";
+import jwt_decode from "jwt-decode";
 
 /*
 //There should be restrictions for logged in user type, not implemented yet.
@@ -19,6 +21,8 @@ function ProfilePageOthers() {
   const [willDisplayType, setWillDisplayType] = useState(0);
   const [university, setUniversity] = useState();
   const navigate = useNavigate();
+
+  const user = jwt_decode(localStorage.getItem("token"));
 
   console.log(willDisplayType);
 
@@ -74,6 +78,10 @@ function ProfilePageOthers() {
       },
     });
   };
+
+  function goToApplicationStatus() {
+    navigate("/application-page-coordinator");
+  }
 
   if (willDisplayType == 0 && currentUser) {
     return (
@@ -166,6 +174,16 @@ function ProfilePageOthers() {
         <div onClick={(e) => handleClick()} className="pp-center">
           <button className="pp-button">Message</button>
         </div>
+
+        {user.userType == 1 ? <div className={classes["pp-center"]}>
+          <button
+            className={classes["pp-button"]}
+            onClick={goToApplicationStatus}
+          >
+            Application Status
+          </button>
+        </div> : ""}
+        
       </div>
     );
   } else if (willDisplayType == 1) {
