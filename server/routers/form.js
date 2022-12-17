@@ -221,4 +221,72 @@ router.patch('/pre-approval-form/:id', auth, async (req,res) => {
 })
 
 
+
+router.post('/learning-agreement-3-3', async (req, res) => {
+    console.log(req.body)
+    try {
+        let application
+        let response
+        let candidate
+
+        // 0 POST, 1 GET, 2 PATCH
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            application = await Application.findOne({'applicantCandidate': user._id})
+            candidate = await User.findById(application.applicantCandidate)
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            response = res.status(201)
+
+            console.log("inside get 3-3")
+            console.log(user)
+            console.log(application)
+            console.log(LAF)
+            console.log(candidate)
+
+            response.send({
+                studentInfo: {
+                    name: candidate.name,
+                    lastName: candidate.surname,
+                    dateOfBirth: LAF.learningAgreementForm.dateofBirth,
+                    nationality: LAF.learningAgreementForm.nationality,
+                    gender: LAF.learningAgreementForm.gender,
+                    academicYear: candidate.erasmusCandidateData.academicYear,
+                    studyCycle: LAF.learningAgreementForm.studyCycle,
+                    subjectAreaCode: LAF.learningAgreementForm.subjectAreaCode
+                },
+                responsiblePersonAtReceivingInsInfo: LAF.learningAgreementForm.responsiblePersonAtReceivingIns,
+                responsiblePersonFromSendingInsInfo: LAF.learningAgreementForm.responsiblePersonFromSendingIns,
+                formID: LAF._id
+
+            })
+        } else if (req.body.type === '2') { // patch
+            const id = req.body.id
+            delete req.body.id
+            if (req.body.infoType === 1) {
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.responsiblePersonFromSendingIns})
+            } else if (req.body.infoType === 0) {
+                await User.findOneAndUpdate({"name": req.body.name}, {
+                    "surname": req.body.lastName,
+                    "erasmusCandidateData.academicYear": req.body.academicYear
+                })
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
+                    "learningAgreementForm.nationality": req.body.nationality,
+                    "learningAgreementForm.gender": req.body.gender,
+                    "learningAgreementForm.studyCycle": req.body.studyCycle,
+                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
+                })
+            } else if (req.body.infoType === 2) {
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.responsiblePersonAtReceivingIns": req.body.responsiblePersonAtReceivingIns
+                })
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
 module.exports = router
