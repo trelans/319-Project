@@ -5,9 +5,9 @@ import img from "./logo.png";
 function NavigationBar() {
   return (
     <div className={classes["nb-header"]}>
-      <div>
+      <Link to="/main-page">
         <img alt="" src={img} style={{ marginLeft: 10 }} />
-      </div>
+      </Link>
       <nav>
         <ul>
           <li>
