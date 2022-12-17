@@ -1095,7 +1095,7 @@ body {
   opacity: 75%;
 }
 .pafp-button:disabled {
-color: #1D1F26;
+  opacity: 50%;
 }
 
 .pafp-flex-div {

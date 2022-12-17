@@ -268,7 +268,7 @@ function PreApprovalFormPage() {
               <td className="pafp-last-table-td">
                 <button
                     disabled={isSubmitButton}
-                    className="">Submit Form</button>
+                    className="pafp-button">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>
