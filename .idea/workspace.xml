@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/LoginPage/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginPage/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PreApprovalFormPage/PreApprovalFormPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PreApprovalFormPage/PreApprovalFormPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/CoursePopUp/Tables/NominateACourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/CoursePopUp/Tables/NominateACourse.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +64,7 @@
       <workItem from="1671088987457" duration="394000" />
       <workItem from="1671089771071" duration="30594000" />
       <workItem from="1671218960009" duration="9836000" />
-      <workItem from="1671306593625" duration="2940000" />
+      <workItem from="1671306593625" duration="4113000" />
     </task>
     <task id="LOCAL-00001" summary="user router -- create user">
       <created>1671103781135</created>
