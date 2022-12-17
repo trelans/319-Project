@@ -82,6 +82,8 @@ function MainPage() {
       setData(users);
     } else if (option == 2) {
       setData(universities);
+    } else {
+      setData(undefined)
     }
   };
 
@@ -139,6 +141,9 @@ function MainPage() {
           {popupOpen && <RatingPopup onCancel={closePopup} />}
           {popupOpen && <Backdrop />}
         </div>
+
+
+        
       </div>
     </div>
   );
