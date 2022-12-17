@@ -44,6 +44,9 @@ function PreApprovalFormConvert() {
   const [courses, setCourses] = useState([]);
   const [bilkentCourses, setBilkentCourses] = useState([]);
   const [isLoading, setLoading] = React.useState(true);
+  const [data, setData] = React.useState([]);
+
+  const location = useLocation();
 
   // the if clause is required otherwise react continuously rerender the page
   if (!loaded) {
@@ -62,12 +65,11 @@ function PreApprovalFormConvert() {
       setECTSCredits(response.ECTSCredits);
       setCourses(response.courses);
       setBilkentCourses(response.bilkentCourses);
+      setData(location.state);
     });
     loaded = true;
     setLoading(false);
   }
-
-  const location = useLocation();
 
   function x() {
     console.log(location.state);
@@ -167,7 +169,7 @@ function PreApprovalFormConvert() {
         </div>
         <div className="cp-container">
           <div className="cp-center">
-            <PreApprovalFormCoursesTable />
+            <PreApprovalFormCoursesTable getData={data} />
           </div>
         </div>
       </div>

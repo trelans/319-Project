@@ -15,26 +15,29 @@ import {handleRequests} from "../../../../../pages/requests";
 
 export default class App extends React.Component {
     constructor(props) {
+        console.log(props)
+        console.log(props.fields.contactPerson.phoneNumber.replaceAll(" ", ""))
         super(props);
         this.options = countryList().getData();
         this.state = {
-            startDate: new Date(),
             options: this.options,
             complete: "",
+            savedInfo: "",
             displayComplete: "none",
-            id: props.id,
+            country: {
+                value: countryList().getValue(props.fields.country),
+                label: props.fields.country
+            },
 
+            id: props.id,
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
             address: props.fields.address,
-            countryVal: props.fields.country,
             erasmusCode: props.fields.erasmusCode,
             contactPersonName: props.fields.contactPerson.name,
             contactPersonEmail: props.fields.contactPerson.email,
-            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber,
-
-            savedInfo: "",
+            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber.replaceAll(" ", ""),
 
             disabledName: true,
             disabledFaculty: true,
@@ -60,14 +63,9 @@ export default class App extends React.Component {
 
         this.updateInputContactPersonName = this.updateInputContactPersonName.bind(this);
         this.updateInputContactPersonEmail = this.updateInputContactPersonEmail.bind(this);
-        this.updateInputContactContactPersonPhoneNumber = this.updateInputContactContactPersonPhoneNumber.bind(this);
-
-
-        this.handleChangeDate = this.handleChangeDate.bind(this);
+        this.updateInputContactPersonPhoneNumber = this.updateInputContactPersonPhoneNumber.bind(this);
 
     }
-
-
 
     updateInputAddress(event) {
         this.setState({address: event.target.value})
@@ -86,7 +84,7 @@ export default class App extends React.Component {
     updateInputContactPersonEmail(event) {
         this.setState({contactPersonEmail: event.target.value})
     }
-    updateInputContactContactPersonPhoneNumber(event) {
+    updateInputContactPersonPhoneNumber(event) {
         this.setState({contactPersonPhoneNumber: event.target.value})
     }
 
@@ -104,16 +102,10 @@ export default class App extends React.Component {
 
 
 
-
-    changeHandler = (countryVal) => {
-        this.setState({countryVal});
+    changeHandler = (country) => {
+        this.setState({country});
     };
 
-    handleChangeDate = (date) => {
-        this.setState({
-            startDate: date,
-        });
-    };
 
     handleEditNameClick() {
         this.setState({disabledName: !this.state.disabledName});
@@ -160,7 +152,7 @@ export default class App extends React.Component {
                 faculty: this.state.faculty,
                 departmentName: this.state.department,
                 address: this.state.address,
-                country: this.state.countryVal,
+                country: this.state.country.label,
                 erasmusCode: this.state.erasmusCode,
                 contactPerson: {
                     name: this.state.contactPersonName,
@@ -400,13 +392,13 @@ export default class App extends React.Component {
                                 >
                                     <ReactCountryFlag
                                         countryCode={
-                                            this.state.countryVal ? this.state.countryVal.value : ""
+                                            this.state.country ? this.state.country.value : ""
                                         }
                                         svg
                                         cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
                                         cdnSuffix="svg"
                                         title={
-                                            this.state.countryVal ? this.state.countryVal.value : ""
+                                            this.state.country ? this.state.country.value : ""
                                         }
                                     />
                                     <div
@@ -420,7 +412,7 @@ export default class App extends React.Component {
                                             ref={"this.nationalityRef"}
                                             isSearchable={true}
                                             options={this.state.options}
-                                            defaultValue={this.state.value}
+                                            defaultValue={this.state.country}
                                             disabled={
                                                 this.state.disabledCountry
                                                     ? "disabledCountry"
@@ -533,10 +525,10 @@ export default class App extends React.Component {
 
                             <Grid item xs={6}>
                                 <PhoneInput
-                                    country={"us"}
+                                    country={"tr"}
                                     className="marginBottom"
-                                    value={this.state.phone}
-                                    onChange={(phone) => this.setState({phone})}
+                                    value={this.state.contactPersonPhoneNumber}
+                                    onChange={(contactPersonPhoneNumber) => this.setState({contactPersonPhoneNumber})}
                                 />
                             </Grid>
 
