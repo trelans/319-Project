@@ -5,29 +5,41 @@ import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-
+import { Navigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 
 //0->outgoing student, 1->incoming student, 2->others
 function ProfilePageOwn() {
-  const user =jwt_decode(localStorage.getItem('token')) 
-  const [university, setUniversity] = useState()
+  const user = jwt_decode(localStorage.getItem("token"));
+  const [university, setUniversity] = useState();
   useEffect(() => {
-    console.log("Here")
-    const getUniversity= async () => {
-        try {
-            if(user.userType == 0 && user.erasmusCandidateData.nominatedUniversityId) {
-              const res= await axios.get( `http://localhost:8080/university/${user.erasmusCandidateData.nominatedUniversityId}`, {})
-              console.log(res.data)
-              setUniversity(res.data)
-            }
-        } catch (error) {
-            console.log("There is a problem")
+    console.log("Here");
+    const getUniversity = async () => {
+      try {
+        if (
+          user.userType == 0 &&
+          user.erasmusCandidateData.nominatedUniversityId
+        ) {
+          const res = await axios.get(
+            `http://localhost:8080/university/${user.erasmusCandidateData.nominatedUniversityId}`,
+            {}
+          );
+          console.log(res.data);
+          setUniversity(res.data);
         }
-    }
+      } catch (error) {
+        console.log("There is a problem");
+      }
+    };
 
-    getUniversity()
-}, [])
+    getUniversity();
+  }, []);
 
+  const navigate = useNavigate();
+
+  function goToApplicationStatus() {
+    navigate("/application-page2");
+  }
 
   if (user.userType == 0) {
     return (
@@ -41,14 +53,18 @@ function ProfilePageOwn() {
             <table className={classes["pp-table"]}>
               <tr>
                 <td>
-                  <h1 className={classes["pp-header-name"]}>{user.name + " " + user.surname}</h1>
+                  <h1 className={classes["pp-header-name"]}>
+                    {user.name + " " + user.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className={classes["pp-header-other"]}>Bilkent ID:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>{user.erasmusCandidateData.studentId}</td>
+                <td className={classes["pp-text-other"]}>
+                  {user.erasmusCandidateData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -57,9 +73,7 @@ function ProfilePageOwn() {
                 <td className={classes["pp-header-other"]}>E-Mail:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>
-                  {user.email}
-                </td>
+                <td className={classes["pp-text-other"]}>{user.email}</td>
               </tr>
               <tr>
                 <br />
@@ -110,13 +124,23 @@ function ProfilePageOwn() {
                 <td className={classes["pp-header-other"]}>Erasmus Points:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>{user.erasmusCandidateData.totalPoints}</td>
+                <td className={classes["pp-text-other"]}>
+                  {user.erasmusCandidateData.totalPoints}
+                </td>
               </tr>
             </table>
           </div>
         </div>
         <div className={classes["pp-center"]}>
           <button className={classes["pp-button"]}>Upload Image</button>
+        </div>
+        <div className={classes["pp-center"]}>
+          <button
+            className={classes["pp-button"]}
+            onClick={goToApplicationStatus}
+          >
+            Application Status
+          </button>
         </div>
       </div>
     );
@@ -132,14 +156,18 @@ function ProfilePageOwn() {
             <table className={classes["pp-table"]}>
               <tr>
                 <td>
-                  <h1 className={classes["pp-header-name"]}>{user.name + " " + user.surname}</h1>
+                  <h1 className={classes["pp-header-name"]}>
+                    {user.name + " " + user.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className={classes["pp-header-other"]}>Bilkent ID:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>{user.incomingStudentData.studentId}</td>
+                <td className={classes["pp-text-other"]}>
+                  {user.incomingStudentData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -148,9 +176,7 @@ function ProfilePageOwn() {
                 <td className={classes["pp-header-other"]}>E-Mail:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>
-                  {user.email}
-                </td>
+                <td className={classes["pp-text-other"]}>{user.email}</td>
               </tr>
               <tr>
                 <br />
@@ -191,7 +217,7 @@ function ProfilePageOwn() {
               </tr>
               <tr>
                 <td className={classes["pp-text-other"]}>
-                {user.incomingStudentData.sendingInstitution}
+                  {user.incomingStudentData.sendingInstitution}
                 </td>
               </tr>
             </table>
@@ -202,7 +228,7 @@ function ProfilePageOwn() {
         </div>
       </div>
     );
-  } else  {
+  } else {
     return (
       <div>
         <NavigationBar />
@@ -214,7 +240,9 @@ function ProfilePageOwn() {
             <table className={classes["pp-table2"]}>
               <tr>
                 <td>
-                  <h1 className={classes["pp-header-name"]}>{user.name + " " + user.surname}</h1>
+                  <h1 className={classes["pp-header-name"]}>
+                    {user.name + " " + user.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
@@ -224,9 +252,7 @@ function ProfilePageOwn() {
                 <td className={classes["pp-header-other"]}>E-Mail:</td>
               </tr>
               <tr>
-                <td className={classes["pp-text-other"]}>
-                  {user.email}
-                </td>
+                <td className={classes["pp-text-other"]}>{user.email}</td>
               </tr>
               <tr>
                 <br />
