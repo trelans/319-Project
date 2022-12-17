@@ -14,7 +14,7 @@ const arr = [
 
 export default function App(props) {
     const [explanation, setExplanation] = useState("");
-    const [story, setStory] = useState({});
+    const [story, setStory] = useState();
     const [inputFields, setInputFields] = useState([
         {
             courseCode: "",
@@ -31,10 +31,13 @@ export default function App(props) {
     console.log(hostUniName)
 
     useEffect((e) => {
-        console.log("jennie", story);
-        handleRequests(e, story, "preapproval-student-nominate-course", "0", (response, status) => {
-            console.log(response)
-        })
+        if (story !== undefined){
+            console.log("jennie", story);
+            handleRequests(e, story, "preapproval-student-nominate-course", "0", (response, status) => {
+                console.log(response)
+                alert("Nomination is done!")
+            })
+        }
     }, [story]);
 
     const handleSubmit = async (e) => {

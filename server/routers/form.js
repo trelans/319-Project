@@ -128,6 +128,7 @@ router.post('/preapproval-student-nominate-course', async (req, res) => {
                     proposingStudentName: user.name
                 }
             })
+            const notification =
             response = res.status(201)
             response.send({"status": "Ok"})
         } else {
