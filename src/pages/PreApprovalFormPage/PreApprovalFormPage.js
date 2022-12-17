@@ -77,7 +77,6 @@ function PreApprovalFormPage() {
     }
 
     function handleSelectEq() {
-        console.log("KKKK");
         if (lastSelectedEq === eqCourseGot) {
             return;
         }
@@ -89,6 +88,7 @@ function PreApprovalFormPage() {
     function closeSelectCourse() {
         setCourseIsOpen(false);
     }
+
 
     function closeSelectEqCourse() {
         setEqCourse(false);
@@ -280,6 +280,8 @@ function PreApprovalFormPage() {
                 <EqPopUp
                     onCancel={closeSelectEqCourse}
                     bilkentCourse={eqCourse}
+                    eqCourses={
+                        eqCourse}
                     setArrFunc={setEqCourseGot}
                     onSelect={handleSelectEq}
                     setNumFunc={setNomNewCourse}
