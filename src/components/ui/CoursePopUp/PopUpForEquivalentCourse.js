@@ -14,8 +14,9 @@ function Modal(props) {
 
 
 
-    var bilkentCourse = props.bilkentCourse
-
+    const bilkentCourse = props.bilkentCourse
+    const eqCourses = props.eqCourses
+    console.log(eqCourses)
 
 
 
@@ -45,7 +46,7 @@ function Modal(props) {
     return(
         <div className={"perfectCentered"} >
             <div className={style.modal}>
-                <h4>Select a Equivalent Course For  From The List</h4>
+                <h4>Select an Equivalent Course For {bilkentCourse.courseCode} From The List</h4>
                 <h6>or</h6>
                 <button onClick={handleNominateNewCourse}>Nominate A New Course</button>
                 <a className={style.close} onClick={cancelHandler}>×</a>

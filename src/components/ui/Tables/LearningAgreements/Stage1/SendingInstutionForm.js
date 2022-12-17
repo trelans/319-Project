@@ -15,8 +15,6 @@ import {handleRequests} from "../../../../../pages/requests";
 
 export default class App extends React.Component {
     constructor(props) {
-        console.log(props)
-        console.log(props.fields.contactPerson.phoneNumber.replaceAll(" ", ""))
         super(props);
         this.options = countryList().getData();
         this.state = {
@@ -37,7 +35,7 @@ export default class App extends React.Component {
             erasmusCode: props.fields.erasmusCode,
             contactPersonName: props.fields.contactPerson.name,
             contactPersonEmail: props.fields.contactPerson.email,
-            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber.replaceAll(" ", ""),
+            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber ? props.fields.contactPerson.phoneNumber.replaceAll(" ", "") : "",
 
             disabledName: true,
             disabledFaculty: true,
@@ -49,7 +47,6 @@ export default class App extends React.Component {
             disabledContactPersonEmail: true,
             disabledContactPersonPhoneNumber: true,
         };
-
 
 
         this.updateInputName = this.updateInputName.bind(this);
@@ -70,9 +67,11 @@ export default class App extends React.Component {
     updateInputAddress(event) {
         this.setState({address: event.target.value})
     }
+
     updateInputCountry(event) {
         this.setState({country: event.target.value})
     }
+
     updateInputErasmusCode(event) {
         this.setState({erasmusCode: event.target.value})
     }
@@ -81,25 +80,27 @@ export default class App extends React.Component {
     updateInputContactPersonName(event) {
         this.setState({contactPersonName: event.target.value})
     }
+
     updateInputContactPersonEmail(event) {
         this.setState({contactPersonEmail: event.target.value})
     }
+
     updateInputContactPersonPhoneNumber(event) {
         this.setState({contactPersonPhoneNumber: event.target.value})
     }
 
 
-
     updateInputName(event) {
         this.setState({name: event.target.value})
     }
+
     updateInputFaculty(event) {
         this.setState({faculty: event.target.value})
     }
+
     updateInputDepartment(event) {
         this.setState({department: event.target.value})
     }
-
 
 
     changeHandler = (country) => {

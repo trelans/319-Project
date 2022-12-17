@@ -114,13 +114,14 @@ class TableAddRows extends React.Component {
       rows: this.state.rows.slice(0, -1),
     });
   };
+
   handleRemoveSpecificRow = (idx) => () => {
     const rows = [...this.state.rows];
-    rows.splice(idx, 1);
+    const row = rows.splice(idx, 1);
     this.setState({ rows });
   };
-  handleAddEquivalentCourse = (idx) => () => {
 
+  handleAddEquivalentCourse = (idx) => () => {
     let arr = this.state.rows[idx]
     arr["idx"] = idx
     this.props.currentCourseForEq(arr)
