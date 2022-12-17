@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation} from "react-router";
+import { useLocation } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
 import { Link } from "react-router-dom";
@@ -134,7 +134,7 @@ function ProfilePageOthers() {
         <div className="pp-center">
           <button className="pp-button">Message</button>
         </div>
-        <Link to='/application-page2'>
+        <Link to="/application-page2">
           <div className="pp-center">
             <button className="pp-button">Application Status</button>
           </div>
@@ -214,7 +214,7 @@ function ProfilePageOthers() {
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
+        <div className="pp-center">
           <button className="pp-button">Upload Image</button>
         </div>
       </div>
@@ -261,8 +261,8 @@ function ProfilePageOthers() {
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
-          <button className="pp-button2">Message</button>
+        <div className="pp-center">
+          <button className="pp-button">Message</button>
         </div>
       </div>
     );

@@ -92,7 +92,7 @@ function ProfilePageOwn() {
             </table>
           </div>
         </div>
-        <div className={classes["pp-button-container"]}>
+        <div className={classes["pp-center"]}>
           <button className={classes["pp-button"]}>Upload Image</button>
         </div>
       </div>
@@ -174,7 +174,7 @@ function ProfilePageOwn() {
             </table>
           </div>
         </div>
-        <div className={classes["pp-button-container"]}>
+        <div className={classes["pp-center"]}>
           <button className={classes["pp-button"]}>Upload Image</button>
         </div>
       </div>
@@ -225,7 +225,7 @@ function ProfilePageOwn() {
             </table>
           </div>
         </div>
-        <div className={classes["pp-button-container"]}>
+        <div className={classes["pp-center"]}>
           <button className={classes["pp-button2"]}>Upload Image</button>
         </div>
       </div>

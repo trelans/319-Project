@@ -2,11 +2,19 @@ import { handleRequests } from "../requests";
 import { useState, useRef } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
+import CourseTransferFormTable from "./PdfTables/CourseTransferFormTable";
 
 const durationTable = {
   0: "Fall",
   1: "Spring",
   2: "Year",
+};
+
+const options = {
+  orientation: "landscape",
+  unit: "in",
+  format: [15, 15],
+  scale: 1,
 };
 
 let loaded = false;
@@ -36,7 +44,11 @@ function CourseTransferFormConvert() {
   return (
     <div>
       <div className="cp-center">
-        <Pdf targetRef={ref} filename="LearningAgreementBeforeMobility.pdf">
+        <Pdf
+          targetRef={ref}
+          filename="LearningAgreementBeforeMobility.pdf"
+          options={options}
+        >
           {({ toPdf }) => (
             <button className="cp-button" onClick={toPdf}>
               Download PDF
@@ -47,51 +59,40 @@ function CourseTransferFormConvert() {
       <div ref={ref}>
         <div className="cp-container">
           <div className="cp-center">
-            <h1 className="cp-h1">
-              Course Transfer Form
-            </h1>
+            <h1 className="cp-h1">Course Transfer Form</h1>
+          </div>
+        </div>
+        <div className="cp-container">
+          <div className="cp-center">
+            <CourseTransferFormTable />
           </div>
         </div>
         <div className="cp-container">
           <div className="cp-center">
             <table className="cp-table">
               <tr className="cp-row">
+                <td className="cp-col">Approved By:</td>
                 <td className="cp-col">Name:</td>
-                <td className="cp-col">{candName}</td>
+                <td className="cp-col">Signature:</td>
+                <td className="cp-col">Date:</td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Surname:</td>
-                <td className="cp-col">{candSurname}</td>
+                <td className="cp-col">Exchange Coordinator (exchange students only)</td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">ID Number:</td>
-                <td className="cp-col">{candID}</td>
+                <td className="cp-col">Chair</td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Department:</td>
-                <td className="cp-col">{candDepartment}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div className="cp-container">
-          <div className="cp-center">
-            <table className="cp-table">
-              <tr className="cp-row">
-                <td className="cp-col">Name of the host institution:</td>
-                <td className="cp-col">{hostUniName}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Academic Year:</td>
-                <td className="cp-col">{academicYear}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Semester:</td>
-                <td className="cp-col">{semester}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Duration:</td>
-                <td className="cp-col">{duration}</td>
+                <td className="cp-col">Dean/Director</td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
+                <td className="cp-col"></td>
               </tr>
             </table>
           </div>
