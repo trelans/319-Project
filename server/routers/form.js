@@ -11,6 +11,7 @@ const Form = require("../models/form");
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
 
+//get pre approval
 router.post('/preapproval-student', async (req, res) => {
     try {
         let response;
@@ -158,5 +159,29 @@ router.post('/learning-agreement-1-3', async (req, res) => {
         res.status(400).send(e)
     }
 })
+
+router.patch('/pre-approval-form/:id', auth, async (req,res) => {
+    
+    const updates = Object.keys(req.body)
+
+    try{
+        const form = await Form.findOne({_id: req.params.id, owner: req.user._id})
+
+        if(!form) {
+            return res.status(404).send()
+        }
+
+        updates.forEach((update) => {
+            form[update] = req.body[update]
+        })
+
+        await form.save()
+
+        res.send(form)
+    }catch(e) {
+        res.status(400).send(e)
+    }
+})
+
 
 module.exports = router

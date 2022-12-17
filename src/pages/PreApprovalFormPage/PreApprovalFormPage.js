@@ -43,6 +43,10 @@ function PreApprovalFormPage() {
 
   const navigate = useNavigate();
 
+  const handleSubmit = () => {
+ 
+  }
+
   useEffect(() => {
     handleSelect();
   }, [selectedCourse]);
@@ -253,8 +257,8 @@ function PreApprovalFormPage() {
                   Convert to PDF
                 </button>
               </td>
-              <td className="pafp-last-table-td">
-                <button className="pafp-button-not-active">Submit Form</button>
+              <td   className="pafp-last-table-td">
+                <button onClick={(e) => handleSubmit()} className="pafp-button-not-active">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>

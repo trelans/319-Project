@@ -241,6 +241,26 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     }
 })
 
+router.post('/users/logoutAllUsers', async (req, res) => {
+    try {
+        var users = await User.find();
+
+        //remove all tokens
+        for(let i = 0; i < users.length; i++) {
+            if(users[i].tokens != []) {
+                users[i].tokens = []
+                await users[i].save()
+            }
+        }
+
+        res.send()
+    } catch (e) {
+        console.log(e)
+        res.status(500).send()
+    }
+})
+
+
 
 router.post('/users/initContacts', async (req, res) => {
     try {
