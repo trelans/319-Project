@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation} from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
-import { Link } from "react-router-dom";
+import classes from "../ProfilePageOwn/ProfilePageOwn.module.css";
+import jwt_decode from "jwt-decode";
 
 /*
 //There should be restrictions for logged in user type, not implemented yet.
@@ -18,6 +19,10 @@ function ProfilePageOthers() {
   const { state } = useLocation();
   const [currentUser, setCurrentUser] = useState();
   const [willDisplayType, setWillDisplayType] = useState(0);
+  const [university, setUniversity] = useState();
+  const navigate = useNavigate();
+
+  const user = jwt_decode(localStorage.getItem("token"));
 
   console.log(willDisplayType);
 
@@ -26,9 +31,25 @@ function ProfilePageOthers() {
     const getUser = async () => {
       try {
         const res = await axios.get(`http://localhost:8080/user/${state}`, {});
+
+        if (
+          res.data.userType == 0 &&
+          res.data.erasmusCandidateData.nominatedUniversityId
+        ) {
+          const res2 = await axios.get(
+            `http://localhost:8080/university/${res.data.erasmusCandidateData.nominatedUniversityId}`,
+            {}
+          );
+          console.log(res2.data);
+          setUniversity(res2.data);
+        }
+
         setCurrentUser(res.data);
-      } catch (error) {}
+      } catch (error) {
+        console.log("There is a problem");
+      }
     };
+
     getUser();
   }, []);
 
@@ -46,6 +67,21 @@ function ProfilePageOthers() {
       }
     } catch (error) {}
   }, [currentUser]);
+
+  const handleClick = () => {
+    navigate("/chat", {
+      state: {
+        name: currentUser.name,
+        surname: currentUser.surname,
+        objectId: currentUser._id,
+        fromProfile: true,
+      },
+    });
+  };
+
+  function goToApplicationStatus() {
+    navigate("/application-page-coordinator");
+  }
 
   if (willDisplayType == 0 && currentUser) {
     return (
@@ -117,28 +153,37 @@ function ProfilePageOthers() {
                 <td className="pp-header-other">Receiving Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">Kingston University</td>
+                <td className="pp-text-other">
+                  {university ? university.name : ""}
+                </td>
               </tr>
               <tr>
                 <br />
               </tr>
               <tr>
-                <td className="pp-header-other">Erasmus Ranking:</td>
+                <td className="pp-header-other">Erasmus Points:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">6</td>
+                <td className="pp-text-other">
+                  {currentUser.erasmusCandidateData.totalPoints}
+                </td>
               </tr>
             </table>
           </div>
         </div>
-        <div className="pp-center">
+        <div onClick={(e) => handleClick()} className="pp-center">
           <button className="pp-button">Message</button>
         </div>
-        <Link to='/application-page2'>
-          <div className="pp-center">
-            <button className="pp-button">Application Status</button>
-          </div>
-        </Link>
+
+        {user.userType == 1 ? <div className={classes["pp-center"]}>
+          <button
+            className={classes["pp-button"]}
+            onClick={goToApplicationStatus}
+          >
+            Application Status
+          </button>
+        </div> : ""}
+        
       </div>
     );
   } else if (willDisplayType == 1) {
@@ -153,14 +198,18 @@ function ProfilePageOthers() {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">Michael Jordan</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">XXXXXXXX</td>
+                <td className="pp-text-other">
+                  {currentUser.incomingStudentData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -169,9 +218,7 @@ function ProfilePageOthers() {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">
-                  michael.jordan@ug.bilkent.edu.tr
-                </td>
+                <td className="pp-text-other">{currentUser.email}</td>
               </tr>
               <tr>
                 <br />
@@ -209,17 +256,19 @@ function ProfilePageOthers() {
                 <td className="pp-header-other">Sending Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">Kingston University</td>
+                <td className="pp-text-other">
+                  {currentUser.incomingStudentData.sendingInstitution}
+                </td>
               </tr>
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
+        <div className="pp-center">
           <button className="pp-button">Upload Image</button>
         </div>
       </div>
     );
-  } else {
+  } else if (willDisplayType == 2) {
     return (
       <div>
         <NavigationBar />
@@ -231,14 +280,10 @@ function ProfilePageOthers() {
             <table className="pp-table2">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">Can Alkan</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
-              </tr>
-              <tr>
-                <td className="pp-header-other">Bilkent ID:</td>
-              </tr>
-              <tr>
-                <td className="pp-text-other">XXXX</td>
               </tr>
               <tr>
                 <br />
@@ -247,7 +292,7 @@ function ProfilePageOthers() {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">calkan@cs.bilkent.edu.tr</td>
+                <td className="pp-text-other">{currentUser.email}</td>
               </tr>
               <tr>
                 <br />
@@ -261,8 +306,8 @@ function ProfilePageOthers() {
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
-          <button className="pp-button2">Message</button>
+        <div onClick={(e) => handleClick()} className="pp-center">
+          <button className="pp-button">Message</button>
         </div>
       </div>
     );

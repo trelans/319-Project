@@ -17,11 +17,12 @@ function SearchBarMain({ placeholder, data }) {
 
     const searchWord = event.target.value;
     setWordEntered(searchWord);
-    const newFilter = data.filter((value) => {
+    
+    const newFilter = data ? data.filter((value) => {
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
-    });
+    }) : [];
 
-    if (searchWord === "") {
+    if (searchWord === "" || !data) {
       setFilteredData([]);
     } else {
       setFilteredData(newFilter);
@@ -54,6 +55,7 @@ function SearchBarMain({ placeholder, data }) {
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
+          readOnly= {data ? false : true}
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (

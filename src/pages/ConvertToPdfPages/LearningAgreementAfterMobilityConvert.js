@@ -10,6 +10,13 @@ const durationTable = {
   2: "Year",
 };
 
+const options = {
+  orientation: "landscape",
+  unit: "in",
+  format: [15, 15],
+  scale: 1,
+};
+
 let loaded = false;
 
 const ref = React.createRef();
@@ -37,7 +44,7 @@ function LearningAgreementAfterMobilityConvert() {
   return (
     <div>
       <div className="cp-center">
-        <Pdf targetRef={ref} filename="LearningAgreementAfterMobility.pdf">
+        <Pdf targetRef={ref} filename="LearningAgreementAfterMobility.pdf" options={options}>
           {({ toPdf }) => (
             <button className="cp-button" onClick={toPdf}>
               Download PDF

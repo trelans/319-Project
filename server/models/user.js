@@ -266,7 +266,9 @@ userSchema.methods.generateAuthToken = async function () {
         name: user.name,
         surname: user.surname,
         userType: user.userType,
-        contacts: user.contacts
+        contacts: user.contacts,
+        email: user.email,
+        erasmusCandidateData: user.erasmusCandidateData
     }, process.env.JWT_SECRET, {expiresIn: '1h'})
 
     user.tokens = user.tokens.concat({token})

@@ -24,6 +24,11 @@
     margin-top: 4px;
 }
 
+.userContainer:hover{
+    opacity: 75%;
+    cursor: pointer;
+}
+
 .usersDetailContainer{
     height: 90vh;
     overflow: hidden;
