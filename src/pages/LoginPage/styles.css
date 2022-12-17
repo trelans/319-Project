@@ -104,7 +104,6 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
-  
 }
 
 .fpp-button:hover {
@@ -688,7 +687,6 @@ body {
 }
 
 .ppu-table {
-
   margin-bottom: 5%;
   margin-top: 50px;
   empty-cells: show;
@@ -1171,7 +1169,6 @@ span.pafp-button-last {
   padding-right: 50px;
 }
 
-
 /*learning agreement page*/
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
@@ -1559,7 +1556,7 @@ span.pafp-button-last {
 /*SearchBarMain styles*/
 
 .searchInputs {
-  margin-top: -47px;  
+  margin-top: -47px;
   margin-left: 400px;
   display: flex;
 }
@@ -1626,7 +1623,7 @@ a {
 
 .dataItem:hover {
   background-color: lightgray;
-cursor: pointer;
+  cursor: pointer;
 }
 
 #clearBtn {
@@ -1649,7 +1646,6 @@ cursor: pointer;
   left: 0;
 
   position: relative;
-  
 }
 
 .main-margined {
@@ -1668,16 +1664,16 @@ cursor: pointer;
 
 /*Rating Popup styles*/
 
-.biggerstars{
+.biggerstars {
   font-size: 32px;
 }
 
 /*Comment Table Styles*/
-.commentTableUniversity{
+.commentTableUniversity {
   margin-top: 200px;
   margin-left: -400px;
 }
-.commentTableCourse{
+.commentTableCourse {
   margin: auto;
   justify-content: center;
   display: flex;
@@ -1695,7 +1691,7 @@ cursor: pointer;
 .loading-spinner {
   width: 100px;
   height: 100px;
-  border: 20px solid #A5C9CA;
+  border: 20px solid #a5c9ca;
   border-top: 20px solid #2c3333;
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
