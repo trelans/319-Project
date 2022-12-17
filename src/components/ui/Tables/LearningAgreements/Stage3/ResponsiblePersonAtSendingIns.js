@@ -10,40 +10,48 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MenuItem } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import {handleRequests} from "../../../../../pages/requests";
 
 const options = [
   { value: "female", label: "Female" },
   { value: "male", label: "Male" },
   { value: "other", label: "Other" },
 ];
-export default class Student extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.options = countryList().getData();
+    console.log(props)
     this.state = {
+
       startDate: new Date(),
-      country: "",
       options: this.options,
-      countryVal: 2,
-      complete: "",
+
       displayComplete: "none",
-      name: "Kingston University",
-      function: "Engineering",
-      academicYear: "2022",
-      studyCycle: "Onurcan",
-      address: "290 Street LA 2032  ",
-      subjectAreaCode: "onurcanatac@bilkent.edu.tr",
-      email: "omer.oktay.gultekin@erasmusapp.com",
+
+      id: props.id,
+
+      name: props.fields ? props.fields.name : "",
+      personFunction: props.fields ? props.fields.personFunction : "",
+      phoneNumber: props.fields ? props.fields.phoneNumber: "",
+      email: props.fields ? props.fields.email: "",
+      signature: props.fields ? props.fields.signature: "",
+
 
       disabledName: true,
-      disabledLastName: true,
-      disabledDateOfBirth: true,
-      disabledNationality: true,
-      disabledGender: true,
-      disabledAcademicYear: true,
-      disabledStudyCycle: true,
-      disabledSubjectArea: true,
+      disabledPersonFunction: true,
+      disabledPhoneNumber: true,
+      disabledEmail: true,
+      disabledSignature: true
+
     };
+
+
+    this.updateInputName = this.updateInputName.bind(this);
+    this.updateInputPersonFunction = this.updateInputPersonFunction.bind(this);
+    this.updateInputPhoneNumber = this.updateInputPhoneNumber.bind(this);
+    this.updateInputEmail = this.updateInputEmail.bind(this);
+    this.updateInputSignature = this.updateInputSignature.bind(this);
 
     this.flagsRef = React.createRef();
     this.lastnameRef = React.createRef();
@@ -54,6 +62,23 @@ export default class Student extends React.Component {
     this.studyCycleRef = React.createRef();
     this.subjectAreaCodeRef = React.createRef();
     this.handleChangeDate = this.handleChangeDate.bind(this);
+  }
+
+
+  updateInputName(event) {
+    this.setState({name: event.target.value})
+  }
+  updateInputPersonFunction(event) {
+    this.setState({personFunction: event.target.value})
+  }
+  updateInputPhoneNumber(event) {
+    this.setState({phoneNumber: event.target.value})
+  }
+  updateInputEmail(event) {
+    this.setState({email: event.target.value})
+  }
+  updateInputSignature(event) {
+    this.setState({signature: event.target.value})
   }
 
   handleChangeGender = (gender) => {
@@ -73,46 +98,43 @@ export default class Student extends React.Component {
     this.setState({ disabledName: !this.state.disabledName });
   }
 
-  handleEditLastNameClick() {
-    this.setState({ disabledLastName: !this.state.disabledLastName });
-  }
-  handleEditDateOfBirthClick() {
-    this.setState({ disabledDateOfBirth: !this.state.disabledDateOfBirth });
-  }
-  handleEditNationalityClick() {
-    this.setState({ disabledNationality: !this.state.disabledNationality });
-  }
-  handleEditGenderClick() {
-    this.setState({ disabledGender: !this.state.disabledGender });
-  }
-  handleEditAcademicYearClick() {
-    this.setState({ disabledAcademicYear: !this.state.disabledAcademicYear });
-  }
-  handleEditStudyCycleClick() {
-    this.setState({ disabledStudyCycle: !this.state.disabledStudyCycle });
-  }
-  handleSubjectAreaClick() {
-    this.setState({ disabledSubjectArea: !this.state.disabledSubjectArea });
+  handleEditPersonFunctionClick() {
+    this.setState({ disabledPersonFunction: !this.state.disabledPersonFunction });
   }
 
-  handlerComplete(e) {
-    if (
-      this.state.countryVal !== null &&
-      this.state.complete === true &&
-      this.state.phone !== ""
-    ) {
-      this.setState({
-        displayComplete: "flex",
-      });
-      window.scroll({
-        top: this.complete.offsetTop,
-        left: 0,
-        behavior: "smooth",
-      });
-    } else {
-      alert("You have not yet completed the form");
-    }
+  handleEditPhoneNumberClick() {
+    this.setState({ disabledPhoneNumber: !this.state.disabledPhoneNumber });
   }
+
+  handleEditEmailClick() {
+    this.setState({ disabledEmail: !this.state.disabledEmail });
+  }
+
+  handleEditSignatureClick() {
+    this.setState({ disabledSignature: !this.state.disabledSignature });
+  }
+
+  handlerComplete = (e) => {
+    const responsiblePersonFromSendingInsInfo = {
+      id: this.state.id,
+      infoType: 1,
+      responsiblePersonFromSendingIns: {
+
+        name: this.state.name,
+        personFunction: this.state.personFunction,
+        email: this.state.email,
+        signature: this.state.signature,
+        phoneNumber: this.state.phoneNumber
+
+      }
+    };
+
+    handleRequests(e, responsiblePersonFromSendingInsInfo, "learning-agreement-3-3", "2", (response, status) => {
+      if (response.status === 200) {
+        this.savedInfo = <div><p>Fields are saved!</p></div>
+      }
+    });
+  };
 
   render() {
     return (

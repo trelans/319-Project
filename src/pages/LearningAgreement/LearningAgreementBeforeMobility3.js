@@ -5,10 +5,53 @@ import LABMStudent from "../../components/ui/Tables/LearningAgreements/Stage3/St
 import LABMSending from "../../components/ui/Tables/LearningAgreements/Stage3/ResponsiblePersonAtSendingIns";
 import LABMReceiving from "../../components/ui/Tables/LearningAgreements/Stage3/ResponsiblePersonAtReceivingIns";
 import Grid from "@mui/material/Grid";
-import React from "react";
+import React, {useState} from "react";
 import Card from "../../components/ui/Card";
 import styles from "./LearningAgreementBeforeMobility.module.css";
+import {handleRequests} from "../requests";
+import LoadingSpinner from "../../components/ui/loadingComponent";
+
+let loaded = false;
+
 function LearningAgreementBeforeMobility3() {
+
+  const [studentInfo, setStudentInfo] = useState();
+  const [responsiblePersonFromSendingInsInfo, setResponsiblePersonFromSendingInsInfo] = useState();
+  const [isLoading, setLoading] = useState(true);
+  const [responsiblePersonAtReceivingInsInfo, setResponsiblePersonAtReceivingInsInfo] = useState();
+  const [formID, setFormID] = useState("");
+
+  // the if clause is required otherwise react continuously rerender the page
+  if (!loaded) {
+    handleRequests(
+        null,
+        {},
+        "learning-agreement-3-3",
+        "1",
+        (response, status) => {
+          console.log(response);
+          setStudentInfo(response.studentInfo);
+          setResponsiblePersonFromSendingInsInfo(response.responsiblePersonFromSendingInsInfo);
+          setResponsiblePersonAtReceivingInsInfo(response.responsiblePersonAtReceivingInsInfo);
+          setFormID(response.formID);
+          loaded = true;
+          setLoading(false);
+        }
+    );
+  }
+
+  if (isLoading) {
+    return (
+        <div className="Page">
+          <NavigationBar />
+          <div className="lc-center1"><h3>Loading...</h3></div>
+          <div className="lc-center2">
+            <LoadingSpinner />
+          </div>
+        </div>
+    );
+  }
+
   return (
     <div>
       <NavigationBar></NavigationBar>
@@ -27,14 +70,23 @@ function LearningAgreementBeforeMobility3() {
               <h1>Responsible Person at Sending Institution</h1>
             </Grid>
             <Grid item xs={6}>
-              <LABMStudent></LABMStudent>
+              <LABMStudent>
+                id={formID}
+                fields={studentInfo}
+              </LABMStudent>
             </Grid>
             <Grid item xs={6}>
-              <LABMSending></LABMSending>
+              <LABMSending>
+                id={formID}
+                fields={responsiblePersonFromSendingInsInfo}
+              </LABMSending>
             </Grid>
             <Grid item xs={6}>
               <h1>Responsible Person at Receiving Institution</h1>
-              <LABMReceiving></LABMReceiving>
+              <LABMReceiving>
+                id={formID}
+                fields={responsiblePersonAtReceivingInsInfo}
+              </LABMReceiving>
             </Grid>
             <Grid item xs={12}>
               <div>
