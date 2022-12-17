@@ -48,6 +48,7 @@ function LoginPage() {
                       // Send any necessary data to other page here
                       localStorage.setItem("token", res.token);
                       localStorage.setItem("userType", res.user.userType);
+                      localStorage.setItem("contacts", JSON.stringify(res.user.contacts))
                       navigate("/main-page");
                     }
                   }
