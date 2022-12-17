@@ -5,11 +5,13 @@ import { handleRequests } from "../requests";
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 
+import CommentTable from "./CommentTable";
+
 let loaded = false;
 
 function ProfilePageUniversity() {
-  const {state} = useLocation()
-  var inputName = state
+  const { state } = useLocation();
+  var inputName = state;
 
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
@@ -23,7 +25,7 @@ function ProfilePageUniversity() {
   if (!loaded) {
     handleRequests(
       null,
-      { name: `${inputName}`},
+      { name: `${inputName}` },
       "profile-university",
       "1",
       (response, status) => {
@@ -83,68 +85,11 @@ function ProfilePageUniversity() {
             <tr>
               <td className="ppu-text-other">{erasmusCode}</td>
             </tr>
-            <tr>
-              <td>
-                <br />
-              </td>
-            </tr>
           </table>
-          <tr>
-            <td className="ppu-text-other"></td>
-          </tr>
+          <div class="commentTableUniversity">
+            <CommentTable />
+          </div>
         </div>
-        <a
-          className="ppu-link"
-          href="https://w3.bilkent.edu.tr/www/"
-          target="_blank"
-        >
-          Official Website
-        </a>
-      </div>
-      <div className="ppu-table-container">
-        <table className="ppu-table2">
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-header">Comments</p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-header">Rate</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">4/5</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">3/5</p>
-            </td>
-          </tr>
-          <tr>
-            <td className="ppu-td">
-              <p className="ppu-table-other">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </td>
-            <td className="ppu-td">
-              <p className="ppu-table-other">3.5/5</p>
-            </td>
-          </tr>
-        </table>
       </div>
     </div>
   );
