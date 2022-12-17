@@ -57,7 +57,7 @@ function PreApprovalFormPage() {
     if (ECTSCredits > 30) {
       setSubmitButton(false)
     }
-    else if (ECTSCredits > 40) {
+     if (ECTSCredits > 40) {
       setSubmitButton(true)
     }
   }, [ECTSCredits]);
