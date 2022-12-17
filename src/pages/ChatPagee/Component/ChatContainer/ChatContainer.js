@@ -9,11 +9,12 @@ import { useLocation } from 'react-router';
 
 export default function ChatContainer({currentChatUser}) {
     console.log(currentChatUser)
+    console.log(JSON.stringify(currentChatUser) ) 
     const user = jwt_decode(localStorage.getItem('token'));
     const id = user._id
     const {state} = useLocation()
 
-    if(JSON.stringify(currentChatUser) === '{}') {
+    if(JSON.stringify(currentChatUser) === '{}' && state) {
         currentChatUser = state
     }
 
@@ -37,14 +38,18 @@ export default function ChatContainer({currentChatUser}) {
             }
         }
         getmessage()
-    }, [currentChatUser.objectId])
+    }, [currentChatUser])
 
     useEffect(() => {
-        if(JSON.stringify(currentChatUser) === '{}' || currentChatUser.fromProfile) {
+        
+        if(currentChatUser && (JSON.stringify(currentChatUser) === '{}' || currentChatUser.fromProfile)) {
             socket.current = io("http://localhost:8080")
             socket.current.emit("addUser", id)
         }
-    }, [id])
+        
+    }, [currentChatUser, id])
+
+
 
     console.log(socket)
 
