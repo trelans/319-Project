@@ -3,11 +3,14 @@ import img from "./image.png";
 import { useRef, useState } from "react";
 import { handleRequests } from "../requests";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 let loaded = false;
 
 function ProfilePageUniversity() {
+  const {state} = useLocation()
+  var inputName = state
+
   const [name, setName] = useState("");
   const [country, setCountry] = useState("");
   const [websiteLink, setWebsiteLink] = useState("");
@@ -20,7 +23,7 @@ function ProfilePageUniversity() {
   if (!loaded) {
     handleRequests(
       null,
-      { name: "Roskilde University" },
+      { name: `${inputName}`},
       "profile-university",
       "1",
       (response, status) => {

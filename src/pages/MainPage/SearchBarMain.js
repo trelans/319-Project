@@ -2,10 +2,14 @@ import React, { useState } from "react";
 //import "./SearchBar.css";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function SearchBarMain({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
+
+  const navigate = useNavigate()
 
   const handleFilter = (event) => {
     const element = document.querySelector(".main-absolute");
@@ -31,6 +35,17 @@ function SearchBarMain({ placeholder, data }) {
     element.style.zIndex = 0;
   };
 
+  const handleClick = (item) => {
+
+    if(item.itemType == "university") {
+      navigate("/profile-university", {state: item.name})
+    } else {
+      navigate("/profile-other", {state : item.id})
+    }
+
+  }
+
+
   return (
     <div className="search">
       <div className="searchInputs">
@@ -52,7 +67,7 @@ function SearchBarMain({ placeholder, data }) {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a className="dataItem" href={value.link} target="_blank">
+              <a className="dataItem" onClick={(e) => handleClick(value)} >
                 <p>{value.name} </p>
               </a>
             );

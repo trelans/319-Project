@@ -40,7 +40,8 @@ function MainPage() {
           setUsers(res.data.map( (val) => {
             return {
               name: val.name + " " + val.surname,
-              id : val._id
+              id : val._id,
+              itemType: "user"
             }
           }))
       } catch (error) {
@@ -62,7 +63,8 @@ function MainPage() {
           setUniversities(res.data.map( (val) => {
             return {
               name: val.name,
-              id : val._id
+              id : val._id,
+              itemType: "university"
             }
           }))
       } catch (error) {
