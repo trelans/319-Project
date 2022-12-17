@@ -8,7 +8,9 @@ function NavigationBarMain() {
   return (
     <div className={classes["nb-header"]}>
       <div>
-        <img alt="" src={img} style={{ marginLeft: 10 }} />
+        <Link to="/main-page">
+          <img alt="" src={img} style={{ marginLeft: 10 }} />
+        </Link>
       </div>
       <nav>
         <ul>
