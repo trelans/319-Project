@@ -106,7 +106,7 @@ function LearningAgreementBeforeMobilityConvert() {
           <div className="cp-center">
             <table className="cp-table">
               <tr className="cp-row">
-                <td className="cp-col">Instution Name:</td>
+                <td className="cp-col">Institution Name:</td>
                 <td className="cp-col">{sendingInstitutionInfo.name}</td>
               </tr>
               <tr className="cp-row">
