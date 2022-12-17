@@ -198,6 +198,7 @@ function PreApprovalFormPage() {
             selected={selectedCourse}
             ref={childRef}
             currentCourseForEq={setEqCourse}
+            sendTotalCredits={setECTSCredits}
           />
         </div>
         <button className="btn btn-primary" onClick={selectCourse}>
