@@ -250,6 +250,10 @@ router.post('/learning-agreement-3-3', async (req, res) => {
                 studentInfo: {
                     name: candidate.name,
                     lastName: candidate.surname,
+                    email: user.email,
+                    signature: candidate.signature,
+                    personFunction: "STUDENT",
+                    phoneNumber: 2345678,
                     dateOfBirth: LAF.learningAgreementForm.dateofBirth,
                     nationality: LAF.learningAgreementForm.nationality,
                     gender: LAF.learningAgreementForm.gender,

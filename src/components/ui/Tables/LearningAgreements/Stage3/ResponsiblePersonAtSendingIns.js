@@ -138,223 +138,169 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className={"App"}>
-        <div>
-          <div id="survey-form">
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <label className={"textHeader"} id="name-label" htmlFor="name">
-                  Name
-                </label>
-              </Grid>
+        <div className={"App"}>
+          <div>
+            <div id="survey-form">
+              <Grid container spacing={2}>
+                <Grid item xs={4}>
+                  <label className={"textHeader"} id="name-label" htmlFor="name">
+                    Name
+                  </label>
+                </Grid>
 
-              <Grid item xs={6}>
-                <div id="nameCircle" ref={(div) => (this.nameCircle = div)} />
-                <input
-                  ref={"this.nameRef"}
-                  id="name"
-                  maxLength="30"
-                  placeholder="write your name"
-                  pattern="[A-Za-z]"
-                  className="styleInput"
-                  defaultValue={this.state.name}
-                  disabled={this.state.disabledName ? "disabledName" : ""}
-                  required
-                />
-              </Grid>
+                <Grid item xs={6}>
+                  <div id="nameCircle" ref={(div) => (this.nameCircle = div)} />
+                  <input
+                      ref={"this.nameRef"}
+                      id="name"
+                      maxLength="30"
+                      placeholder="write your name"
+                      pattern="[A-Za-z]"
+                      className="styleInput"
+                      defaultValue={this.state.name}
+                      disabled={this.state.disabledName ? "disabledName" : ""}
+                      required
+                  />
+                </Grid>
 
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditNameClick.bind(this)}
-                  disabled={!this.state.disabledName}
-                >
-                  {" "}
-                  Edit
+
+
+                <Grid item xs={4}>
+                  <label
+                      className={"textHeader"}
+                      id="lastName-label"
+                      htmlFor="Last name"
+                  >
+                    Function
+                  </label>
+                </Grid>
+
+                <div />
+
+                <Grid item xs={6}>
+                  <input
+                      ref={"this.lastnameRef"}
+                      id="function"
+                      maxLength="30"
+                      pattern="[A-Za-z]"
+                      defaultValue={this.state.personFunction}
+                      className="styleInput"
+                      disabled={
+                        this.state.disabledPersonFunction ? "disabledPersonFunction" : ""
+                      }
+                      required
+                  />
+                </Grid>
+
+
+
+                <Grid item xs={4}>
+                  <label
+                      className={"textHeader"}
+                      id="lastName-label"
+                      htmlFor="Address"
+                  >
+                    Phone Number
+                  </label>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <PhoneInput
+                      country={"us"}
+                      className="marginBottom"
+                      value={this.state.phoneNumber}
+                      onChange={(phoneNumber) => this.setState({ phoneNumber })}
+                  />
+                </Grid>
+
+
+
+                <Grid item xs={4}>
+                  <label
+                      className={"textHeader"}
+                      id="Dateofbirth-label"
+                      htmlFor="Date of Birth"
+                  >
+                    Mail
+                  </label>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <input
+                      ref={"this.mail"}
+                      id="mail"
+                      maxLength="30"
+                      defaultValue={this.state.email}
+                      className="styleInput"
+                      disabled={this.state.disabledEmail ? "disabledEmail" : ""}
+                      required
+                  />
+                </Grid>
+
+
+
+                <Grid item xs={4}>
+                  <label
+                      className={"textHeader"}
+                      id="Dateofbirth-label"
+                      htmlFor="Date of Birth"
+                  >
+                    Date
+                  </label>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <DatePicker
+                      ref={"this.dateOfBirthRef"}
+                      selected={this.state.startDate}
+                      onChange={this.handleChangeDate}
+                      className="styleInput"
+                      disabled={
+                        this.state.disabledName ? "disabledName" : ""
+                      }
+                  />
+                </Grid>
+
+
+
+                <Grid item xs={4}>
+                  <label
+                      className={"textHeader"}
+                      id="lastName-label"
+                      htmlFor="country"
+                  >
+                    Signature
+                  </label>
+                </Grid>
+
+                <Grid item xs={6}>
+                  <input
+                      ref={"this.academicYear"}
+                      id="name"
+                      maxLength="30"
+                      className="styleInput"
+                      defaultValue={this.state.name}
+                      disabled={
+                        this.state.disabledName
+                            ? "disabledAcademicYear"
+                            : ""
+                      }
+                      required
+                  />
+                </Grid>
+
+
+
+                <Grid item xs={12}></Grid>
+              </Grid>
+              <div className="perfectCentered">
+                <button className="buttons" onClick={this.handlerComplete}>
+                  Save{" "}
                 </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="Last name"
-                >
-                  Function
-                </label>
-              </Grid>
-
-              <div />
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.lastnameRef"}
-                  id="function"
-                  maxLength="30"
-                  pattern="[A-Za-z]"
-                  defaultValue={this.state.function}
-                  className="styleInput"
-                  disabled={
-                    this.state.disabledLastName ? "disabledLastName" : ""
-                  }
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditLastNameClick.bind(this)}
-                  disabled={!this.state.disabledLastName}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="Address"
-                >
-                  Phone Number
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <PhoneInput
-                  country={"us"}
-                  className="marginBottom"
-                  value={this.state.phone}
-                  onChange={(phone) => this.setState({ phone })}
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleSubjectAreaClick.bind(this)}
-                  disabled={!this.state.disabledSubjectArea}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="Dateofbirth-label"
-                  htmlFor="Date of Birth"
-                >
-                  Mail
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.mail"}
-                  id="mail"
-                  maxLength="30"
-                  defaultValue={this.state.email}
-                  className="styleInput"
-                  disabled={this.state.disabledGender ? "disabledGender" : ""}
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditGenderClick.bind(this)}
-                  disabled={!this.state.disabledGender}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="Dateofbirth-label"
-                  htmlFor="Date of Birth"
-                >
-                  Date
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <DatePicker
-                  ref={"this.dateOfBirthRef"}
-                  selected={this.state.startDate}
-                  onChange={this.handleChangeDate}
-                  className="styleInput"
-                  disabled={
-                    this.state.disabledDateOfBirth ? "disabledDateOfBirth" : ""
-                  }
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditDateOfBirthClick.bind(this)}
-                  disabled={!this.state.disabledDateOfBirth}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="country"
-                >
-                  Signature
-                </label>
-              </Grid>
-
-              <Grid item xs={6}>
-                <input
-                  ref={"this.academicYear"}
-                  id="name"
-                  maxLength="30"
-                  className="styleInput"
-                  defaultValue={this.state.academicYear}
-                  disabled={
-                    this.state.disabledAcademicYear
-                      ? "disabledAcademicYear"
-                      : ""
-                  }
-                  required
-                />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditAcademicYearClick.bind(this)}
-                  disabled={!this.state.disabledAcademicYear}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
-              <Grid item xs={12}></Grid>
-            </Grid>
-            <div className="perfectCentered">
-              <button className="buttons" onClick={this.handlerComplete}>
-                Save{" "}
-              </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }
