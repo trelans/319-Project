@@ -10,6 +10,7 @@ const University = require("../models/university");
 const Form = require("../models/form");
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
+const Notification = require("../models/notification")
 
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
@@ -128,7 +129,16 @@ router.post('/preapproval-student-nominate-course', async (req, res) => {
                     proposingStudentName: user.name
                 }
             })
-            const notification =
+
+            const erasmusCoordinator = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
+            const notification = new Notification({
+                owner: erasmusCoordinator._id,
+                text: user.name + " request a new exemption for " + req.body.bilkentCourse.courseCode + " at " + req.body.hostUniName
+            })
+
+            await notification.save()
+
+
             response = res.status(201)
             response.send({"status": "Ok"})
         } else {
@@ -200,14 +210,14 @@ router.post('/learning-agreement-1-3', async (req, res) => {
     }
 })
 
-router.patch('/pre-approval-form/:id', auth, async (req,res) => {
-    
+router.patch('/pre-approval-form/:id', auth, async (req, res) => {
+
     const updates = Object.keys(req.body)
 
-    try{
+    try {
         const form = await Form.findOne({_id: req.params.id, owner: req.user._id})
 
-        if(!form) {
+        if (!form) {
             return res.status(404).send()
         }
 
@@ -218,7 +228,7 @@ router.patch('/pre-approval-form/:id', auth, async (req,res) => {
         await form.save()
 
         res.send(form)
-    }catch(e) {
+    } catch (e) {
         res.status(400).send(e)
     }
 })
