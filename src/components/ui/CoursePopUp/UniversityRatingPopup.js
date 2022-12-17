@@ -12,14 +12,14 @@ function Modal(props) {
 
   return (
     <div className={"perfectCentered"}>
-      <div className={style.modal}>
+      <div className={style.modal} style={{ overflowY: "scroll" }}>
         <h4>Rate Your Host University</h4>
         <a className={style.close} onClick={cancelHandler}>
           ×
         </a>
         <br /> <br />
         <div>
-          <RatingPopupTable />
+          <RatingPopupTable onCancel={cancelHandler} />
         </div>
       </div>
     </div>
