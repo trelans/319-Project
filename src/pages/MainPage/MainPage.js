@@ -44,14 +44,16 @@ function MainPage() {
           res.data.map((val) => {
             return {
               name: val.name + " " + val.surname,
-              id: val._id,
-            };
-          })
-        );
-      } catch (error) {}
-    };
-    getUsers();
-  }, []);
+              id : val._id,
+              itemType: "user"
+            }
+          }))
+      } catch (error) {
+          
+      }
+    }
+    getUsers()
+  }, [])
 
   useEffect(() => {
     const getUniversities = async () => {
@@ -66,14 +68,16 @@ function MainPage() {
           res.data.map((val) => {
             return {
               name: val.name,
-              id: val._id,
-            };
-          })
-        );
-      } catch (error) {}
-    };
-    getUniversities();
-  }, []);
+              id : val._id,
+              itemType: "university"
+            }
+          }))
+      } catch (error) {
+          
+      }
+    }
+    getUniversities()
+  }, [])
 
   const handeSelect = (option) => {
     if (option == 0) {

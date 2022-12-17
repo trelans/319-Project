@@ -373,6 +373,22 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     res.status(200).send()
 })
 
+router.get('/user/:id', async (req, res) => {
+
+    try {
+        const user = await User.findById(req.params.id)
+
+        if (!user) {
+            throw new Error()
+        }
+
+        res.send(user)
+
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
 router.get('/users/:id/avatar', async (req, res) => {
 
     try {

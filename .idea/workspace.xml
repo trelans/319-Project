@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/routers/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers/form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/SendingInstutionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/SendingInstutionForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
       <workItem from="1670849953856" duration="4697000" />
       <workItem from="1671088987457" duration="394000" />
       <workItem from="1671089771071" duration="30594000" />
-      <workItem from="1671218960009" duration="8070000" />
+      <workItem from="1671218960009" duration="9836000" />
     </task>
     <task id="LOCAL-00001" summary="user router -- create user">
       <created>1671103781135</created>
@@ -160,7 +161,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671227983286</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="&#10;receivingInstutionForm.js&#10;onChange method added for all editables.">
+      <created>1671228640065</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671228640065</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
