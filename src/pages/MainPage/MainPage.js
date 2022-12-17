@@ -13,6 +13,7 @@ import axios from "axios";
 
 import RatingPopup from "../../components/ui/CoursePopUp/UniversityRatingPopup";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
+import LoadingSpinner from "../../components/ui/loadingComponent";
 
 function MainPage() {
   /*

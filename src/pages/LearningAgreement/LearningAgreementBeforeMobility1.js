@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import React, { useState } from "react";
 import styles from "./LearningAgreementBeforeMobility.module.css";
 import { handleRequests } from "../requests";
+import LoadingSpinner from "../../components/ui/loadingComponent";
 
 let loaded = false;
 
@@ -41,7 +42,10 @@ function LearningAgreementBeforeMobility1() {
     return (
       <div className="Page">
         <NavigationBar />
-        <div className="App">Loading...</div>
+        <div className="lc-center1"><h3>Loading...</h3></div>
+        <div className="lc-center2">
+          <LoadingSpinner />
+        </div>
       </div>
     );
   }

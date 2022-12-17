@@ -1661,3 +1661,33 @@ a:hover {
   justify-content: center;
   display: flex;
 }
+
+/* loading component styles */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 100px;
+  height: 100px;
+  border: 20px solid #A5C9CA;
+  border-top: 20px solid #2c3333;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.lc-center1 {
+  margin-top: 15%;
+  justify-content: center;
+  display: flex;
+}
+
+.lc-center2 {
+  margin-top: 2%;
+  justify-content: center;
+  display: flex;
+}
