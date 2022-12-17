@@ -44,16 +44,15 @@ function MainPage() {
           res.data.map((val) => {
             return {
               name: val.name + " " + val.surname,
-              id : val._id,
-              itemType: "user"
-            }
-          }))
-      } catch (error) {
-          
-      }
-    }
-    getUsers()
-  }, [])
+              id: val._id,
+              itemType: "user",
+            };
+          })
+        );
+      } catch (error) {}
+    };
+    getUsers();
+  }, []);
 
   useEffect(() => {
     const getUniversities = async () => {
@@ -68,16 +67,15 @@ function MainPage() {
           res.data.map((val) => {
             return {
               name: val.name,
-              id : val._id,
-              itemType: "university"
-            }
-          }))
-      } catch (error) {
-          
-      }
-    }
-    getUniversities()
-  }, [])
+              id: val._id,
+              itemType: "university",
+            };
+          })
+        );
+      } catch (error) {}
+    };
+    getUniversities();
+  }, []);
 
   const handeSelect = (option) => {
     if (option == 1) {
@@ -110,7 +108,9 @@ function MainPage() {
               onChange={(e) => handeSelect(e.target.options.selectedIndex)}
               id="searchParameter"
               name="searchParameter"
-            > <option value="Select">Select</option>
+            >
+              {" "}
+              <option value="Select">Select</option>
               <option value="user">User</option>
               <option value="university">University</option>
             </select>

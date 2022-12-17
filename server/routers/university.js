@@ -51,21 +51,6 @@ router.get('/universities', auth, async (req,res) => {
     
 })
 
-router.get('/university/:id', async (req, res) => {
-
-    try {
-        const university = await University.findById(req.params.id)
-
-        if (!university) {
-            throw new Error()
-        }
-
-        res.send(university)
-    } catch (e) {
-        res.status(404).send()
-    }
-})
-
 /*
 router.get('/tasks/:id', auth, async (req,res) => {
 

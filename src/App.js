@@ -87,7 +87,7 @@ function App() {
       <Route
         exact
         path="/forgot-password-page"
-        element={<ForgotPasswordPage/>}
+        element={<ForgotPasswordPage />}
       />
       <Route
         exact
@@ -184,7 +184,7 @@ function App() {
       <Route
         exact
         path="/profile-university"
-        element={<ProfilePageUniversity/>}
+        element={<ProfilePageUniversity />}
       />
       <Route exact path="/profile-course" element={<ProfilePageCourse />} />
       <Route exact path="/info-page" element={<InfoPage />} />

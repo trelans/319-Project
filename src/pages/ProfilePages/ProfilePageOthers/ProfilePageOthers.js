@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
 import { Link } from "react-router-dom";
@@ -15,65 +15,39 @@ const willDisplayType = 0;
 */
 
 function ProfilePageOthers() {
+  const { state } = useLocation();
+  const [currentUser, setCurrentUser] = useState();
+  const [willDisplayType, setWillDisplayType] = useState(0);
 
-  const {state} = useLocation()
-  const [currentUser, setCurrentUser] = useState()
-  const [willDisplayType, setWillDisplayType] = useState(0)
-  const [university, setUniversity] = useState()
-  const navigate = useNavigate()
-
-  console.log(willDisplayType)
+  console.log(willDisplayType);
 
   useEffect(() => {
-    console.log("Here")
-    const getUser= async () => {
-        try {
-            const res = await axios.get( `http://localhost:8080/user/${state}`, {})
-            
-            if(res.data.userType == 0 && res.data.erasmusCandidateData.nominatedUniversityId) {
-              const res2 = await axios.get( `http://localhost:8080/university/${res.data.erasmusCandidateData.nominatedUniversityId}`, {})
-              console.log(res2.data)
-              setUniversity(res2.data)
-            }
-            
-            setCurrentUser(res.data)
-        } catch (error) {
-            console.log("There is a problem")
-        }
-    }
+    console.log("Here");
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user/${state}`, {});
+        setCurrentUser(res.data);
+      } catch (error) {}
+    };
+    getUser();
+  }, []);
 
-    getUser()
-}, [])
+  console.log(state);
+  console.log(currentUser);
 
-console.log(state)
-console.log(currentUser)
+  useEffect(() => {
+    try {
+      if (currentUser.userType == 0) {
+        setWillDisplayType(0);
+      } else if (currentUser.userType == 5) {
+        setWillDisplayType(1);
+      } else {
+        setWillDisplayType(2);
+      }
+    } catch (error) {}
+  }, [currentUser]);
 
-useEffect(() => {
-  try {
-    if(currentUser.userType == 0) {
-      setWillDisplayType(0)
-    } else if (currentUser.userType == 5) {
-      setWillDisplayType(1)
-    } else {
-      setWillDisplayType(2)
-    }
-  } catch (error) {
-    
-  }
-
-}, [currentUser])
-
-
-const handleClick = () => {
-  navigate("/chat", {state: {
-    name: currentUser.name,
-    surname: currentUser.surname,
-    objectId: currentUser._id,
-    fromProfile: true
-  }})
-}
-
-if (willDisplayType == 0 && currentUser) {
+  if (willDisplayType == 0 && currentUser) {
     return (
       <div>
         <NavigationBar />
@@ -143,24 +117,24 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">Receiving Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{university ? university.name : ""}</td>
+                <td className="pp-text-other">Kingston University</td>
               </tr>
               <tr>
                 <br />
               </tr>
               <tr>
-                <td className="pp-header-other">Erasmus Points:</td>
+                <td className="pp-header-other">Erasmus Ranking:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.erasmusCandidateData.totalPoints}</td>
+                <td className="pp-text-other">6</td>
               </tr>
             </table>
           </div>
         </div>
-        <div onClick={(e) => handleClick()} className="pp-button-container">
+        <div className="pp-center">
           <button className="pp-button">Message</button>
         </div>
-        <Link to='/application-page2'>
+        <Link to="/application-page2">
           <div className="pp-center">
             <button className="pp-button">Application Status</button>
           </div>
@@ -179,14 +153,14 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">Michael Jordan</h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.incomingStudentData.studentId}</td>
+                <td className="pp-text-other">XXXXXXXX</td>
               </tr>
               <tr>
                 <br />
@@ -196,7 +170,7 @@ if (willDisplayType == 0 && currentUser) {
               </tr>
               <tr>
                 <td className="pp-text-other">
-                {currentUser.email}
+                  michael.jordan@ug.bilkent.edu.tr
                 </td>
               </tr>
               <tr>
@@ -235,17 +209,17 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">Sending Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.incomingStudentData.sendingInstitution}</td>
+                <td className="pp-text-other">Kingston University</td>
               </tr>
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
+        <div className="pp-center">
           <button className="pp-button">Upload Image</button>
         </div>
       </div>
     );
-  } else  if (willDisplayType == 2) {
+  } else {
     return (
       <div>
         <NavigationBar />
@@ -257,8 +231,14 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table2">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">Can Alkan</h1>
                 </td>
+              </tr>
+              <tr>
+                <td className="pp-header-other">Bilkent ID:</td>
+              </tr>
+              <tr>
+                <td className="pp-text-other">XXXX</td>
               </tr>
               <tr>
                 <br />
@@ -267,7 +247,7 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.email}</td>
+                <td className="pp-text-other">calkan@cs.bilkent.edu.tr</td>
               </tr>
               <tr>
                 <br />
@@ -281,8 +261,8 @@ if (willDisplayType == 0 && currentUser) {
             </table>
           </div>
         </div>
-        <div onClick={(e) => handleClick()} className="pp-button-container">
-          <button className="pp-button2">Message</button>
+        <div className="pp-center">
+          <button className="pp-button">Message</button>
         </div>
       </div>
     );

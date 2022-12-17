@@ -9,7 +9,6 @@ const Department = require("../models/department");
 const University = require("../models/university");
 const Form = require("../models/form");
 const BilkentCourse = require("../models/bilkentCourse")
-const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
 
 router.post('/preapproval-student', async (req, res) => {
     try {
@@ -53,35 +52,6 @@ router.post('/preapproval-student', async (req, res) => {
                 "courses": PAF.preApprovalForm.courses,
                 "bilkentCourses": courseMap
             })
-        } else {
-            response = res.status(302)
-            response.send("No Preapproval form found")
-        }
-
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.post('/preapproval-student-popup', async (req, res) => {
-    try {
-        console.log("req" + req.body.courses)
-        let response;
-        const eqCourseData = [];
-        // 0 POST, 1 GET
-        if (req.body.type === "1") {
-            await Promise.all(req.body.courses.map(async (course) => {
-                const foreignCourse = await ForeignUniversityCourse.findById({_id: course.courseID})
-                eqCourseData.push({
-                    courseCode: foreignCourse.courseCode,
-                    name: foreignCourse.name,
-                    ECTSCredits: foreignCourse.ectsCredits,
-                    partNo: 0
-                })
-            }))
-            response = res.status(201)
-            response.send({"eqCourseData": eqCourseData})
         } else {
             response = res.status(302)
             response.send("No Preapproval form found")

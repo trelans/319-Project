@@ -50,7 +50,7 @@ class TableAddRows extends React.Component {
       courseCode: "",
       courseName: "",
       credits: "",
-      courseType: "",
+      elective: "",
       courseCodeEq: "",
       courseNameEq: "",
       partNo: "",
@@ -72,7 +72,7 @@ class TableAddRows extends React.Component {
         courseCode: row["courseCode"],
         courseName:  row["courseName"],
         credits:  row["credit"],
-        courseType: row["courseType"],
+        elective: row["courseType"],
         courseCodeEq: "",
         courseNameEq: "",
         partNo: "",
@@ -96,7 +96,7 @@ class TableAddRows extends React.Component {
       courseCode: this.state.rows[zar["idx"]]["courseCode"],
       courseName: this.state.rows[zar["idx"]]["courseName"] ,
       credits: this.state.rows[zar["idx"]]["credits"],
-      courseType:  this.state.rows[zar["idx"]]["courseType"],
+      elective:  this.state.rows[zar["idx"]]["courseType"],
       courseCodeEq: zar["courseCode"],
       courseNameEq: zar["courseName"],
       partNo: zar["mergeNo"],
@@ -192,9 +192,9 @@ class TableAddRows extends React.Component {
                       <td>
                         <input
                           type="text"
-                          name="courseType"
+                          name="elective"
                           disabled="true"
-                          value={this.state.rows[idx].courseType}
+                          value={this.state.rows[idx].elective}
                           onChange={this.handleChange(idx)}
                           className="form-control"
                         />
