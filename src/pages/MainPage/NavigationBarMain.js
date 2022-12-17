@@ -14,7 +14,7 @@ function NavigationBar() {
             <Link to="/main-page">Home</Link>
           </li>
           <li>
-            <Link to="/profile-page">Profile</Link>
+            <Link to="/profile-own">Profile</Link>
           </li>
           <li>
             <Link to="/chat">DM</Link>
