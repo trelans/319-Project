@@ -39,6 +39,7 @@ function PreApprovalFormPage() {
   const [eqCourseGot, setEqCourseGot] = useState({});
   const [nomNewCourse, setNomNewCourse] = useState(false);
   const [isLoading, setLoading] = React.useState(true);
+  const [isSubmitButton, setSubmitButton] = React.useState(true);
   const childRef = useRef();
 
   const navigate = useNavigate();
@@ -50,6 +51,16 @@ function PreApprovalFormPage() {
   useEffect(() => {
     handleSelectEq();
   }, [eqCourseGot]);
+
+
+  useEffect(() => {
+    if (ECTSCredits > 30) {
+      setSubmitButton(false)
+    }
+    else if (ECTSCredits > 40) {
+      setSubmitButton(true)
+    }
+  }, [ECTSCredits]);
 
   function selectCourse() {
     setCourseIsOpen(true);
@@ -255,7 +266,9 @@ function PreApprovalFormPage() {
                 </button>
               </td>
               <td className="pafp-last-table-td">
-                <button className="pafp-button-not-active">Submit Form</button>
+                <button
+                    disabled={isSubmitButton}
+                    className="">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>

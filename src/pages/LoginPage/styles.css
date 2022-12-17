@@ -1094,6 +1094,9 @@ body {
 .pafp-button:hover {
   opacity: 75%;
 }
+.pafp-button:disabled {
+color: #1D1F26;
+}
 
 .pafp-flex-div {
   display: flex;
@@ -1151,6 +1154,7 @@ span.pafp-button-last {
 .pafp-last-table-td {
   padding-right: 50px;
 }
+
 
 /*learning agreement page*/
 
