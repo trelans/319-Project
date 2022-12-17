@@ -29,6 +29,8 @@ export default class Student extends React.Component {
       displayComplete: "none",
       id: props.id,
 
+
+
       name: props.fields ? props.fields.name : "",
       personFunction: props.fields ? props.fields.personFunction : "",
       phoneNumber: props.fields ? props.fields.phoneNumber : "",
@@ -41,6 +43,8 @@ export default class Student extends React.Component {
       disabledEmail: true,
       disabledSignature: true,
     };
+
+
 
     this.updateInputName = this.updateInputName.bind(this);
     this.updateInputPersonFunction = this.updateInputPersonFunction.bind(this);
