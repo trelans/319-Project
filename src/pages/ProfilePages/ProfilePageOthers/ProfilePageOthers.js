@@ -56,7 +56,7 @@ useEffect(() => {
     
   }
 
-}, [])
+}, [currentUser])
 
 
   if (willDisplayType == 0 && currentUser) {
@@ -71,14 +71,14 @@ useEffect(() => {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">İlker Özgen {currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">21902719 {currentUser.erasmusCandidateData.studentId}</td>
+                <td className="pp-text-other">{currentUser.erasmusCandidateData.studentId}</td>
               </tr>
               <tr>
                 <br />
@@ -87,7 +87,7 @@ useEffect(() => {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">ilker.ozgen@ug.bilkent.edu.tr {currentUser.email}</td>
+                <td className="pp-text-other">{currentUser.email}</td>
               </tr>
               <tr>
                 <br />
@@ -96,7 +96,7 @@ useEffect(() => {
                 <td className="pp-header-other">Department: </td>
               </tr>
               <tr>
-                <td className="pp-text-other">Computer Science {currentUser.erasmusCandidateData.departments}</td>
+                <td className="pp-text-other">{currentUser.erasmusCandidateData.departments}</td>
               </tr>
             </table>
           </div>
@@ -222,7 +222,7 @@ useEffect(() => {
         </div>
       </div>
     );
-  } else if (willDisplayType == 2) {
+  } else  {
     return (
       <div>
         <NavigationBar />
