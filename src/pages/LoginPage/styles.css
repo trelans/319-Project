@@ -1539,7 +1539,7 @@ span.pafp-button-last {
 /*SearchBarMain styles*/
 
 .searchInputs {
-  margin-top: -50px;
+  margin-top: -50px;  
   margin-left: 400px;
   display: flex;
 }
@@ -1634,4 +1634,13 @@ a:hover {
 .main-margined {
   margin-top: -25px;
   margin-left: 285px;
+}
+
+.ir-selection-box {
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  list-style: none;
+  border: solid 1px rgb(168, 168, 168);
+  width: 395px;
 }

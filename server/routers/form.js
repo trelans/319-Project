@@ -20,16 +20,21 @@ router.post('/preapproval-student', async (req, res) => {
             const user = await User.findOne({'tokens.token': req.body.token})
             const department = await Department.findById(user.erasmusCandidateData.departments[0]["id"])
             appliedInstitution = await University.findById(user.erasmusCandidateData.nominatedUniversityId)
-            const courseMap = {"CS Required Course":[], "CS Technical Elective":[], "CS HSS Elective": [], "CS General Elective": []};
-            await BilkentCourse.find({}).then(function(courses) {
-                courses.forEach(function(course) {
-                    if(course.courseType === "CS Required Course"){
+            const courseMap = {
+                "CS Required Course": [],
+                "CS Technical Elective": [],
+                "CS HSS Elective": [],
+                "CS General Elective": []
+            };
+            await BilkentCourse.find({}).then(function (courses) {
+                courses.forEach(function (course) {
+                    if (course.courseType === "CS Required Course") {
                         courseMap["CS Required Course"].push(course)
-                    }else if (course.courseType === "CS Technical Elective"){
+                    } else if (course.courseType === "CS Technical Elective") {
                         courseMap["CS Technical Elective"].push(course)
-                    }else if (course.courseType === "CS HSS Elective"){
+                    } else if (course.courseType === "CS HSS Elective") {
                         courseMap["CS HSS Elective"].push(course)
-                    }else {
+                    } else {
                         courseMap["CS General Elective"].push(course)
                     }
                 })
@@ -87,14 +92,47 @@ router.post('/learning-agreement-1-3', async (req, res) => {
                 receivingInstitutionInfo: LAF.learningAgreementForm.receivingInstitution,
                 formID: LAF._id
             })
-        } else if(req.body.type === '2'){
-            console.log(req.body)
+        } else if (req.body.type === '2') {
             const id = req.body.id
-            console.log(id)
             delete req.body.id
-            await Form.findByIdAndUpdate(id, {"learningAgreementForm.sendingInstitution": req.body.sendingInstitution})
-            res.status(200).send({status: "Ok"})
+            console.log(id)
+            if (req.body.infoType === 1) {
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.sendingInstitution": req.body.sendingInstitution})
+            } else if (req.body.infoType === 0) {
+                console.log("body" + req.body.studyCycle)
+                await User.findOneAndUpdate({"name": req.body.name}, {
+                    "surname": req.body.lastName,
+                    "erasmusCandidateData.academicYear": req.body.academicYear
+                })
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.dateofBirth": req.body.dateofBirth,
+                    "learningAgreementForm.nationality": req.body.nationality,
+                    "learningAgreementForm.gender": req.body.gender,
+                    "learningAgreementForm.studyCycle": req.body.studyCycle,
+                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
+                    })
+            } else if (req.body.infoType === 2) {
+
+                console.log("name:" + req.body.name)
+                console.log(id)
+
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.receivingInstitution": req.body.receivingInstitution
+                    /*
+                    "learningAgreementForm.receivingInstitution.name": req.body.receivingInstitution.name,
+                    "learningAgreementForm.receivingInstitution.faculty": req.body.receivingInstitution.faculty,
+                    "learningAgreementForm.receivingInstitution.erasmusCode": req.body.receivingInstitution.erasmusCode,
+                    "learningAgreementForm.receivingInstitution.departmentName": req.body.receivingInstitution.departmentName,
+                    "learningAgreementForm.receivingInstitution.address": req.body.receivingInstitution.address,
+                    "learningAgreementForm.receivingInstitution.country": req.body.receivingInstitution.country,
+                    "learningAgreementForm.receivingInstitution.contactPerson.name": req.body.receivingInstitution.contactPerson.name,
+                    "learningAgreementForm.receivingInstitution.contactPerson.email": req.body.receivingInstitution.contactPerson.email,
+                    "learningAgreementForm.receivingInstitution.contactPerson.phoneNumber": req.body.receivingInstitution.contactPerson.phoneNumber,
+                    */
+
+                })
+            }
         }
+
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
