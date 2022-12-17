@@ -147,9 +147,9 @@ function PreApprovalFormPage() {
       <NavigationBar />
       <div className="pafp-container">
         <h1 className="pafp-h1">Applicant Info</h1>
-        <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12, padding: 100,  }}>
-          <tr>
-            <td className="pafp-first-table-td">
+        <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
+          <tr  >
+            <td className="pafp-first-table-td" >
               <p className="pafp-table-title-white">Name:</p>
             </td>
             <td className="pafp-first-table-td">
