@@ -37,7 +37,7 @@ body {
   .nb-header a:hover,
   .nb-header a:active,
   .nb-header a.active {
-    opacity: 75%;
+    color: #b981ff;
   }
   
   .nb-name {
