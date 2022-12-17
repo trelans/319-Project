@@ -14,6 +14,13 @@ export default function App(props) {
       comments: "",
       courseRate: "",
     },
+
+    {
+      courseCode: "CS 224",
+      courseName: "Insane Lab Challenges",
+      comments: "",
+      courseRate: "",
+    },
   ]);
 
   const handleSubmit = async (e) => {
