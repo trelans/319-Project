@@ -6,7 +6,6 @@ import TodoWidget from "./TodoWidget";
 
 import Grid from "@mui/material/Grid";
 import SearchBarMain from "./SearchBarMain";
-import BookData from "./Data.json";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -84,7 +83,7 @@ function MainPage() {
     } else if (option == 2) {
       setData(universities);
     } else {
-      setData(undefined)
+      setData(undefined);
     }
   };
 
@@ -111,7 +110,7 @@ function MainPage() {
               onChange={(e) => handeSelect(e.target.options.selectedIndex)}
               id="searchParameter"
               name="searchParameter"
-              style={{borderRadius: 5, marginTop: 3}}
+              style={{ borderRadius: 5, marginTop: 3 }}
             >
               {" "}
               <option value="Select">Select</option>
@@ -128,6 +127,7 @@ function MainPage() {
             <Grid item xs={2}>
               <Link to="/application-page1">
                 <button className="fpp-button">Application Status</button>
+                <button className="fpp-button">Reply Nomination Requests</button>
               </Link>
             </Grid>
             <Grid item xs={1}>
@@ -143,9 +143,6 @@ function MainPage() {
           {popupOpen && <RatingPopup onCancel={closePopup} />}
           {popupOpen && <Backdrop />}
         </div>
-
-
-        
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ function ProfilePageOwn() {
   const navigate = useNavigate();
 
   function goToApplicationStatus() {
-    navigate("/application-page2");
+    navigate("/application-page1");
   }
 
   if (user.userType == 0) {
@@ -132,9 +132,6 @@ function ProfilePageOwn() {
           </div>
         </div>
         <div className={classes["pp-center"]}>
-          <button className={classes["pp-button"]}>Upload Image</button>
-        </div>
-        <div className={classes["pp-center"]}>
           <button
             className={classes["pp-button"]}
             onClick={goToApplicationStatus}
@@ -223,9 +220,6 @@ function ProfilePageOwn() {
             </table>
           </div>
         </div>
-        <div className={classes["pp-center"]}>
-          <button className={classes["pp-button"]}>Upload Image</button>
-        </div>
       </div>
     );
   } else {
@@ -267,9 +261,6 @@ function ProfilePageOwn() {
               </tr>
             </table>
           </div>
-        </div>
-        <div className={classes["pp-center"]}>
-          <button className={classes["pp-button2"]}>Upload Image</button>
         </div>
       </div>
     );

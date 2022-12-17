@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
 import classes from "./NavigationBar.module.css";
 import img from "./logo.png";
+import { NotificationManager } from "react-notifications";
 
 function NavigationBar() {
+  function fetchNotifications() {
+    NotificationManager.info("Hey I am Adyasha", "Info!", 5000);
+    NotificationManager.success(
+      "A sample notification message",
+      "Success",
+      5000
+    );
+  }
+
   return (
     <div className={classes["nb-header"]}>
       <Link to="/main-page">
@@ -20,7 +30,7 @@ function NavigationBar() {
             <Link to="/chat">DM</Link>
           </li>
           <li>
-            <Link to="/notification-popup">Notifications</Link>
+            <Link onClick={fetchNotifications}>Notifications</Link>
           </li>
           <li>
             <Link to="/settings-page">Settings</Link>

@@ -6,9 +6,14 @@ const Task = require('./task')
 
 
 const wishedCourse = mongoose.Schema( {
-    course: {
+    bilkentCourse: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
+        ref: 'BilkentCourse'
+    },
+
+    foreignUniversityCourse: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ForeignUniversityCourse'
     }
 
 }, {_id: false});

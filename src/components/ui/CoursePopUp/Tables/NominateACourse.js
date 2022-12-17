@@ -1,8 +1,9 @@
 import style from "./NominateACourse.module.css";
 import {Button, Container, Divider, Stack, TextField} from "@mui/material";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {InputRow} from "../../../InputRow";
 import {PropaneSharp} from "@mui/icons-material";
+import {handleRequests} from "../../../../pages/requests";
 
 const arr = [
     {value: "", text: "--Or Choose Already Existing Course to Merge--"},
@@ -12,8 +13,8 @@ const arr = [
 ];
 
 export default function App(props) {
-    const [name, setName] = useState("");
-    const [story, setStory] = useState({});
+    const [explanation, setExplanation] = useState("");
+    const [story, setStory] = useState();
     const [inputFields, setInputFields] = useState([
         {
             courseCode: "",
@@ -24,10 +25,24 @@ export default function App(props) {
         },
     ]);
 
+    const bilkentCourse = props.bilkentCourse
+    const hostUniName = props.hostUniName
+    console.log(bilkentCourse)
+    console.log(hostUniName)
+
+    useEffect((e) => {
+        if (story !== undefined){
+            console.log("jennie", story);
+            handleRequests(e, story, "preapproval-student-nominate-course", "0", (response, status) => {
+                console.log(response)
+                alert("Nomination is done!")
+            })
+        }
+    }, [story]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await setStory({trips: [...inputFields], name});
-        console.log("jennie", story);
+        await setStory({nominatedCoursesData: [...inputFields], explanation, bilkentCourse, hostUniName});
     };
 
     const handleChange = (event, index) => {
@@ -39,7 +54,7 @@ export default function App(props) {
     };
 
     const handleName = (event) => {
-        setName(event.target.value);
+        setExplanation(event.target.value);
     };
 
     // adds new input
@@ -105,14 +120,13 @@ export default function App(props) {
                                 ))}
                             </select>
                             <TextField style={{marginTop : 30 }}
-                                name="name"
+                                name="explanation"
                                 required
                                 fullWidth
-
                                        multiline={6}
                                 label="Message"
                                 onChange={(event) => handleName(event)}
-                                value={name}
+                                value={explanation}
                             />
                         </div>
                         <Button type="submit" variant="contained" disableElevation>

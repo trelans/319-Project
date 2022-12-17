@@ -10,6 +10,7 @@ const University = require("../models/university");
 const Form = require("../models/form");
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
+const Notification = require("../models/notification")
 
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
@@ -79,7 +80,6 @@ router.post('/preapproval-student-popup', async (req, res) => {
             ).exemptedCourses
             await Promise.all(courseList.map(async (course) => {
                 const foreignUniversityCourse = await ForeignUniversityCourse.findOne({name: course.courseName})
-                console.log("Foreign Course found for: " + course + " " + foreignUniversityCourse)
                 eqCourseData.push({
                     courseName: foreignUniversityCourse.name,
                     courseCode: foreignUniversityCourse.courseCode,
@@ -95,6 +95,56 @@ router.post('/preapproval-student-popup', async (req, res) => {
             response.send("No Preapproval form found")
         }
 
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.post('/preapproval-student-nominate-course', async (req, res) => {
+    try {
+        let response;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "0") {
+            console.log("REadsadsa")
+            console.log(req.body)
+            const user = await User.findOne({'tokens.token': req.body.token})
+            const nominatedCourses = []
+            await Promise.all(req.body.nominatedCoursesData.map(async (course) => {
+                const nominatedCourse = {
+                    name: course.courseName,
+                    courseCode: course.courseCode,
+                    syllabusLink: course.syllabus,
+                    courseWebPage: course.website,
+                    ectsCredits: course.credits
+                }
+                nominatedCourses.push(nominatedCourse)
+            }))
+            await BilkentCourse.findOneAndUpdate({courseCode: req.body.bilkentCourse.courseCode}, {
+                nominatedForeignCourses: {
+                    nominatedCourses,
+                    hostUniName: req.body.hostUniName,
+                    explanation: req.body.explanation,
+                    proposingStudentName: user.name
+                }
+            })
+
+            const erasmusCoordinator = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
+            const notification = new Notification({
+                owner: erasmusCoordinator._id,
+                text: user.name + " request a new exemption for " + req.body.bilkentCourse.courseCode + " at " + req.body.hostUniName
+            })
+
+            await notification.save()
+
+
+            response = res.status(201)
+            response.send({"status": "Ok"})
+        } else {
+            response = res.status(302)
+            response.send("No Get status")
+        }
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
@@ -160,14 +210,14 @@ router.post('/learning-agreement-1-3', async (req, res) => {
     }
 })
 
-router.patch('/pre-approval-form/:id', auth, async (req,res) => {
-    
+router.patch('/pre-approval-form/:id', auth, async (req, res) => {
+
     const updates = Object.keys(req.body)
 
-    try{
+    try {
         const form = await Form.findOne({_id: req.params.id, owner: req.user._id})
 
-        if(!form) {
+        if (!form) {
             return res.status(404).send()
         }
 
@@ -178,10 +228,78 @@ router.patch('/pre-approval-form/:id', auth, async (req,res) => {
         await form.save()
 
         res.send(form)
-    }catch(e) {
+    } catch (e) {
         res.status(400).send(e)
     }
 })
 
+
+
+router.post('/learning-agreement-3-3', async (req, res) => {
+    console.log(req.body)
+    try {
+        let application
+        let response
+        let candidate
+
+        // 0 POST, 1 GET, 2 PATCH
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            application = await Application.findOne({'applicantCandidate': user._id})
+            candidate = await User.findById(application.applicantCandidate)
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            response = res.status(201)
+
+            console.log("inside get 3-3")
+            console.log(user)
+            console.log(application)
+            console.log(LAF)
+            console.log(candidate)
+
+            response.send({
+                studentInfo: {
+                    name: candidate.name,
+                    lastName: candidate.surname,
+                    dateOfBirth: LAF.learningAgreementForm.dateofBirth,
+                    nationality: LAF.learningAgreementForm.nationality,
+                    gender: LAF.learningAgreementForm.gender,
+                    academicYear: candidate.erasmusCandidateData.academicYear,
+                    studyCycle: LAF.learningAgreementForm.studyCycle,
+                    subjectAreaCode: LAF.learningAgreementForm.subjectAreaCode
+                },
+                responsiblePersonAtReceivingInsInfo: LAF.learningAgreementForm.responsiblePersonAtReceivingIns,
+                responsiblePersonFromSendingInsInfo: LAF.learningAgreementForm.responsiblePersonFromSendingIns,
+                formID: LAF._id
+
+            })
+        } else if (req.body.type === '2') { // patch
+            const id = req.body.id
+            delete req.body.id
+            if (req.body.infoType === 1) {
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.responsiblePersonFromSendingIns})
+            } else if (req.body.infoType === 0) {
+                await User.findOneAndUpdate({"name": req.body.name}, {
+                    "surname": req.body.lastName,
+                    "erasmusCandidateData.academicYear": req.body.academicYear
+                })
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
+                    "learningAgreementForm.nationality": req.body.nationality,
+                    "learningAgreementForm.gender": req.body.gender,
+                    "learningAgreementForm.studyCycle": req.body.studyCycle,
+                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
+                })
+            } else if (req.body.infoType === 2) {
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.responsiblePersonAtReceivingIns": req.body.responsiblePersonAtReceivingIns
+                })
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
 
 module.exports = router

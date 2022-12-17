@@ -39,30 +39,9 @@ function PreApprovalFormPage() {
   const [eqCourseGot, setEqCourseGot] = useState({});
   const [nomNewCourse, setNomNewCourse] = useState(false);
   const [isLoading, setLoading] = React.useState(true);
-  const [isSubmitButton, setSubmitButton] = React.useState(true);
   const childRef = useRef();
 
   const navigate = useNavigate();
-
-  const handleSubmit = () => {
-    
-    fetch(`http://localhost:8080/`, {
-      method: "PATCH",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/JSON",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({
-        preApprovalForm : {
-          totalEctsCredits: ECTSCredits,
-          courses: [],
-        }
-      }),
-    });
-
-
-  }
 
   useEffect(() => {
     handleSelect();
@@ -71,16 +50,6 @@ function PreApprovalFormPage() {
   useEffect(() => {
     handleSelectEq();
   }, [eqCourseGot]);
-
-
-  useEffect(() => {
-    if (ECTSCredits > 30) {
-      setSubmitButton(false)
-    }
-     if (ECTSCredits > 40) {
-      setSubmitButton(true)
-    }
-  }, [ECTSCredits]);
 
   function selectCourse() {
     setCourseIsOpen(true);
@@ -117,7 +86,9 @@ function PreApprovalFormPage() {
       return;
     }
     console.log(eqCourseGot);
-    childRef.current.car(eqCourseGot);
+    if (childRef.current != null) {
+      childRef.current.car(eqCourseGot);
+    }
     //setLastSelectedEq(selectedCourse)
   }
 
@@ -145,17 +116,17 @@ function PreApprovalFormPage() {
       setECTSCredits(response.ECTSCredits);
       setCourses(response.bilkentCourses);
       setBilkentCourses(response.bilkentCourses);
+      loaded = true;
+      setLoading(false);
     });
-    loaded = true;
-    setLoading(false);
   }
 
   if (isLoading) {
     return (
       <div className={"Page"}>
         <NavigationBar />
-        <div className="perfectCentered">
-          <div className="App">Loading...</div>
+        <div className="lc-center1"><h3>Loading...</h3></div>
+        <div className="lc-center2">
           <LoadingSpinner />
         </div>
       </div>
@@ -166,54 +137,54 @@ function PreApprovalFormPage() {
     <div>
       <NavigationBar />
       <div className="pafp-container">
-        <h1 className="pafp-h1">Applicant Info</h1>
-        <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
-          <tr  >
-            <td className="pafp-first-table-td" >
-              <p className="pafp-table-title-white">Name:</p>
-            </td>
-            <td className="pafp-first-table-td">
-              <p className="ap-text-other-white">{candName}</p>
-            </td>
-          </tr>
+        <h1 className="pafp-h1">Applicant Info:</h1>
+        <table className="pafp-first-table">
           <tr>
             <td className="pafp-first-table-td">
-              <p className="pafp-table-title-white">Surname:</p>
+              <p className="pafp-table-title">Name:</p>
             </td>
             <td className="pafp-first-table-td">
-              <p className="ap-text-other-white">{candSurname}</p>
+              <p className="ap-text-other">{candName}</p>
+            </td>
+          </tr>
+          <tr>
+            <td className="pafp-first-table-td">
+              <p className="pafp-table-title">Surname:</p>
+            </td>
+            <td className="pafp-first-table-td">
+              <p className="ap-text-other">{candSurname}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title-white">ID Number:</p>
+              <p className="pafp-table-title">ID Number:</p>
             </td>
             <td>
-              <p className="ap-text-other-white">{candID}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p className="pafp-table-title-white">Department:</p>
-            </td>
-            <td>
-              <p className="ap-text-other-white">{candDepartment}</p>
+              <p className="ap-text-other">{candID}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title-white">Host Institution Name:</p>
+              <p className="pafp-table-title">Department:</p>
             </td>
             <td>
-              <p className="ap-text-other-white">{hostUniName}</p>
+              <p className="ap-text-other">{candDepartment}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title-white">Duration:</p>
+              <p className="pafp-table-title">Host Institution Name:</p>
             </td>
             <td>
-              <p className="ap-text-other-white">Next {duration}</p>
+              <p className="ap-text-other">{hostUniName}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p className="pafp-table-title">Duration:</p>
+            </td>
+            <td>
+              <p className="ap-text-other">Next {duration}</p>
             </td>
           </tr>
         </table>
@@ -258,15 +229,6 @@ function PreApprovalFormPage() {
                 </label>
               </td>
               <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
                 <p className="pafp-lined-header">Approved By</p>
               </td>
               <td className="pafp-last-table-td">
@@ -285,22 +247,20 @@ function PreApprovalFormPage() {
                   Convert to PDF
                 </button>
               </td>
-              <td   className="pafp-last-table-td">
-                <button onClick={(e) => handleSubmit()}
-                    disabled={isSubmitButton}
-                    className="pafp-button">Submit Form</button>
-              </td>
               <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
+                <button className="pafp-button-not-active">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-red-text">Not Approved</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">Can Alkan</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">Signature</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">12.12.2022</p>
               </td>
             </tr>
           </table>
@@ -331,6 +291,7 @@ function PreApprovalFormPage() {
       {nomNewCourse && (
         <NomNewCoursePopUp
           bilkentCourse={nomNewCourse}
+          hostUniName={hostUniName}
           onCancel={closeNominationPopup}
         />
       )}
