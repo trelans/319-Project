@@ -71,10 +71,6 @@ function PreApprovalFormConvert() {
     setLoading(false);
   }
 
-  function x() {
-    console.log(location.state);
-  }
-
   if (isLoading) {
     return (
       <div className={"Page"}>
@@ -94,9 +90,6 @@ function PreApprovalFormConvert() {
           )}
         </Pdf>
       </div>
-      <button onClick={x}>
-        asfasd
-      </button>
       <div ref={ref}>
         <div className="cp-container">
           <div className="cp-center">

@@ -53,7 +53,7 @@ import CourseTransferFormConvert from "./pages/ConvertToPdfPages/CourseTransferF
 import LearningAgreementBeforeMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementBeforeMobilityConvert";
 import LearningAgreementDuringMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementDuringMobilityConvert";
 import LearningAgreementAfterMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementAfterMobilityConvert";
-
+import NominationRequests from "./pages/NominationRequests/NominationRequests"
 //import io from "socket.io-client";
 
 //export const socket = io.connect("http://localhost:8080");
@@ -257,6 +257,11 @@ function App() {
         path="/learning-agreement-after-mobility-convert"
         element={<LearningAgreementAfterMobilityConvert />}
       />
+        <Route
+            exact
+            path="/nominationRequests"
+            element={<NominationRequests />}
+        />
     </Routes>
   );
 }
