@@ -54,6 +54,10 @@ import LearningAgreementBeforeMobilityConvert from "./pages/ConvertToPdfPages/Le
 import LearningAgreementDuringMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementDuringMobilityConvert";
 import LearningAgreementAfterMobilityConvert from "./pages/ConvertToPdfPages/LearningAgreementAfterMobilityConvert";
 import NominationRequests from "./pages/NominationRequests/NominationRequests"
+
+import 'react-notifications/lib/notifications.css';
+import { NotificationContainer } from 'react-notifications';
+
 //import io from "socket.io-client";
 
 //export const socket = io.connect("http://localhost:8080");
@@ -70,6 +74,7 @@ if (token1) {
 
 function App() {
   return (
+    <div> 
     <Routes>
       <Route
         exact
@@ -263,6 +268,8 @@ function App() {
             element={<NominationRequests />}
         />
     </Routes>
+    <NotificationContainer />
+    </div>
   );
 }
 

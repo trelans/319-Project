@@ -10,41 +10,45 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MenuItem } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { handleRequests } from "../../../../../pages/requests";
 
 const options = [
   { value: "female", label: "Female" },
   { value: "male", label: "Male" },
   { value: "other", label: "Other" },
 ];
-export default class Student extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.options = countryList().getData();
     this.state = {
       startDate: new Date(),
-      country: "",
       options: this.options,
-      countryVal: 2,
-      complete: "",
-      displayComplete: "",
-      name: "",
-      function: "",
-      academicYear: "",
-      studyCycle: "",
-      address: "",
-      subjectAreaCode: "",
-      email: "",
+
+      displayComplete: "none",
+      id: props.id,
+
+      name: props.fields ? props.fields.name : "",
+      personFunction: props.fields ? props.fields.personFunction : "",
+      phoneNumber: props.fields ? props.fields.phoneNumber : "",
+      email: props.fields ? props.fields.email : "",
+      signature: props.fields ? props.fields.signature : "",
 
       disabledName: true,
-      disabledLastName: true,
-      disabledDateOfBirth: true,
-      disabledNationality: true,
-      disabledGender: true,
-      disabledAcademicYear: true,
-      disabledStudyCycle: true,
-      disabledSubjectArea: true,
+      disabledPersonFunction: true,
+      disabledPhoneNumber: true,
+      disabledEmail: true,
+      disabledSignature: true,
     };
 
+    this.updateInputName = this.updateInputName.bind(this);
+    this.updateInputPersonFunction = this.updateInputPersonFunction.bind(this);
+    this.updateInputPhoneNumber = this.updateInputPhoneNumber.bind(this);
+    this.updateInputEmail = this.updateInputEmail.bind(this);
+    this.updateInputSignature = this.updateInputSignature.bind(this);
+
+    /*
     this.flagsRef = React.createRef();
     this.lastnameRef = React.createRef();
     this.dateOfBirthRef = React.createRef();
@@ -53,12 +57,27 @@ export default class Student extends React.Component {
     this.academicYearRef = React.createRef();
     this.studyCycleRef = React.createRef();
     this.subjectAreaCodeRef = React.createRef();
+     */
     this.handleChangeDate = this.handleChangeDate.bind(this);
   }
 
-  handleChangeGender = (gender) => {
-    this.setState({ gender });
-  };
+  updateInputName(event) {
+    this.setState({ name: event.target.value });
+  }
+  updateInputPersonFunction(event) {
+    this.setState({ personFunction: event.target.value });
+  }
+  updateInputPhoneNumber(event) {
+    this.setState({ phoneNumber: event.target.value });
+  }
+  updateInputEmail(event) {
+    this.setState({ email: event.target.value });
+  }
+  updateInputSignature(event) {
+    this.setState({ signature: event.target.value });
+  }
+
+  //gereksiz
   changeHandler = (countryVal) => {
     this.setState({ countryVal });
   };
@@ -73,46 +92,53 @@ export default class Student extends React.Component {
     this.setState({ disabledName: !this.state.disabledName });
   }
 
-  handleEditLastNameClick() {
-    this.setState({ disabledLastName: !this.state.disabledLastName });
-  }
-  handleEditDateOfBirthClick() {
-    this.setState({ disabledDateOfBirth: !this.state.disabledDateOfBirth });
-  }
-  handleEditNationalityClick() {
-    this.setState({ disabledNationality: !this.state.disabledNationality });
-  }
-  handleEditGenderClick() {
-    this.setState({ disabledGender: !this.state.disabledGender });
-  }
-  handleEditAcademicYearClick() {
-    this.setState({ disabledAcademicYear: !this.state.disabledAcademicYear });
-  }
-  handleEditStudyCycleClick() {
-    this.setState({ disabledStudyCycle: !this.state.disabledStudyCycle });
-  }
-  handleSubjectAreaClick() {
-    this.setState({ disabledSubjectArea: !this.state.disabledSubjectArea });
+  handleEditPersonFunctionClick() {
+    this.setState({
+      disabledPersonFunction: !this.state.disabledPersonFunction,
+    });
   }
 
-  handlerComplete(e) {
-    if (
-      this.state.countryVal !== null &&
-      this.state.complete === true &&
-      this.state.phone !== ""
-    ) {
-      this.setState({
-        displayComplete: "flex",
-      });
-      window.scroll({
-        top: this.complete.offsetTop,
-        left: 0,
-        behavior: "smooth",
-      });
-    } else {
-      alert("You have not yet completed the form");
-    }
+  handleEditPhoneNumberClick() {
+    this.setState({ disabledPhoneNumber: !this.state.disabledPhoneNumber });
   }
+
+  handleEditEmailClick() {
+    this.setState({ disabledEmail: !this.state.disabledEmail });
+  }
+
+  handleEditSignatureClick() {
+    this.setState({ disabledSignature: !this.state.disabledSignature });
+  }
+
+  handlerComplete = (e) => {
+    const responsiblePersonAtReceivingInsInfo = {
+      id: this.state.id,
+      infoType: 2,
+      responsiblePersonAtReceivingIns: {
+        name: this.state.name,
+        personFunction: this.state.personFunction,
+        email: this.state.email,
+        signature: this.state.signature,
+        phoneNumber: this.state.phoneNumber,
+      },
+    };
+
+    handleRequests(
+      e,
+      responsiblePersonAtReceivingInsInfo,
+      "learning-agreement-3-3",
+      "2",
+      (response, status) => {
+        if (response.status === 200) {
+          this.savedInfo = (
+            <div>
+              <p>Fields are saved!</p>
+            </div>
+          );
+        }
+      }
+    );
+  };
 
   render() {
     return (
@@ -141,17 +167,6 @@ export default class Student extends React.Component {
                 />
               </Grid>
 
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditNameClick.bind(this)}
-                  disabled={!this.state.disabledName}
-                >
-                  {" "}
-                  Edit
-                </button>
-              </Grid>
-
               <Grid item xs={4}>
                 <label
                   className={"textHeader"}
@@ -170,24 +185,15 @@ export default class Student extends React.Component {
                   id="function"
                   maxLength="30"
                   pattern="[A-Za-z]"
-                  defaultValue={this.state.function}
+                  defaultValue={this.state.personFunction}
                   className="styleInput"
                   disabled={
-                    this.state.disabledLastName ? "disabledLastName" : ""
+                    this.state.disabledPersonFunction
+                      ? "disabledPersonFunction"
+                      : ""
                   }
                   required
                 />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditLastNameClick.bind(this)}
-                  disabled={!this.state.disabledLastName}
-                >
-                  {" "}
-                  Edit
-                </button>
               </Grid>
 
               <Grid item xs={4}>
@@ -204,20 +210,9 @@ export default class Student extends React.Component {
                 <PhoneInput
                   country={"us"}
                   className="marginBottom"
-                  value={this.state.phone}
-                  onChange={(phone) => this.setState({ phone })}
+                  value={this.state.phoneNumber}
+                  onChange={(phoneNumber) => this.setState({ phoneNumber })}
                 />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleSubjectAreaClick.bind(this)}
-                  disabled={!this.state.disabledSubjectArea}
-                >
-                  {" "}
-                  Edit
-                </button>
               </Grid>
 
               <Grid item xs={4}>
@@ -237,20 +232,9 @@ export default class Student extends React.Component {
                   maxLength="30"
                   defaultValue={this.state.email}
                   className="styleInput"
-                  disabled={this.state.disabledGender ? "disabledGender" : ""}
+                  disabled={this.state.disabledEmail ? "disabledEmail" : ""}
                   required
                 />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditGenderClick.bind(this)}
-                  disabled={!this.state.disabledGender}
-                >
-                  {" "}
-                  Edit
-                </button>
               </Grid>
 
               <Grid item xs={4}>
@@ -269,21 +253,8 @@ export default class Student extends React.Component {
                   selected={this.state.startDate}
                   onChange={this.handleChangeDate}
                   className="styleInput"
-                  disabled={
-                    this.state.disabledDateOfBirth ? "disabledDateOfBirth" : ""
-                  }
+                  disabled={this.state.disabledName ? "disabledName" : ""}
                 />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton"
-                  onClick={this.handleEditDateOfBirthClick.bind(this)}
-                  disabled={!this.state.disabledDateOfBirth}
-                >
-                  {" "}
-                  Edit
-                </button>
               </Grid>
 
               <Grid item xs={4}>
@@ -302,25 +273,12 @@ export default class Student extends React.Component {
                   id="name"
                   maxLength="30"
                   className="styleInput"
-                  defaultValue={this.state.academicYear}
+                  defaultValue={this.state.name}
                   disabled={
-                    this.state.disabledAcademicYear
-                      ? "disabledAcademicYear"
-                      : ""
+                    this.state.disabledName ? "disabledAcademicYear" : ""
                   }
                   required
                 />
-              </Grid>
-
-              <Grid item xs={1}>
-                <button
-                  className="editButton "
-                  onClick={this.handleEditAcademicYearClick.bind(this)}
-                  disabled={!this.state.disabledAcademicYear}
-                >
-                  {" "}
-                  Edit
-                </button>
               </Grid>
 
               <Grid item xs={12}></Grid>
