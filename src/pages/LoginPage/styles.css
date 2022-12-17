@@ -459,6 +459,13 @@ body {
   padding-bottom: 0%;
   margin-left: 20px;
 }
+.ap-text-other-white {
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  margin-left: 20px;
+}
 
 /* NavigationBar (nb) styles */
 .nb-header {
@@ -951,6 +958,13 @@ body {
 .pafp-table-title {
   font-size: 20px;
   color: #2c3333;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.pafp-table-title-white {
+  font-size: 20px;
+  color: white;
   font-family: sans-serif;
   font-weight: bold;
 }
