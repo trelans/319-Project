@@ -68,9 +68,9 @@ function PreApprovalFormPage() {
             return;
         }
 
-        bilkentCourses[selectedCourse.courseType].splice(bilkentCourses[selectedCourse.courseType].findIndex(
+        setCourses(bilkentCourses[selectedCourse.courseType].splice(bilkentCourses[selectedCourse.courseType].findIndex(
             course => course.courseCode === selectedCourse.courseCode
-        ), 1)
+        ), 1))
         childRef.current.bar(selectedCourse);
 
         setLastSelectedCourse(selectedCourse);
@@ -108,7 +108,6 @@ function PreApprovalFormPage() {
             setHostUniName(response.appliedInstitution);
             setDuration(durationTable[response.duration]);
             setECTSCredits(response.ECTSCredits);
-            setCourses(response.bilkentCourses);
             setBilkentCourses(response.bilkentCourses);
         });
         loaded = true;
@@ -280,8 +279,8 @@ function PreApprovalFormPage() {
                 <EqPopUp
                     onCancel={closeSelectEqCourse}
                     bilkentCourse={eqCourse}
-                    eqCourses={
-                        eqCourse}
+                    eqCourses={courses}
+                    hostUniName={hostUniName}
                     setArrFunc={setEqCourseGot}
                     onSelect={handleSelectEq}
                     setNumFunc={setNomNewCourse}
