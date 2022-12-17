@@ -9,11 +9,13 @@ function Modal(props) {
   const [arr, setArr] = useState();
   const [closePop, setPop] = useState();
   const [bilkentCourse, setBilkentCourse] = useState();
+  const [hostUniName, setHostUniName] = useState();
 
   var willClose = false;
 
   useEffect(() => {
     setBilkentCourse(props.bilkentCourse);
+    setHostUniName(props.hostUniName);
   }, [bilkentCourse]);
 
   function cancelHandler() {
@@ -38,7 +40,7 @@ function Modal(props) {
           ×
         </a>
         <br /> <br />
-        <NominateACourse onCancel={cancelHandler} />
+        <NominateACourse bilkentCourse={bilkentCourse} hostUniName={hostUniName} onCancel={cancelHandler} />
       </div>
     </div>
   );

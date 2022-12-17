@@ -79,7 +79,6 @@ router.post('/preapproval-student-popup', async (req, res) => {
             ).exemptedCourses
             await Promise.all(courseList.map(async (course) => {
                 const foreignUniversityCourse = await ForeignUniversityCourse.findOne({name: course.courseName})
-                console.log("Foreign Course found for: " + course + " " + foreignUniversityCourse)
                 eqCourseData.push({
                     courseName: foreignUniversityCourse.name,
                     courseCode: foreignUniversityCourse.courseCode,
@@ -95,6 +94,44 @@ router.post('/preapproval-student-popup', async (req, res) => {
             response.send("No Preapproval form found")
         }
 
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.post('/preapproval-student-nominate-course', async (req, res) => {
+    try {
+        let response;
+
+        // 0 POST, 1 GET
+        if (req.body.type === "0") {
+            console.log("REadsadsa")
+            console.log(req.body)
+            /*
+            const hostUniName = req.body.hostUniName
+            const bilkentCourse = await BilkentCourse.findOne({"courseCode": req.body.courseCode})
+            const courseList = bilkentCourse.foreignUniversities.find(
+                university => university.universityName === hostUniName
+            ).exemptedCourses
+            await Promise.all(courseList.map(async (course) => {
+                const foreignUniversityCourse = await ForeignUniversityCourse.findOne({name: course.courseName})
+                console.log("Foreign Course found for: " + course + " " + foreignUniversityCourse)
+                eqCourseData.push({
+                    courseName: foreignUniversityCourse.name,
+                    courseCode: foreignUniversityCourse.courseCode,
+                    credits: foreignUniversityCourse.ectsCredits,
+                    partNo: 0
+                })
+
+            }))
+            response = res.status(201)
+            response.send({"eqCourseData": eqCourseData})
+             */
+        } else {
+            response = res.status(302)
+            response.send("No Get status")
+        }
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

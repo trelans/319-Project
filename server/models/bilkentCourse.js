@@ -30,6 +30,44 @@ const university = mongoose.Schema({
     exemptedCourses: [exemptedCourse]
 }, {_id: false});
 
+const nominatedCourse = mongoose.Schema({
+    name: {
+        type: String,
+        trim: true,
+    },
+    courseCode: {
+        type: String,
+        trim: true,
+        uppercase: true
+    },
+
+    syllabusLink: {
+        type: String,
+        trim: true,
+        default: 'No link provided'
+    },
+    courseWebPage: {
+        type: String,
+        trim: true,
+        default: 'No Webpage Provided'
+    },
+
+    universityName: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    ectsCredits: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    explanation: {
+        type: String,
+    }
+
+}, {_id: false});
+
 const courseSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -50,6 +88,10 @@ const courseSchema = new mongoose.Schema({
     courseType: {
         type: String,
         trim: true
+    },
+
+    nominatedForeignCourses: {
+        nominatedCourse: [nominatedCourse]
     },
 
     foreignUniversities: [university],
