@@ -14,65 +14,68 @@ const willDisplayType = 0;
 */
 
 function ProfilePageOthers() {
+  const { state } = useLocation();
+  const [currentUser, setCurrentUser] = useState();
+  const [willDisplayType, setWillDisplayType] = useState(0);
+  const [university, setUniversity] = useState();
+  const navigate = useNavigate();
 
-  const {state} = useLocation()
-  const [currentUser, setCurrentUser] = useState()
-  const [willDisplayType, setWillDisplayType] = useState(0)
-  const [university, setUniversity] = useState()
-  const navigate = useNavigate()
-
-  console.log(willDisplayType)
+  console.log(willDisplayType);
 
   useEffect(() => {
-    console.log("Here")
-    const getUser= async () => {
-        try {
-            const res = await axios.get( `http://localhost:8080/user/${state}`, {})
-            
-            if(res.data.userType == 0 && res.data.erasmusCandidateData.nominatedUniversityId) {
-              const res2 = await axios.get( `http://localhost:8080/university/${res.data.erasmusCandidateData.nominatedUniversityId}`, {})
-              console.log(res2.data)
-              setUniversity(res2.data)
-            }
-            
-            setCurrentUser(res.data)
-        } catch (error) {
-            console.log("There is a problem")
+    console.log("Here");
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user/${state}`, {});
+
+        if (
+          res.data.userType == 0 &&
+          res.data.erasmusCandidateData.nominatedUniversityId
+        ) {
+          const res2 = await axios.get(
+            `http://localhost:8080/university/${res.data.erasmusCandidateData.nominatedUniversityId}`,
+            {}
+          );
+          console.log(res2.data);
+          setUniversity(res2.data);
         }
-    }
 
-    getUser()
-}, [])
+        setCurrentUser(res.data);
+      } catch (error) {
+        console.log("There is a problem");
+      }
+    };
 
-console.log(state)
-console.log(currentUser)
+    getUser();
+  }, []);
 
-useEffect(() => {
-  try {
-    if(currentUser.userType == 0) {
-      setWillDisplayType(0)
-    } else if (currentUser.userType == 5) {
-      setWillDisplayType(1)
-    } else {
-      setWillDisplayType(2)
-    }
-  } catch (error) {
-    
-  }
+  console.log(state);
+  console.log(currentUser);
 
-}, [currentUser])
+  useEffect(() => {
+    try {
+      if (currentUser.userType == 0) {
+        setWillDisplayType(0);
+      } else if (currentUser.userType == 5) {
+        setWillDisplayType(1);
+      } else {
+        setWillDisplayType(2);
+      }
+    } catch (error) {}
+  }, [currentUser]);
 
+  const handleClick = () => {
+    navigate("/chat", {
+      state: {
+        name: currentUser.name,
+        surname: currentUser.surname,
+        objectId: currentUser._id,
+        fromProfile: true,
+      },
+    });
+  };
 
-const handleClick = () => {
-  navigate("/chat", {state: {
-    name: currentUser.name,
-    surname: currentUser.surname,
-    objectId: currentUser._id,
-    fromProfile: true
-  }})
-}
-
-if (willDisplayType == 0 && currentUser) {
+  if (willDisplayType == 0 && currentUser) {
     return (
       <div>
         <NavigationBar />
@@ -84,14 +87,18 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.erasmusCandidateData.studentId}</td>
+                <td className="pp-text-other">
+                  {currentUser.erasmusCandidateData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -138,7 +145,9 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">Receiving Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{university ? university.name : ""}</td>
+                <td className="pp-text-other">
+                  {university ? university.name : ""}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -147,12 +156,14 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">Erasmus Points:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.erasmusCandidateData.totalPoints}</td>
+                <td className="pp-text-other">
+                  {currentUser.erasmusCandidateData.totalPoints}
+                </td>
               </tr>
             </table>
           </div>
         </div>
-        <div onClick={(e) => handleClick()} className="pp-button-container">
+        <div onClick={(e) => handleClick()} className="pp-center">
           <button className="pp-button">Message</button>
         </div>
       </div>
@@ -169,14 +180,18 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.incomingStudentData.studentId}</td>
+                <td className="pp-text-other">
+                  {currentUser.incomingStudentData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -185,9 +200,7 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">
-                {currentUser.email}
-                </td>
+                <td className="pp-text-other">{currentUser.email}</td>
               </tr>
               <tr>
                 <br />
@@ -225,17 +238,19 @@ if (willDisplayType == 0 && currentUser) {
                 <td className="pp-header-other">Sending Institution:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.incomingStudentData.sendingInstitution}</td>
+                <td className="pp-text-other">
+                  {currentUser.incomingStudentData.sendingInstitution}
+                </td>
               </tr>
             </table>
           </div>
         </div>
-        <div className="pp-button-container">
+        <div className="pp-center">
           <button className="pp-button">Upload Image</button>
         </div>
       </div>
     );
-  } else  if (willDisplayType == 2) {
+  } else if (willDisplayType == 2) {
     return (
       <div>
         <NavigationBar />
@@ -247,7 +262,9 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table2">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
@@ -271,8 +288,8 @@ if (willDisplayType == 0 && currentUser) {
             </table>
           </div>
         </div>
-        <div onClick={(e) => handleClick()} className="pp-button-container">
-          <button className="pp-button2">Message</button>
+        <div onClick={(e) => handleClick()} className="pp-center">
+          <button className="pp-button">Message</button>
         </div>
       </div>
     );
