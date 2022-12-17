@@ -4,12 +4,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function SearchBarMain({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleFilter = (event) => {
     const element = document.querySelector(".main-absolute");
@@ -17,10 +16,12 @@ function SearchBarMain({ placeholder, data }) {
 
     const searchWord = event.target.value;
     setWordEntered(searchWord);
-    
-    const newFilter = data ? data.filter((value) => {
-      return value.name.toLowerCase().includes(searchWord.toLowerCase());
-    }) : [];
+
+    const newFilter = data
+      ? data.filter((value) => {
+          return value.name.toLowerCase().includes(searchWord.toLowerCase());
+        })
+      : [];
 
     if (searchWord === "" || !data) {
       setFilteredData([]);
@@ -37,15 +38,12 @@ function SearchBarMain({ placeholder, data }) {
   };
 
   const handleClick = (item) => {
-
-    if(item.itemType == "university") {
-      navigate("/profile-university", {state: item.name})
+    if (item.itemType == "university") {
+      navigate("/profile-university", { state: item.name });
     } else {
-      navigate("/profile-other", {state : item.id})
+      navigate("/profile-other", { state: item.id });
     }
-
-  }
-
+  };
 
   return (
     <div className="search">
@@ -55,7 +53,7 @@ function SearchBarMain({ placeholder, data }) {
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
-          readOnly= {data ? false : true}
+          readOnly={data ? false : true}
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (
@@ -69,7 +67,7 @@ function SearchBarMain({ placeholder, data }) {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a className="dataItem" onClick={(e) => handleClick(value)} >
+              <a className="dataItem" onClick={(e) => handleClick(value)}>
                 <p>{value.name} </p>
               </a>
             );
