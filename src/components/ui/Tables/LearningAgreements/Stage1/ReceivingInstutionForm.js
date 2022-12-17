@@ -1,4 +1,6 @@
 import React from "react";
+import validate from "validator/validator";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactCountryFlag from "react-country-flag";
 import Select from "react-select";
@@ -6,32 +8,36 @@ import countryList from "react-select-country-list";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import {MenuItem} from "@mui/material";
 import Grid from "@material-ui/core/Grid";
 import {handleRequests} from "../../../../../pages/requests";
 
 
 export default class App extends React.Component {
     constructor(props) {
+        console.log(props)
+        console.log(props.fields.contactPerson.phoneNumber.replaceAll(" ", ""))
         super(props);
-        console.log(props.fields)
         this.options = countryList().getData();
         this.state = {
-            startDate: new Date(),
             options: this.options,
-            countryVal: "",
             complete: "",
+            savedInfo: "",
             displayComplete: "none",
+            country: {
+                value: countryList().getValue(props.fields.country),
+                label: props.fields.country
+            },
+
             id: props.id,
             name: props.fields.name,
             faculty: props.fields.faculty,
             department: props.fields.departmentName,
             address: props.fields.address,
-            country: props.fields.country,
             erasmusCode: props.fields.erasmusCode,
             contactPersonName: props.fields.contactPerson.name,
             contactPersonEmail: props.fields.contactPerson.email,
-            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber,
+            contactPersonPhoneNumber: props.fields.contactPerson.phoneNumber.replaceAll(" ", ""),
 
             disabledName: true,
             disabledFaculty: true,
@@ -44,6 +50,8 @@ export default class App extends React.Component {
             disabledContactPersonPhoneNumber: true,
         };
 
+
+
         this.updateInputName = this.updateInputName.bind(this);
 
         this.updateInputFaculty = this.updateInputFaculty.bind(this);
@@ -55,11 +63,7 @@ export default class App extends React.Component {
 
         this.updateInputContactPersonName = this.updateInputContactPersonName.bind(this);
         this.updateInputContactPersonEmail = this.updateInputContactPersonEmail.bind(this);
-        this.updateInputContactContactPersonPhoneNumber = this.updateInputContactContactPersonPhoneNumber.bind(this);
-
-
-        this.handleChangeDate = this.handleChangeDate.bind(this);
-
+        this.updateInputContactPersonPhoneNumber = this.updateInputContactPersonPhoneNumber.bind(this);
 
     }
 
@@ -80,7 +84,7 @@ export default class App extends React.Component {
     updateInputContactPersonEmail(event) {
         this.setState({contactPersonEmail: event.target.value})
     }
-    updateInputContactContactPersonPhoneNumber(event) {
+    updateInputContactPersonPhoneNumber(event) {
         this.setState({contactPersonPhoneNumber: event.target.value})
     }
 
@@ -97,15 +101,11 @@ export default class App extends React.Component {
     }
 
 
-    changeHandler = (countryVal) => {
-        this.setState({countryVal});
+
+    changeHandler = (country) => {
+        this.setState({country});
     };
 
-    handleChangeDate = (date) => {
-        this.setState({
-            startDate: date,
-        });
-    };
 
     handleEditNameClick() {
         this.setState({disabledName: !this.state.disabledName});
@@ -142,6 +142,7 @@ export default class App extends React.Component {
     handleEditContactPersonPhoneNumberClick() {
         this.setState({disabledContactPersonPhoneNumber: !this.state.disabledContactPersonPhoneNumber});
     }
+
     handlerComplete = (e) => {
         const receivingInstitutionInfo = {
             id: this.state.id,
@@ -151,7 +152,7 @@ export default class App extends React.Component {
                 faculty: this.state.faculty,
                 departmentName: this.state.department,
                 address: this.state.address,
-                country: this.state.countryVal,
+                country: this.state.country.label,
                 erasmusCode: this.state.erasmusCode,
                 contactPerson: {
                     name: this.state.contactPersonName,
@@ -166,27 +167,27 @@ export default class App extends React.Component {
                 this.savedInfo = <div><p>Fields are saved!</p></div>
             }
         })
+        /*
+      if (
+        this.state.countryVal !== null &&
+        this.state.complete === true &&
+        this.state.phone !== ""
+      ) {
+        this.setState({
+          displayComplete: "flex",
+        });
+        window.scroll({
+          top: this.complete.offsetTop,
+          left: 0,
+          behavior: "smooth",
+        });
+      } else {
+        alert("You have not yet completed the form");
+      }
+         */
     }
-    /*
-    handlerComplete(e) {
-        if (
-            this.state.countryVal !== null &&
-            this.state.complete === true &&
-            this.state.phone !== ""
-        ) {
-            this.setState({
-                displayComplete: "flex",
-            });
-            window.scroll({
-                top: this.complete.offsetTop,
-                left: 0,
-                behavior: "smooth",
-            });
-        } else {
-            alert("You have not yet completed the form");
-        }
-    }
-*/
+
+
     render() {
         return (
             <div className={"App"}>
@@ -208,8 +209,8 @@ export default class App extends React.Component {
                                     placeholder="write your name"
                                     pattern="[A-Za-z]"
                                     className="styleInput"
-                                    defaultValue={this.state.name}
                                     onChange={this.updateInputName}
+                                    defaultValue={this.state.name}
                                     disabled={this.state.disabledName ? "disabledName" : ""}
                                     required
                                 />
@@ -244,8 +245,8 @@ export default class App extends React.Component {
                                     maxLength="30"
                                     pattern="[A-Za-z]"
                                     defaultValue={this.state.faculty}
-                                    onChange={this.updateInputFaculty}
                                     className="styleInput"
+                                    onChange={this.updateInputFaculty}
                                     disabled={
                                         this.state.disabledFaculty ? "disabledFaculty" : ""
                                     }
@@ -281,8 +282,8 @@ export default class App extends React.Component {
                                     maxLength="30"
                                     pattern="[A-Za-z]"
                                     defaultValue={this.state.erasmusCode}
-                                    onChange={this.updateInputErasmusCode}
                                     className="styleInput"
+                                    onChange={this.updateInputErasmusCode}
                                     disabled={
                                         this.state.disabledErasmusCode ? "disabledErasmusCode" : ""
                                     }
@@ -317,8 +318,8 @@ export default class App extends React.Component {
                                     id="name"
                                     maxLength="30"
                                     className="styleInput"
-                                    defaultValue={this.state.department}
                                     onChange={this.updateInputDepartment}
+                                    defaultValue={this.state.department}
                                     disabled={
                                         this.state.disabledDepartment
                                             ? "disabledDepartment"
@@ -391,13 +392,13 @@ export default class App extends React.Component {
                                 >
                                     <ReactCountryFlag
                                         countryCode={
-                                            this.state.countryVal ? this.state.countryVal.value : ""
+                                            this.state.country ? this.state.country.value : ""
                                         }
                                         svg
                                         cdnUrl="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/flags/1x1/"
                                         cdnSuffix="svg"
                                         title={
-                                            this.state.countryVal ? this.state.countryVal.value : ""
+                                            this.state.country ? this.state.country.value : ""
                                         }
                                     />
                                     <div
@@ -411,7 +412,7 @@ export default class App extends React.Component {
                                             ref={"this.nationalityRef"}
                                             isSearchable={true}
                                             options={this.state.options}
-                                            defaultValue={this.state.value}
+                                            defaultValue={this.state.country}
                                             disabled={
                                                 this.state.disabledCountry
                                                     ? "disabledCountry"
@@ -457,11 +458,11 @@ export default class App extends React.Component {
                             <Grid item xs={6}>
                                 <input
                                     ref={"this.studyCycle"}
-                                    id="studyCycle"
+                                    id="contactPersonName"
                                     maxLength="50"
                                     defaultValue={this.state.contactPersonName}
-                                    onChange={this.updateInputContactPersonName}
                                     className="styleInput"
+                                    onChange={this.updateInputContactPersonName}
                                     disabled={
                                         this.state.disabledContactPersonName ? "disabledContactPersonName" : ""
                                     }
@@ -524,10 +525,10 @@ export default class App extends React.Component {
 
                             <Grid item xs={6}>
                                 <PhoneInput
-                                    country={"us"}
+                                    country={"tr"}
                                     className="marginBottom"
-                                    value={this.state.phone}
-                                    onChange={(phone) => this.setState({phone})}
+                                    value={this.state.contactPersonPhoneNumber}
+                                    onChange={(contactPersonPhoneNumber) => this.setState({contactPersonPhoneNumber})}
                                 />
                             </Grid>
 
@@ -543,6 +544,7 @@ export default class App extends React.Component {
                             </Grid>
                         </Grid>
                         <div className="perfectCentered">
+                            {this.savedInfo}
                             <button className="buttons" onClick={this.handlerComplete}>
                                 Save{" "}
                             </button>

@@ -2,6 +2,7 @@ import "../../../index";
 import style from "./coursePopUp.module.css";
 import CoursesTable from "./Tables/BilkentCourses";
 import { useEffect } from "react";
+import RatingPopupTable from "./Tables/RatingPopupTable";
 
 import React, { useState } from "react";
 function Modal(props) {
@@ -12,12 +13,14 @@ function Modal(props) {
   return (
     <div className={"perfectCentered"}>
       <div className={style.modal}>
-        <h4>Onurcan's popup</h4>
+        <h4>Rate Your Host University</h4>
         <a className={style.close} onClick={cancelHandler}>
           ×
         </a>
         <br /> <br />
-        <div></div>
+        <div>
+          <RatingPopupTable />
+        </div>
       </div>
     </div>
   );
