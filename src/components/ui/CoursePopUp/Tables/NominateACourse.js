@@ -40,7 +40,7 @@ export default function App(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await setStory({nominatedCoursesData: [...inputFields], bilkentCourse, hostUniName});
+        await setStory({nominatedCoursesData: [...inputFields], bilkentCourse, hostUniName , explanation });
     };
 
     const handleChange = (event, index) => {
