@@ -23,18 +23,15 @@ export default class Student extends React.Component {
     this.options = countryList().getData();
     this.state = {
       startDate: new Date(),
-      country: "",
       options: this.options,
       countryVal: 2,
+      name: "",
+      function: "",
+      subjectAreaCode: "",
+      email: "",
+
       complete: "",
-      displayComplete: "none",
-      name: "Kingston University",
-      function: "Engineering",
-      academicYear: "2022",
-      studyCycle: "Onurcan",
-      address: "290 Street LA 2032  ",
-      subjectAreaCode: "onurcanatac@bilkent.edu.tr",
-      email: "omer.oktay.gultekin@erasmusapp.com",
+      displayComplete: "",
 
       disabledName: true,
       disabledLastName: true,

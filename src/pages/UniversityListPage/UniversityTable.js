@@ -66,6 +66,39 @@ class TableAddRows extends React.Component {
       rows,
     });
   };
+
+  handleAppLinkChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].applicationLink = value;
+
+    this.setState({
+      rows,
+    });
+  };
+
+  handleErasmusCodeChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].erasmusCode = value;
+
+    this.setState({
+      rows,
+    });
+  };
+
+  handleAddressChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].address = value;
+
+    this.setState({
+      rows,
+    });
+  };
   handleAddRow = () => {
     const item = {
       universityName: "",
@@ -74,6 +107,9 @@ class TableAddRows extends React.Component {
       mobilityPeriod: "",
       country: "",
       website: "",
+      applicationLink: "",
+      erasmusCode: "",
+      address: "",
       disabledRow: false,
     };
     this.setState({
@@ -134,6 +170,9 @@ class TableAddRows extends React.Component {
                     <th className="text-center"> Mobility Period </th>
                     <th className="text-center"> Country </th>
                     <th className="text-center"> Website </th>
+                    <th className="text-center"> Application Link </th>
+                    <th className="text-center"> Erasmus Code </th>
+                    <th className="text-center"> Address</th>
                     <th />
                   </tr>
                 </thead>
@@ -198,6 +237,36 @@ class TableAddRows extends React.Component {
                           disabled={this.state.rows[idx].disabledRow}
                           value={this.state.rows[idx].website}
                           onChange={this.handleWebsiteChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="applicationLink"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].applicationLink}
+                          onChange={this.handleAppLinkChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="erasmusCode"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].erasmusCode}
+                          onChange={this.handleErasmusCodeChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="address"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].address}
+                          onChange={this.handleAddressChange(idx)}
                           className="form-control"
                         />
                       </td>
