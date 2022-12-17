@@ -22,7 +22,6 @@ export default function App(props) {
             credits: "",
             website: "",
             syllabus: "",
-            explanation: ""
         },
     ]);
 
@@ -40,7 +39,7 @@ export default function App(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await setStory({nominatedCoursesData: [...inputFields], bilkentCourse, hostUniName});
+        await setStory({nominatedCoursesData: [...inputFields], explanation, bilkentCourse, hostUniName});
     };
 
     const handleChange = (event, index) => {
@@ -65,7 +64,6 @@ export default function App(props) {
                 credits: "",
                 website: "",
                 syllabus: "",
-                explanation: ""
             },
         ]);
     };

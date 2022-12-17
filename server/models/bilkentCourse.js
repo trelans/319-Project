@@ -52,19 +52,12 @@ const nominatedCourse = mongoose.Schema({
         default: 'No Webpage Provided'
     },
 
-    universityName: {
-        type: String,
-        required: true,
-        trim: true
-    },
     ectsCredits: {
         type: Number,
         required: true,
         trim: true
     },
-    explanation: {
-        type: String,
-    }
+
 
 }, {_id: false});
 
@@ -91,7 +84,16 @@ const courseSchema = new mongoose.Schema({
     },
 
     nominatedForeignCourses: {
-        nominatedCourse: [nominatedCourse]
+        nominatedCourses: [nominatedCourse],
+        hostUniName: {
+            type: String
+        },
+        explanation: {
+            type: String
+        },
+        proposingStudentName: {
+            type: String
+        }
     },
 
     foreignUniversities: [university],

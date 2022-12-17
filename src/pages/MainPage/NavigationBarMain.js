@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "../../components/ui/NavigationBar/NavigationBar.module.css";
 import SearchBarMain from "./SearchBarMain";
-import BookData from "./Data.json";
 import img from "./logo.png";
 
 function NavigationBarMain() {
