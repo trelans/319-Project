@@ -2,6 +2,7 @@ import { handleRequests } from "../requests";
 import { useState, useRef } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
+import LearningAgreementAfterMobilityTable from "./PdfTables/LearningAgreementAfterMobilityTable";
 
 const durationTable = {
   0: "Fall",
@@ -47,53 +48,12 @@ function LearningAgreementAfterMobilityConvert() {
       <div ref={ref}>
         <div className="cp-container">
           <div className="cp-center">
-            <h1 className="cp-h1">
-              Learning Agreement After Mobility
-            </h1>
+            <LearningAgreementAfterMobilityTable />
           </div>
         </div>
         <div className="cp-container">
           <div className="cp-center">
-            <table className="cp-table">
-              <tr className="cp-row">
-                <td className="cp-col">Name:</td>
-                <td className="cp-col">{candName}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Surname:</td>
-                <td className="cp-col">{candSurname}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">ID Number:</td>
-                <td className="cp-col">{candID}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Department:</td>
-                <td className="cp-col">{candDepartment}</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-        <div className="cp-container">
-          <div className="cp-center">
-            <table className="cp-table">
-              <tr className="cp-row">
-                <td className="cp-col">Name of the host institution:</td>
-                <td className="cp-col">{hostUniName}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Academic Year:</td>
-                <td className="cp-col">{academicYear}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Semester:</td>
-                <td className="cp-col">{semester}</td>
-              </tr>
-              <tr className="cp-row">
-                <td className="cp-col">Duration:</td>
-                <td className="cp-col">{duration}</td>
-              </tr>
-            </table>
+            <LearningAgreementAfterMobilityTable />
           </div>
         </div>
       </div>

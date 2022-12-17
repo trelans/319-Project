@@ -1,6 +1,6 @@
 import sampleData from '../sampleData';
 
-function PreApprovalFormCoursesTable(props) {
+function LearningAgreementDuringMobilityTable(props) {
   // get table column
   const column = Object.keys(sampleData[0]);
   // get table heading data
@@ -31,4 +31,4 @@ function PreApprovalFormCoursesTable(props) {
   );
 }
 
-export default PreApprovalFormCoursesTable;
+export default LearningAgreementDuringMobilityTable;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
+import { Link } from "react-router-dom";
 
 /*
 //There should be restrictions for logged in user type, not implemented yet.
@@ -84,14 +85,18 @@ if (willDisplayType == 0 && currentUser) {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
+                  <h1 className="pp-header-name">
+                    {currentUser.name + " " + currentUser.surname}
+                  </h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.erasmusCandidateData.studentId}</td>
+                <td className="pp-text-other">
+                  {currentUser.erasmusCandidateData.studentId}
+                </td>
               </tr>
               <tr>
                 <br />
@@ -155,6 +160,11 @@ if (willDisplayType == 0 && currentUser) {
         <div onClick={(e) => handleClick()} className="pp-button-container">
           <button className="pp-button">Message</button>
         </div>
+        <Link to='/application-page2'>
+          <div className="pp-center">
+            <button className="pp-button">Application Status</button>
+          </div>
+        </Link>
       </div>
     );
   } else if (willDisplayType == 1) {

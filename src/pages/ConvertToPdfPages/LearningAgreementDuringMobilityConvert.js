@@ -2,12 +2,21 @@ import { handleRequests } from "../requests";
 import { useState, useRef } from "react";
 import * as React from "react";
 import Pdf from "react-to-pdf";
+import LearningAgreementDuringMobilityTable from "./PdfTables/LearningAgreementDuringMobilityTable";
 
 const durationTable = {
   0: "Fall",
   1: "Spring",
   2: "Year",
 };
+
+const options = {
+  orientation: "landscape",
+  unit: "in",
+  format: [15, 15],
+  scale: 1,
+};
+
 
 let loaded = false;
 
@@ -36,7 +45,7 @@ function LearningAgreementDuringMobilityConvert() {
   return (
     <div>
       <div className="cp-center">
-        <Pdf targetRef={ref} filename="LearningAgreementDuringMobility.pdf">
+        <Pdf targetRef={ref} filename="LearningAgreementDuringMobility.pdf" options={options}>
           {({ toPdf }) => (
             <button className="cp-button" onClick={toPdf}>
               Download PDF
@@ -47,9 +56,27 @@ function LearningAgreementDuringMobilityConvert() {
       <div ref={ref}>
         <div className="cp-container">
           <div className="cp-center">
-            <h1 className="cp-h1">
-              Learning Agreement During Mobility
-            </h1>
+            <h1 className="cp-h1">Learning Agreement During Mobility</h1>
+          </div>
+        </div>
+        <div className="cp-container">
+          <div className="cp-center">
+            <h4>Table A</h4>
+          </div>
+        </div>
+        <div className="cp-container">
+          <div className="cp-center">
+            <LearningAgreementDuringMobilityTable />
+          </div>
+        </div>
+        <div className="cp-container">
+          <div className="cp-center">
+            <h4>Table B</h4>
+          </div>
+        </div>
+        <div className="cp-container">
+          <div className="cp-center">
+            <LearningAgreementDuringMobilityTable />
           </div>
         </div>
         <div className="cp-container">
@@ -57,41 +84,83 @@ function LearningAgreementDuringMobilityConvert() {
             <table className="cp-table">
               <tr className="cp-row">
                 <td className="cp-col">Name:</td>
-                <td className="cp-col">{candName}</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Surname:</td>
-                <td className="cp-col">{candSurname}</td>
+                <td className="cp-col">Function:</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">ID Number:</td>
-                <td className="cp-col">{candID}</td>
+                <td className="cp-col">Phone Number:</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Department:</td>
-                <td className="cp-col">{candDepartment}</td>
+                <td className="cp-col">Mail:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Date:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Signature:</td>
+                <td className="cp-col"></td>
               </tr>
             </table>
           </div>
-        </div>
-        <div className="cp-container">
           <div className="cp-center">
             <table className="cp-table">
               <tr className="cp-row">
-                <td className="cp-col">Name of the host institution:</td>
-                <td className="cp-col">{hostUniName}</td>
+                <td className="cp-col">Name:</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Academic Year:</td>
-                <td className="cp-col">{academicYear}</td>
+                <td className="cp-col">Function:</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Semester:</td>
-                <td className="cp-col">{semester}</td>
+                <td className="cp-col">Phone Number:</td>
+                <td className="cp-col"></td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Duration:</td>
-                <td className="cp-col">{duration}</td>
+                <td className="cp-col">Mail:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Date:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Signature:</td>
+                <td className="cp-col"></td>
+              </tr>
+            </table>
+          </div>
+          <div className="cp-center">
+            <table className="cp-table">
+              <tr className="cp-row">
+                <td className="cp-col">Name:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Function:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Phone Number:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Mail:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Date:</td>
+                <td className="cp-col"></td>
+              </tr>
+              <tr className="cp-row">
+                <td className="cp-col">Signature:</td>
+                <td className="cp-col"></td>
               </tr>
             </table>
           </div>
