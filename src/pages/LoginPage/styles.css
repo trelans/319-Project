@@ -1644,3 +1644,9 @@ a:hover {
   border: solid 1px rgb(168, 168, 168);
   width: 395px;
 }
+
+/*Rating Popup styles*/
+
+.biggerstars{
+  font-size: 32px;
+}
