@@ -1656,3 +1656,8 @@ a:hover {
   margin-top: 200px;
   margin-left: -400px;
 }
+.commentTableCourse{
+  margin: auto;
+  justify-content: center;
+  display: flex;
+}

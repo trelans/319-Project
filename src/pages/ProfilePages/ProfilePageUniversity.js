@@ -5,7 +5,7 @@ import { handleRequests } from "../requests";
 import * as React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import CommentTable from "./CommentTable";
+import CommentTableUni from "./CommentTableUni";
 
 let loaded = false;
 
@@ -87,7 +87,7 @@ function ProfilePageUniversity() {
             </tr>
           </table>
           <div class="commentTableUniversity">
-            <CommentTable />
+            <CommentTableUni />
           </div>
         </div>
       </div>

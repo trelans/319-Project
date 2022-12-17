@@ -1,53 +1,56 @@
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
-import {useRef, useState} from "react";
-import {handleRequests} from "../requests";
+import { useRef, useState } from "react";
+import { handleRequests } from "../requests";
 import * as React from "react";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import CommentTableCourse from "./CommentTableCourse";
 
 let loaded = false;
 
 function ProfilePageCourse() {
+  const [courseName, setCourseName] = useState("");
+  const [courseCode, setCourseCode] = useState("");
+  const [requiredLanguage, setRequiredLanguage] = useState("");
+  const [websiteLink, setWebsiteLink] = useState("");
+  const [syllabusLink, setSyllabusLink] = useState("");
+  const [university, setUniversity] = useState("");
+  const [ectsCredits, setEctsCredits] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [isLoading, setLoading] = React.useState(true);
 
+  if (!loaded) {
+    handleRequests(
+      null,
+      { courseCode: "CS315" },
+      "profile-course",
+      "1",
+      (response, status) => {
+        setCourseName(response.courseName);
+        setCourseCode(response.courseCode);
+        setRequiredLanguage(response.requiredLanguage);
+        setWebsiteLink(response.websiteLink);
+        setSyllabusLink(response.syllabusLink);
+        setUniversity(response.university);
+        setEctsCredits(response.ectsCredits);
+        setComments(response.comments);
 
-  const [courseName, setCourseName] = useState('')
-  const [courseCode, setCourseCode] = useState('')
-  const [requiredLanguage, setRequiredLanguage] = useState('')
-  const [websiteLink, setWebsiteLink] = useState('')
-  const [syllabusLink, setSyllabusLink] = useState('')
-  const [university, setUniversity] = useState('')
-  const [ectsCredits, setEctsCredits] = useState(0)
-  const [comments, setComments] = useState([])
-  const [isLoading, setLoading] = React.useState(true)
-
-  if(!loaded) {
-    handleRequests(null, {"courseCode": "CS315"}, "profile-course", "1", (response, status) => {
-
-      setCourseName(response.courseName,)
-      setCourseCode(response.courseCode)
-      setRequiredLanguage(response.requiredLanguage)
-      setWebsiteLink(response.websiteLink)
-      setSyllabusLink(response.syllabusLink)
-      setUniversity(response.university)
-      setEctsCredits(response.ectsCredits)
-      setComments(response.comments)
-
-      console.log(courseName)
-      console.log(courseCode)
-      console.log(university)
-
-    })
-    loaded = true
-    setLoading(false)
+        console.log(courseName);
+        console.log(courseCode);
+        console.log(university);
+      }
+    );
+    loaded = true;
+    setLoading(false);
   }
 
   if (isLoading) {
-    return <div className={"Page"}>
-      <NavigationBar/>
-      <div className="App">Loading...</div>
-    </div>;
+    return (
+      <div className={"Page"}>
+        <NavigationBar />
+        <div className="App">Loading...</div>
+      </div>
+    );
   }
-
 
   return (
     <div>
@@ -56,9 +59,7 @@ function ProfilePageCourse() {
         <div className="ppc-center">
           <div>
             <p className="ppc-header-name">Course Name:</p>
-            <p className="ppc-header-other">
-              {courseName}
-            </p>
+            <p className="ppc-header-other">{courseName}</p>
           </div>
         </div>
         <hr className="ppc-line"></hr>
@@ -118,49 +119,8 @@ function ProfilePageCourse() {
             </tr>
           </table>
         </div>
-        <div className="ppu-table-container">
-          <table className="ppu-table2">
-            <tr>
-              <td className="ppu-td">
-                <p className="ppu-table-header">Comments</p>
-              </td>
-              <td className="ppu-td">
-                <p className="ppu-table-header">Rate</p>
-              </td>
-            </tr>
-            <tr>
-              <td className="ppu-td">
-                <p className="ppu-table-other">
-                  {comments}
-                </p>
-              </td>
-              <td className="ppu-td">
-                <p className="ppu-table-other">4/5</p>
-              </td>
-            </tr>
-            <tr>
-              <td className="ppu-td">
-                <p className="ppu-table-other">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </td>
-              <td className="ppu-td">
-                <p className="ppu-table-other">3/5</p>
-              </td>
-            </tr>
-            <tr>
-              <td className="ppu-td">
-                <p className="ppu-table-other">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </td>
-              <td className="ppu-td">
-                <p className="ppu-table-other">3.5/5</p>
-              </td>
-            </tr>
-          </table>
+        <div class="commentTableCourse">
+          <CommentTableCourse />
         </div>
       </div>
     </div>
