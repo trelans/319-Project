@@ -80,9 +80,9 @@ function MainPage() {
   }, [])
 
   const handeSelect = (option) => {
-    if (option == 0) {
+    if (option == 1) {
       setData(users);
-    } else {
+    } else if (option == 2) {
       setData(universities);
     }
   };
@@ -110,7 +110,7 @@ function MainPage() {
               onChange={(e) => handeSelect(e.target.options.selectedIndex)}
               id="searchParameter"
               name="searchParameter"
-            >
+            > <option value="Select">Select</option>
               <option value="user">User</option>
               <option value="university">University</option>
             </select>

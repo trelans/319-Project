@@ -96,7 +96,7 @@ useEffect(() => {
                 <td className="pp-header-other">Department: </td>
               </tr>
               <tr>
-                <td className="pp-text-other">{currentUser.erasmusCandidateData.departments}</td>
+                <td className="pp-text-other">CS</td>
               </tr>
             </table>
           </div>
