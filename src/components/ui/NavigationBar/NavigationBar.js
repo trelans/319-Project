@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import classes from "./NavigationBar.module.css";
+import img from "./logo.png";
 
 function NavigationBar() {
   return (
     <div className={classes["nb-header"]}>
-      <div className={classes["nb-name"]}>Toera</div>
+      <div>
+        <img alt="" src={img} style={{ marginLeft: 10 }} />
+      </div>
       <nav>
         <ul>
           <li>

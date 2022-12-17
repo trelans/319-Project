@@ -1539,7 +1539,7 @@ span.pafp-button-last {
 /*SearchBarMain styles*/
 
 .searchInputs {
-  margin-top: -50px;  
+  margin-top: -47px;  
   margin-left: 400px;
   display: flex;
 }
@@ -1547,9 +1547,7 @@ span.pafp-button-last {
 .search input {
   background-color: white;
   border: 0;
-  border-radius: 2px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-radius: 5px;
   font-size: 18px;
   padding: 15px;
   height: 30px;
@@ -1562,7 +1560,8 @@ span.pafp-button-last {
   color: black;
   display: grid;
   place-items: center;
-  margin-left: -30px;
+  margin-left: -32px;
+  border-radius: 10px;
 }
 
 input:focus {
@@ -1600,12 +1599,14 @@ input:focus {
 .dataItem p {
   margin-left: 10px;
 }
+
 a {
   text-decoration: none;
 }
 
-a:hover {
-  background-color: lightgrey;
+.dataItem:hover {
+  background-color: lightgray;
+cursor: pointer;
 }
 
 #clearBtn {

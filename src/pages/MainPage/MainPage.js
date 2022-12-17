@@ -111,6 +111,7 @@ function MainPage() {
               onChange={(e) => handeSelect(e.target.options.selectedIndex)}
               id="searchParameter"
               name="searchParameter"
+              style={{borderRadius: 5, marginTop: 3}}
             >
               {" "}
               <option value="Select">Select</option>
