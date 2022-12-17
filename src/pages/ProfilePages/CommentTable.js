@@ -1,6 +1,7 @@
-import sampleData from "../sampleData";
+import sampleData from "./CommentDataSample";
+import StarsTable from "./StarsTable";
 
-function PreApprovalFormCoursesTable(props) {
+function CommentTable(props) {
   // get table column
   const column = Object.keys(sampleData[0]);
   // get table heading data
@@ -14,9 +15,14 @@ function PreApprovalFormCoursesTable(props) {
     return sampleData.map((data) => {
       return (
         <tr>
-          {column.map((v) => {
-            return <td>{data[v]}</td>;
-          })}
+          <div>
+            <td>{data.Comment}</td>
+            {console.log(data.Comment)}
+            <td>
+              {console.log(data.Rating)}
+              <StarsTable fetchedRating={data.Rating} />
+            </td>
+          </div>
         </tr>
       );
     });
@@ -31,4 +37,4 @@ function PreApprovalFormCoursesTable(props) {
   );
 }
 
-export default PreApprovalFormCoursesTable;
+export default CommentTable;

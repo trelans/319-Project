@@ -6,7 +6,7 @@ const TableData = [
     courseType: "CS Required Course",
     equivalentCourseCode: "CS315",
     equivalentCourseName: "Programming Languages",
-    part: 1
+    part: 1,
   },
   {
     courseCode: "CS315",
@@ -15,7 +15,7 @@ const TableData = [
     courseType: "CS Required Course",
     equivalentCourseCode: "CS315",
     equivalentCourseName: "Programming Languages",
-    part: 1
+    part: 1,
   },
   {
     courseCode: "CS473",
@@ -24,7 +24,7 @@ const TableData = [
     courseType: "CS Required Course",
     equivalentCourseCode: "CS315",
     equivalentCourseName: "Programming Languages",
-    part: 1
+    part: 1,
   },
   {
     courseCode: "EEE391",
@@ -33,7 +33,7 @@ const TableData = [
     courseType: "CS Required Course",
     equivalentCourseCode: "CS315",
     equivalentCourseName: "Programming Languages",
-    part: 1
+    part: 1,
   },
   {
     courseCode: "IE400",
@@ -42,7 +42,7 @@ const TableData = [
     courseType: "CS Required Course",
     equivalentCourseCode: "CS315",
     equivalentCourseName: "Programming Languages",
-    part: 1
+    part: 1,
   },
 ];
 export default TableData;

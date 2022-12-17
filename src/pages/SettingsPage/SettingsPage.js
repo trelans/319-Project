@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
+import React from "react";
+
 function SettingsPage() {
   return (
     <div>

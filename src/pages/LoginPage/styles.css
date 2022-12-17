@@ -681,9 +681,9 @@ body {
 }
 
 .ppu-table {
-  margin: auto;
+
   margin-bottom: 5%;
-  padding: auto;
+  margin-top: 50px;
   empty-cells: show;
 }
 
@@ -1649,4 +1649,10 @@ a:hover {
 
 .biggerstars{
   font-size: 32px;
+}
+
+/*Comment Table Styles*/
+.commentTableUniversity{
+  margin-top: 200px;
+  margin-left: -400px;
 }

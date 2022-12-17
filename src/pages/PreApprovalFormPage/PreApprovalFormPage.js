@@ -282,6 +282,7 @@ function PreApprovalFormPage() {
                     bilkentCourse={eqCourse}
                     eqCourses={
                         eqCourse}
+                    hostUniName={hostUniName}
                     setArrFunc={setEqCourseGot}
                     onSelect={handleSelectEq}
                     setNumFunc={setNomNewCourse}
