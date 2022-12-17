@@ -3,18 +3,19 @@ import "./contact.css"
 import ChatContainer from '../ChatContainer/ChatContainer'
 import jwt_decode from "jwt-decode";
 import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
-export default function Contact() {
+export default function Contact({contacts}) {
 
     const user = jwt_decode(localStorage.getItem('token'))
-    const contacts = user.contacts;
     const[currentChatUser, setcurrentChatUser] = useState({})
 
     const handleUser = (e) => {
         setcurrentChatUser(e)
     }
 
-    return(
+return(
     <div className='mainContactContainer'>
         <div>
             <div style={{width: "20pc", padding:"10px"}}>

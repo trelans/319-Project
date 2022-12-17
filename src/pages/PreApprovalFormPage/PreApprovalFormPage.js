@@ -45,7 +45,23 @@ function PreApprovalFormPage() {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
- 
+    
+    fetch(`http://localhost:8080/`, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/JSON",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({
+        preApprovalForm : {
+          totalEctsCredits: ECTSCredits,
+          courses: [],
+        }
+      }),
+    });
+
+
   }
 
   useEffect(() => {
