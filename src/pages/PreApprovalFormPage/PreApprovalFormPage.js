@@ -229,15 +229,6 @@ function PreApprovalFormPage() {
                 </label>
               </td>
               <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
                 <p className="pafp-lined-header">Approved By</p>
               </td>
               <td className="pafp-last-table-td">
@@ -260,16 +251,16 @@ function PreApprovalFormPage() {
                 <button className="pafp-button-not-active">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
-                <p className="pafp-lined-header"></p>
-              </td>
-              <td className="pafp-last-table-td">
                 <p className="pafp-red-text">Not Approved</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">Can Alkan</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">Signature</p>
+              </td>
+              <td className="pafp-last-table-td">
+                <p className="pafp-red-text">12.12.2022</p>
               </td>
             </tr>
           </table>
