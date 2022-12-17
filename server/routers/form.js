@@ -108,26 +108,29 @@ router.post('/preapproval-student-nominate-course', async (req, res) => {
         if (req.body.type === "0") {
             console.log("REadsadsa")
             console.log(req.body)
-            /*
-            const hostUniName = req.body.hostUniName
-            const bilkentCourse = await BilkentCourse.findOne({"courseCode": req.body.courseCode})
-            const courseList = bilkentCourse.foreignUniversities.find(
-                university => university.universityName === hostUniName
-            ).exemptedCourses
-            await Promise.all(courseList.map(async (course) => {
-                const foreignUniversityCourse = await ForeignUniversityCourse.findOne({name: course.courseName})
-                console.log("Foreign Course found for: " + course + " " + foreignUniversityCourse)
-                eqCourseData.push({
-                    courseName: foreignUniversityCourse.name,
-                    courseCode: foreignUniversityCourse.courseCode,
-                    credits: foreignUniversityCourse.ectsCredits,
-                    partNo: 0
-                })
-
+            const user = await User.findOne({'tokens.token': req.body.token})
+            const nominatedCourses = []
+            await Promise.all(req.body.nominatedCoursesData.map(async (course) => {
+                const nominatedCourse = {
+                    name: course.courseName,
+                    courseCode: course.courseCode,
+                    syllabusLink: course.syllabus,
+                    courseWebPage: course.website,
+                    ectsCredits: course.credits
+                }
+                nominatedCourses.push(nominatedCourse)
             }))
+            await BilkentCourse.findOneAndUpdate({courseCode: req.body.bilkentCourse.courseCode}, {
+                nominatedForeignCourses: {
+                    nominatedCourses,
+                    hostUniName: req.body.hostUniName,
+                    explanation: req.body.explanation,
+                    proposingStudentName: user.name
+                }
+            })
+            const notification =
             response = res.status(201)
-            response.send({"eqCourseData": eqCourseData})
-             */
+            response.send({"status": "Ok"})
         } else {
             response = res.status(302)
             response.send("No Get status")
