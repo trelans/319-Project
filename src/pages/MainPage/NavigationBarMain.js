@@ -3,7 +3,7 @@ import classes from "../../components/ui/NavigationBar/NavigationBar.module.css"
 import SearchBarMain from "./SearchBarMain";
 import BookData from "./Data.json";
 
-function NavigationBar() {
+function NavigationBarMain() {
   return (
     <div className={classes["nb-header"]}>
       <div className={classes["nb-name"]}>Toera</div>
@@ -39,4 +39,4 @@ function NavigationBar() {
   );
 }
 
-export default NavigationBar;
+export default NavigationBarMain;
