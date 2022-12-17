@@ -5,11 +5,18 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import {io} from 'socket.io-client'
+import { useLocation } from 'react-router';
 
 export default function ChatContainer({currentChatUser}) {
     console.log(currentChatUser)
     const user = jwt_decode(localStorage.getItem('token'));
     const id = user._id
+    const {state} = useLocation()
+
+    if(JSON.stringify(currentChatUser) === '{}') {
+        currentChatUser = state
+    }
+
 
     const scrollRef = useRef()
     const socket = useRef()
@@ -33,7 +40,7 @@ export default function ChatContainer({currentChatUser}) {
     }, [currentChatUser.objectId])
 
     useEffect(() => {
-        if(JSON.stringify(currentChatUser) === '{}') {
+        if(JSON.stringify(currentChatUser) === '{}' || currentChatUser.fromProfile) {
             socket.current = io("http://localhost:8080")
             socket.current.emit("addUser", id)
         }
