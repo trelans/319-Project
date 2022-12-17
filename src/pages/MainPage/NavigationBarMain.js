@@ -2,12 +2,16 @@ import { Link } from "react-router-dom";
 import classes from "../../components/ui/NavigationBar/NavigationBar.module.css";
 import SearchBarMain from "./SearchBarMain";
 import BookData from "./Data.json";
+import img from "./logo.png";
 
 function NavigationBarMain() {
   return (
     <div className={classes["nb-header"]}>
-      <div className={classes["nb-name"]}>Toera</div>
-
+      <div>
+        <Link to="/main-page">
+          <img alt="" src={img} style={{ marginLeft: 10 }} />
+        </Link>
+      </div>
       <nav>
         <ul>
           <li>

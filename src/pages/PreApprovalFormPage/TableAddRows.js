@@ -30,6 +30,7 @@ class TableAddRows extends React.Component {
     rows: [],
     addingEquivalentCourse: false,
     currentCourseNameForEq: "",
+    sendTotalCredits: 0
   };
 
   
@@ -53,6 +54,7 @@ class TableAddRows extends React.Component {
       elective: "",
       courseCodeEq: "",
       courseNameEq: "",
+      creditsEq: "",
       partNo: "",
     };
     this.setState({
@@ -75,6 +77,7 @@ class TableAddRows extends React.Component {
         elective: row["courseType"],
         courseCodeEq: "",
         courseNameEq: "",
+        creditsEq: "",
         partNo: "",
       };
       this.setState({
@@ -90,7 +93,8 @@ class TableAddRows extends React.Component {
       console.log("Prevent")
       return
     }
-
+    this.state.sendTotalCredits += zar["credit"]
+    this.props.sendTotalCredits(this.state.sendTotalCredits)
     const item = {
       idx: "",
       courseCode: this.state.rows[zar["idx"]]["courseCode"],
@@ -99,6 +103,7 @@ class TableAddRows extends React.Component {
       elective:  this.state.rows[zar["idx"]]["courseType"],
       courseCodeEq: zar["courseCode"],
       courseNameEq: zar["courseName"],
+      creditsEq: zar["credit"],
       partNo: zar["mergeNo"],
     };
 
@@ -151,6 +156,7 @@ class TableAddRows extends React.Component {
                     <th className="text-center"> Course Type </th>
                     <th className="text-center"> Course Code </th>
                     <th className="text-center"> Course Name </th>
+                    <th className="text-center"> Credits </th>
                     <th className="text-center"> Part No </th>
                     <th />
                   </tr>
@@ -219,7 +225,16 @@ class TableAddRows extends React.Component {
                           className="form-control"
                         />
                       </td>
-
+                      <td>
+                        <input
+                            type="text"
+                            name="creditBilkent"
+                            disabled="true"
+                            value={this.state.rows[idx].creditsEq}
+                            onChange={this.handleChange(idx)}
+                            className="form-control"
+                        />
+                      </td>
                       <td>
                         <input
                           type="text"

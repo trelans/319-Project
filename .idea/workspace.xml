@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="&#10;receivingInstutionForm.js&#10;onChange method added for all editables.">
+    <list default="true" id="3f19a557-debc-47eb-95d6-c7a652c3c08d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routers/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers/form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/ReceivingInstutionForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/SendingInstutionForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Tables/LearningAgreements/Stage1/SendingInstutionForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LoginPage/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/LoginPage/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/PreApprovalFormPage/PreApprovalFormPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/PreApprovalFormPage/PreApprovalFormPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +37,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kutay/Desktop/319/319-Project&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Trelans/Desktop/319-new/319-Project/server/config&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -48,20 +47,10 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="319-Project" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="319-Project" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Trelans\Desktop\319-new\319-Project\server\config" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,6 +65,7 @@
       <workItem from="1671088987457" duration="394000" />
       <workItem from="1671089771071" duration="30594000" />
       <workItem from="1671218960009" duration="9836000" />
+      <workItem from="1671306593625" duration="2940000" />
     </task>
     <task id="LOCAL-00001" summary="user router -- create user">
       <created>1671103781135</created>

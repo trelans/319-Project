@@ -39,6 +39,7 @@ function PreApprovalFormPage() {
   const [eqCourseGot, setEqCourseGot] = useState({});
   const [nomNewCourse, setNomNewCourse] = useState(false);
   const [isLoading, setLoading] = React.useState(true);
+  const [isSubmitButton, setSubmitButton] = React.useState(true);
   const childRef = useRef();
 
   const navigate = useNavigate();
@@ -54,6 +55,16 @@ function PreApprovalFormPage() {
   useEffect(() => {
     handleSelectEq();
   }, [eqCourseGot]);
+
+
+  useEffect(() => {
+    if (ECTSCredits > 30) {
+      setSubmitButton(false)
+    }
+     if (ECTSCredits > 40) {
+      setSubmitButton(true)
+    }
+  }, [ECTSCredits]);
 
   function selectCourse() {
     setCourseIsOpen(true);
@@ -139,54 +150,54 @@ function PreApprovalFormPage() {
     <div>
       <NavigationBar />
       <div className="pafp-container">
-        <h1 className="pafp-h1">Applicant Info:</h1>
-        <table className="pafp-first-table">
-          <tr>
-            <td className="pafp-first-table-td">
-              <p className="pafp-table-title">Name:</p>
+        <h1 className="pafp-h1">Applicant Info</h1>
+        <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
+          <tr  >
+            <td className="pafp-first-table-td" >
+              <p className="pafp-table-title-white">Name:</p>
             </td>
             <td className="pafp-first-table-td">
-              <p className="ap-text-other">{candName}</p>
+              <p className="ap-text-other-white">{candName}</p>
             </td>
           </tr>
           <tr>
             <td className="pafp-first-table-td">
-              <p className="pafp-table-title">Surname:</p>
+              <p className="pafp-table-title-white">Surname:</p>
             </td>
             <td className="pafp-first-table-td">
-              <p className="ap-text-other">{candSurname}</p>
+              <p className="ap-text-other-white">{candSurname}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title">ID Number:</p>
+              <p className="pafp-table-title-white">ID Number:</p>
             </td>
             <td>
-              <p className="ap-text-other">{candID}</p>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p className="pafp-table-title">Department:</p>
-            </td>
-            <td>
-              <p className="ap-text-other">{candDepartment}</p>
+              <p className="ap-text-other-white">{candID}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title">Host Institution Name:</p>
+              <p className="pafp-table-title-white">Department:</p>
             </td>
             <td>
-              <p className="ap-text-other">{hostUniName}</p>
+              <p className="ap-text-other-white">{candDepartment}</p>
             </td>
           </tr>
           <tr>
             <td>
-              <p className="pafp-table-title">Duration:</p>
+              <p className="pafp-table-title-white">Host Institution Name:</p>
             </td>
             <td>
-              <p className="ap-text-other">Next {duration}</p>
+              <p className="ap-text-other-white">{hostUniName}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p className="pafp-table-title-white">Duration:</p>
+            </td>
+            <td>
+              <p className="ap-text-other-white">Next {duration}</p>
             </td>
           </tr>
         </table>
@@ -202,6 +213,7 @@ function PreApprovalFormPage() {
             selected={selectedCourse}
             ref={childRef}
             currentCourseForEq={setEqCourse}
+            sendTotalCredits={setECTSCredits}
           />
         </div>
         <button className="btn btn-primary" onClick={selectCourse}>
@@ -258,7 +270,9 @@ function PreApprovalFormPage() {
                 </button>
               </td>
               <td   className="pafp-last-table-td">
-                <button onClick={(e) => handleSubmit()} className="pafp-button-not-active">Submit Form</button>
+                <button onClick={(e) => handleSubmit()}
+                    disabled={isSubmitButton}
+                    className="pafp-button">Submit Form</button>
               </td>
               <td className="pafp-last-table-td">
                 <p className="pafp-lined-header"></p>

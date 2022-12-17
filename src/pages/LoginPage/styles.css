@@ -104,7 +104,6 @@ body {
   border-color: #2c3333;
   font-weight: bold;
   font-family: sans-serif;
-  
 }
 
 .fpp-button:hover {
@@ -459,6 +458,13 @@ body {
   padding-bottom: 0%;
   margin-left: 20px;
 }
+.ap-text-other-white {
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  padding-bottom: 0%;
+  margin-left: 20px;
+}
 
 /* NavigationBar (nb) styles */
 .nb-header {
@@ -681,7 +687,6 @@ body {
 }
 
 .ppu-table {
-
   margin-bottom: 5%;
   margin-top: 50px;
   empty-cells: show;
@@ -946,6 +951,7 @@ body {
 
 .pafp-first-table-td {
   padding-bottom: 0px;
+
 }
 
 .pafp-table-title {
@@ -953,6 +959,14 @@ body {
   color: #2c3333;
   font-family: sans-serif;
   font-weight: bold;
+}
+
+.pafp-table-title-white {
+  font-size: 20px;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-left: 47px;
 }
 
 .pafp-alert {
@@ -1093,6 +1107,9 @@ body {
 
 .pafp-button:hover {
   opacity: 75%;
+}
+.pafp-button:disabled {
+  opacity: 50%;
 }
 
 .pafp-flex-div {
@@ -1539,7 +1556,7 @@ span.pafp-button-last {
 /*SearchBarMain styles*/
 
 .searchInputs {
-  margin-top: -50px;  
+  margin-top: -47px;
   margin-left: 400px;
   display: flex;
 }
@@ -1547,9 +1564,7 @@ span.pafp-button-last {
 .search input {
   background-color: white;
   border: 0;
-  border-radius: 2px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
+  border-radius: 5px;
   font-size: 18px;
   padding: 15px;
   height: 30px;
@@ -1562,7 +1577,8 @@ span.pafp-button-last {
   color: black;
   display: grid;
   place-items: center;
-  margin-left: -30px;
+  margin-left: -32px;
+  border-radius: 10px;
 }
 
 input:focus {
@@ -1600,12 +1616,14 @@ input:focus {
 .dataItem p {
   margin-left: 10px;
 }
+
 a {
   text-decoration: none;
 }
 
-a:hover {
-  background-color: lightgrey;
+.dataItem:hover {
+  background-color: lightgray;
+  cursor: pointer;
 }
 
 #clearBtn {
@@ -1628,7 +1646,6 @@ a:hover {
   left: 0;
 
   position: relative;
-  
 }
 
 .main-margined {
@@ -1647,16 +1664,16 @@ a:hover {
 
 /*Rating Popup styles*/
 
-.biggerstars{
+.biggerstars {
   font-size: 32px;
 }
 
 /*Comment Table Styles*/
-.commentTableUniversity{
+.commentTableUniversity {
   margin-top: 200px;
   margin-left: -400px;
 }
-.commentTableCourse{
+.commentTableCourse {
   margin: auto;
   justify-content: center;
   display: flex;
@@ -1674,7 +1691,7 @@ a:hover {
 .loading-spinner {
   width: 100px;
   height: 100px;
-  border: 20px solid #A5C9CA;
+  border: 20px solid #a5c9ca;
   border-top: 20px solid #2c3333;
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
