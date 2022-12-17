@@ -953,6 +953,7 @@ body {
 
 .pafp-first-table-td {
   padding-bottom: 0px;
+
 }
 
 .pafp-table-title {
@@ -967,6 +968,7 @@ body {
   color: white;
   font-family: sans-serif;
   font-weight: bold;
+  margin-left: 47px;
 }
 
 .pafp-alert {
