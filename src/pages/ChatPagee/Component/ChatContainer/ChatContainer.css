@@ -39,6 +39,10 @@
     border-radius: 10px;
 }
 
+.msgButton:hover {
+    opacity: 75%;
+}
+
 .msg {
     display: flex;
     align-items: center;
