@@ -12,7 +12,6 @@ router.post('/login', async (req,res) => {
     console.log(req.body)
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
-        console.log("Found user: ", user)
         if(user.active) {
             const token = await user.generateAuthToken()
             res.send({user, token})

@@ -1,14 +1,65 @@
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useLocation } from "react-router";
 import NavigationBar from "../../../components/ui/NavigationBar/NavigationBar";
 import img from "../profile.png";
 
+/*
 //There should be restrictions for logged in user type, not implemented yet.
 const loggedInUserType = 0;
 //0->outgoing student 1->incoming student 2->others
 const willDisplayType = 0;
 //0->outgoing student 1->incoming student 2->others
+*/
 
 function ProfilePageOthers() {
-  if (willDisplayType == 0) {
+
+  
+  const {state} = useLocation()
+  const [currentUser, setCurrentUser] = useState()
+  const [willDisplayType, setWillDisplayType] = useState(0)
+
+  console.log(willDisplayType)
+
+  
+  useEffect(() => {
+    console.log("Here")
+    const getUser= async () => {
+        try {
+            const res = await axios.get( `http://localhost:8080/user/${state}`, {
+
+            })
+            setCurrentUser(res.data)
+        } catch (error) {
+            
+        }
+    }
+    getUser()
+}, [])
+
+
+
+console.log(state)
+console.log(currentUser)
+
+useEffect(() => {
+  try {
+    if(currentUser.userType == 0) {
+      setWillDisplayType(0)
+    } else if (currentUser.userType == 5) {
+      setWillDisplayType(1)
+    } else {
+      setWillDisplayType(2)
+    }
+  } catch (error) {
+    
+  }
+
+}, [currentUser])
+
+
+  if (willDisplayType == 0 && currentUser) {
     return (
       <div>
         <NavigationBar />
@@ -20,14 +71,14 @@ function ProfilePageOthers() {
             <table className="pp-table">
               <tr>
                 <td>
-                  <h1 className="pp-header-name">İlker Özgen</h1>
+                  <h1 className="pp-header-name">{currentUser.name + " " + currentUser.surname}</h1>
                 </td>
               </tr>
               <tr>
                 <td className="pp-header-other">Bilkent ID:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">21902719</td>
+                <td className="pp-text-other">{currentUser.erasmusCandidateData.studentId}</td>
               </tr>
               <tr>
                 <br />
@@ -36,16 +87,16 @@ function ProfilePageOthers() {
                 <td className="pp-header-other">E-Mail:</td>
               </tr>
               <tr>
-                <td className="pp-text-other">ilker.ozgen@ug.bilkent.edu.tr</td>
+                <td className="pp-text-other">{currentUser.email}</td>
               </tr>
               <tr>
                 <br />
               </tr>
               <tr>
-                <td className="pp-header-other">Department:</td>
+                <td className="pp-header-other">Department: </td>
               </tr>
               <tr>
-                <td className="pp-text-other">Computer Science</td>
+                <td className="pp-text-other">CS</td>
               </tr>
             </table>
           </div>
@@ -171,7 +222,7 @@ function ProfilePageOthers() {
         </div>
       </div>
     );
-  } else if (willDisplayType == 2) {
+  } else  {
     return (
       <div>
         <NavigationBar />

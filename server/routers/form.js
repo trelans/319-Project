@@ -81,7 +81,7 @@ router.post('/learning-agreement-1-3', async (req, res) => {
                 studentInfo: {
                     name: candidate.name,
                     lastName: candidate.surname,
-                    dateOfBirth: LAF.learningAgreementForm.dateOfBirth,
+                    dateOfBirth: LAF.learningAgreementForm.dateofBirth,
                     nationality: LAF.learningAgreementForm.nationality,
                     gender: LAF.learningAgreementForm.gender,
                     academicYear: candidate.erasmusCandidateData.academicYear,
@@ -95,36 +95,23 @@ router.post('/learning-agreement-1-3', async (req, res) => {
         } else if (req.body.type === '2') {
             const id = req.body.id
             delete req.body.id
-            console.log(id)
             if (req.body.infoType === 1) {
                 await Form.findByIdAndUpdate(id, {"learningAgreementForm.sendingInstitution": req.body.sendingInstitution})
             } else if (req.body.infoType === 0) {
-                console.log("body" + req.body.studyCycle)
                 await User.findOneAndUpdate({"name": req.body.name}, {
                     "surname": req.body.lastName,
                     "erasmusCandidateData.academicYear": req.body.academicYear
                 })
                 await Form.findByIdAndUpdate(id, {
-                    "learningAgreementForm.dateofBirth": req.body.dateofBirth,
+                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
                     "learningAgreementForm.nationality": req.body.nationality,
                     "learningAgreementForm.gender": req.body.gender,
                     "learningAgreementForm.studyCycle": req.body.studyCycle,
                     "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
-                    })
+                })
             } else if (req.body.infoType === 2) {
-
-                console.log(req.body.name)
-
                 await Form.findByIdAndUpdate(id, {
-                    "learningAgreementForm.receivingInstitution.name": req.body.receivingInstitution.name,
-                    "learningAgreementForm.receivingInstitution.faculty": req.body.receivingInstitution.faculty,
-                    "learningAgreementForm.receivingInstitution.erasmusCode": req.body.receivingInstitution.erasmusCode,
-                    "learningAgreementForm.receivingInstitution.departmentName": req.body.receivingInstitution.departmentName,
-                    "learningAgreementForm.receivingInstitution.address": req.body.receivingInstitution.address,
-                    "learningAgreementForm.receivingInstitution.country": req.body.receivingInstitution.country,
-                    "learningAgreementForm.receivingInstitution.contactPerson.name": req.body.receivingInstitution.contactPerson.name,
-                    "learningAgreementForm.receivingInstitution.contactPerson.email": req.body.receivingInstitution.contactPerson.email,
-                    "learningAgreementForm.receivingInstitution.contactPerson.phoneNumber": req.body.receivingInstitution.contactPerson.phoneNumber,
+                    "learningAgreementForm.receivingInstitution": req.body.receivingInstitution
                 })
             }
         }
