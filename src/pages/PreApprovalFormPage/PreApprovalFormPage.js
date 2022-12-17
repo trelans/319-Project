@@ -77,7 +77,7 @@ function PreApprovalFormPage() {
       return;
     }
     console.log(eqCourseGot);
-    childRef.current.car(eqCourseGot);
+    //childRef.current.car(eqCourseGot);
     //setLastSelectedEq(selectedCourse)
   }
   function closeSelectCourse() {
