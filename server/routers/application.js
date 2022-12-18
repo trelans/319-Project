@@ -22,6 +22,7 @@ router.post('/application-page1', async (req, res) => {
         if (req.body.type === "1") {
             const user = await User.findOne({'tokens.token': req.body.token})
             application = await Application.findOne({'applicantCandidate': user._id})
+            console.log(application)
             erasmusCoordinator = await User.findById(application.responsibleErasmusCoord)
             appliedInstitution = await University.findById(application.appliedInstitution)
             PAF = await Form.findOne({'ownerApplication': application._id, 'formType': 0})

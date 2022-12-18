@@ -84,7 +84,6 @@ router.post('/create/newCandidate', async (req, res) => {
 
 router.post('/create/newErasmusCoordinator', async (req, res) => {
     const user = new User(req.body);
-    console.log(user)
     try {
         await user.save()
         res.status(201).send({ user, token })

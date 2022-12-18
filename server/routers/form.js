@@ -15,6 +15,7 @@ const Notification = require("../models/notification")
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
     try {
+        console.log("2asdasdasdasdadad")
         let response;
         let appliedInstitution;
         let PAF;
@@ -43,6 +44,23 @@ router.post('/preapproval-student', async (req, res) => {
                 })
             })
             PAF = await Form.findOne({'owner': user._id, 'formType': 0})
+            const wishCourses = []
+
+
+            await Promise.all(PAF.preApprovalForm.courses.map(async (course) => {
+                const bilkentCourse = await BilkentCourse.findOne({courseCode: course.bilkentCourseCode})
+                const foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course.foreignUniversityCourseCode})
+                wishCourses.push({
+                    courseCode: bilkentCourse.courseCode,
+                    courseCodeEq: foreignCourse.courseCode,
+                    courseName: bilkentCourse.name,
+                    courseNameEq: foreignCourse.name,
+                    credits: bilkentCourse.ectsCredits,
+                    creditsEq: foreignCourse.ectsCredits,
+                    elective: bilkentCourse.courseType
+                })
+            }))
+
             response = res.status(201)
             response.send({
                 "name": user.name,
@@ -53,10 +71,11 @@ router.post('/preapproval-student', async (req, res) => {
                 "duration": user.erasmusCandidateData.preferredSemester,
                 "ECTSCredits": PAF.preApprovalForm.totalEctsCredits,
                 "courses": PAF.preApprovalForm.courses,
-                "bilkentCourses": courseMap
+                "bilkentCourses": courseMap,
+                "wishCourses": wishCourses,
+                "formStatus": PAF.status
             })
         } else if (req.body.type === "2") {
-            console.log(req.body)
 
             const user = await User.findOne({'tokens.token': req.body.token})
             const PAFWishCourses = []
@@ -76,13 +95,13 @@ router.post('/preapproval-student', async (req, res) => {
                 status: 2
             })
 
-            await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
-            await Form.findOneAndUpdate({'owner': user._id, 'formType': 1}, {
-                status: 1
-            })
+            await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
+
+            response = res.status(200)
+            response.send({"message": "Form submitted"})
         } else {
             response = res.status(302)
-            response.send("No Preapproval form found")
+            response.send({"message": "No Preapproval form found"})
         }
 
     } catch (e) {
@@ -277,10 +296,8 @@ router.post('/learning-agreement-3-3', async (req, res) => {
             response = res.status(201)
 
             console.log("inside get 3-3")
-            console.log(user)
             console.log(application)
             console.log(LAF)
-            console.log(candidate)
 
             response.send({
                 studentInfo: {
