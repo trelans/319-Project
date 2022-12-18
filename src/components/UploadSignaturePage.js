@@ -8,6 +8,8 @@ function UploadSignaturePage(props) {
         props.onCancel();
     }
 
+
+
     return (
         <div className="perfectCentered">
             <div className={style.modal}>

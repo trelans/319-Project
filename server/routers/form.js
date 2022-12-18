@@ -15,7 +15,6 @@ const Notification = require("../models/notification")
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
     try {
-        console.log("2asdasdasdasdadad")
         let response;
         let appliedInstitution;
         let PAF;
@@ -95,7 +94,8 @@ router.post('/preapproval-student', async (req, res) => {
                 status: 2
             })
 
-            await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
+            const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
+
 
             response = res.status(200)
             response.send({"message": "Form submitted"})
