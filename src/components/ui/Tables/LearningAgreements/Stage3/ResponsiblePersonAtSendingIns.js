@@ -35,6 +35,7 @@ export default class App extends React.Component {
       phoneNumber: props.fields ? props.fields.phoneNumber : "",
       email: props.fields ? props.fields.email : "",
       signature: props.fields ? props.fields.signature : "",
+      //date almamışsınız
 
       disabledName: true,
       disabledPersonFunction: true,
@@ -258,29 +259,7 @@ export default class App extends React.Component {
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                <label
-                  className={"textHeader"}
-                  id="lastName-label"
-                  htmlFor="country"
-                >
-                  Signature
-                </label>
-              </Grid>
 
-              <Grid item xs={6}>
-                <input
-                  ref={"this.academicYear"}
-                  id="name"
-                  maxLength="30"
-                  className="styleInput"
-                  defaultValue={this.state.name}
-                  disabled={
-                    this.state.disabledName ? "disabledAcademicYear" : ""
-                  }
-                  required
-                />
-              </Grid>
 
               <Grid item xs={12}></Grid>
             </Grid>
