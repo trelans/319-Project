@@ -1,67 +1,67 @@
 import axios from "axios";
 import React from "react";
 
-const universities = [];  
-
-
-
+const universities = [];
 
 class TableAddRows extends React.Component {
-
-
   createUniversity = async (data) => {
-
     //update according to data
     try {
-      const res = await axios.post(`http://localhost:8080/create/newUniversity`, {
-        name: "Technical University of Dortmund",
-        departments: ["CS"],
-        universityId: 1,
-        fallSuitability: true,
-        springSuitability: false,
-        quota: 3,
-        mobilityPeriod: "09.09.2023-04.04.2024",
-        languageRequirement: [{"language": "English"}],
-        erasmusCode: "D DORTMUN01",
-        countryCode: "+49",
-        country: "Germany",
-        address: "August-Schmidt-Strasse 4, 44227 Dortmund"
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const res = await axios.post(
+        `http://localhost:8080/create/newUniversity`,
+        {
+          name: "Technical University of Dortmund",
+          departments: ["CS"],
+          universityId: 1,
+          fallSuitability: true,
+          springSuitability: false,
+          quota: 3,
+          mobilityPeriod: "09.09.2023-04.04.2024",
+          languageRequirement: [{ language: "English" }],
+          erasmusCode: "D DORTMUN01",
+          countryCode: "+49",
+          country: "Germany",
+          address: "August-Schmidt-Strasse 4, 44227 Dortmund",
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
-      universities.append(res.data)
-
+      universities.append(res.data);
     } catch (error) {}
-  }
+  };
 
   updateUniversity = async (universityId, data) => {
     try {
-      const res = await axios.patch(`http://localhost:8080/updateUniversity/${universityId}`, {
-        data
-      },{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const res = await axios.patch(
+        `http://localhost:8080/updateUniversity/${universityId}`,
+        {
+          data,
         },
-      });
-
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
     } catch (error) {}
-  }
-
+  };
 
   deleteUniversity = async (universityId) => {
     try {
-      const res = await axios.delete(`http://localhost:8080/university/${universityId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
+      const res = await axios.delete(
+        `http://localhost:8080/university/${universityId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
     } catch (error) {}
-  }
-  
+  };
 
   state = {
     rows: [{}],
@@ -118,16 +118,6 @@ class TableAddRows extends React.Component {
       rows,
     });
   };
-  handleWebsiteChange = (idx) => (e) => {
-    const { value } = e.target;
-    const rows = [...this.state.rows];
-
-    rows[idx].website = value;
-
-    this.setState({
-      rows,
-    });
-  };
 
   handleAppLinkChange = (idx) => (e) => {
     const { value } = e.target;
@@ -168,7 +158,6 @@ class TableAddRows extends React.Component {
       quota: "",
       mobilityPeriod: "",
       country: "",
-      website: "",
       applicationLink: "",
       erasmusCode: "",
       address: "",
@@ -203,6 +192,7 @@ class TableAddRows extends React.Component {
 
   handleSaveSpecificRow = (idx) => () => {
     const rows = [...this.state.rows];
+
     const isDisabled = rows[idx].disabledRow;
 
     if (!isDisabled) {
@@ -213,6 +203,22 @@ class TableAddRows extends React.Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+
+    this.setTableInfo = (arr) => {
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].disabledRow = true;
+      }
+      this.state.rows = arr;
+      console.log(arr);
+
+      this.setState({
+        rows: [...this.state.rows],
+      });
+      console.log(this.state.rows);
+    };
+  }
   render() {
     return (
       <div>
@@ -231,7 +237,6 @@ class TableAddRows extends React.Component {
                     <th className="text-center"> Quota </th>
                     <th className="text-center"> Mobility Period </th>
                     <th className="text-center"> Country </th>
-                    <th className="text-center"> Website </th>
                     <th className="text-center"> Application Link </th>
                     <th className="text-center"> Erasmus Code </th>
                     <th className="text-center"> Address</th>
@@ -247,7 +252,7 @@ class TableAddRows extends React.Component {
                           type="text"
                           name="universityName"
                           disabled={this.state.rows[idx].disabledRow}
-                          value={this.state.rows[idx].universityName}
+                          value={this.state.rows[idx].name}
                           onChange={this.handleNameChange(idx)}
                           className="form-control"
                         />
@@ -292,16 +297,7 @@ class TableAddRows extends React.Component {
                           className="form-control"
                         />
                       </td>
-                      <td>
-                        <input
-                          type="text"
-                          name="website"
-                          disabled={this.state.rows[idx].disabledRow}
-                          value={this.state.rows[idx].website}
-                          onChange={this.handleWebsiteChange(idx)}
-                          className="form-control"
-                        />
-                      </td>
+
                       <td>
                         <input
                           type="text"

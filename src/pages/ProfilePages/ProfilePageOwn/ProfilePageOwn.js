@@ -252,8 +252,8 @@ function ProfilePageOwn() {
           <div className={classes["pp-img-container"]}>
             <img className={classes["pp-img"]} alt="" src={img} />
           </div>
-          <div>
-            <table className={classes["pp-table2"]}>
+          <div style={{marginLeft:-50}}>
+            <table className={classes["pp-table2"]} style={{marginLeft:-200, marginTop:100}}>
               <tr>
                 <td>
                   <h1 className={classes["pp-header-name"]}>
