@@ -153,24 +153,11 @@ router.post('/profile-own-popup', async (req, res) => {
         } else if(req.body.type === "0") {
             user = await User.findOneAndUpdate({'tokens.token': req.body.token}, {"erasmusCandidateData.signature": req.body.signature})
             response = res.status(201)
+            response.send({"status": "send"})
         }else {
             response = res.status(302)
+            response.send({"status": "send"})
         }
-
-        console.log("sending responses...")
-
-        response.send({
-
-            "name": user.name,
-            "surname": user.surname,
-            "email": user.email,
-            "studentId": user.studentId,
-            "department": user.department,
-            "receivingInstitution": user.receivingInstitution,
-            "totalPoints": user.totalPoints,
-            "studyCycle": "Bachelor's"
-
-        })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
