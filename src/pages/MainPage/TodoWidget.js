@@ -22,7 +22,7 @@ function TodoWidget() {
         >
           See what remains
         </p>
-        <div >
+        <div>
           {" "}
           <Grid container spacing={2}>
             <Grid

@@ -107,13 +107,13 @@ router.post('/preapproval-student', async (req, res) => {
             //notification to the erasmus coord
             const notificationCoord = new Notification({
                 owner: application.responsibleErasmusCoord,
-                text: user.name + " their pre approval form."
+                text: user.name + " "+  user.surname + "submitted their pre approval form."
             })
             await notificationCoord.save()
             
             //create to do for erasmuss coord
             const task = new Task({
-                description: "Evaluate pre approval form of " + user.name + ".",
+                description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
                 owner: application.responsibleErasmusCoord,
                 applicationId: application._id
             })
