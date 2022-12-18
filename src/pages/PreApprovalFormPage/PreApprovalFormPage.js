@@ -162,6 +162,17 @@ function PreApprovalFormPage() {
     setNomNewCourse(false);
   }
 
+  function handleFeedback () {
+    navigate("/chat", {
+      state: {
+        name: candName,
+        surname: candSurname,
+        objectId: candID,
+        fromProfile: true,
+      },
+    });
+  }
+
   // the if clause is required otherwise react continuously rerender the page
   if (!loaded) {
     handleRequests(null, {
@@ -653,7 +664,7 @@ function PreApprovalFormPage() {
                     <button className="pafp-button-blue">Approve Form</button>
                   </td>
                   <td className="pafp-last-table-td">
-                    <button className="pafp-button">Give Feedback</button>
+                    <button onClick={(e) => handleFeedback()} className="pafp-button">Give Feedback</button>
                   </td>
                   <td className="pafp-last-table-td">
                     <p className="pafp-lined-header"></p>
