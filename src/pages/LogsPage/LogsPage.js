@@ -1,4 +1,6 @@
 import axios from "axios";
+import LogsTable from "../../components/ui/CoursePopUp/Tables/LogsTable"
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
 async function LogsPage() {
 
@@ -18,13 +20,10 @@ async function LogsPage() {
 
 await getLogs();
 
-import LogsTable from "../../components/ui/CoursePopUp/Tables/LogsTable"
-import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
-
-function LogsPage() {
-  return <div><NavigationBar/>
+return (
+    <div><NavigationBar/>
     <div style={{marginTop: 10}}>
-    <LogsTable></LogsTable></div></div>;
+    <LogsTable></LogsTable>
+    </div></div>);
 }
-
 export default LogsPage;
