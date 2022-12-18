@@ -22,13 +22,13 @@ router.post('/preapproval-student', async (req, res) => {
         let user;
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            if(req.body.usrType == 0 ) {
+            if (req.body.userType === 0) {
                 user = await User.findOne({'tokens.token': req.body.token})
-            }else {
+            } else {
                 console.log("Test 2")
                 user = await User.findById(req.body.userId)
             }
-           
+
             const department = await Department.findById(user.erasmusCandidateData.departments[0]["id"])
             appliedInstitution = await University.findById(user.erasmusCandidateData.nominatedUniversityId)
             const courseMap = {
@@ -84,49 +84,62 @@ router.post('/preapproval-student', async (req, res) => {
                 "userType": user.userType
             })
         } else if (req.body.type === "2") {
+            if (req.body.userType === 0) {
+                user = await User.findOne({'tokens.token': req.body.token})
+            } else {
+                user = await User.findById(req.body.userId)
+            }
 
-            const user = await User.findOne({'tokens.token': req.body.token})
-            const PAFWishCourses = []
-
-            await Promise.all(req.body.wishCourses.map(async (wishCourse) => {
-                PAFWishCourses.push({
-                    bilkentCourseCode: wishCourse.courseCode,
-                    foreignUniversityCourseCode: wishCourse.courseCodeEq
+            console.log("Before if")
+            if (req.body.approvedStage && req.body.approvedStage === 1) {
+                console.log("Inside if")
+                const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
+                    status: 4
                 })
-            }))
+                await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
+            } else {
+                const user = await User.findOne({'tokens.token': req.body.token})
+                const PAFWishCourses = []
 
-            const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
-                preApprovalForm: {
-                    courses: PAFWishCourses,
-                    totalEctsCredits: req.body.ectsCredits
-                },
-                status: 2
-            })
+                await Promise.all(req.body.wishCourses.map(async (wishCourse) => {
+                    PAFWishCourses.push({
+                        bilkentCourseCode: wishCourse.courseCode,
+                        foreignUniversityCourseCode: wishCourse.courseCodeEq
+                    })
+                }))
 
-            const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
+                const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
+                    preApprovalForm: {
+                        courses: PAFWishCourses,
+                        totalEctsCredits: req.body.ectsCredits
+                    },
+                    status: 2
+                })
 
-            //notificconst application = ation to the student
-            const notificationStudent = new Notification({
-                owner: user._id,
-                text: "You have submitted your approval form."
-            })
-            await notificationStudent.save()
+                const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
 
-            //notification to the erasmus coord
-            const notificationCoord = new Notification({
-                owner: application.responsibleErasmusCoord,
-                text: user.name + " " + user.surname + " submitted their pre approval form."
-            })
-            await notificationCoord.save()
+                //notificconst application = ation to the student
+                const notificationStudent = new Notification({
+                    owner: user._id,
+                    text: "You have submitted your approval form."
+                })
+                await notificationStudent.save()
 
-            //create to do for erasmuss coord
-            const task = new Task({
-                description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
-                owner: application.responsibleErasmusCoord,
-                applicationId: application._id
-            })
-            await task.save()
+                //notification to the erasmus coord
+                const notificationCoord = new Notification({
+                    owner: application.responsibleErasmusCoord,
+                    text: user.name + " " + user.surname + " submitted their pre approval form."
+                })
+                await notificationCoord.save()
 
+                //create to do for erasmuss coord
+                const task = new Task({
+                    description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
+                    owner: application.responsibleErasmusCoord,
+                    applicationId: application._id
+                })
+                await task.save()
+            }
 
             response = res.status(200)
             response.send({"message": "Form submitted"})

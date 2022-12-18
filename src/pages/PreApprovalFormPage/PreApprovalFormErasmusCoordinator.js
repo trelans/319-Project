@@ -1,13 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
-import { useState } from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function PreApprovalFormErasmusCoordinator() {
   
   const { state } = useLocation();
   const [currentUser, setCurrentUser] = useState();
+  const [university, setUniversity] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Here");
@@ -16,7 +19,7 @@ function PreApprovalFormErasmusCoordinator() {
         const res = await axios.get(`http://localhost:8080/user/${state}`, {});
 
         if (
-          res.data.userType == 0 &&
+          res.data.userType === 0 &&
           res.data.erasmusCandidateData.nominatedUniversityId
         ) {
           const res2 = await axios.get(
