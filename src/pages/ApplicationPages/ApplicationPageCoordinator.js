@@ -202,10 +202,10 @@ function ApplicationPageCoordinator() {
                 <p className="ap-text-other">{LAFDeadline}</p>
               </td>
               <td>
-                {LAFButtonStatus === "ap-button-not-active" ? ( // change later
+                {LAFButtonStatus === "ap-button-not-active" ? (
                   <button className={LAFButtonStatus}>{LAFButtonText}</button>
                 ) : (
-                  <Link to="/learning-agreement-1-3">
+                  <Link to="/learning-agreement-1-3" state={location.state}>
                     <button className={LAFButtonStatus}>{LAFButtonText}</button>
                   </Link>
                 )}

@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import InfoPageItem from "../InfoPage/InfoPageItem";
 import LABMStudent from "../../components/ui/Tables/LearningAgreements/Stage3/Student";
@@ -15,19 +15,25 @@ import LoadingSpinner from "../../components/ui/loadingComponent";
 let loaded = false;
 
 function LearningAgreementBeforeMobility3() {
-
+    const {state} = useLocation();
     const [studentInfo, setStudentInfo] = useState();
     const [responsiblePersonFromSendingInsInfo, setResponsiblePersonFromSendingInsInfo] = useState();
     const [isLoading, setLoading] = useState(true);
     const [responsiblePersonAtReceivingInsInfo, setResponsiblePersonAtReceivingInsInfo] = useState();
     const [formID, setFormID] = useState("");
+    const [approveButtonText, setApproveButtonText] = useState("")
     const navigate = useNavigate();
+    const userType = localStorage.getItem("userType")
 
     // the if clause is required otherwise react continuously rerender the page
     if (!loaded) {
         handleRequests(
             null,
-            {},
+            {
+                "name": "",
+                userType,
+                userId: state
+            },
             "learning-agreement-3-3",
             "1",
             (response, status) => {
@@ -38,6 +44,11 @@ function LearningAgreementBeforeMobility3() {
                 setFormID(response.formID);
                 loaded = true;
                 setLoading(false);
+                if (userType === "0"){
+                    setApproveButtonText("Submit")
+                }else{
+                    setApproveButtonText("Approve")
+                }
             }
         );
     }
@@ -123,15 +134,22 @@ function LearningAgreementBeforeMobility3() {
                         <button className={styles.butConvert} onClick={(e) => {
                             handleRequests(
                                 e,
-                                {formID},
+                                {
+                                    formID,
+                                    userType
+                                },
                                 "learning-agreement-3-3",
                                 "2",
                                 (response, status) => {
-                                    alert("Form is submitted")
+                                    if (userType === "0"){
+                                        alert("Form is submitted")
+                                    } else if(userType === "1"){
+                                        alert("Form is approved")
+                                    }
                                     navigate("/main-page");
                                 }
                             );
-                        }}>Submit
+                        }}>{approveButtonText}
                         </button>
                     </div>
 
