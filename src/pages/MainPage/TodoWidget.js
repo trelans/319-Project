@@ -33,7 +33,7 @@ function TodoWidget() {
               justifyContent="center"
               style={{ minHeight: "30vh" }}
             >
-              <TodoInside style={{overflowY:"scroll"}} />
+              <TodoInside />
             </Grid>
           </Grid>
         </div>
