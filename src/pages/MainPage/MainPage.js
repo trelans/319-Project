@@ -69,7 +69,7 @@ function MainPage() {
               name: val.name,
               id: val._id,
               itemType: "university",
-            };
+            };  
           })
         );
       } catch (error) {}

@@ -184,7 +184,7 @@ function ApplicationPageCoordinator() {
                 <p className="ap-text-other">{PFDeadline}</p>
               </td>
               <td>
-                <Link to="/preapproval-coordinator">
+                <Link state={location.state} to="/preapproval-student">
                   <button className={PFButtonStatus}>{PFButtonText}</button>
                 </Link>
               </td>
