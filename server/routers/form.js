@@ -96,7 +96,30 @@ router.post('/preapproval-student', async (req, res) => {
                 const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
                     status: 4
                 })
-                await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
+                const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
+
+                //notificconst application = ation to the student
+                const notificationStudent = new Notification({
+                    owner: user._id,
+                    text: "Your preapproval form is approved."
+                })
+                await notificationStudent.save()
+
+                //notification to the erasmus coord
+                const notificationCoord = new Notification({
+                    owner: application.responsibleErasmusCoord,
+                    text: user.name + " " + user.surname + " submitted their pre approval form."
+                })
+                await notificationCoord.save()
+
+                //create to do for erasmuss coord
+                const task = new Task({
+                    description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
+                    owner: application.responsibleErasmusCoord,
+                    applicationId: application._id
+                })
+                await task.save()
+
             } else {
                 const user = await User.findOne({'tokens.token': req.body.token})
                 const PAFWishCourses = []

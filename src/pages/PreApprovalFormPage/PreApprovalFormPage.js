@@ -184,31 +184,42 @@ function PreApprovalFormPage() {
         setNomNewCourse(false);
     }
 
-    // the if clause is required otherwise react continuously rerender the page
-    if (!loaded) {
-        handleRequests(null, {
-            userType: localStorage.getItem("userType"),
-            userId: state
-        }, "preapproval-student", "1", (response, status) => {
-            console.log(response)
-            //response.userType
-            setUserType(localStorage.getItem("userType")); //response.userType OLCAK
-            setwishCourses(response.wishCourses);
-            setAppFormStatus(response.formStatus);
-            setCandName(response.name);
-            setCandSurname(response.surname);
-            setCandID(response.id);
-            setCandDepartment(response.department);
-            setHostUniName(response.appliedInstitution);
-            setDuration(durationTable[response.duration]);
-            setECTSCredits(response.ECTSCredits);
-            setCourses(response.bilkentCourses);
-            setBilkentCourses(response.bilkentCourses);
-            setAcademicYear(response.academicYear);
-            loaded = true;
-            setLoading(false);
-        });
-    }
+  function handleFeedback () {
+    navigate("/chat", {
+      state: {
+        name: candName,
+        surname: candSurname,
+        objectId: candID,
+        fromProfile: true,
+      },
+    });
+  }
+
+  // the if clause is required otherwise react continuously rerender the page
+  if (!loaded) {
+    handleRequests(null, {
+      usrType: localStorage.getItem("userType"),
+      userId: state
+    }, "preapproval-student", "1", (response, status) => {
+      console.log(response)
+      //response.userType
+      setUserType(localStorage.getItem("userType")); //response.userType OLCAK
+      setwishCourses(response.wishCourses);
+      setAppFormStatus(response.formStatus);
+      setCandName(response.name);
+      setCandSurname(response.surname);
+      setCandID(response.id);
+      setCandDepartment(response.department);
+      setHostUniName(response.appliedInstitution);
+      setDuration(durationTable[response.duration]);
+      setECTSCredits(response.ECTSCredits);
+      setCourses(response.bilkentCourses);
+      setBilkentCourses(response.bilkentCourses);
+      setAcademicYear(response.academicYear);
+      loaded = true;
+      setLoading(false);
+    });
+  }
 
     if (isLoading) {
         return (
@@ -675,7 +686,7 @@ function PreApprovalFormPage() {
                                     <button className="pafp-button-blue" onClick={handleApprove}>Approve Form</button>
                                 </td>
                                 <td className="pafp-last-table-td">
-                                    <button className="pafp-button">Give Feedback</button>
+                                    <button onClick={(e) => handleFeedback()} className="pafp-button">Give Feedback</button>
                                 </td>
                                 <td className="pafp-last-table-td">
                                     <p className="pafp-lined-header"></p>
