@@ -10,6 +10,7 @@ function UniversityListPage() {
   var rowFormat = []
 
   const childRef = useRef()
+
   useEffect(async () => {
     try {
       const res = await axios.get(`http://localhost:8080/universities`, {

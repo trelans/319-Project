@@ -155,6 +155,7 @@ class TableAddRows extends React.Component {
               <table
                 className="table table-bordered table-hover"
                 id="tab_logic"
+                style={{backgroundColor:"#a5c9ca"}}
               >
                 <thead>
                   <tr>
