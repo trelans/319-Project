@@ -18,7 +18,7 @@ router.post('/preapproval-student', async (req, res) => {
         let response;
         let appliedInstitution;
         let PAF;
-        // 0 POST, 1 GET
+        // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
             const user = await User.findOne({'tokens.token': req.body.token})
             const department = await Department.findById(user.erasmusCandidateData.departments[0]["id"])
@@ -54,6 +54,31 @@ router.post('/preapproval-student', async (req, res) => {
                 "ECTSCredits": PAF.preApprovalForm.totalEctsCredits,
                 "courses": PAF.preApprovalForm.courses,
                 "bilkentCourses": courseMap
+            })
+        } else if (req.body.type === "2") {
+            console.log(req.body)
+
+            const user = await User.findOne({'tokens.token': req.body.token})
+            const PAFWishCourses = []
+
+            await Promise.all(req.body.wishCourses.map(async (wishCourse) => {
+                PAFWishCourses.push({
+                    bilkentCourseCode: wishCourse.courseCode,
+                    foreignUniversityCourseCode: wishCourse.courseCodeEq
+                })
+            }))
+
+            const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
+                preApprovalForm: {
+                    courses: PAFWishCourses,
+                    totalEctsCredits: req.body.ectsCredits
+                },
+                status: 2
+            })
+
+            await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
+            await form.findOneAndUpdate({'owner': user._id, 'formType': 1}, {
+                status: 1
             })
         } else {
             response = res.status(302)
@@ -210,6 +235,7 @@ router.post('/learning-agreement-1-3', async (req, res) => {
     }
 })
 
+/*
 router.patch('/pre-approval-form/:id', auth, async (req, res) => {
 
     const updates = Object.keys(req.body)
@@ -232,7 +258,7 @@ router.patch('/pre-approval-form/:id', auth, async (req, res) => {
         res.status(400).send(e)
     }
 })
-
+ */
 
 
 router.post('/learning-agreement-3-3', async (req, res) => {
