@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +11,7 @@ import SearchBar from "material-ui-search-bar";
 import RatingPopup from "../UniversityRatingPopup";
 import Backdrop from "../Backdrop";
 import NominatedCoursePopup from "./NominatedCoursePopup";
-
+import axios from "axios";
 interface waitingCourse {
     requestNo: string;
     date: string;
@@ -24,44 +24,45 @@ const useStyles = makeStyles({
     },
 });
 
-const originalRows: waitingCourse[] = [
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-];
+var notifss = []
+var notifsRe = []
 
-export default function BasicTable() {
+
+
+
+
+
+
+const originalRows: waitingCourse[] = notifss
+
+
+export default function BasicTable(props ) {
     const [rows, setRows] = useState(originalRows);
     const [searched, setSearched] = useState("");
+    const [notifs, setNotifs] = useState(  {
 
-    const classes = useStyles();
+    });
+    const classes = useStyles()
+
+    var isDataGeldiMi = false
+    console.log("rows")
+console.log(rows)
+
+
+
+    useEffect(async () => {
+
+        const res = await axios.get(`http://localhost:8080/notifications`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+
+        setRows (res.data)
+            console.log(rows)
+    }, []);
+
+
 
     const requestSearch = (searchedVal: string) => {
         const filteredRows = originalRows.filter((row) => {
@@ -74,7 +75,6 @@ export default function BasicTable() {
         setSearched("");
         requestSearch(searched);
     };
-
 
 
     return (
@@ -101,8 +101,10 @@ export default function BasicTable() {
                                     <TableCell component="th" scope="row">
                                         {idx + 1}
                                     </TableCell>
-                                    <TableCell align="left">{row.date}</TableCell>
-                                    <TableCell align="left">{row.notification}</TableCell>
+                                    <TableCell align="left">{
+                                       row.updatedAt
+                                        }</TableCell>
+                                    <TableCell align="left">{row.text}</TableCell>
                                     <TableCell align="left">
 
                                     </TableCell>

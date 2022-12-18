@@ -109,10 +109,7 @@ function PreApprovalFormPage() {
         state: childRef.current.getTableInfo(),
       });
     } else if (appFormStatus === 2) {
-      localStorage.setItem(
-        "preapprovalinfo",
-        JSON.stringify(wishCourses)
-      );
+      localStorage.setItem("preapprovalinfo", JSON.stringify(wishCourses));
       navigate("/pre-approval-form-convert");
     }
   }

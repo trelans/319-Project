@@ -16,13 +16,13 @@ function LoginPage() {
         <form>
           <div className="lp-center">
             <h1 className="lp-h1">
-              Welcome to <br /> Erasmus App!
+              Welcome to <br /> toera!
             </h1>
           </div>
           <input
             className="lp-input"
             type="text"
-            placeholder="Email"
+            placeholder="E-Mail"
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
@@ -48,7 +48,10 @@ function LoginPage() {
                       // Send any necessary data to other page here
                       localStorage.setItem("token", res.token);
                       localStorage.setItem("userType", res.user.userType);
-                      localStorage.setItem("contacts", JSON.stringify(res.user.contacts))
+                      localStorage.setItem(
+                        "contacts",
+                        JSON.stringify(res.user.contacts)
+                      );
                       navigate("/main-page");
                     }
                   }

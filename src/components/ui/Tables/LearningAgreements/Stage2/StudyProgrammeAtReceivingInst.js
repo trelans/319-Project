@@ -10,14 +10,12 @@ class TableAddRows extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
-        props.courses.map((course) => {
-            this.state.rows.push({
-                componentCode: course.courseCode,
-                componentTitle: course.courseName,
-                semester: props.semester === 0 ? "Fall" : props.semester === 1 ? "Spring" : "Year",
-                numberOfECTS: "" + course.credits,
-            })
-        })
+
+
+        this.state.rows = props.courses
+        this.setState({
+            rows: [...this.state.rows],
+        });
     }
 
 
@@ -106,16 +104,16 @@ class TableAddRows extends React.Component {
                                             <input
                                                 type="text"
                                                 name="semester"
-                                                value={this.state.rows[idx].credits}
+                                                value={this.state.rows[idx].semester === 0 ? "Fall" : this.state.rows[idx].semester === 1 ? "Spring" : "Year"}
                                                 onChange={this.handleChange(idx)}
                                                 className="form-control"
                                             />
                                         </td>
                                         <td>
                                             <input
-                                                type="number"
+                                                type="string"
                                                 name="credits"
-                                                value={this.state.rows[idx].elective}
+                                                value={this.state.rows[idx].credits}
                                                 onChange={this.handleChange(idx)}
                                                 className="form-control"
                                             />
