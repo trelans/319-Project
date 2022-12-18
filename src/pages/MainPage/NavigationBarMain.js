@@ -3,15 +3,23 @@ import classes from "../../components/ui/NavigationBar/NavigationBar.module.css"
 import SearchBarMain from "./SearchBarMain";
 import img from "./logo.png";
 import { NotificationManager } from "react-notifications";
+import axios from "axios";
 
 function NavigationBarMain() {
-  function fetchNotifications() {
-    NotificationManager.info("Hey I am Adyasha", "Info!", 5000);
-    NotificationManager.success(
-      "A sample notification message",
-      "Success",
-      5000
-    );
+  async function fetchNotifications() {
+
+    const res = await axios.get(`http://localhost:8080/notifications`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const notifications = res.data;
+
+    for(let i = 0; i < notifications.length; i++) {
+      NotificationManager.info(notifications[i].text, "Notification", 5000);
+    }
+    
   }
 
   return (
@@ -25,7 +33,7 @@ function NavigationBarMain() {
         <ul>
           <li>
             <Link to="/main-page">Home</Link>
-          </li>
+          </li> 
           <li>
             <Link to="/profile-own">Profile</Link>
           </li>

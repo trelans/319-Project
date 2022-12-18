@@ -2,15 +2,24 @@ import { Link } from "react-router-dom";
 import classes from "./NavigationBar.module.css";
 import img from "./logo.png";
 import { NotificationManager } from "react-notifications";
+import axios from "axios";
 
 function NavigationBar() {
-  function fetchNotifications() {
-    NotificationManager.info("Hey I am Adyasha", "Info!", 5000);
-    NotificationManager.success(
-      "A sample notification message",
-      "Success",
-      5000
-    );
+  
+  async function fetchNotifications() {
+
+    const res = await axios.get(`http://localhost:8080/notifications`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const notifications = res.data;
+
+    for(let i = 0; i < notifications.length; i++) {
+      NotificationManager.info(notifications[i].text, "Notification", 5000);
+    }
+    
   }
 
   return (

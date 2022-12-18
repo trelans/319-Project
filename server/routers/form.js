@@ -51,9 +51,16 @@ router.post('/preapproval-student', async (req, res) => {
                 "department": department.name,
                 "appliedInstitution": appliedInstitution.name,
                 "duration": user.erasmusCandidateData.preferredSemester,
+                "semester": user.erasmusCandidateData.preferredSemester === 0 ? "Fall" :
+                    user.erasmusCandidateData.preferredSemester === 1 ? "Spring" : "Year",
                 "ECTSCredits": PAF.preApprovalForm.totalEctsCredits,
                 "courses": PAF.preApprovalForm.courses,
-                "bilkentCourses": courseMap
+                "bilkentCourses": courseMap,
+                "academicYear": user.erasmusCandidateData.academicYear ?  "academicYear" : "2022",
+                "coordinatorName": PAF.learningAgreementForm.responsiblePersonFromSendingIns.name,
+                "signature": PAF.learningAgreementForm.responsiblePersonFromSendingIns.signature,
+                "date": PAF.learningAgreementForm.responsiblePersonFromSendingIns.date
+
             })
         } else if (req.body.type === "2") {
             console.log(req.body)
@@ -286,6 +293,10 @@ router.post('/learning-agreement-3-3', async (req, res) => {
                 studentInfo: {
                     name: candidate.name,
                     lastName: candidate.surname,
+                    email: user.email,
+                    signature: candidate.signature,
+                    personFunction: "STUDENT",
+                    phoneNumber: 2345678,
                     dateOfBirth: LAF.learningAgreementForm.dateofBirth,
                     nationality: LAF.learningAgreementForm.nationality,
                     gender: LAF.learningAgreementForm.gender,
