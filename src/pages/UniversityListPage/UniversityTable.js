@@ -1,6 +1,83 @@
+import axios from "axios";
 import React from "react";
 
 class TableAddRows extends React.Component {
+
+  universities = [];
+
+  getUniversities = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/universities`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      
+      universities = res.data.map((val) => {
+          return {
+            name: val.name,
+            id: val._id,
+            itemType: "university",
+          };
+        })
+      
+    } catch (error) {}
+  }
+
+  createUniversity = async (data) => {
+
+    //update according to data
+    try {
+      const res = await axios.post(`http://localhost:8080/create/newUniversity`, {
+        name: "Technical University of Dortmund",
+        departments: ["CS"],
+        universityId: 1,
+        fallSuitability: true,
+        springSuitability: false,
+        quota: 3,
+        mobilityPeriod: "09.09.2023-04.04.2024",
+        languageRequirement: [{"language": "English"}],
+        erasmusCode: "D DORTMUN01",
+        countryCode: "+49",
+        country: "Germany",
+        address: "August-Schmidt-Strasse 4, 44227 Dortmund"
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      universities.append(res.data)
+
+    } catch (error) {}
+  }
+
+  updateUniversity = async (universityId, data) => {
+    try {
+      const res = await axios.patch(`http://localhost:8080/updateUniversity/${universityId}`, {
+        data
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+    } catch (error) {}
+  }
+
+
+  deleteUniversity = async (universityId) => {
+    try {
+      const res = await axios.delete(`http://localhost:8080/university/${universityId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+    } catch (error) {}
+  }
+
+
   state = {
     rows: [{}],
   };
