@@ -7,6 +7,7 @@ import { useState } from "react";
 import RatingPopup from "../../components/ui/CoursePopUp/UniversityRatingPopup";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import NomReqTable from "../../components/ui/CoursePopUp/Tables/NomRequestTable"
 function MainPage() {
 
     const [popupOpen, setPopup] = useState(false);
@@ -24,12 +25,10 @@ function MainPage() {
             <div>
                 <NavigationBar />
                 <div>
-
+                    <NomReqTable></NomReqTable>
                 </div>
                 <div className="main-margined">
-                    <form>
 
-                    </form>
                 </div>
                 <div className="main-absolute">
 
