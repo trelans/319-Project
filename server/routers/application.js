@@ -10,7 +10,6 @@ const Form = require("../models/form")
 const router = new express.Router()
 
 router.post('/application-page1', async (req, res) => {
-    let erasmusCoordinator;
     try {
 
         let response;
@@ -33,18 +32,6 @@ router.post('/application-page1', async (req, res) => {
             response = res.status(302)
         }
 
-        console.log({"status": application.status,
-            "erasmusCoordinator": erasmusCoordinator.name + " " + erasmusCoordinator.surname,
-            "appliedInstitution": appliedInstitution.name,
-            "mobilityPeriod": appliedInstitution.mobilityPeriod,
-            "PFStatus": PAF.status,
-            "PFDeadline": PAF.deadline,
-            "LAFStatus": LAF.status,
-            "LAFDeadline": LAF.deadline,
-            "CTFStatus": CTF.status,
-            "CTFDeadline": CTF.deadline,
-            "applicationID": application._id
-        })
         response.send({
             "status": application.status,
             "erasmusCoordinator": erasmusCoordinator.name + " " + erasmusCoordinator.surname,

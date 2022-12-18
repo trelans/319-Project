@@ -7,7 +7,7 @@ function TodoWidget() {
       <div>
         <h1
           style={{
-            marginRight: 200,
+
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -18,11 +18,11 @@ function TodoWidget() {
         <p
           id="description"
           className="blackLetter"
-          style={{ marginRight: 200 }}
+          style={{ }}
         >
           See what remains
         </p>
-        <div id="survey-form">
+        <div >
           {" "}
           <Grid container spacing={2}>
             <Grid

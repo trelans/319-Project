@@ -19,6 +19,10 @@ function NavigationBar() {
     for(let i = 0; i < notifications.length; i++) {
       NotificationManager.info(notifications[i].text, "Notification", 5000);
     }
+
+    if(notifications.length == 0) {
+      NotificationManager.info("You have no notifications.", "Info", 5000);
+    }
     
   }
 

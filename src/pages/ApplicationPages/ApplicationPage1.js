@@ -76,7 +76,6 @@ function ApplicationPage1() {
 
   if (!loaded) {
     handleRequests(null, {}, "application-page1", "1", (response, status) => {
-      console.log("Loaded");
       setStatus(appStatusTable[response.status]);
       setErasmusCoordinator(response.erasmusCoordinator);
       setAppliedInstitution(response.appliedInstitution);
