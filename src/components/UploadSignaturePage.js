@@ -1,11 +1,32 @@
 import SignatureCanvas from "react-signature-canvas";
 import style from "./UploadSignaturePopup.module.css";
 import {handleRequests} from "../pages/requests";
+import * as React from "react";
+import NavigationBar from "./ui/NavigationBar/NavigationBar";
+import {useState} from "react";
+
+let loaded = false
 
 function UploadSignaturePage(props) {
     let sigCanvas;
+    const [signature, setSignature] = useState("")
     function cancelHandler() {
         props.onCancel();
+    }
+
+    const [isLoading, setLoading] = React.useState(true)
+
+    if(!loaded) {
+        handleRequests(null, {}, "profile-own-popup", "1", (response, status) => {
+            setSignature(response.signature)
+            loaded = true
+            setLoading(false)
+        })
+
+    }
+
+    if (isLoading) {
+        return
     }
 
     return (
@@ -24,9 +45,9 @@ function UploadSignaturePage(props) {
                     backgroundColor="#a5c9ca"
                     ref={(ref) => {
                         sigCanvas = ref
-                        console.log("signature:" + ref)
-                        console.log("signature:" + ref.toDataURL())
-                        console.log("signature:" + ref.isEmpty())
+                        if(ref){
+                            ref.fromDataURL(signature ? signature : "")
+                        }
                     }}
 
                 />
@@ -36,7 +57,7 @@ function UploadSignaturePage(props) {
                         handleRequests(
                             e,
                             {signature: sigCanvas.toDataURL()},
-                            "profile-own",
+                            "profile-own-popup",
                             "0",
                             (response, status) => {
                                 alert("Signature is saved!")

@@ -141,7 +141,28 @@ router.post('/profile-own-others', async (req, res) => {
     }
 })
 
-
+router.post('/profile-own-popup', async (req, res) => {
+    try {
+        let response;
+        let user;
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            user = await User.findOne({'tokens.token': req.body.token})
+            response = res.status(201)
+            response.send({signature: user.erasmusCandidateData.signature})
+        } else if(req.body.type === "0") {
+            user = await User.findOneAndUpdate({'tokens.token': req.body.token}, {"erasmusCandidateData.signature": req.body.signature})
+            response = res.status(201)
+            response.send({"status": "send"})
+        }else {
+            response = res.status(302)
+            response.send({"status": "send"})
+        }
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
 
 router.post('/profile-others-student', async (req, res) => {
     console.log("entered profile others-student router")
@@ -246,7 +267,6 @@ router.post('/profile-course', async (req, res) => {
         res.status(400).send(e)
     }
 })
-
 
 
 router.patch('/profile-course', auth, async (req, res) => {

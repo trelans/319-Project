@@ -146,8 +146,7 @@ function PreApprovalFormPage() {
   // the if clause is required otherwise react continuously rerender the page
   if (!loaded) {
     handleRequests(null, {}, "preapproval-student", "1", (response, status) => {
-      console.log("On load göt");
-      console.log(response.wishCourses);
+      console.log(response.wishCourses); // Kutay
       setAppFormStatus(response.formStatus);
       setCandName(response.name);
       setCandSurname(response.surname);

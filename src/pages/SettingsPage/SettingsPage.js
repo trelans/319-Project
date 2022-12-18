@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
 import React from "react";
+import { Switch } from "@mui/material";
+import { Height } from "@material-ui/icons";
 
 function SettingsPage() {
   return (
@@ -24,18 +26,13 @@ function SettingsPage() {
           <div className="sp-center">
             <label class="container" className="sp-label">
               Disable Notifications
-              <input type="checkbox" className="sp-checkbox" />
-              <span class="checkmark"></span>
+              <Switch defaultUnchecked />
             </label>
           </div>
           <div className="sp-center">
             <label class="container" className="sp-label">
               Send E-Mail for Notifications
-              <input
-                type="checkbox"
-                defaultChecked="true"
-                className="sp-checkbox"
-              />
+              <Switch defaultChecked/>
               <span class="checkmark"></span>
             </label>
           </div>

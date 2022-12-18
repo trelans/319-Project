@@ -16,7 +16,6 @@ const Task = require('../models/task')
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
     try {
-        console.log("2asdasdasdasdadad")
         let response;
         let appliedInstitution;
         let PAF;
@@ -98,7 +97,7 @@ router.post('/preapproval-student', async (req, res) => {
 
             const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
             
-            //notification to the student
+            //notificconst application = ation to the student
             const notificationStudent = new Notification({
                 owner: user._id,
                 text:"You have submitted your approval form."
@@ -119,6 +118,7 @@ router.post('/preapproval-student', async (req, res) => {
                 applicationId: application._id
             })
             await task.save()
+
 
             response = res.status(200)
             response.send({"message": "Form submitted"})

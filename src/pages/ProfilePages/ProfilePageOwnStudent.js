@@ -35,9 +35,11 @@ function ProfilePageOwnStudent() {
       console.log("student name: " + name + " " + surname)
       console.log("receiving ins. : " + receivingInstitution)
 
+      loaded = true
+      setLoading(false)
+
     })
-    loaded = true
-    setLoading(false)
+
   }
 
   if (isLoading) {
