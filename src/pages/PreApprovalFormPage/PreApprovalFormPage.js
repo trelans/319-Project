@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
@@ -22,6 +22,8 @@ const durationTable = {
 let loaded = false;
 
 function PreApprovalFormPage() {
+
+  const {state} = useLocation();
   const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = React.useState({});
   const [selectedCourseEq, setSelectedCourseEq] = React.useState({});
@@ -165,11 +167,15 @@ function PreApprovalFormPage() {
 
   // the if clause is required otherwise react continuously rerender the page
   if (!loaded) {
-    handleRequests(null, {}, "preapproval-student", "1", (response, status) => {
+    handleRequests(null, {
+      usrType: localStorage.getItem("userType"),
+      userId: state 
+    }, "preapproval-student", "1", (response, status) => {
+      console.log(response)
       //response.userType
-      setUserType(response.userType); //response.userType OLCAK
+      setUserType(localStorage.getItem("userType")); //response.userType OLCAK
       setwishCourses(response.wishCourses);
-      setAppFormStatus(response.appFormStatus);
+      setAppFormStatus(response.formStatus);
       setCandName(response.name);
       setCandSurname(response.surname);
       setCandID(response.id);
@@ -375,6 +381,7 @@ function PreApprovalFormPage() {
     }
     //view
     else if (appFormStatus == 2) {
+      console.log("Here")
       return (
         <div>
           <NavigationBar />
@@ -532,7 +539,6 @@ function PreApprovalFormPage() {
   //erasmus coordinator
   else if (userType == 1) {
     //edit
-    if (appFormStatus == 1) {
       return (
         <div>
           <NavigationBar />
@@ -620,7 +626,7 @@ function PreApprovalFormPage() {
               <table className="pafp-table-last">
                 <tr>
                   <td className="pafp-last-table-td">
-                    <button className="pafp-button">Convert to PDF</button>
+                    <button onClick={handleConvertPdf} className="pafp-button">Convert to PDF</button>
                   </td>
                   <td className="pafp-last-table-td"></td>
                   <td className="pafp-last-table-td">
@@ -699,7 +705,6 @@ function PreApprovalFormPage() {
           )}
         </div>
       );
-    }
   }
   //committee member
   else if (userType == 2) {
@@ -789,7 +794,7 @@ function PreApprovalFormPage() {
               <table className="pafp-table-last">
                 <tr>
                   <td className="pafp-last-table-td">
-                    <button className="pafp-button">Convert to PDF</button>
+                    <button onClick={handleConvertPdf} className="pafp-button">Convert to PDF</button>
                   </td>
                   <td className="pafp-last-table-td"></td>
                   <td className="pafp-last-table-td">

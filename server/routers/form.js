@@ -19,9 +19,16 @@ router.post('/preapproval-student', async (req, res) => {
         let response;
         let appliedInstitution;
         let PAF;
+        let user;
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            const user = await User.findOne({'tokens.token': req.body.token})
+            if(req.body.usrType == 0 ) {
+                user = await User.findOne({'tokens.token': req.body.token})
+            }else {
+                console.log("Test 2")
+                user = await User.findById(req.body.userId)
+            }
+           
             const department = await Department.findById(user.erasmusCandidateData.departments[0]["id"])
             appliedInstitution = await University.findById(user.erasmusCandidateData.nominatedUniversityId)
             const courseMap = {
