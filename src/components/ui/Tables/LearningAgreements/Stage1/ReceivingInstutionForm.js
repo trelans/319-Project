@@ -22,10 +22,10 @@ export default class App extends React.Component {
             complete: "",
             savedInfo: "",
             displayComplete: "none",
-            country: {
+            country: props.fields.country ? {
                 value: countryList().getValue(props.fields.country),
                 label: props.fields.country
-            },
+            } : {},
 
             id: props.id,
             name: props.fields.name,
