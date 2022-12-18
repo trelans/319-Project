@@ -26,10 +26,7 @@ function UploadSignaturePage(props) {
     }
 
     if (isLoading) {
-        return <div className={"Page"}>
-            <NavigationBar/>
-            <div className="App">Loading...</div>
-        </div>;
+        return
     }
 
     return (
@@ -48,10 +45,9 @@ function UploadSignaturePage(props) {
                     backgroundColor="#a5c9ca"
                     ref={(ref) => {
                         sigCanvas = ref
-                        ref.fromDataURL(signature ? signature : "")
-                        console.log("signature:" + ref)
-                        console.log("signature:" + ref.toDataURL())
-                        console.log("signature:" + ref.isEmpty())
+                        if(ref){
+                            ref.fromDataURL(signature ? signature : "")
+                        }
                     }}
 
                 />
