@@ -39,6 +39,7 @@ function PreApprovalFormPage() {
   const [eqCourseGot, setEqCourseGot] = useState({});
   const [nomNewCourse, setNomNewCourse] = useState(false);
   const [isLoading, setLoading] = React.useState(true);
+  const [academicYear, setAcademicYear] = useState();
   const childRef = useRef();
 
   const navigate = useNavigate();
@@ -118,6 +119,7 @@ function PreApprovalFormPage() {
       setECTSCredits(response.ECTSCredits);
       setCourses(response.bilkentCourses);
       setBilkentCourses(response.bilkentCourses);
+      setAcademicYear(response.academicYear);
       loaded = true;
       setLoading(false);
     });
