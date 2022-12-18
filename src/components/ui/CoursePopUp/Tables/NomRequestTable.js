@@ -61,11 +61,11 @@ export default function BasicTable() {
                     <Table className={classes.table} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Food (100g serving)</TableCell>
-                                <TableCell align="right">Calories</TableCell>
-                                <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                                <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                                <TableCell align="right">Protein&nbsp;(g)</TableCell>
+
+                                <TableCell align="right">Request No</TableCell>
+                                <TableCell align="right">Course Code</TableCell>
+                                <TableCell align="right">Course Name</TableCell>
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -77,7 +77,7 @@ export default function BasicTable() {
                                     <TableCell align="right">{row.calories}</TableCell>
                                     <TableCell align="right">{row.fat}</TableCell>
                                     <TableCell align="right">{row.carbs}</TableCell>
-                                    <TableCell align="right">{row.protein}</TableCell>
+                                    <TableCell align="right"><button>Review Nomination Request</button></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
