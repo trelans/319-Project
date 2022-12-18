@@ -2,8 +2,8 @@ import axios from "axios";
 import LogsTable from "../../components/ui/CoursePopUp/Tables/LogsTable"
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
-async function LogsPage() {
-
+function LogsPage() {
+  
   var notifications;
 
   async function getLogs() {
@@ -18,7 +18,8 @@ async function LogsPage() {
     console.log(notifications)
   }
 
-await getLogs();
+getLogs();
+
 
 return (
     <div><NavigationBar/>
