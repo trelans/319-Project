@@ -128,6 +128,22 @@ function ApplicationPageCoordinator() {
             </tr>
             <tr>
               <td>
+                <p className="ap-header-other">Name:</p>
+              </td>
+              <td>
+                <p className="ap-text-other">{appliedInstitution}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p className="ap-header-other">Surname:</p>
+              </td>
+              <td>
+                <p className="ap-text-other">{appliedInstitution}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 <p className="ap-header-other">Applied Institution:</p>
               </td>
               <td>

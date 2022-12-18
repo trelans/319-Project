@@ -107,7 +107,7 @@ router.post('/preapproval-student', async (req, res) => {
             //notification to the erasmus coord
             const notificationCoord = new Notification({
                 owner: application.responsibleErasmusCoord,
-                text: user.name + " "+  user.surname + "submitted their pre approval form."
+                text: user.name + " "+  user.surname + " submitted their pre approval form."
             })
             await notificationCoord.save()
             
