@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
 import Grid from "@mui/material/Grid";
@@ -11,13 +11,19 @@ import {handleRequests} from "../requests";
 let loaded = false
 
 function LearningAgreementBeforeMobility2() {
+    const {state} = useLocation();
+    console.log(state)
     const [bilkentCourses, setBilkentCourses] = useState([])
     const [foreignCourses, setForeignCourses] = useState([])
     const [semester, setSemester] = useState("")
     const [isLoading, setLoading] = React.useState(true)
 
     if (!loaded) {
-        handleRequests(null, {"name": ""}, "learning-agreement-2-3", "1", (response, status) => {
+        handleRequests(null, {
+            "name": "",
+            userType: localStorage.getItem("userType"),
+            userId: state
+        }, "learning-agreement-2-3", "1", (response, status) => {
             setForeignCourses(response.foreignCourses)
             setBilkentCourses(response.bilkentCourses)
             setSemester(response.preferredSemester)
@@ -58,7 +64,7 @@ function LearningAgreementBeforeMobility2() {
             </div>
 
             <div className="perfectCentered">
-                <Link to="/learning-agreement-3-3">
+                <Link to="/learning-agreement-3-3" state={state}>
                     <button className={styles.butConvert}>
                         Next Step{" "}
                     </button>

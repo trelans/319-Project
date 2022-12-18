@@ -77,7 +77,8 @@ function ApplicationPage1() {
     2: "Not Evaluated",
     3: "Rejected",
     4: "Approved By Erasmus Coordinator (Waiting for Faculty Member Approval)",
-    5: "Approved By Faculty Committee Member"
+    5: "Approved By Faculty Committee Member",
+    6: "Approved By Erasmus Coordinator"
   };
 
   if (isLoading) {
