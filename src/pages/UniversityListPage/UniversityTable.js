@@ -1,6 +1,84 @@
+import axios from "axios";
 import React from "react";
 
 class TableAddRows extends React.Component {
+
+  /*
+  universities = [];
+
+  getUniversities = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/universities`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      
+      universities = res.data.map((val) => {
+          return {
+            name: val.name,
+            id: val._id,
+            itemType: "university",
+          };
+        })
+      
+    } catch (error) {}
+  }
+
+  createUniversity = async (data) => {
+
+    //update according to data
+    try {
+      const res = await axios.post(`http://localhost:8080/create/newUniversity`, {
+        name: "Technical University of Dortmund",
+        departments: ["CS"],
+        universityId: 1,
+        fallSuitability: true,
+        springSuitability: false,
+        quota: 3,
+        mobilityPeriod: "09.09.2023-04.04.2024",
+        languageRequirement: [{"language": "English"}],
+        erasmusCode: "D DORTMUN01",
+        countryCode: "+49",
+        country: "Germany",
+        address: "August-Schmidt-Strasse 4, 44227 Dortmund"
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      universities.append(res.data)
+
+    } catch (error) {}
+  }
+
+  updateUniversity = async (universityId, data) => {
+    try {
+      const res = await axios.patch(`http://localhost:8080/updateUniversity/${universityId}`, {
+        data
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+    } catch (error) {}
+  }
+
+
+  deleteUniversity = async (universityId) => {
+    try {
+      const res = await axios.delete(`http://localhost:8080/university/${universityId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+    } catch (error) {}
+  }
+  */
+
   state = {
     rows: [{}],
   };
@@ -66,6 +144,39 @@ class TableAddRows extends React.Component {
       rows,
     });
   };
+
+  handleAppLinkChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].applicationLink = value;
+
+    this.setState({
+      rows,
+    });
+  };
+
+  handleErasmusCodeChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].erasmusCode = value;
+
+    this.setState({
+      rows,
+    });
+  };
+
+  handleAddressChange = (idx) => (e) => {
+    const { value } = e.target;
+    const rows = [...this.state.rows];
+
+    rows[idx].address = value;
+
+    this.setState({
+      rows,
+    });
+  };
   handleAddRow = () => {
     const item = {
       universityName: "",
@@ -74,6 +185,9 @@ class TableAddRows extends React.Component {
       mobilityPeriod: "",
       country: "",
       website: "",
+      applicationLink: "",
+      erasmusCode: "",
+      address: "",
       disabledRow: false,
     };
     this.setState({
@@ -134,6 +248,9 @@ class TableAddRows extends React.Component {
                     <th className="text-center"> Mobility Period </th>
                     <th className="text-center"> Country </th>
                     <th className="text-center"> Website </th>
+                    <th className="text-center"> Application Link </th>
+                    <th className="text-center"> Erasmus Code </th>
+                    <th className="text-center"> Address</th>
                     <th />
                   </tr>
                 </thead>
@@ -198,6 +315,36 @@ class TableAddRows extends React.Component {
                           disabled={this.state.rows[idx].disabledRow}
                           value={this.state.rows[idx].website}
                           onChange={this.handleWebsiteChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="applicationLink"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].applicationLink}
+                          onChange={this.handleAppLinkChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="erasmusCode"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].erasmusCode}
+                          onChange={this.handleErasmusCodeChange(idx)}
+                          className="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="address"
+                          disabled={this.state.rows[idx].disabledRow}
+                          value={this.state.rows[idx].address}
+                          onChange={this.handleAddressChange(idx)}
                           className="form-control"
                         />
                       </td>
