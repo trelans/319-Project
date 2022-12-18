@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,45 +24,41 @@ const useStyles = makeStyles({
     },
 });
 
+
 const originalRows: waitingCourse[] = [
     {
         requestNo: "1",
         date: "22/01/2022",
         notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    },
+    }
 ];
 
-export default function BasicTable() {
+export default function BasicTable(props) {
     const [rows, setRows] = useState(originalRows);
     const [searched, setSearched] = useState("");
+    const [notifs, setNotifs] = useState(  {
+        requestNo: "1",
+        date: "22/01/2022",
+        notification: "User post preapproval form",
+    });
+    const classes = useStyles()
+    var isFilled = false
 
-    const classes = useStyles();
+    if (props.sendNotif !== undefined ) {
+        console.log("HERE")
+        setNotifs(props.sendNotif)
+        isFilled = true;
+    }
+  //  setNotifs(props.sendNotif)
 
+
+    useEffect(() => {
+       console.log(notifs)
+
+    }, []);
+
+    console.log("zaa")
+    console.log(props.sendNotif)
     const requestSearch = (searchedVal: string) => {
         const filteredRows = originalRows.filter((row) => {
             return row.name.toLowerCase().includes(searchedVal.toLowerCase());
@@ -102,7 +98,7 @@ export default function BasicTable() {
                                         {idx + 1}
                                     </TableCell>
                                     <TableCell align="left">{row.date}</TableCell>
-                                    <TableCell align="left">{row.notification}</TableCell>
+                                    <TableCell align="left">{notifs["text"]}</TableCell>
                                     <TableCell align="left">
 
                                     </TableCell>
