@@ -3,6 +3,7 @@ import React from "react";
 
 class TableAddRows extends React.Component {
 
+  /*
   universities = [];
 
   getUniversities = async () => {
@@ -76,7 +77,7 @@ class TableAddRows extends React.Component {
 
     } catch (error) {}
   }
-
+  */
 
   state = {
     rows: [{}],
