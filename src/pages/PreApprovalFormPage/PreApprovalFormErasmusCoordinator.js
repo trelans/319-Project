@@ -5,7 +5,7 @@ import TableAddRows from "./TableAddRows";
 import { useState } from "react";
 
 function PreApprovalFormErasmusCoordinator() {
-  /*
+  
   const { state } = useLocation();
   const [currentUser, setCurrentUser] = useState();
 
@@ -46,7 +46,7 @@ function PreApprovalFormErasmusCoordinator() {
       },
     });  
   }
-  */
+  
 
   return (
     <div>
