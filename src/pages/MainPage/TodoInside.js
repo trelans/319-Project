@@ -13,7 +13,7 @@ function  Todo({ todo, index, markTodo, removeTodo }) {
         {todo.text}
       </span>
       <div>
-        <Button disabled={true} variant="outline-success"  onClick={() => markTodo(index)}>
+        <Button disabled={true} variant="outline-success" style={{}}  onClick={() => markTodo(index)}>
           ✓
         </Button>{" "}
 
@@ -89,7 +89,7 @@ function TodoInside() {
         <FormTodo addTodo={addTodo} />
         <div>
           {todos.map((todo, index) => (
-            <Card style={{marginTop: 10 , background: "#ebf1c1"}}>
+            <Card style={{marginTop: 10 , background: ""}}>
               <Card.Body>
                 <Todo
                   key={index}

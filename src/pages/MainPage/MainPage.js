@@ -170,7 +170,10 @@ function MainPage() {
           </form>
 
         </div>
-        <div className="main-absolute" >
+        <div className="main-absolute" style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"}} >
           <Grid container  style={{  marginTop: 0 } }>
             <Grid item xs={6}  >
               <div className={"dashboard-cards"} >
