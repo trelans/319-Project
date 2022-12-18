@@ -54,6 +54,54 @@ function MainPage() {
     getUsers();
   }, []);
 
+
+  const replyNomRequestButton = () => (
+      <Grid xs={12}>
+        <Link to="/nominationRequests">
+          <button className="fpp-button-main" >
+            Reply Nomination Requests
+          </button>
+        </Link>
+      </Grid>
+
+  )
+  const logsButton = () => (
+      <Grid xs={12}>
+        <Link to="/logs-page">
+          <button className="fpp-button-main">
+            Logs
+          </button>
+        </Link>
+      </Grid>
+  )
+  const universityListButton = () => (
+      <Grid xs={12}>
+        <Link to="/university-list">
+          <button className="fpp-button-main">
+            University List
+          </button>
+        </Link>
+      </Grid>
+  )
+
+  const applicationStatusButton = () => (
+
+      <Grid xs={12}>
+        <Link to="/application-page1">
+          <button className="fpp-button-main">Application Status</button>
+        </Link>
+      </Grid>
+  )
+  const rateYourExperiencesButton = () => (
+      <Grid xs={12}>
+        <button
+            className="fpp-button-main"
+            onClick={openUniversityRatingPopup}
+        >
+          Rate Your Experiences!
+        </button>
+      </Grid>
+  )
   useEffect(() => {
     const getUniversities = async () => {
       try {
@@ -106,7 +154,7 @@ function MainPage() {
         <div>
           <SearchBarMain placeholder={placeHolderBar} data={data} />
         </div>
-        <div className="main-margined">
+        <div className="main-margined" >
           <form>
             <select
               onChange={(e) => handeSelect(e.target.options.selectedIndex)}
@@ -120,29 +168,41 @@ function MainPage() {
               <option value="university">University</option>
             </select>
           </form>
+
         </div>
-        <div className="main-absolute">
-          <Grid container spacing={2}>
-            <Grid item xs={5}>
-              <TodoWidget />
+        <div className="main-absolute" >
+          <Grid container  style={{  marginTop: 0 } }>
+            <Grid item xs={6}  >
+              <div className={"dashboard-cards"} >
+                <TodoWidget />
+              </div>
             </Grid>
-            <Grid item xs={2}>
-              <Link to="/application-page1">
-                <button className="fpp-button">Application Status</button>
-              </Link>
-              <Link to="/nominationRequests">
-                <button className="fpp-button">
-                  Reply Nomination Requests
-                </button>
-              </Link>
+            <Grid item xs={6 }>
+              <div className={"dashboard-cards"}>
+                <h1
+                    style={{
+
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      color: "#afaaa0"
+                    }}
+                >
+                 Operations
+                </h1>
+                <Grid container padding={3}>
+
+
+                  { localStorage.getItem("userType") == 0 ? applicationStatusButton() : null }
+                  { localStorage.getItem("userType") == 0 ? rateYourExperiencesButton() : null }
+                  { localStorage.getItem("userType") == 1 ? universityListButton() : null }
+                  { localStorage.getItem("userType") == 1 ? logsButton() : null }
+                  { localStorage.getItem("userType") == 3 || localStorage.getItem("userType") == 1 ? replyNomRequestButton() : null }
+                </Grid>
+              </div>
             </Grid>
             <Grid item xs={1}>
-              <button
-                className="fpp-button"
-                onClick={openUniversityRatingPopup}
-              >
-                ratingsPopup check
-              </button>
+
             </Grid>
           </Grid>
 

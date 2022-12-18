@@ -11,6 +11,7 @@ function TodoWidget() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            color: "#afaaa0"
           }}
         >
           Todo List
@@ -18,7 +19,7 @@ function TodoWidget() {
         <p
           id="description"
           className="blackLetter"
-          style={{ }}
+          style={{ color: "cornsilk"}}
         >
           See what remains
         </p>
