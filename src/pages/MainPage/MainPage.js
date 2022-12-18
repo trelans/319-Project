@@ -104,7 +104,6 @@ function MainPage() {
       <div>
         <NavigationBarMain />
         <div>
-          {console.log(placeHolderBar)}
           <SearchBarMain placeholder={placeHolderBar} data={data} />
         </div>
         <div className="main-margined">
