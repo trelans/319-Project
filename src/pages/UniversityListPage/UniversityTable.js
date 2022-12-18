@@ -4,7 +4,7 @@ import React from "react";
 const universities = [];
 
 class TableAddRows extends React.Component {
-  
+
   createUniversity = async (data) => {
     //update according to data
     try {
@@ -34,6 +34,10 @@ class TableAddRows extends React.Component {
       universities.append(res.data);
     } catch (error) {}
   };
+
+  updateField = () =>{
+
+  }
 
   updateUniversity = async (universityId, data) => {
     try {
@@ -159,6 +163,10 @@ class TableAddRows extends React.Component {
       rows,
     });
   };
+  handleSaveAll = () => {
+
+  }
+
   handleAddRow = () => {
     const item = {
       universityName: "",
@@ -212,7 +220,7 @@ class TableAddRows extends React.Component {
       });
     }
 
-    this.updateUniversity(selectedUniversity._id, {quota: 5})
+    this.updateUniversity(selectedUniversity._id, this.state.rows[idx])
   };
 
   constructor(props) {
@@ -370,6 +378,9 @@ class TableAddRows extends React.Component {
               </table>
               <button onClick={this.handleAddRow} className="btn btn-primary">
                 Add University
+              </button>
+              <button onClick={this.handleSaveAll} className="btn btn-primary" style={{marginLeft : 5}}>
+                Save
               </button>
             </div>
           </div>
