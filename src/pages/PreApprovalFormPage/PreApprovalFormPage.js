@@ -21,26 +21,27 @@ const durationTable = {
 let loaded = false;
 
 function PreApprovalFormPage() {
-  const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = React.useState({});
-  const [selectedCourseEq, setSelectedCourseEq] = React.useState({});
-  const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
-  const [lastSelectedEq, setLastSelectedEq] = React.useState();
-  const [eqCourse, setEqCourse] = React.useState();
-  const [candName, setCandName] = useState("");
-  const [candSurname, setCandSurname] = useState("");
-  const [candID, setCandID] = useState("");
-  const [candDepartment, setCandDepartment] = useState("");
-  const [hostUniName, setHostUniName] = useState("");
-  const [duration, setDuration] = useState("");
-  const [ECTSCredits, setECTSCredits] = useState("");
-  const [courses, setCourses] = useState([]);
-  const [bilkentCourses, setBilkentCourses] = useState({});
-  const [eqCourseGot, setEqCourseGot] = useState({});
-  const [nomNewCourse, setNomNewCourse] = useState(false);
-  const [isLoading, setLoading] = React.useState(true);
-  const [academicYear, setAcademicYear] = useState();
-  const childRef = useRef();
+    const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
+    const [selectedCourse, setSelectedCourse] = React.useState({});
+    const [selectedCourseEq, setSelectedCourseEq] = React.useState({});
+    const [lastSelectedCourse, setLastSelectedCourse] = React.useState();
+    const [lastSelectedEq, setLastSelectedEq] = React.useState();
+    const [eqCourse, setEqCourse] = React.useState();
+    const [candName, setCandName] = useState("");
+    const [candSurname, setCandSurname] = useState("");
+    const [candID, setCandID] = useState("");
+    const [candDepartment, setCandDepartment] = useState("");
+    const [hostUniName, setHostUniName] = useState("");
+    const [duration, setDuration] = useState("");
+    const [ECTSCredits, setECTSCredits] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [bilkentCourses, setBilkentCourses] = useState({});
+    const [eqCourseGot, setEqCourseGot] = useState({});
+    const [nomNewCourse, setNomNewCourse] = useState(false);
+    const [isLoading, setLoading] = React.useState(true);
+    const [wishList, setWishList] = useState()
+    const [academicYear, setAcademicYear] = useState();
+    const childRef = useRef();
 
   const navigate = useNavigate();
 
@@ -56,14 +57,28 @@ function PreApprovalFormPage() {
     setCourseIsOpen(true);
   }
 
-  function handleConvertPdf() {
-    console.log(childRef.current.getTableInfo());
-    localStorage.setItem("preapprovalinfo", JSON.stringify(childRef.current.getTableInfo()));
-    navigate("/pre-approval-form-convert", {
-      state: childRef.current.getTableInfo(),
-    });
-    
-  }
+    useEffect((e) => {
+        if (wishList !== undefined) {
+            console.log("Wish List", wishList);
+            handleRequests(e, wishList, "preapproval-student", "2", (response, status) => {
+                console.log(response)
+                alert("Nomination is done!")
+            })
+        }
+    }, [wishList]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await setWishList({wishCourses: [...childRef.current.getTableInfo()], ectsCredits: ECTSCredits});
+    };
+
+
+    function handleConvertPdf() {
+        console.log(childRef.current.getTableInfo());
+        localStorage.setItem("preapprovalinfo", JSON.stringify(childRef.current.getTableInfo()));navigate("/pre-approval-form-convert", {
+            state: childRef.current.getTableInfo(),
+        });
+    }
 
   function handleSelect() {
     if (
