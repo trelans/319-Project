@@ -7,9 +7,21 @@ import { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
+import UploadSignaturePage from "../../../components/UploadSignaturePage";
+import Backdrop from "../../../components/ui/CoursePopUp/Backdrop";
 
 //0->outgoing student, 1->incoming student, 2->others
 function ProfilePageOwn() {
+  const [selectCourseIsOpen, setCourseIsOpen] = useState(false);
+
+  function selectCourse() {
+    setCourseIsOpen(true);
+  }
+
+  function closeSelectCourse() {
+    setCourseIsOpen(false);
+  }
+
   const user = jwt_decode(localStorage.getItem("token"));
   const [university, setUniversity] = useState();
   useEffect(() => {
@@ -139,6 +151,15 @@ function ProfilePageOwn() {
             Application Status
           </button>
         </div>
+        <div className={classes["pp-center"]}>
+          <button className={classes["pp-button"]} onClick={selectCourse}>
+            Upload Signature
+          </button>
+        </div>
+        {selectCourseIsOpen && (
+          <UploadSignaturePage onCancel={closeSelectCourse} />
+        )}
+        {selectCourseIsOpen && <Backdrop />}
       </div>
     );
   } else if (user.userType == 5) {
