@@ -11,8 +11,13 @@ class TableAddRowsView extends React.Component {
     this.car = (zar) => {
       this.handleEqCourse(zar);
     };
-    this.getTableInfo = () => {
-      return this.state.rows;
+    this.setTableInfo = (arr) => {
+      this.state.rows = arr;
+      console.log(arr);
+
+      this.setState({
+        rows: [...this.state.rows],
+      });
     };
   }
 
