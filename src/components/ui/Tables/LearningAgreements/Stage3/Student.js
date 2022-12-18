@@ -1,5 +1,4 @@
 import React from "react";
-
 import validate from "validator/validator";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +10,7 @@ import "react-phone-input-2/lib/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MenuItem } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
+import SignatureCanvas from 'react-signature-canvas'
 const options = [
   { value: "female", label: "Female" },
   { value: "male", label: "Male" },
@@ -28,13 +27,28 @@ export default class Student extends React.Component {
       countryVal: 2,
       complete: "",
       displayComplete: "none",
-      name: "Kingston University",
+
+      //  name: "Kingston University",
       function: "Engineering",
       academicYear: "2022",
       studyCycle: "Onurcan",
       address: "290 Street LA 2032  ",
       subjectAreaCode: "onurcanatac@bilkent.edu.tr",
-      email: "omer.oktay.gultekin@erasmusapp.com",
+      //    email: "omer.oktay.gultekin@erasmusapp.com",
+
+      id: props.id,
+
+      // name: props.fields ? props.fields.name : "",
+      // personFunction: props.fields ? props.fields.personFunction : "",
+      // phoneNumber: props.fields ? props.fields.phoneNumber : "",
+      // email: props.fields ? props.fields.email : "",
+      // signature: props.fields ? props.fields.signature : "",
+      name: props.fields ? props.fields.name : "aHMET",
+      personFunction: props.fields ? props.fields.personFunction : "ZAZAZA",
+      phoneNumber: props.fields ? props.fields.phoneNumber : "+90535521121",
+      email: props.fields ? props.fields.email : "SSSSSS",
+      signature: props.fields ? props.fields.signature : "ZZZ",
+
 
       disabledName: true,
       disabledLastName: true,
@@ -116,6 +130,14 @@ export default class Student extends React.Component {
   }
 
   render() {
+
+    console.log(this.state.name)
+    console.log(this.state.personFunction)
+    console.log(this.state.phoneNumber)
+    console.log(this.state.email)
+    console.log(this.state.signature)
+
+
     return (
         <div className={"App"}>
           <div>
@@ -171,7 +193,7 @@ export default class Student extends React.Component {
                       id="function"
                       maxLength="30"
                       pattern="[A-Za-z]"
-                      defaultValue={this.state.function}
+                      defaultValue={this.state.personFunction}
                       className="styleInput"
                       disabled={
                         this.state.disabledLastName ? "disabledLastName" : ""
@@ -205,7 +227,7 @@ export default class Student extends React.Component {
                   <PhoneInput
                       country={"us"}
                       className="marginBottom"
-                      value={this.state.phone}
+                      value={this.state.phoneNumber}
                       onChange={(phone) => this.setState({ phone })}
                   />
                 </Grid>
@@ -298,30 +320,11 @@ export default class Student extends React.Component {
                 </Grid>
 
                 <Grid item xs={6}>
-                  <input
-                      ref={"this.academicYear"}
-                      id="name"
-                      maxLength="30"
-                      className="styleInput"
-                      defaultValue={this.state.academicYear}
-                      disabled={
-                        this.state.disabledAcademicYear
-                            ? "disabledAcademicYear"
-                            : ""
-                      }
-                      required
-                  />
+                  <button  className="editButton " style = {{width: 200 , height: 36}}>Sign</button>
                 </Grid>
 
                 <Grid item xs={1}>
-                  <button
-                      className="editButton "
-                      onClick={this.handleEditAcademicYearClick.bind(this)}
-                      disabled={!this.state.disabledAcademicYear}
-                  >
-                    {" "}
-                    Edit
-                  </button>
+
                 </Grid>
 
                 <Grid item xs={12}></Grid>
