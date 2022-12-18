@@ -51,6 +51,26 @@ router.get('/universities', auth, async (req,res) => {
     
 })
 
+router.post('/updateAllUniversities', async (req,res) => {
+    
+    const updates = Object.keys(req.body)
+
+    try{
+        const universities = await University.find()
+
+        universities.forEach(async (university) => {
+                updates.forEach((update) => {
+                university[update] = req.body[update]
+            })
+            await university.save()
+        })
+
+        res.send("successful")
+    }catch(e) {
+        res.status(400).send(e)
+    }
+})
+
 router.get('/university/:id', async (req, res) => {
 
     try {

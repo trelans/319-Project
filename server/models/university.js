@@ -75,6 +75,17 @@ const universitySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    quota: {
+        type: Number,
+        default: 2
+    },
+
+    semester: {
+        type: String,
+        default: "Fall"
+    },
+
     
     // userType: {
     //     type: Number,
