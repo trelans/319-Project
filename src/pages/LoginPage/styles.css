@@ -1672,7 +1672,6 @@ a {
   background: inherit;
   margin-top: 100px;
   padding-top: 10px;
-  margin-left: 6%;
 
   width: 100%;
   height: 100%;
@@ -1749,5 +1748,5 @@ a {
   height: 350px;
   background: #1D1F26;
   width: 557px;
-
+margin-left: 13%;
 }
