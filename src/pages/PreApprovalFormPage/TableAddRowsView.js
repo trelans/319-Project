@@ -136,9 +136,10 @@ class TableAddRowsView extends React.Component {
               <table
                 className="table table-bordered table-hover"
                 id="tab_logic"
+                style={{backgroundColor:"#a5c9ca"}}
               >
                 <thead>
-                  <tr>
+                  <tr style={{padding:"auto"}}>
                     <th className="text-center"> # </th>
                     <th className="text-center"> Course Code</th>
                     <th className="text-center"> Course Name </th>
@@ -154,7 +155,7 @@ class TableAddRowsView extends React.Component {
                 <tbody>
                   {this.state.rows.map((item, idx) => (
                     <tr id="addr0" key={idx}>
-                      <td>{idx}</td>
+                      <td>{idx + 1}</td>
                       <td>
                         <input
                           type="text"
