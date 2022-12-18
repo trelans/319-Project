@@ -43,6 +43,8 @@ function PreApprovalFormPage() {
   const [isLoading, setLoading] = React.useState(true);
   const [wishList, setWishList] = useState();
   const [academicYear, setAcademicYear] = useState();
+  const [wishCourses, setwishCourses] = useState();
+
   const childRef = useRef();
 
   const navigate = useNavigate();
@@ -58,6 +60,10 @@ function PreApprovalFormPage() {
   function selectCourse() {
     setCourseIsOpen(true);
   }
+
+  useEffect(() => {
+    fillTable();
+  }, [wishCourses]);
 
   useEffect(
     (e) => {
@@ -99,7 +105,12 @@ function PreApprovalFormPage() {
       state: childRef.current.getTableInfo(),
     });
   }
-
+  function fillTable() {
+    if (appFormStatus === 2) {
+      childRef.current.setTableInfo(wishCourses);
+      console.log(wishCourses);
+    }
+  }
   function handleSelect() {
     if (
       lastSelectedCourse === selectedCourse ||
@@ -123,7 +134,7 @@ function PreApprovalFormPage() {
     if (lastSelectedEq === eqCourseGot) {
       return;
     }
-    console.log("Selected Göt");
+
     console.log(eqCourseGot);
     if (childRef.current != null) {
       childRef.current.car(eqCourseGot);
@@ -146,7 +157,7 @@ function PreApprovalFormPage() {
   // the if clause is required otherwise react continuously rerender the page
   if (!loaded) {
     handleRequests(null, {}, "preapproval-student", "1", (response, status) => {
-      console.log(response.wishCourses); // Kutay
+      setwishCourses(response.wishCourses);
       setAppFormStatus(response.formStatus);
       setCandName(response.name);
       setCandSurname(response.surname);
