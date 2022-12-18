@@ -440,7 +440,6 @@ router.patch('/pre-approval-form/:id', auth, async (req, res) => {
 
 
 router.post('/learning-agreement-3-3', async (req, res) => {
-    console.log(req.body)
     try {
         let application
         let response
@@ -478,18 +477,27 @@ router.post('/learning-agreement-3-3', async (req, res) => {
 
             })
         } else if (req.body.type === '2') { // patch
-            console.log("patch fun")
-            console.log(req.body.personInfo)
-            const id = req.body.id
-            delete req.body.id
-            if (req.body.infoType === 1) {
-                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonAtReceivingIns": req.body.personInfo})
-            } else if (req.body.infoType === 0) {
-                await Form.findByIdAndUpdate(id, {"learningAgreementForm.signeeStudent": req.body.personInfo})
+            if(req.body.formID){
+                console.log(req.body)
+                const LAF = await Form.findOneAndUpdate({_id: req.body.formID, formType: 1}, {status: 2})
+                console.log(LAF.formType)
+                const application = await Application.findOneAndUpdate({_id: LAF.ownerApplication}, {status: 4})
+                console.log(application.status)
+            }else{
+                console.log("patch fun")
+                console.log(req.body.personInfo)
+                const id = req.body.id
+                delete req.body.id
+                if (req.body.infoType === 1) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonAtReceivingIns": req.body.personInfo})
+                } else if (req.body.infoType === 0) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.signeeStudent": req.body.personInfo})
 
-            } else if (req.body.infoType === 2) {
-                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.personInfo})
+                } else if (req.body.infoType === 2) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.personInfo})
+                }
             }
+            res.status(200).send({"status": "ok"})
         }
 
     } catch (e) {
