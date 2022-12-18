@@ -8,6 +8,8 @@ function NavigationBar() {
   
   async function fetchNotifications() {
 
+    let unreadNotifications = 0
+
     const res = await axios.get(`http://localhost:8080/notifications`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -16,12 +18,13 @@ function NavigationBar() {
 
     const notifications = res.data;
 
-    for(let i = 0; i < notifications.length; i++) {
+    for(let i = 0; i < notifications.length && !notifications[i].read; i++) {
       NotificationManager.info(notifications[i].text, "Notification", 5000);
+      unreadNotifications++;
     }
 
-    if(notifications.length == 0) {
-      NotificationManager.info("You have no notifications.", "Info", 5000);
+    if(notifications.length == 0 || unreadNotifications) {
+      NotificationManager.info("You have no unread notifications.", "Info", 5000);
     }
     
   }

@@ -54,6 +54,12 @@ router.get('/notifications', auth, async (req,res) => {
     
 })
 
+router.post("/readNotification", auth, async (req,res) => {
+    const notification = Notification.findById(req.body.id) 
+    notification.read = true;
+    notification.save()
+})
+
 /*
 
 router.get('/tasks/:id', auth, async (req,res) => {

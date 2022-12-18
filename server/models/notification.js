@@ -7,6 +7,10 @@ const notificationsSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    read : {
+        type: Boolean,
+        deafult: false
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

@@ -126,9 +126,12 @@ const userSchema = new mongoose.Schema({
         default: []
     },
 
+    signature: {
+        type: String,
+        //required: true
+    },
 
     //optional part for other users
-
     erasmusCandidateData: {
         isActiveCandidate: {
             type: Boolean,
@@ -151,11 +154,6 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             //required: true,
             ref: 'University'
-        },
-
-        signature: {
-            type: String,
-            //required: true
         },
 
         academicYear: {

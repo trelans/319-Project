@@ -149,7 +149,7 @@ router.post('/profile-own-popup', async (req, res) => {
         if (req.body.type === "1") {
             user = await User.findOne({'tokens.token': req.body.token})
             response = res.status(201)
-            response.send({signature: user.erasmusCandidateData.signature})
+            response.send({signature: user.signature})
         } else if(req.body.type === "0") {
             user = await User.findOneAndUpdate({'tokens.token': req.body.token}, {"erasmusCandidateData.signature": req.body.signature})
             response = res.status(201)
@@ -183,7 +183,6 @@ router.post('/profile-others-student', async (req, res) => {
         console.log("sending responses...")
 
         response.send({
-
             "name": user.name,
             "surname": user.surname,
             "email": user.email,

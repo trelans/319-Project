@@ -97,14 +97,22 @@ function PreApprovalFormPage() {
   };
 
   function handleConvertPdf() {
-    console.log(childRef.current.getTableInfo());
-    localStorage.setItem(
-      "preapprovalinfo",
-      JSON.stringify(childRef.current.getTableInfo())
-    );
-    navigate("/pre-approval-form-convert", {
-      state: childRef.current.getTableInfo(),
-    });
+    if (appFormStatus === 1) {
+      console.log(childRef.current.getTableInfo());
+      localStorage.setItem(
+        "preapprovalinfo",
+        JSON.stringify(childRef.current.getTableInfo())
+      );
+      navigate("/pre-approval-form-convert", {
+        state: childRef.current.getTableInfo(),
+      });
+    } else if (appFormStatus === 2) {
+      localStorage.setItem(
+        "preapprovalinfo",
+        JSON.stringify(wishCourses)
+      );
+      navigate("/pre-approval-form-convert");
+    }
   }
   function fillTable() {
     if (appFormStatus === 2) {
