@@ -4,6 +4,7 @@ import React from "react";
 const universities = [];
 
 class TableAddRows extends React.Component {
+  
   createUniversity = async (data) => {
     //update according to data
     try {
@@ -36,19 +37,26 @@ class TableAddRows extends React.Component {
 
   updateUniversity = async (universityId, data) => {
     try {
+  
+      if(!data) {
+        throw new Error("No data is provided")
+      }
+
+      console.log(data)
+  
       const res = await axios.patch(
-        `http://localhost:8080/updateUniversity/${universityId}`,
-        {
-          data,
-        },
+        `http://localhost:8080/updateUniversity/${universityId}`, data,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
+  
+      console.log(res.data)
     } catch (error) {}
-  };
+  }
+  
 
   deleteUniversity = async (universityId) => {
     try {
@@ -191,16 +199,20 @@ class TableAddRows extends React.Component {
   };
 
   handleSaveSpecificRow = (idx) => () => {
+    const selectedUniversity = this.state.rows[idx]
     const rows = [...this.state.rows];
 
     const isDisabled = rows[idx].disabledRow;
 
+    console.log("clicked")
     if (!isDisabled) {
       rows[idx].disabledRow = true;
       this.setState({
         rows,
       });
     }
+
+    this.updateUniversity(selectedUniversity._id, {quota: 5})
   };
 
   constructor(props) {
