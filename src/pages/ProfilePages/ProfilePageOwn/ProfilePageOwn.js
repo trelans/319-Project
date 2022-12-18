@@ -9,6 +9,7 @@ import { Navigate } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
 import UploadSignaturePage from "../../../components/UploadSignaturePage";
 import Backdrop from "../../../components/ui/CoursePopUp/Backdrop";
+import {handleRequests} from "../../requests";
 
 //0->outgoing student, 1->incoming student, 2->others
 function ProfilePageOwn() {
