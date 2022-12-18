@@ -57,9 +57,11 @@ function PreApprovalFormPage() {
 
   function handleConvertPdf() {
     console.log(childRef.current.getTableInfo());
+    localStorage.setItem("preapprovalinfo", JSON.stringify(childRef.current.getTableInfo()));
     navigate("/pre-approval-form-convert", {
       state: childRef.current.getTableInfo(),
     });
+    
   }
 
   function handleSelect() {
