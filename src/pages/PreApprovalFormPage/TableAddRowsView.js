@@ -19,6 +19,11 @@ class TableAddRowsView extends React.Component {
         rows: [...this.state.rows],
       });
     };
+        this.getTableInfo = () =>  {
+
+      return this.state.rows
+
+    }
     
   }
 

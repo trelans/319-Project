@@ -135,10 +135,12 @@ function PreApprovalFormPage() {
     }
 
     function fillTable() {
-        if (appFormStatus === 2) {
+    
+        if (appFormStatus >= 2) {
             childRef.current.setTableInfo(wishCourses);
             console.log(wishCourses);
         }
+    
     }
 
     function handleSelect() {
@@ -238,6 +240,7 @@ function PreApprovalFormPage() {
     //student
     if (userType == 0) {
         //edit
+        console.log(appFormStatus)
         if (appFormStatus == 1) {
             return (
                 <div>
@@ -410,8 +413,8 @@ function PreApprovalFormPage() {
             );
         }
         //view
-        else if (appFormStatus == 2) {
-            console.log("Here")
+        else if (appFormStatus >= 2) {
+            
             return (
                 <div>
                     <NavigationBar/>
@@ -568,7 +571,8 @@ function PreApprovalFormPage() {
     }
     //erasmus coordinator
     else if (userType == 1) {
-        //edit
+        console.log("PAPAPA")
+        //edit 
         return (
             <div>
                 <NavigationBar/>
