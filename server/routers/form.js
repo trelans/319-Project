@@ -477,12 +477,37 @@ router.post('/learning-agreement-3-3', async (req, res) => {
 
             })
         } else if (req.body.type === '2') { // patch
+
+            const user = await User.findOne({'tokens.token': req.body.token})
             if(req.body.formID){
                 console.log(req.body)
                 const LAF = await Form.findOneAndUpdate({_id: req.body.formID, formType: 1}, {status: 2})
                 console.log(LAF.formType)
                 const application = await Application.findOneAndUpdate({_id: LAF.ownerApplication}, {status: 4})
                 console.log(application.status)
+
+                //notification to the student
+                const notificationStudent = new Notification({
+                    owner: user._id,
+                    text: "You have submitted your learning aggrement before mobility form."
+                })
+                await notificationStudent.save()
+
+                //notification to the erasmus coord
+                const notificationCoord = new Notification({
+                    owner: application.responsibleErasmusCoord,
+                    text: user.name + " " + user.surname + "  learning aggrement before mobility form."
+                })
+                await notificationCoord.save()
+
+                //create to do for erasmuss coord
+                const task = new Task({
+                    description: "Evaluate learning aggrement before mobility form of " + user.name + " " + user.surname + ".",
+                    owner: application.responsibleErasmusCoord,
+                    applicationId: application._id
+                })
+                await task.save()
+
             }else{
                 console.log("patch fun")
                 console.log(req.body.personInfo)
