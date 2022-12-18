@@ -38,6 +38,7 @@ function ProfilePageUniversity() {
 
         console.log(name);
         console.log(country);
+        console.log(response.feedbacks)
       }
     );
     loaded = true;

@@ -29,6 +29,7 @@ function returnStatusClass(formStatus) {
     2: "ap-text-not-uploaded",
     3: "ap-text-not-uploaded",
     4: "ap-text-granted",
+    5: "ap-text-granted",
   };
   return textClasses[formStatus];
 }
@@ -61,20 +62,22 @@ function ApplicationPage1() {
     0: "Waiting For Erasmus Candidate to Upload Preapproval Form",
     1: "Waiting For Erasmus Coordinator to Evaluate Preapproval Form",
     2: "Waiting For Faculty Administration Committee to Approve Preapproval Form",
-    3: "Waiting For Erasmus Candidate to Upload Learning Agreement Form",
+    3: "Waiting For Erasmus Candidate to Upload Learning Agreement Form Before Mobility",
     4: "Waiting For Erasmus Coordinator to Approve Learning Agreement Form",
-    5: "Waiting For Erasmus Candidate to Make Changes in Preapproval Form (If Necessary)",
+    5: "Waiting For Erasmus Candidate to Make Changes in Learning Agreement Form During Mobility (If Necessary)",
     6: "Mobility Period (No Actions Necessary)",
-    7: "Waiting For Erasmus Coordinator to upload Course Transfer Form",
-    8: "Waiting For Faculty Administration Committee to approve Course Transfer Form",
-    9: "Application Completed",
+    7: "Waiting For Erasmus Candidate to upload Learning Agreement Form After Mobility",
+    8: "Waiting For Erasmus Coordinator to upload Course Transfer Form",
+    9: "Waiting For Faculty Administration Committee to approve Course Transfer Form",
+    10: "Application Completed",
   };
   const formStatusTable = {
     0: "Not Available",
     1: "Not Uploaded",
     2: "Not Evaluated",
     3: "Rejected",
-    4: "Approved",
+    4: "Approved By Erasmus Coordinator (Waiting for Faculty Member Approval)",
+    5: "Approved By Faculty Committee Member"
   };
 
   if (isLoading) {
@@ -183,7 +186,7 @@ function ApplicationPage1() {
                 <p className="ap-text-other">{LAFDeadline}</p>
               </td>
               <td>
-                {LAFButtonStatus !== "ap-button-not-active" ? ( // change later
+                {LAFButtonStatus === "ap-button-not-active" ? ( // change later
                   <button className={LAFButtonStatus}>{LAFButtonText}</button>
                 ) : (
                   <Link to="/learning-agreement-1-3">

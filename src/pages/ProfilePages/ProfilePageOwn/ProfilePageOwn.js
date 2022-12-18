@@ -278,7 +278,7 @@ function ProfilePageOwn() {
               </tr>
               <tr>
                 <td className={classes["pp-text-other"]}>
-                  Erasmus Coordinator
+                  {user.userType === 1 ? "Erasmus Coordinator" : user.userType === 2 ? "Faculty Committee Member" : "Course Coordinator"}
                 </td>
               </tr>
             </table>
