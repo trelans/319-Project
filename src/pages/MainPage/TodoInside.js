@@ -6,17 +6,20 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-function  Todo({ todo, index, markTodo, removeTodo }) {
+function Todo({ todo, index, markTodo, removeTodo }) {
   return (
     <div className="todo">
       <span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
         {todo.text}
       </span>
-      <div>
-        <Button disabled={true} variant="outline-success" style={{}}  onClick={() => markTodo(index)}>
+      <div style={{marginRight: -120}}>
+        <Button
+          disabled={true}
+          variant="outline-success"
+          onClick={() => markTodo(index)}
+        >
           ✓
         </Button>{" "}
-
       </div>
     </div>
   );
@@ -32,7 +35,7 @@ function FormTodo({ addTodo }) {
     setValue("");
   };
 
-  return
+  return;
 }
 
 function TodoInside() {
@@ -84,12 +87,22 @@ function TodoInside() {
   }, []);
 
   return (
-    <div className="todo-app" style={{overflowY:"scroll", maxHeight:200, minHeight:200, maxWidth:500, minWidth:500}}>
+    <div
+      className="todo-app"
+      style={{
+        overflowY: "scroll",
+        maxHeight: 200,
+        minHeight: 200,
+        maxWidth: 500,
+        minWidth: 500,
+        position: "absolute",
+      }}
+    >
       <div className="container">
         <FormTodo addTodo={addTodo} />
         <div>
           {todos.map((todo, index) => (
-            <Card style={{marginTop: 10 , background: ""}}>
+            <Card style={{ marginTop: 10, background: "#ebf1c1" }}>
               <Card.Body>
                 <Todo
                   key={index}

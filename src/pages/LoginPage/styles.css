@@ -1517,6 +1517,11 @@ span.pafp-button-last {
   width: 250px;
 }
 
+.todo:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
 /*convert pdf styles*/
 .cp-table {
   padding: auto;
@@ -1665,7 +1670,7 @@ a {
   right: 0;
   padding: 10px;
   background: inherit;
-  margin-top: 50px;
+  margin-top: 100px;
   padding-top: 10px;
   margin-left: 6%;
 
