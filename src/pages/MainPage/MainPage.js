@@ -85,9 +85,11 @@ function MainPage() {
     } else {
       setData(undefined);
     }
+    setPlaceHolder("Search...");
   };
 
   const [popupOpen, setPopup] = useState(false);
+  const [placeHolderBar, setPlaceHolder] = useState("Select Type");
 
   function openUniversityRatingPopup() {
     setPopup(true);
@@ -102,7 +104,8 @@ function MainPage() {
       <div>
         <NavigationBarMain />
         <div>
-          <SearchBarMain placeholder="Search..." data={data} />
+          {console.log(placeHolderBar)}
+          <SearchBarMain placeholder={placeHolderBar} data={data} />
         </div>
         <div className="main-margined">
           <form>
