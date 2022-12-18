@@ -289,9 +289,15 @@ router.post('/learning-agreement-1-3', async (req, res) => {
         let LAF
         let response
         let candidate
+        let user
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            const user = await User.findOne({'tokens.token': req.body.token})
+            if (req.body.userType === '0') {
+                user = await User.findOne({'tokens.token': req.body.token})
+            } else {
+                console.log("Test 2")
+                user = await User.findById(req.body.userId)
+            }
             application = await Application.findOne({'applicantCandidate': user._id})
             candidate = await User.findById(application.applicantCandidate)
             LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
@@ -347,10 +353,15 @@ router.post('/learning-agreement-2-3', async (req, res) => {
         let application
         let PAF
         let response
-        let candidate
+        let user
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            const user = await User.findOne({'tokens.token': req.body.token})
+            if (req.body.usrType === '0') {
+                user = await User.findOne({'tokens.token': req.body.token})
+            } else {
+                console.log("Test 2")
+                user = await User.findById(req.body.userId)
+            }
             response = res.status(201)
             PAF = await Form.findOne({'owner': user._id, 'formType': 0})
             const bilkentCourses = []
@@ -445,10 +456,16 @@ router.post('/learning-agreement-3-3', async (req, res) => {
         let response
         let candidate
         let LAF
+        let user
 
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            const user = await User.findOne({'tokens.token': req.body.token})
+            if (req.body.userType === '0') {
+                user = await User.findOne({'tokens.token': req.body.token})
+            } else {
+                console.log("Test 2")
+                user = await User.findById(req.body.userId)
+            }
             application = await Application.findOne({'applicantCandidate': user._id})
             candidate = await User.findById(application.applicantCandidate)
             LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
@@ -477,38 +494,59 @@ router.post('/learning-agreement-3-3', async (req, res) => {
 
             })
         } else if (req.body.type === '2') { // patch
-
-            const user = await User.findOne({'tokens.token': req.body.token})
-            if(req.body.formID){
+            let LAFStatus
+            let appStatus
+            if (req.body.userType === '0') {
+                user = await User.findOne({'tokens.token': req.body.token})
+                LAFStatus = 2
+                appStatus = 4
+            } else {
+                user = await User.findById(req.body.userId)
+                LAFStatus = 6
+                appStatus = 5
+            }
+            if (req.body.formID) {
                 console.log(req.body)
-                const LAF = await Form.findOneAndUpdate({_id: req.body.formID, formType: 1}, {status: 2})
+                const LAF = await Form.findOneAndUpdate({_id: req.body.formID, formType: 1}, {status: LAFStatus})
                 console.log(LAF.formType)
-                const application = await Application.findOneAndUpdate({_id: LAF.ownerApplication}, {status: 4})
+                const application = await Application.findOneAndUpdate({_id: LAF.ownerApplication}, {status: appStatus})
                 console.log(application.status)
 
+                let notifStudentText;
+                let notifCoordText;
+                let toDoCoordText;
+                if (req.body.userType === '0'){
+                    notifStudentText = "You have submitted your learning agreement before mobility form."
+                    notifCoordText = user.name + " " + user.surname + "  learning aggrement before mobility form is waiting to be approved."
+                }else {
+                    notifStudentText = "Your learning agreement before mobility form is approved."
+                    notifCoordText = user.name + " " + user.surname + "  learning aggrement before mobility form is approved."
+                }
                 //notification to the student
                 const notificationStudent = new Notification({
                     owner: user._id,
-                    text: "You have submitted your learning aggrement before mobility form."
+                    text: notifStudentText
                 })
                 await notificationStudent.save()
 
                 //notification to the erasmus coord
                 const notificationCoord = new Notification({
                     owner: application.responsibleErasmusCoord,
-                    text: user.name + " " + user.surname + "  learning aggrement before mobility form."
+                    text: notifCoordText
                 })
                 await notificationCoord.save()
 
-                //create to do for erasmuss coord
-                const task = new Task({
-                    description: "Evaluate learning aggrement before mobility form of " + user.name + " " + user.surname + ".",
-                    owner: application.responsibleErasmusCoord,
-                    applicationId: application._id
-                })
-                await task.save()
+                if (req.body.userType === '0'){
+                    //create to do for erasmus coord
+                    const task = new Task({
+                        description: "Evaluate learning agreement before mobility form of " + user.name + " " + user.surname + ".",
+                        owner: application.responsibleErasmusCoord,
+                        applicationId: application._id
+                    })
+                    await task.save()
+                }
 
-            }else{
+            } else {
                 console.log("patch fun")
                 console.log(req.body.personInfo)
                 const id = req.body.id
