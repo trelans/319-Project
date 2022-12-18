@@ -327,6 +327,11 @@ router.post('/users/contacts', auth, async (req, res) => {
 })
 
 
+router.post('/user/updatePassword', auth, async (req, res) => {
+    req.user.password = req.body.password;
+    req.user.save()
+})
+
 router.get('/users/me', auth, async (req, res) => {
     res.send(req.user)
 })
