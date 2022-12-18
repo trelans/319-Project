@@ -18,6 +18,10 @@ const feedback = mongoose.Schema({
         type: String,
         required: true
     },
+    rating : {
+        type: Number,
+        default: 0
+    },
     feedbackOwner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
