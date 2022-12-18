@@ -382,6 +382,7 @@ router.post('/learning-agreement-3-3', async (req, res) => {
         let application
         let response
         let candidate
+        let LAF
 
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
@@ -395,43 +396,36 @@ router.post('/learning-agreement-3-3', async (req, res) => {
             console.log(application)
             console.log(LAF)
 
+            if (LAF.learningAgreementForm.signeeStudent.name === "") {
+                LAF = await Form.findOneAndUpdate({'ownerApplication': application._id, 'formType': 1},
+                    {
+                        "learningAgreementForm.signeeStudent.name": user.name + " " + user.surname,
+                        "learningAgreementForm.signeeStudent.email": user.email,
+                        "learningAgreementForm.signeeStudent.signature": user.signature,
+                    })
+                LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            }
+
+            console.log(LAF)
             response.send({
-                studentInfo: {
-                    name: candidate.name,
-                    lastName: candidate.surname,
-                    dateOfBirth: LAF.learningAgreementForm.dateofBirth,
-                    nationality: LAF.learningAgreementForm.nationality,
-                    gender: LAF.learningAgreementForm.gender,
-                    academicYear: candidate.erasmusCandidateData.academicYear,
-                    studyCycle: LAF.learningAgreementForm.studyCycle,
-                    subjectAreaCode: LAF.learningAgreementForm.subjectAreaCode
-                },
+                studentInfo: LAF.learningAgreementForm.signeeStudent,
                 responsiblePersonAtReceivingInsInfo: LAF.learningAgreementForm.responsiblePersonAtReceivingIns,
                 responsiblePersonFromSendingInsInfo: LAF.learningAgreementForm.responsiblePersonFromSendingIns,
                 formID: LAF._id
 
             })
         } else if (req.body.type === '2') { // patch
+            console.log("patch fun")
+            console.log(req.body.personInfo)
             const id = req.body.id
             delete req.body.id
             if (req.body.infoType === 1) {
-                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.responsiblePersonFromSendingIns})
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonAtReceivingIns": req.body.personInfo})
             } else if (req.body.infoType === 0) {
-                await User.findOneAndUpdate({"name": req.body.name}, {
-                    "surname": req.body.lastName,
-                    "erasmusCandidateData.academicYear": req.body.academicYear
-                })
-                await Form.findByIdAndUpdate(id, {
-                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
-                    "learningAgreementForm.nationality": req.body.nationality,
-                    "learningAgreementForm.gender": req.body.gender,
-                    "learningAgreementForm.studyCycle": req.body.studyCycle,
-                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
-                })
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.signeeStudent": req.body.personInfo})
+
             } else if (req.body.infoType === 2) {
-                await Form.findByIdAndUpdate(id, {
-                    "learningAgreementForm.responsiblePersonAtReceivingIns": req.body.responsiblePersonAtReceivingIns
-                })
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.personInfo})
             }
         }
 

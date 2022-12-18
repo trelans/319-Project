@@ -312,6 +312,29 @@ const formSchema = new mongoose.Schema({
             }
         },
 
+        signeeStudent: {
+            name: {
+                type: String,
+                default: ""
+            },
+            email: {
+                type: String
+            },
+            personFunction: {
+                type: String,
+                default: "Student"
+            },
+            date: {
+                type: String
+            },
+            signature: {
+                type: String
+            },
+            phoneNumber: {
+                type: String
+            }
+        },
+
         responsiblePersonAtReceivingIns: {
             name: {
                 type: String,
