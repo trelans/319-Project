@@ -125,13 +125,16 @@ function MainPage() {
               <TodoWidget />
             </Grid>
             <Grid item xs={2}>
-              <Link to="/nominationRequests">
+              <Link to="/application-page1">
                 <button className="fpp-button">Application Status</button>
-                <button className="fpp-button">Reply Nomination Requests</button>
+              </Link>
+              <Link to="/nominationRequests">
+                <button className="fpp-button">
+                  Reply Nomination Requests
+                </button>
               </Link>
             </Grid>
             <Grid item xs={1}>
-
               <button
                 className="fpp-button"
                 onClick={openUniversityRatingPopup}
