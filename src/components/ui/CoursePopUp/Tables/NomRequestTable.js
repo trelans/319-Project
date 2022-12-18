@@ -8,6 +8,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
+import RatingPopup from "../UniversityRatingPopup";
+import Backdrop from "../Backdrop";
+import NominatedCoursePopup from "./NominatedCoursePopup";
 
 interface waitingCourse {
   requestNo: string;
@@ -57,6 +60,9 @@ const originalRows: waitingCourse[] = [
 export default function BasicTable() {
   const [rows, setRows] = useState(originalRows);
   const [searched, setSearched] = useState("");
+
+  const [popupOpen, setPopup] = useState(false);
+
   const classes = useStyles();
 
   const requestSearch = (searchedVal: string) => {
@@ -70,6 +76,14 @@ export default function BasicTable() {
     setSearched("");
     requestSearch(searched);
   };
+
+  function openNominatedCoursePopup() {
+    setPopup(true);
+  }
+
+  function closePopup() {
+    setPopup(false);
+  }
 
   return (
     <>
@@ -98,7 +112,9 @@ export default function BasicTable() {
                   <TableCell align="left">{row.courseCode}</TableCell>
                   <TableCell align="left">{row.courseName}</TableCell>
                   <TableCell align="left">
-                    <button>Review Nomination Request</button>
+                    <button onClick={openNominatedCoursePopup}>
+                      Review Nomination Request
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -107,6 +123,8 @@ export default function BasicTable() {
         </TableContainer>
       </Paper>
       <br />
+      {popupOpen && <NominatedCoursePopup onCancel={closePopup} />}
+      {popupOpen && <Backdrop />}
     </>
   );
 }
