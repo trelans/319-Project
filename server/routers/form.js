@@ -11,6 +11,7 @@ const Form = require("../models/form");
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
 const Notification = require("../models/notification")
+const Task = require('../models/task')
 
 //get pre approval
 router.post('/preapproval-student', async (req, res) => {
@@ -95,6 +96,28 @@ router.post('/preapproval-student', async (req, res) => {
             })
 
             const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
+            
+            //notificconst application = ation to the student
+            const notificationStudent = new Notification({
+                owner: user._id,
+                text:"You have submitted your approval form."
+            })
+            await notificationStudent.save()
+
+            //notification to the erasmus coord
+            const notificationCoord = new Notification({
+                owner: application.responsibleErasmusCoord,
+                text: user.name + " their pre approval form."
+            })
+            await notificationCoord.save()
+            
+            //create to do for erasmuss coord
+            const task = new Task({
+                description: "Evaluate pre approval form of " + user.name + ".",
+                owner: application.responsibleErasmusCoord,
+                applicationId: application._id
+            })
+            await task.save()
 
 
             response = res.status(200)
