@@ -1,29 +1,13 @@
 import axios from "axios";
 import React from "react";
 
+const universities = [];  
+
+
+
+
 class TableAddRows extends React.Component {
 
-  /*
-  universities = [];
-
-  getUniversities = async () => {
-    try {
-      const res = await axios.get(`http://localhost:8080/universities`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      
-      universities = res.data.map((val) => {
-          return {
-            name: val.name,
-            id: val._id,
-            itemType: "university",
-          };
-        })
-      
-    } catch (error) {}
-  }
 
   createUniversity = async (data) => {
 
@@ -77,7 +61,7 @@ class TableAddRows extends React.Component {
 
     } catch (error) {}
   }
-  */
+  
 
   state = {
     rows: [{}],
