@@ -22,7 +22,7 @@ function TodoWidget() {
         >
           See what remains
         </p>
-        <div >
+        <div>
           {" "}
           <Grid container spacing={2}>
             <Grid
@@ -33,7 +33,7 @@ function TodoWidget() {
               justifyContent="center"
               style={{ minHeight: "30vh" }}
             >
-              <TodoInside />
+              <TodoInside style={{overflowY:"scroll"}} />
             </Grid>
           </Grid>
         </div>
