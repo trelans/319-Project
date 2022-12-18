@@ -70,23 +70,23 @@ function LearningAgreementBeforeMobility3() {
               <h1>Responsible Person at Sending Institution</h1>
             </Grid>
             <Grid item xs={6}>
-              <LABMStudent>
-                id={formID}
-                fields={studentInfo}
+              <LABMStudent id={formID}
+                           fields={studentInfo}
+                           infoType={0}>
               </LABMStudent>
             </Grid>
             <Grid item xs={6}>
-              <LABMSending>
-                id={formID}
-                fields={responsiblePersonFromSendingInsInfo}
-              </LABMSending>
+              <LABMStudent id={formID}
+                           fields={responsiblePersonAtReceivingInsInfo}
+                           infoType={1}>
+              </LABMStudent>
             </Grid>
             <Grid item xs={6}>
               <h1>Responsible Person at Receiving Institution</h1>
-              <LABMReceiving>
-                id={formID}
-                fields={responsiblePersonAtReceivingInsInfo}
-              </LABMReceiving>
+              <LABMStudent id={formID}
+                           fields={responsiblePersonFromSendingInsInfo}
+                           infoType={2}>
+              </LABMStudent>
             </Grid>
             <Grid item xs={12}>
               <div>
