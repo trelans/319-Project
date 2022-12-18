@@ -118,6 +118,26 @@ function PreApprovalFormPage() {
         );
     };
 
+    const handleApproveFaculty = async (e) => {
+        console.log("Burada")
+        e.preventDefault();
+        handleRequests(
+            e,
+            {
+                approvedStage: 2,
+                userType: localStorage.getItem("userType"),
+                userId: state
+            },
+            "preapproval-student",
+            "2",
+            (response, status) => {
+                console.log(response);
+                alert("Preapproval is approved");
+                navigate("/main-page");
+            }
+        );
+    };
+
     function handleConvertPdf() {
         if (appFormStatus === 1) {
             console.log(childRef.current.getTableInfo());
@@ -135,12 +155,12 @@ function PreApprovalFormPage() {
     }
 
     function fillTable() {
-    
+
         if (appFormStatus >= 2) {
             childRef.current.setTableInfo(wishCourses);
             console.log(wishCourses);
         }
-    
+
     }
 
     function handleSelect() {
@@ -186,22 +206,22 @@ function PreApprovalFormPage() {
         setNomNewCourse(false);
     }
 
-    function handleFeedback () {
+    function handleFeedback() {
         navigate("/chat", {
-          state: {
-            name: candName,
-            surname: candSurname,
-            objectId: candID,
-            fromProfile: true,
-          },
+            state: {
+                name: candName,
+                surname: candSurname,
+                objectId: candID,
+                fromProfile: true,
+            },
         });
-      }
+    }
 
     // the if clause is required otherwise react continuously rerender the page
     if (!loaded) {
         handleRequests(null, {
             usrType: localStorage.getItem("userType"),
-            userId: state 
+            userId: state
         }, "preapproval-student", "1", (response, status) => {
             //response.userType
             console.log(response)
@@ -414,7 +434,7 @@ function PreApprovalFormPage() {
         }
         //view
         else if (appFormStatus >= 2) {
-            
+
             return (
                 <div>
                     <NavigationBar/>
@@ -690,7 +710,8 @@ function PreApprovalFormPage() {
                                     <button className="pafp-button-blue" onClick={handleApprove}>Approve Form</button>
                                 </td>
                                 <td className="pafp-last-table-td">
-                                    <button onClick={(e) => handleFeedback()} className="pafp-button">Give Feedback</button>
+                                    <button onClick={(e) => handleFeedback()} className="pafp-button">Give Feedback
+                                    </button>
                                 </td>
                                 <td className="pafp-last-table-td">
                                     <p className="pafp-lined-header"></p>
@@ -742,173 +763,171 @@ function PreApprovalFormPage() {
     }
     //committee member
     else if (userType == 2) {
-        //view
-        if (appFormStatus == 2) {
-            return (
-                <div>
-                    <NavigationBar/>
-                    <div className="pafp-container">
-                        <h1 className="pafp-h1">Applicant Info:</h1>
+        return (
+            <div>
+                <NavigationBar/>
+                <div className="pafp-container">
+                    <h1 className="pafp-h1">Applicant Info:</h1>
+                    <table className="pafp-first-table">
+                        <tr>
+                            <td className="pafp-first-table-td">
+                                <p className="pafp-table-title">Name:</p>
+                            </td>
+                            <td className="pafp-first-table-td">
+                                <p className="ap-text-other">{candName}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="pafp-first-table-td">
+                                <p className="pafp-table-title">Surname:</p>
+                            </td>
+                            <td className="pafp-first-table-td">
+                                <p className="ap-text-other">{candSurname}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p className="pafp-table-title">ID Number:</p>
+                            </td>
+                            <td>
+                                <p className="ap-text-other">{candID}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p className="pafp-table-title">Department:</p>
+                            </td>
+                            <td>
+                                <p className="ap-text-other">{candDepartment}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p className="pafp-table-title">Host Institution Name:</p>
+                            </td>
+                            <td>
+                                <p className="ap-text-other">{hostUniName}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p className="pafp-table-title">Duration:</p>
+                            </td>
+                            <td>
+                                <p className="ap-text-other">Next {duration}</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <div className="pafp-container2">
+                        <p className="pafp-alert">Course or Requirement to be Exempted</p>
+                        <p className="pafp-alert">
+                            Host Institution Courses to be Transferred Upon Approval
+                        </p>
+                    </div>
+                    <div className="pafp-flex-div">
+                        <TableAddRowsView
+                            getArrFunc={selectedCourse}
+                            selected={selectedCourse}
+                            ref={childRef}
+                            currentCourseForEq={setEqCourse}
+                            sendTotalCredits={setECTSCredits}
+                        />
+                    </div>
+                    <div>
                         <table className="pafp-first-table">
                             <tr>
                                 <td className="pafp-first-table-td">
-                                    <p className="pafp-table-title">Name:</p>
+                                    <p className="pafp-table-title">Total ECTS:</p>
                                 </td>
                                 <td className="pafp-first-table-td">
-                                    <p className="ap-text-other">{candName}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="pafp-first-table-td">
-                                    <p className="pafp-table-title">Surname:</p>
-                                </td>
-                                <td className="pafp-first-table-td">
-                                    <p className="ap-text-other">{candSurname}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p className="pafp-table-title">ID Number:</p>
-                                </td>
-                                <td>
-                                    <p className="ap-text-other">{candID}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p className="pafp-table-title">Department:</p>
-                                </td>
-                                <td>
-                                    <p className="ap-text-other">{candDepartment}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p className="pafp-table-title">Host Institution Name:</p>
-                                </td>
-                                <td>
-                                    <p className="ap-text-other">{hostUniName}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p className="pafp-table-title">Duration:</p>
-                                </td>
-                                <td>
-                                    <p className="ap-text-other">Next {duration}</p>
+                                    <p className="ap-text-other">{ECTSCredits}</p>
                                 </td>
                             </tr>
                         </table>
-                        <div className="pafp-container2">
-                            <p className="pafp-alert">Course or Requirement to be Exempted</p>
-                            <p className="pafp-alert">
-                                Host Institution Courses to be Transferred Upon Approval
-                            </p>
-                        </div>
-                        <div className="pafp-flex-div">
-                            <TableAddRowsView
-                                getArrFunc={selectedCourse}
-                                selected={selectedCourse}
-                                ref={childRef}
-                                currentCourseForEq={setEqCourse}
-                                sendTotalCredits={setECTSCredits}
-                            />
-                        </div>
-                        <div>
-                            <table className="pafp-first-table">
-                                <tr>
-                                    <td className="pafp-first-table-td">
-                                        <p className="pafp-table-title">Total ECTS:</p>
-                                    </td>
-                                    <td className="pafp-first-table-td">
-                                        <p className="ap-text-other">{ECTSCredits}</p>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table className="pafp-table-last">
-                                <tr>
-                                    <td className="pafp-last-table-td">
-                                        <button onClick={handleConvertPdf} className="pafp-button">Convert to PDF
-                                        </button>
-                                    </td>
-                                    <td className="pafp-last-table-td"></td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header">Approved By</p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header">Name</p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header">Signature</p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header">Date</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="pafp-last-table-td">
-                                        <button className="pafp-button-blue">Approve Form</button>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <button className="pafp-button-yellow">Reject Form</button>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-lined-header"></p>
-                                    </td>
-                                    <td className="pafp-last-table-td">
-                                        <p className="pafp-red-text">Not Approved</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        <table className="pafp-table-last">
+                            <tr>
+                                <td className="pafp-last-table-td">
+                                    <button onClick={handleConvertPdf} className="pafp-button">Convert to PDF
+                                    </button>
+                                </td>
+                                <td className="pafp-last-table-td"></td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header">Approved By</p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header">Name</p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header">Signature</p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header">Date</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="pafp-last-table-td">
+                                    <button onClick={handleApproveFaculty} className="pafp-button-blue">Approve Form</button>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <button className="pafp-button-yellow">Reject Form</button>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-lined-header"></p>
+                                </td>
+                                <td className="pafp-last-table-td">
+                                    <p className="pafp-red-text">Not Approved</p>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    {selectCourseIsOpen && (
-                        <Modal
-                            courses={bilkentCourses}
-                            onCancel={closeSelectCourse}
-                            onSelect={handleSelect}
-                            setArrFunc={setSelectedCourse}
-                        />
-                    )}
-                    {selectCourseIsOpen && <Backdrop/>}
-                    {eqCourse && <Backdrop/>}
-                    {nomNewCourse && <Backdrop/>}
-                    {eqCourse && (
-                        <EqPopUp
-                            onCancel={closeSelectEqCourse}
-                            bilkentCourse={eqCourse}
-                            eqCourses={eqCourse}
-                            hostUniName={hostUniName}
-                            setArrFunc={setEqCourseGot}
-                            onSelect={handleSelectEq}
-                            setNumFunc={setNomNewCourse}
-                        />
-                    )}
-                    {nomNewCourse && (
-                        <NomNewCoursePopUp
-                            bilkentCourse={nomNewCourse}
-                            hostUniName={hostUniName}
-                            onCancel={closeNominationPopup}
-                        />
-                    )}
                 </div>
-            );
-        }
+                {selectCourseIsOpen && (
+                    <Modal
+                        courses={bilkentCourses}
+                        onCancel={closeSelectCourse}
+                        onSelect={handleSelect}
+                        setArrFunc={setSelectedCourse}
+                    />
+                )}
+                {selectCourseIsOpen && <Backdrop/>}
+                {eqCourse && <Backdrop/>}
+                {nomNewCourse && <Backdrop/>}
+                {eqCourse && (
+                    <EqPopUp
+                        onCancel={closeSelectEqCourse}
+                        bilkentCourse={eqCourse}
+                        eqCourses={eqCourse}
+                        hostUniName={hostUniName}
+                        setArrFunc={setEqCourseGot}
+                        onSelect={handleSelectEq}
+                        setNumFunc={setNomNewCourse}
+                    />
+                )}
+                {nomNewCourse && (
+                    <NomNewCoursePopUp
+                        bilkentCourse={nomNewCourse}
+                        hostUniName={hostUniName}
+                        onCancel={closeNominationPopup}
+                    />
+                )}
+            </div>
+        );
+
     }
 }
 

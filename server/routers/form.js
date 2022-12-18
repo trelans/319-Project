@@ -94,12 +94,18 @@ router.post('/preapproval-student', async (req, res) => {
             }
 
             console.log("Before if")
-            if (req.body.approvedStage && req.body.approvedStage === 1) {
+            if (req.body.approvedStage) {
                 console.log("Inside if")
                 const form = await Form.findOneAndUpdate({'owner': user._id, 'formType': 0}, {
-                    status: 4
+                    status: req.body.approvedStage + 3
                 })
-                const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
+                const application = await Application.findByIdAndUpdate(
+                    form.ownerApplication, {status: req.body.approvedStage + 1}
+                )
+
+                const LAF = await Form.findOneAndUpdate({'owner': user._id, 'formType': 1}, {
+                    status: 1
+                })
 
                 console.log(application.responsibleErasmusCoord)
                 //notificconst application = ation to the student
@@ -434,7 +440,6 @@ router.patch('/pre-approval-form/:id', auth, async (req, res) => {
 
 
 router.post('/learning-agreement-3-3', async (req, res) => {
-    console.log(req.body)
     try {
         let application
         let response
@@ -471,6 +476,77 @@ router.post('/learning-agreement-3-3', async (req, res) => {
                 formID: LAF._id
 
             })
+        } else if (req.body.type === '2') { // patch
+            if(req.body.formID){
+                console.log(req.body)
+                const LAF = await Form.findOneAndUpdate({_id: req.body.formID, formType: 1}, {status: 2})
+                console.log(LAF.formType)
+                const application = await Application.findOneAndUpdate({_id: LAF.ownerApplication}, {status: 4})
+                console.log(application.status)
+            }else{
+                console.log("patch fun")
+                console.log(req.body.personInfo)
+                const id = req.body.id
+                delete req.body.id
+                if (req.body.infoType === 1) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonAtReceivingIns": req.body.personInfo})
+                } else if (req.body.infoType === 0) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.signeeStudent": req.body.personInfo})
+
+                } else if (req.body.infoType === 2) {
+                    await Form.findByIdAndUpdate(id, {"learningAgreementForm.responsiblePersonFromSendingIns": req.body.personInfo})
+                }
+            }
+            res.status(200).send({"status": "ok"})
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.post('/learning-agreement-before-mobility-convert', async (req, res) => {
+    console.log(req.body)
+    try {
+        let application
+        let response
+        let candidate
+        let LAF
+
+        // 0 POST, 1 GET, 2 PATCH
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            application = await Application.findOne({'applicantCandidate': user._id})
+            candidate = await User.findById(application.applicantCandidate)
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            response = res.status(201)
+
+            console.log("inside get 3-3")
+            console.log(application)
+            console.log(LAF)
+
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            const infos = {
+                studentInfo: {
+                    name: candidate.name,
+                    lastName: candidate.surname,
+                    dateOfBirth: LAF.learningAgreementForm.dateofBirth,
+                    nationality: LAF.learningAgreementForm.nationality,
+                    gender: LAF.learningAgreementForm.gender,
+                    academicYear: candidate.erasmusCandidateData.academicYear,
+                    studyCycle: LAF.learningAgreementForm.studyCycle,
+                    subjectAreaCode: LAF.learningAgreementForm.subjectAreaCode
+                },
+                sendingInstitutionInfo: LAF.learningAgreementForm.sendingInstitution,
+                receivingInstitutionInfo: LAF.learningAgreementForm.receivingInstitution,
+                formID: LAF._id,
+                studentSignInfo: LAF.learningAgreementForm.signeeStudent,
+                responsiblePersonAtReceivingInsInfo: LAF.learningAgreementForm.responsiblePersonAtReceivingIns,
+                responsiblePersonFromSendingInsInfo: LAF.learningAgreementForm.responsiblePersonFromSendingIns,
+            }
+            console.log(infos)
+            response.send(infos)
         } else if (req.body.type === '2') { // patch
             console.log("patch fun")
             console.log(req.body.personInfo)
