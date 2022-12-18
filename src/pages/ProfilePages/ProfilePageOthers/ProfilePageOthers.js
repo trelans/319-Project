@@ -175,7 +175,7 @@ function ProfilePageOthers() {
           <button className="pp-button">Message</button>
         </div>
 
-        {user.userType == 1 ? (
+        {user.userType != 0 ? (
           <div className={classes["pp-center"]}>
             <button
               className={classes["pp-button"]}

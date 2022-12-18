@@ -22,8 +22,11 @@ router.post('/preapproval-student', async (req, res) => {
         let user;
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            if (req.body.userType === 0) {
+            console.log(req.body)
+            console.log("ahmet")
+            if (req.body.usrType === '0') {
                 user = await User.findOne({'tokens.token': req.body.token})
+                console.log("asdasa")
             } else {
                 console.log("Test 2")
                 user = await User.findById(req.body.userId)
@@ -84,7 +87,7 @@ router.post('/preapproval-student', async (req, res) => {
                 "userType": user.userType
             })
         } else if (req.body.type === "2") {
-            if (req.body.userType === 0) {
+            if (req.body.usrType === '0') {
                 user = await User.findOne({'tokens.token': req.body.token})
             } else {
                 user = await User.findById(req.body.userId)
@@ -98,6 +101,7 @@ router.post('/preapproval-student', async (req, res) => {
                 })
                 const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
 
+                console.log(application.responsibleErasmusCoord)
                 //notificconst application = ation to the student
                 const notificationStudent = new Notification({
                     owner: user._id,
@@ -105,17 +109,27 @@ router.post('/preapproval-student', async (req, res) => {
                 })
                 await notificationStudent.save()
 
-                //notification to the erasmus coord
-                const notificationCoord = new Notification({
-                    owner: application.responsibleErasmusCoord,
+                //notification to the faculty committee member
+                const erasmusCoordinator = await User.findById(application.responsibleErasmusCoord)
+                console.log("veli")
+                console.log(erasmusCoordinator)
+                const department = await Department.findOne({"name": erasmusCoordinator.erasmusCoordinatorData.department})
+                console.log("Arap")
+                console.log(department.name)
+                const facultyMember = await User.findOne({"facultyMemberData.faculty": department.faculty})
+                console.log("saksoy")
+                console.log(facultyMember.name)
+
+                const notificationMember = new Notification({
+                    owner: facultyMember._id,
                     text: user.name + " " + user.surname + " submitted their pre approval form."
                 })
-                await notificationCoord.save()
+                await notificationMember.save()
 
                 //create to do for erasmuss coord
                 const task = new Task({
                     description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
-                    owner: application.responsibleErasmusCoord,
+                    owner: facultyMember._id,
                     applicationId: application._id
                 })
                 await task.save()

@@ -29,6 +29,7 @@ function returnStatusClass(formStatus) {
     2: "ap-text-not-uploaded",
     3: "ap-text-not-uploaded",
     4: "ap-text-granted",
+    5: "ap-text-granted",
   };
   return textClasses[formStatus];
 }

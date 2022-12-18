@@ -198,11 +198,11 @@ function PreApprovalFormPage() {
     // the if clause is required otherwise react continuously rerender the page
     if (!loaded) {
         handleRequests(null, {
-            userType: localStorage.getItem("userType"),
+            usrType: localStorage.getItem("userType"),
             userId: state 
         }, "preapproval-student", "1", (response, status) => {
-            console.log(response)
             //response.userType
+            console.log(response)
             setUserType(localStorage.getItem("userType")); //response.userType OLCAK
             setwishCourses(response.wishCourses);
             setAppFormStatus(response.formStatus);
