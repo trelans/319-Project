@@ -84,52 +84,44 @@ router.get('/tasks/:id', auth, async (req,res) => {
     }
 })
 
-router.patch('/tasks/:id', auth, async (req,res) => {
+*/
+router.patch('/updateUniversity/:id', auth, async (req,res) => {
     
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['description','completed']
-    const isValidOperation = updates.every((update) => {
-        return allowedUpdates.includes(update)
-    })
-
-    if(!isValidOperation) {
-        return res.status(400).send({error: 'Invalid Updates!'})
-    }
 
     try{
-        const task = await Task.findOne({_id: req.params.id, owner: req.user._id})
+        const university = await University.findOne({_id: req.params.id})
 
-        if(!task) {
+        if(!university) {
             return res.status(404).send()
         }
 
         updates.forEach((update) => {
-            task[update] = req.body[update]
+            university[update] = req.body[update]
         })
 
-        await task.save()
-
-        res.send(task)
+        await university.save()
+        res.send(university)
     }catch(e) {
         res.status(400).send(e)
     }
 })
 
-router.delete('/tasks/:id', auth, async (req,res) => {
+router.delete('/university/:id', auth, async (req,res) => {
 
     try {
         //const task = await Task.findByIdAndDelete(req.params.id)
-        const task = await Task.findOneAndDelete({_id: req.params.id, owner: req.user._id})
+        const university = await University.findOneAndDelete({_id: req.params.id})
 
-        if(!task) {
+        if(!university) {
             return res.status(404).send()
         }
 
-        res.send(task)
+        res.send(university)
     }catch(e) { 
         res.status(500).send()
     }
 })
-*/
+
 
 module.exports = router
