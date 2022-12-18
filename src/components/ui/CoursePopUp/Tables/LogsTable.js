@@ -11,7 +11,7 @@ import SearchBar from "material-ui-search-bar";
 import RatingPopup from "../UniversityRatingPopup";
 import Backdrop from "../Backdrop";
 import NominatedCoursePopup from "./NominatedCoursePopup";
-
+import axios from "axios";
 interface waitingCourse {
     requestNo: string;
     date: string;
@@ -24,41 +24,46 @@ const useStyles = makeStyles({
     },
 });
 
+var notifss = []
+var notifsRe = []
 
-const originalRows: waitingCourse[] = [
-    {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
-    }
-];
 
-export default function BasicTable(props) {
+
+
+
+
+
+const originalRows: waitingCourse[] = notifss
+
+
+export default function BasicTable(props ) {
     const [rows, setRows] = useState(originalRows);
     const [searched, setSearched] = useState("");
     const [notifs, setNotifs] = useState(  {
-        requestNo: "1",
-        date: "22/01/2022",
-        notification: "User post preapproval form",
+
     });
     const classes = useStyles()
-    var isFilled = false
 
-    if (props.sendNotif !== undefined ) {
-        console.log("HERE")
-        setNotifs(props.sendNotif)
-        isFilled = true;
-    }
-  //  setNotifs(props.sendNotif)
+    var isDataGeldiMi = false
+    console.log("rows")
+console.log(rows)
 
 
-    useEffect(() => {
-       console.log(notifs)
 
+    useEffect(async () => {
+
+        const res = await axios.get(`http://localhost:8080/notifications`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+
+        setRows (res.data)
+            console.log(rows)
     }, []);
 
-    console.log("zaa")
-    console.log(props.sendNotif)
+
+
     const requestSearch = (searchedVal: string) => {
         const filteredRows = originalRows.filter((row) => {
             return row.name.toLowerCase().includes(searchedVal.toLowerCase());
@@ -70,7 +75,6 @@ export default function BasicTable(props) {
         setSearched("");
         requestSearch(searched);
     };
-
 
 
     return (
@@ -97,8 +101,10 @@ export default function BasicTable(props) {
                                     <TableCell component="th" scope="row">
                                         {idx + 1}
                                     </TableCell>
-                                    <TableCell align="left">{row.date}</TableCell>
-                                    <TableCell align="left">{notifs["text"]}</TableCell>
+                                    <TableCell align="left">{
+                                       row.updatedAt
+                                        }</TableCell>
+                                    <TableCell align="left">{row.text}</TableCell>
                                     <TableCell align="left">
 
                                     </TableCell>
