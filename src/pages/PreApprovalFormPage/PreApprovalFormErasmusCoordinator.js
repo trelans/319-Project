@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 function PreApprovalFormErasmusCoordinator() {
-  
+  /*
   const { state } = useLocation();
   const [currentUser, setCurrentUser] = useState();
   const [university, setUniversity] = useState();
@@ -50,7 +50,7 @@ function PreApprovalFormErasmusCoordinator() {
     });  
   }
   
-
+*/
   return (
     <div>
       <NavigationBar />
