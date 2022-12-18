@@ -25,7 +25,7 @@ function NavigationBarMain() {
         <ul>
           <li>
             <Link to="/main-page">Home</Link>
-          </li>
+          </li> 
           <li>
             <Link to="/profile-own">Profile</Link>
           </li>
