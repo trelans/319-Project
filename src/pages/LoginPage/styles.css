@@ -177,7 +177,7 @@ body {
 
 .sp-container {
   width: 60%;
-  padding: 5% 0 0;
+  padding: 1% 0 0;
   margin-bottom: 0%;
   margin: auto;
 }
@@ -185,8 +185,8 @@ body {
 .sp-center {
   text-align: center;
   margin: 0px;
-  padding-bottom: 5%;
-  padding-top: 5%;
+  padding-bottom: 3%;
+  padding-top: 3%;
 }
 
 .sp-h1 {
