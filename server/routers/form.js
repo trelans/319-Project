@@ -105,12 +105,19 @@ router.post('/preapproval-student', async (req, res) => {
                 })
                 await notificationStudent.save()
 
-                //notification to the erasmus coord
-                const notificationCoord = new Notification({
-                    owner: application.responsibleErasmusCoord,
+                //notification to the faculty committee member
+                const erasmusCoordinator = User.findById(application.responsibleErasmusCoord)
+                const department = Department.findOne({"name": erasmusCoordinator.erasmusCoordinatorData.department})
+                const facultyMember = User.findOne({"facultyMemberData.faculty": department.faculty})
+                console.log(erasmusCoordinator.name)
+                console.log(department.name)
+                console.log(facultyMember.name)
+
+                const notificationMember = new Notification({
+                    owner: facultyMember._id,
                     text: user.name + " " + user.surname + " submitted their pre approval form."
                 })
-                await notificationCoord.save()
+                await notificationMember.save()
 
                 //create to do for erasmuss coord
                 const task = new Task({
