@@ -1,9 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Checkbox } from "@mui/material";
 import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import TableAddRows from "./TableAddRows";
+import { useState } from "react";
 
 function PreApprovalFormErasmusCoordinator() {
+  /*
+  const { state } = useLocation();
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    console.log("Here");
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8080/user/${state}`, {});
+
+        if (
+          res.data.userType == 0 &&
+          res.data.erasmusCandidateData.nominatedUniversityId
+        ) {
+          const res2 = await axios.get(
+            `http://localhost:8080/university/${res.data.erasmusCandidateData.nominatedUniversityId}`,
+            {}
+          );
+          console.log(res2.data);
+          setUniversity(res2.data);
+        }
+
+        setCurrentUser(res.data);
+      } catch (error) {
+        console.log("There is a problem");
+      }
+    };
+
+    getUser();
+  }, []);
+
+  const handleFeedback = () => {
+    navigate("/chat", {
+      state: {
+        name: currentUser.name,
+        surname: currentUser.surname,
+        objectId: currentUser._id,
+        fromProfile: true,
+      },
+    });  
+  }
+  */
+
   return (
     <div>
       <NavigationBar />
