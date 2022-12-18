@@ -4,6 +4,7 @@ import { handleRequests } from "../requests";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import LoadingSpinner from "../../components/ui/loadingComponent";
+import { useEffect } from "react";
 
 function returnButtonText(status) {
   if (status < 2 || status === 3) {
@@ -32,8 +33,6 @@ function returnStatusClass(formStatus) {
   return textClasses[formStatus];
 }
 
-let loaded = false;
-
 function ApplicationPage1() {
   const [status, setStatus] = useState("");
   const [erasmusCoordinator, setErasmusCoordinator] = useState("");
@@ -53,6 +52,10 @@ function ApplicationPage1() {
   const [PFButtonStatus, setPFButtonStatus] = useState("");
   const [LAFButtonStatus, setLAFButtonStatus] = useState("");
   const [isLoading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, isLoading);
 
   const appStatusTable = {
     0: "Waiting For Erasmus Candidate to Upload Preapproval Form",
@@ -74,7 +77,7 @@ function ApplicationPage1() {
     4: "Approved",
   };
 
-  if (!loaded) {
+  if (isLoading) {
     handleRequests(null, {}, "application-page1", "1", (response, status) => {
       setStatus(appStatusTable[response.status]);
       setErasmusCoordinator(response.erasmusCoordinator);
@@ -93,7 +96,6 @@ function ApplicationPage1() {
       setLAFStatusClass(returnStatusClass(response.LAFStatus));
       setLAFButtonStatus(returnButtonStatus(response.LAFStatus));
       setCTFStatusClass(returnStatusClass(response.CTFStatus));
-      loaded = true;
       setLoading(false);
     });
   }
@@ -102,7 +104,9 @@ function ApplicationPage1() {
     return (
       <div className={"Page"}>
         <NavigationBar />
-        <div className="lc-center1"><h3>Loading...</h3></div>
+        <div className="lc-center1">
+          <h3>Loading...</h3>
+        </div>
         <div className="lc-center2">
           <LoadingSpinner />
         </div>
