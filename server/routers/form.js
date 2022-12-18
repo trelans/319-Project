@@ -73,7 +73,8 @@ router.post('/preapproval-student', async (req, res) => {
                 "courses": PAF.preApprovalForm.courses,
                 "bilkentCourses": courseMap,
                 "wishCourses": wishCourses,
-                "formStatus": PAF.status
+                "formStatus": PAF.status,
+                "userType": user.userType
             })
         } else if (req.body.type === "2") {
 
@@ -96,21 +97,21 @@ router.post('/preapproval-student', async (req, res) => {
             })
 
             const application = await Application.findByIdAndUpdate(form.ownerApplication, {status: 1})
-            
+
             //notificconst application = ation to the student
             const notificationStudent = new Notification({
                 owner: user._id,
-                text:"You have submitted your approval form."
+                text: "You have submitted your approval form."
             })
             await notificationStudent.save()
 
             //notification to the erasmus coord
             const notificationCoord = new Notification({
                 owner: application.responsibleErasmusCoord,
-                text: user.name + " "+  user.surname + " submitted their pre approval form."
+                text: user.name + " " + user.surname + " submitted their pre approval form."
             })
             await notificationCoord.save()
-            
+
             //create to do for erasmuss coord
             const task = new Task({
                 description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
@@ -276,6 +277,78 @@ router.post('/learning-agreement-1-3', async (req, res) => {
         res.status(400).send(e)
     }
 })
+
+router.post('/learning-agreement-2-3', async (req, res) => {
+    console.log(req.body)
+    try {
+        let application
+        let PAF
+        let response
+        let candidate
+        // 0 POST, 1 GET, 2 PATCH
+        if (req.body.type === "1") {
+            const user = await User.findOne({'tokens.token': req.body.token})
+            response = res.status(201)
+            PAF = await Form.findOne({'owner': user._id, 'formType': 0})
+            const bilkentCourses = []
+            const foreignCourses = []
+
+            await Promise.all(PAF.preApprovalForm.courses.map(async (course) => {
+                const bilkentCourse = await BilkentCourse.findOne({courseCode: course.bilkentCourseCode})
+                const foreignCourse = await ForeignUniversityCourse.findOne({courseCode: course.foreignUniversityCourseCode})
+                bilkentCourses.push({
+                        courseCode: bilkentCourse.courseCode,
+                        courseName: bilkentCourse.name,
+                        credits: bilkentCourse.ectsCredits
+                    }
+                )
+                foreignCourses.push(
+                    {
+                        courseCode: foreignCourse.courseCode,
+                        courseName: foreignCourse.name,
+                        credits: foreignCourse.ectsCredits,
+                    }
+                )
+            }))
+
+            response.send({
+                bilkentCourses: bilkentCourses,
+                foreignCourses: foreignCourses,
+                preferredSemester: user.erasmusCandidateData.preferredSemester
+            })
+        } else if (req.body.type === '2') {
+            /*
+            const id = req.body.id
+            delete req.body.id
+            if (req.body.infoType === 1) {
+                await Form.findByIdAndUpdate(id, {"learningAgreementForm.sendingInstitution": req.body.sendingInstitution})
+            } else if (req.body.infoType === 0) {
+                await User.findOneAndUpdate({"name": req.body.name}, {
+                    "surname": req.body.lastName,
+                    "erasmusCandidateData.academicYear": req.body.academicYear
+                })
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.dateofBirth": req.body.dateOfBirth,
+                    "learningAgreementForm.nationality": req.body.nationality,
+                    "learningAgreementForm.gender": req.body.gender,
+                    "learningAgreementForm.studyCycle": req.body.studyCycle,
+                    "learningAgreementForm.subjectAreaCode": req.body.subjectAreaCode,
+                })
+            } else if (req.body.infoType === 2) {
+                await Form.findByIdAndUpdate(id, {
+                    "learningAgreementForm.receivingInstitution": req.body.receivingInstitution
+                })
+            }
+
+             */
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
 
 /*
 router.patch('/pre-approval-form/:id', auth, async (req, res) => {

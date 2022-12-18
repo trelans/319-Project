@@ -52,6 +52,52 @@ router.post('/application-page1', async (req, res) => {
     }
 })
 
+
+router.post('/application-page-coordinator', async (req, res) => {
+    try {
+        let response;
+        let application;
+        let appliedInstitution;
+        let PAF;
+        let LAF;
+        let CTF;
+        let user;
+        // 0 POST, 1 GET
+        if (req.body.type === "1") {
+            console.log(req.body.candidateID)
+            user = await User.findById(req.body.candidateID)
+            application = await Application.findOne({'applicantCandidate': user._id})
+            console.log(application)
+            erasmusCoordinator = await User.findById(application.responsibleErasmusCoord)
+            appliedInstitution = await University.findById(application.appliedInstitution)
+            PAF = await Form.findOne({'ownerApplication': application._id, 'formType': 0})
+            LAF = await Form.findOne({'ownerApplication': application._id, 'formType': 1})
+            CTF = await Form.findOne({'ownerApplication': application._id, 'formType': 2})
+            response = res.status(201)
+        } else {
+            response = res.status(302)
+        }
+
+        response.send({
+            "status": application.status,
+            "erasmusCoordinator": erasmusCoordinator.name + " " + erasmusCoordinator.surname,
+            "appliedInstitution": appliedInstitution.name,
+            "mobilityPeriod": appliedInstitution.mobilityPeriod,
+            "PFStatus": PAF.status,
+            "PFDeadline": PAF.deadline,
+            "LAFStatus": LAF.status,
+            "LAFDeadline": LAF.deadline,
+            "CTFStatus": CTF.status,
+            "CTFDeadline": CTF.deadline,
+            "applicationID": application._id,
+            "studentName": user.name,
+            "studentSurname": user.surname
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
 router.patch('/application-page1', auth, async (req, res) => {
 })
 

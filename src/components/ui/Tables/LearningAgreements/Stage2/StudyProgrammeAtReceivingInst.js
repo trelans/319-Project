@@ -1,11 +1,28 @@
 import React from "react";
+import countryList from "react-select-country-list";
 
 class TableAddRows extends React.Component {
+
     state = {
-        rows: [{}],
+        rows: [],
     };
+
+    constructor(props) {
+        super(props);
+        console.log(props);
+        props.courses.map((course) => {
+            this.state.rows.push({
+                componentCode: course.courseCode,
+                componentTitle: course.courseName,
+                semester: props.semester === 0 ? "Fall" : props.semester === 1 ? "Spring" : "Year",
+                numberOfECTS: "" + course.credits,
+            })
+        })
+    }
+
+
     handleChange = (idx) => (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         const rows = [...this.state.rows];
         rows[idx] = {
             [name]: value,
@@ -20,7 +37,6 @@ class TableAddRows extends React.Component {
             componentTitle: "",
             semester: "",
             numberOfECTS: "",
-
         };
         this.setState({
             rows: [...this.state.rows, item],
@@ -34,8 +50,9 @@ class TableAddRows extends React.Component {
     handleRemoveSpecificRow = (idx) => () => {
         const rows = [...this.state.rows];
         rows.splice(idx, 1);
-        this.setState({ rows });
+        this.setState({rows});
     };
+
     render() {
         return (
             <div>
@@ -48,14 +65,19 @@ class TableAddRows extends React.Component {
                             >
                                 <thead>
                                 <tr>
-                                    <th className="text-center"> # </th>
+                                    <th className="text-center"> #</th>
                                     <th className="text-center"> Component Code</th>
-                                    <th className="text-center"> Component Title at the receiving instution (as indicated in the course catalog) </th>
+                                    <th className="text-center"> Component Title at the receiving instution (as
+                                                                 indicated in the course catalog)
+                                    </th>
                                     <th className="text-center"> Semester
-                                        [e.g. autumn / spring / term] </th>
-                                    <th className="text-center"> Number of ECTS credits (or equivalent)  to be awarded by the receiving institution upon successful completion </th>
+                                                                 [e.g. fall / spring / year]
+                                    </th>
+                                    <th className="text-center"> Number of ECTS credits (or equivalent) to be awarded by
+                                                                 the receiving institution upon successful completion
+                                    </th>
 
-                                    <th />
+                                    <th/>
                                 </tr>
                                 </thead>
                                 <tbody>

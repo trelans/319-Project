@@ -2,7 +2,7 @@ import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 import { useState } from "react";
 import { handleRequests } from "../requests";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import LoadingSpinner from "../../components/ui/loadingComponent";
 
 function returnButtonText(status) {
@@ -52,7 +52,10 @@ function ApplicationPageCoordinator() {
   const [CTFStatusClass, setCTFStatusClass] = useState("");
   const [PFButtonStatus, setPFButtonStatus] = useState("");
   const [LAFButtonStatus, setLAFButtonStatus] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [isLoading, setLoading] = React.useState(true);
+  const location = useLocation();
 
   const appStatusTable = {
     0: "Waiting For Erasmus Candidate to Upload Preapproval Form",
@@ -75,7 +78,7 @@ function ApplicationPageCoordinator() {
   };
 
   if (!loaded) {
-    handleRequests(null, {}, "application-page1", "1", (response, status) => {
+    handleRequests(null, {candidateID: location.state}, "application-page-coordinator", "1", (response, status) => {
       setStatus(appStatusTable[response.status]);
       setErasmusCoordinator(response.erasmusCoordinator);
       setAppliedInstitution(response.appliedInstitution);
@@ -93,6 +96,8 @@ function ApplicationPageCoordinator() {
       setLAFStatusClass(returnStatusClass(response.LAFStatus));
       setLAFButtonStatus(returnButtonStatus(response.LAFStatus));
       setCTFStatusClass(returnStatusClass(response.CTFStatus));
+      setName(response.studentName)
+      setSurname(response.studentSurname)
       loaded = true;
       setLoading(false);
     });
@@ -131,7 +136,7 @@ function ApplicationPageCoordinator() {
                 <p className="ap-header-other">Name:</p>
               </td>
               <td>
-                <p className="ap-text-other">{appliedInstitution}</p>
+                <p className="ap-text-other">{name}</p>
               </td>
             </tr>
             <tr>
@@ -139,7 +144,7 @@ function ApplicationPageCoordinator() {
                 <p className="ap-header-other">Surname:</p>
               </td>
               <td>
-                <p className="ap-text-other">{appliedInstitution}</p>
+                <p className="ap-text-other">{surname}</p>
               </td>
             </tr>
             <tr>
@@ -179,7 +184,7 @@ function ApplicationPageCoordinator() {
                 <p className="ap-text-other">{PFDeadline}</p>
               </td>
               <td>
-                <Link to="/preapproval-student">
+                <Link to="/preapproval-coordinator">
                   <button className={PFButtonStatus}>{PFButtonText}</button>
                 </Link>
               </td>
