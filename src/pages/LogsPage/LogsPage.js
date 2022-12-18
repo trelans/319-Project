@@ -16,16 +16,15 @@ async function LogsPage() {
     console.log(notifications)
   }
 
-  await getLogs();
+await getLogs();
 
-  return <div>
-      <div> LOGS </div>
-      {notifications?.map( (item) => {
-        return (
-          <div>{item.text}</div>
-        )
-      })}
-  </div>;
+import LogsTable from "../../components/ui/CoursePopUp/Tables/LogsTable"
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+
+function LogsPage() {
+  return <div><NavigationBar/>
+    <div style={{marginTop: 10}}>
+    <LogsTable></LogsTable></div></div>;
 }
 
 export default LogsPage;
