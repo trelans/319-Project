@@ -203,16 +203,34 @@ class TableAddRows extends React.Component {
 
   handleSaveSpecificRow = (idx) => () => {
     const rows = [...this.state.rows];
+
     const isDisabled = rows[idx].disabledRow;
 
     if (!isDisabled) {
       rows[idx].disabledRow = true;
       this.setState({
         rows,
+
       });
     }
   };
 
+  constructor(props) {
+    super(props);
+
+
+    this.setTableInfo = (arr) => {
+      this.state.rows = arr;
+      console.log(arr);
+
+      var disabledRow = true
+      this.setState({
+        rows: [...this.state.rows],
+      });
+      console.log(this.state.rows)
+    };
+
+  }
   render() {
     return (
       <div>
@@ -247,7 +265,7 @@ class TableAddRows extends React.Component {
                           type="text"
                           name="universityName"
                           disabled={this.state.rows[idx].disabledRow}
-                          value={this.state.rows[idx].universityName}
+                          value={this.state.rows[idx].name}
                           onChange={this.handleNameChange(idx)}
                           className="form-control"
                         />
