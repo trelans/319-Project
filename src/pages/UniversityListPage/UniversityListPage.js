@@ -2,13 +2,14 @@ import NavigationBar from "../../components/ui/NavigationBar/NavigationBar.js";
 import UniversityTable from "./UniversityTable.js";
 
 import SearchBar from "material-ui-search-bar";
-import { useEffect } from "react";
+import {useEffect, useRef} from "react";
 import axios from "axios";
 
 function UniversityListPage() {
   
+  var rowFormat = []
 
-
+  const childRef = useRef()
   useEffect(async () => {
     try {
       const res = await axios.get(`http://localhost:8080/universities`, {
@@ -18,6 +19,8 @@ function UniversityListPage() {
       });
       
       console.log(res.data)
+      var curr = res.data
+      childRef.current.setTableInfo(curr)
 
     } catch (error) {}
 }, []);
@@ -32,7 +35,7 @@ function UniversityListPage() {
           <span>CS</span>
         </p>
         <SearchBar />
-        <UniversityTable />
+        <UniversityTable  ref={childRef}/>
       </div>
     </div>
   );
