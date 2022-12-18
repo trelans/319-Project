@@ -77,7 +77,7 @@ router.post('/preapproval-student', async (req, res) => {
             })
 
             await Application.findByIdAndUpdate(form.ownerApplication, {status: 2})
-            await form.findOneAndUpdate({'owner': user._id, 'formType': 1}, {
+            await Form.findOneAndUpdate({'owner': user._id, 'formType': 1}, {
                 status: 1
             })
         } else {
