@@ -171,7 +171,7 @@ export default class App extends React.Component {
                 <label
                   className={"textHeader"}
                   id="lastName-label"
-       
+
                 >
                   Function
                 </label>
