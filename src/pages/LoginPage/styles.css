@@ -1517,6 +1517,11 @@ span.pafp-button-last {
   width: 250px;
 }
 
+.todo:hover {
+  opacity: 75%;
+  cursor: pointer;
+}
+
 /*convert pdf styles*/
 .cp-table {
   padding: auto;
