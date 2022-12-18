@@ -84,7 +84,7 @@ function TodoInside() {
   }, []);
 
   return (
-    <div className="todo-app" style={{overflowY:"scroll", maxHeight:200}}>
+    <div className="todo-app" style={{overflowY:"scroll", maxHeight:200, minHeight:200, maxWidth:500, minWidth:500}}>
       <div className="container">
         <FormTodo addTodo={addTodo} />
         <div>
