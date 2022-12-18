@@ -25,6 +25,7 @@ function SearchBarMain({ placeholder, data }) {
 
     if (searchWord === "" || !data) {
       setFilteredData([]);
+      element.style.zIndex = 0; //search bar change: when its deleted main page is clickable too
     } else {
       setFilteredData(newFilter);
     }

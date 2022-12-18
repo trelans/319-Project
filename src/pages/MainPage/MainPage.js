@@ -85,9 +85,11 @@ function MainPage() {
     } else {
       setData(undefined);
     }
+    setPlaceHolder("Search...");
   };
 
   const [popupOpen, setPopup] = useState(false);
+  const [placeHolderBar, setPlaceHolder] = useState("Select Type");
 
   function openUniversityRatingPopup() {
     setPopup(true);
@@ -102,7 +104,8 @@ function MainPage() {
       <div>
         <NavigationBarMain />
         <div>
-          <SearchBarMain placeholder="Search..." data={data} />
+          {console.log(placeHolderBar)}
+          <SearchBarMain placeholder={placeHolderBar} data={data} />
         </div>
         <div className="main-margined">
           <form>
@@ -125,13 +128,16 @@ function MainPage() {
               <TodoWidget />
             </Grid>
             <Grid item xs={2}>
-              <Link to="/nominationRequests">
+              <Link to="/application-page1">
                 <button className="fpp-button">Application Status</button>
-                <button className="fpp-button">Reply Nomination Requests</button>
+              </Link>
+              <Link to="/nominationRequests">
+                <button className="fpp-button">
+                  Reply Nomination Requests
+                </button>
               </Link>
             </Grid>
             <Grid item xs={1}>
-
               <button
                 className="fpp-button"
                 onClick={openUniversityRatingPopup}
