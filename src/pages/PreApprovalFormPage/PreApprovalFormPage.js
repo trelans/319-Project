@@ -270,9 +270,19 @@ function PreApprovalFormPage() {
           <NavigationBar />
           <div className="pafp-container">
             <h1 className="pafp-h1">Applicant Info</h1>
-            <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
-              <tr  >
-                <td className="pafp-first-table-td" >
+            <table
+              className="pafp-first-table"
+              style={{
+                background: "#354259",
+                color: "white",
+                borderRadius: 12,
+                width: 550,
+                height: 250,
+                boxShadow: "4px 4px #152137",
+              }}
+            >
+              <tr>
+                <td className="pafp-first-table-td">
                   <p className="pafp-table-title-white">Name:</p>
                 </td>
                 <td className="pafp-first-table-td">
@@ -305,7 +315,9 @@ function PreApprovalFormPage() {
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title-white">Host Institution Name:</p>
+                  <p className="pafp-table-title-white">
+                    Host Institution Name:
+                  </p>
                 </td>
                 <td>
                   <p className="ap-text-other-white">{hostUniName}</p>
@@ -320,12 +332,10 @@ function PreApprovalFormPage() {
                 </td>
               </tr>
             </table>
-            <div className="pafp-container2">
-              <p className="pafp-alert">Course or Requirement to be Exempted</p>
-              <p className="pafp-alert">
-                Host Institution Courses to be Transferred Upon Approval
-              </p>
-            </div>
+            <div
+              className="pafp-container2"
+              style={{ marginBottom: "50px" }}
+            ></div>
             <div className="pafp-flex-div">
               <TableAddRows
                 getArrFunc={selectedCourse}
@@ -442,9 +452,19 @@ function PreApprovalFormPage() {
           <NavigationBar />
           <div className="pafp-container">
             <h1 className="pafp-h1">Applicant Info</h1>
-            <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
-              <tr  >
-                <td className="pafp-first-table-td" >
+            <table
+              className="pafp-first-table"
+              style={{
+                background: "#354259",
+                color: "white",
+                borderRadius: 12,
+                width: 550,
+                height: 250,
+                boxShadow: "4px 4px #152137",
+              }}
+            >
+              <tr>
+                <td className="pafp-first-table-td">
                   <p className="pafp-table-title-white">Name:</p>
                 </td>
                 <td className="pafp-first-table-td">
@@ -477,7 +497,9 @@ function PreApprovalFormPage() {
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title-white">Host Institution Name:</p>
+                  <p className="pafp-table-title-white">
+                    Host Institution Name:
+                  </p>
                 </td>
                 <td>
                   <p className="ap-text-other-white">{hostUniName}</p>
@@ -492,12 +514,10 @@ function PreApprovalFormPage() {
                 </td>
               </tr>
             </table>
-            <div className="pafp-container2">
-              <p className="pafp-alert">Course or Requirement to be Exempted</p>
-              <p className="pafp-alert">
-                Host Institution Courses to be Transferred Upon Approval
-              </p>
-            </div>
+            <div
+              className="pafp-container2"
+              style={{ marginBottom: "50px" }}
+            ></div>
             <div className="pafp-flex-div">
               <TableAddRowsView
                 getArrFunc={selectedCourse}
@@ -600,9 +620,19 @@ function PreApprovalFormPage() {
         <NavigationBar />
         <div className="pafp-container">
           <h1 className="pafp-h1">Applicant Info</h1>
-          <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
-            <tr  >
-              <td className="pafp-first-table-td" >
+          <table
+            className="pafp-first-table"
+            style={{
+              background: "#354259",
+              color: "white",
+              borderRadius: 12,
+              width: 550,
+              height: 250,
+              boxShadow: "4px 4px #152137",
+            }}
+          >
+            <tr>
+              <td className="pafp-first-table-td">
                 <p className="pafp-table-title-white">Name:</p>
               </td>
               <td className="pafp-first-table-td">
@@ -650,12 +680,10 @@ function PreApprovalFormPage() {
               </td>
             </tr>
           </table>
-          <div className="pafp-container2">
-            <p className="pafp-alert">Course or Requirement to be Exempted</p>
-            <p className="pafp-alert">
-              Host Institution Courses to be Transferred Upon Approval
-            </p>
-          </div>
+          <div
+            className="pafp-container2"
+            style={{ marginBottom: "50px" }}
+          ></div>
           <div className="pafp-flex-div">
             <TableAddRows
               getArrFunc={selectedCourse}
@@ -778,9 +806,19 @@ function PreApprovalFormPage() {
         <NavigationBar />
         <div className="pafp-container">
           <h1 className="pafp-h1">Applicant Info</h1>
-          <table className="pafp-first-table" style={{ background: "#354259", color: "white", borderRadius: 12 , width: 550, height: 250 , boxShadow: "4px 4px #152137"  }}>
-            <tr  >
-              <td className="pafp-first-table-td" >
+          <table
+            className="pafp-first-table"
+            style={{
+              background: "#354259",
+              color: "white",
+              borderRadius: 12,
+              width: 550,
+              height: 250,
+              boxShadow: "4px 4px #152137",
+            }}
+          >
+            <tr>
+              <td className="pafp-first-table-td">
                 <p className="pafp-table-title-white">Name:</p>
               </td>
               <td className="pafp-first-table-td">
@@ -828,12 +866,10 @@ function PreApprovalFormPage() {
               </td>
             </tr>
           </table>
-          <div className="pafp-container2">
-            <p className="pafp-alert">Course or Requirement to be Exempted</p>
-            <p className="pafp-alert">
-              Host Institution Courses to be Transferred Upon Approval
-            </p>
-          </div>
+          <div
+            className="pafp-container2"
+            style={{ marginBottom: "50px" }}
+          ></div>
           <div className="pafp-flex-div">
             <TableAddRowsView
               getArrFunc={selectedCourse}
