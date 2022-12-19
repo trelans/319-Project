@@ -10,30 +10,41 @@ router.post('/create/newUniversity', async (req, res) => {
     const universityId = req.body.universityId
     const fallSuitability = req.body.fallSuitability
     const springSuitability = req.body.springSuitability
-    departments.forEach(async depName => {
-        const department = await Department.findOne({ name: depName })
-        if (department) {
-            console.log(req.body.quota)
-            department.hostUniversities.push({
-                universityId: universityId,
-                quota: quota,
-                fallSuitability: fallSuitability,
-                springSuitability: springSuitability
-            })
-            department.save()
-        } else {
-            console.log("Given Department is not yet created!")
-        }
-    })
+
+    /*
+    if(departments) {
+        departments?.forEach(async depName => {
+            const department = await Department.findOne({ name: depName })
+            if (department) {
+                console.log(req.body.quota)
+                department.hostUniversities.push({
+                    universityId: universityId,
+                    quota: quota,
+                    fallSuitability: fallSuitability,
+                    springSuitability: springSuitability
+                })
+                department.save()
+            } else {
+                console.log("Given Department is not yet created!")
+            }
+        })    
+    }
+    */
+
     delete req.body["departments"]
     delete req.body["quota"]
     delete req.body["fallSuitability"]
     delete req.body["springSuitability"]
-    const university = new University(req.body);
+
+    console.log("hello")
+    console.log(req.body)
+    const university = new University({...req.body, name: req.body.universityName});
+
     try {
         await university.save()
         res.status(201).send({ university })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
@@ -139,7 +150,7 @@ router.delete('/university/:id', auth, async (req,res) => {
 
         res.send(university)
     }catch(e) { 
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 

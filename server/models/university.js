@@ -118,7 +118,7 @@ const universitySchema = new mongoose.Schema({
 
     countryCode: {
         type: String,
-        required: true
+        //required: true
     },
 
     languageRequirements: [languageRequirement]
