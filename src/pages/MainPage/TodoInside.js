@@ -7,20 +7,36 @@ import { useState } from "react";
 import axios from "axios";
 
 function Todo({ todo, index, markTodo, removeTodo }) {
+
+  const [isTodoDone, setIsTodoDone] = useState(false);
+
   return (
     <div className="todo">
       <span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
         {todo.text}
       </span>
-      <div style={{marginRight: -120}}>
+
+      {isTodoDone ? <div style={{marginRight: -120}}>
         <Button
           disabled={true}
           variant="outline-success"
           onClick={() => markTodo(index)}
+          style={{backgroundColor: "green", color: "black", border:"green"}}
         >
           ✓
         </Button>{" "}
-      </div>
+      </div>:null}
+
+      {!isTodoDone ? <div style={{marginRight: -120}}>
+        <Button
+          disabled={true}
+          variant="outline-success"
+          onClick={() => markTodo(index)}
+          style={{backgroundColor: "yellow", color: "black", border:"yellow"}}
+        >
+          !
+        </Button>{" "}
+      </div>:null}
     </div>
   );
 }
