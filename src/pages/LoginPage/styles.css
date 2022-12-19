@@ -1749,4 +1749,18 @@ a {
   background: #1D1F26;
   width: 557px;
 margin-left: 13%;
+  box-shadow: black 5px 5px;
 }
+
+::-webkit-scrollbar-track {
+  border-radius: 0.125rem;
+  background-color: lightgray;
+}
+::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 0.125rem;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 0.125rem;
+  background-color: rgb(128, 128, 128);};
+

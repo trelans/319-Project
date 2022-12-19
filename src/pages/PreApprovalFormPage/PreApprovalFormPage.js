@@ -269,63 +269,73 @@ function PreApprovalFormPage() {
         <div>
           <NavigationBar />
           <div className="pafp-container">
-            <h1 className="pafp-h1">Applicant Info:</h1>
-            <table className="pafp-first-table">
+            <h1 className="pafp-h1">Applicant Info</h1>
+            <table
+              className="pafp-first-table"
+              style={{
+                background: "#354259",
+                color: "white",
+                borderRadius: 12,
+                width: 550,
+                height: 250,
+                boxShadow: "4px 4px #152137",
+              }}
+            >
               <tr>
                 <td className="pafp-first-table-td">
-                  <p className="pafp-table-title">Name:</p>
+                  <p className="pafp-table-title-white">Name:</p>
                 </td>
                 <td className="pafp-first-table-td">
-                  <p className="ap-text-other">{candName}</p>
+                  <p className="ap-text-other-white">{candName}</p>
                 </td>
               </tr>
               <tr>
                 <td className="pafp-first-table-td">
-                  <p className="pafp-table-title">Surname:</p>
+                  <p className="pafp-table-title-white">Surname:</p>
                 </td>
                 <td className="pafp-first-table-td">
-                  <p className="ap-text-other">{candSurname}</p>
+                  <p className="ap-text-other-white">{candSurname}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">ID Number:</p>
+                  <p className="pafp-table-title-white">ID Number:</p>
                 </td>
                 <td>
-                  <p className="ap-text-other">{candID}</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p className="pafp-table-title">Department:</p>
-                </td>
-                <td>
-                  <p className="ap-text-other">{candDepartment}</p>
+                  <p className="ap-text-other-white">{candID}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">Host Institution Name:</p>
+                  <p className="pafp-table-title-white">Department:</p>
                 </td>
                 <td>
-                  <p className="ap-text-other">{hostUniName}</p>
+                  <p className="ap-text-other-white">{candDepartment}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">Duration:</p>
+                  <p className="pafp-table-title-white">
+                    Host Institution Name:
+                  </p>
                 </td>
                 <td>
-                  <p className="ap-text-other">Next {duration}</p>
+                  <p className="ap-text-other-white">{hostUniName}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="pafp-table-title-white">Duration:</p>
+                </td>
+                <td>
+                  <p className="ap-text-other-white">Next {duration}</p>
                 </td>
               </tr>
             </table>
-            <div className="pafp-container2">
-              <p className="pafp-alert">Course or Requirement to be Exempted</p>
-              <p className="pafp-alert">
-                Host Institution Courses to be Transferred Upon Approval
-              </p>
-            </div>
+            <div
+              className="pafp-container2"
+              style={{ marginBottom: "50px" }}
+            ></div>
             <div className="pafp-flex-div">
               <TableAddRows
                 getArrFunc={selectedCourse}
@@ -441,63 +451,73 @@ function PreApprovalFormPage() {
         <div>
           <NavigationBar />
           <div className="pafp-container">
-            <h1 className="pafp-h1">Applicant Info:</h1>
-            <table className="pafp-first-table">
+            <h1 className="pafp-h1">Applicant Info</h1>
+            <table
+              className="pafp-first-table"
+              style={{
+                background: "#354259",
+                color: "white",
+                borderRadius: 12,
+                width: 550,
+                height: 250,
+                boxShadow: "4px 4px #152137",
+              }}
+            >
               <tr>
                 <td className="pafp-first-table-td">
-                  <p className="pafp-table-title">Name:</p>
+                  <p className="pafp-table-title-white">Name:</p>
                 </td>
                 <td className="pafp-first-table-td">
-                  <p className="ap-text-other">{candName}</p>
+                  <p className="ap-text-other-white">{candName}</p>
                 </td>
               </tr>
               <tr>
                 <td className="pafp-first-table-td">
-                  <p className="pafp-table-title">Surname:</p>
+                  <p className="pafp-table-title-white">Surname:</p>
                 </td>
                 <td className="pafp-first-table-td">
-                  <p className="ap-text-other">{candSurname}</p>
+                  <p className="ap-text-other-white">{candSurname}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">ID Number:</p>
+                  <p className="pafp-table-title-white">ID Number:</p>
                 </td>
                 <td>
-                  <p className="ap-text-other">{candID}</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p className="pafp-table-title">Department:</p>
-                </td>
-                <td>
-                  <p className="ap-text-other">{candDepartment}</p>
+                  <p className="ap-text-other-white">{candID}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">Host Institution Name:</p>
+                  <p className="pafp-table-title-white">Department:</p>
                 </td>
                 <td>
-                  <p className="ap-text-other">{hostUniName}</p>
+                  <p className="ap-text-other-white">{candDepartment}</p>
                 </td>
               </tr>
               <tr>
                 <td>
-                  <p className="pafp-table-title">Duration:</p>
+                  <p className="pafp-table-title-white">
+                    Host Institution Name:
+                  </p>
                 </td>
                 <td>
-                  <p className="ap-text-other">Next {duration}</p>
+                  <p className="ap-text-other-white">{hostUniName}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="pafp-table-title-white">Duration:</p>
+                </td>
+                <td>
+                  <p className="ap-text-other-white">Next {duration}</p>
                 </td>
               </tr>
             </table>
-            <div className="pafp-container2">
-              <p className="pafp-alert">Course or Requirement to be Exempted</p>
-              <p className="pafp-alert">
-                Host Institution Courses to be Transferred Upon Approval
-              </p>
-            </div>
+            <div
+              className="pafp-container2"
+              style={{ marginBottom: "50px" }}
+            ></div>
             <div className="pafp-flex-div">
               <TableAddRowsView
                 getArrFunc={selectedCourse}
@@ -599,63 +619,71 @@ function PreApprovalFormPage() {
       <div>
         <NavigationBar />
         <div className="pafp-container">
-          <h1 className="pafp-h1">Applicant Info:</h1>
-          <table className="pafp-first-table">
+          <h1 className="pafp-h1">Applicant Info</h1>
+          <table
+            className="pafp-first-table"
+            style={{
+              background: "#354259",
+              color: "white",
+              borderRadius: 12,
+              width: 550,
+              height: 250,
+              boxShadow: "4px 4px #152137",
+            }}
+          >
             <tr>
               <td className="pafp-first-table-td">
-                <p className="pafp-table-title">Name:</p>
+                <p className="pafp-table-title-white">Name:</p>
               </td>
               <td className="pafp-first-table-td">
-                <p className="ap-text-other">{candName}</p>
+                <p className="ap-text-other-white">{candName}</p>
               </td>
             </tr>
             <tr>
               <td className="pafp-first-table-td">
-                <p className="pafp-table-title">Surname:</p>
+                <p className="pafp-table-title-white">Surname:</p>
               </td>
               <td className="pafp-first-table-td">
-                <p className="ap-text-other">{candSurname}</p>
+                <p className="ap-text-other-white">{candSurname}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">ID Number:</p>
+                <p className="pafp-table-title-white">ID Number:</p>
               </td>
               <td>
-                <p className="ap-text-other">{candID}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p className="pafp-table-title">Department:</p>
-              </td>
-              <td>
-                <p className="ap-text-other">{candDepartment}</p>
+                <p className="ap-text-other-white">{candID}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">Host Institution Name:</p>
+                <p className="pafp-table-title-white">Department:</p>
               </td>
               <td>
-                <p className="ap-text-other">{hostUniName}</p>
+                <p className="ap-text-other-white">{candDepartment}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">Duration:</p>
+                <p className="pafp-table-title-white">Host Institution Name:</p>
               </td>
               <td>
-                <p className="ap-text-other">Next {duration}</p>
+                <p className="ap-text-other-white">{hostUniName}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p className="pafp-table-title-white">Duration:</p>
+              </td>
+              <td>
+                <p className="ap-text-other-white">Next {duration}</p>
               </td>
             </tr>
           </table>
-          <div className="pafp-container2">
-            <p className="pafp-alert">Course or Requirement to be Exempted</p>
-            <p className="pafp-alert">
-              Host Institution Courses to be Transferred Upon Approval
-            </p>
-          </div>
+          <div
+            className="pafp-container2"
+            style={{ marginBottom: "50px" }}
+          ></div>
           <div className="pafp-flex-div">
             <TableAddRows
               getArrFunc={selectedCourse}
@@ -777,63 +805,71 @@ function PreApprovalFormPage() {
       <div>
         <NavigationBar />
         <div className="pafp-container">
-          <h1 className="pafp-h1">Applicant Info:</h1>
-          <table className="pafp-first-table">
+          <h1 className="pafp-h1">Applicant Info</h1>
+          <table
+            className="pafp-first-table"
+            style={{
+              background: "#354259",
+              color: "white",
+              borderRadius: 12,
+              width: 550,
+              height: 250,
+              boxShadow: "4px 4px #152137",
+            }}
+          >
             <tr>
               <td className="pafp-first-table-td">
-                <p className="pafp-table-title">Name:</p>
+                <p className="pafp-table-title-white">Name:</p>
               </td>
               <td className="pafp-first-table-td">
-                <p className="ap-text-other">{candName}</p>
+                <p className="ap-text-other-white">{candName}</p>
               </td>
             </tr>
             <tr>
               <td className="pafp-first-table-td">
-                <p className="pafp-table-title">Surname:</p>
+                <p className="pafp-table-title-white">Surname:</p>
               </td>
               <td className="pafp-first-table-td">
-                <p className="ap-text-other">{candSurname}</p>
+                <p className="ap-text-other-white">{candSurname}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">ID Number:</p>
+                <p className="pafp-table-title-white">ID Number:</p>
               </td>
               <td>
-                <p className="ap-text-other">{candID}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <p className="pafp-table-title">Department:</p>
-              </td>
-              <td>
-                <p className="ap-text-other">{candDepartment}</p>
+                <p className="ap-text-other-white">{candID}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">Host Institution Name:</p>
+                <p className="pafp-table-title-white">Department:</p>
               </td>
               <td>
-                <p className="ap-text-other">{hostUniName}</p>
+                <p className="ap-text-other-white">{candDepartment}</p>
               </td>
             </tr>
             <tr>
               <td>
-                <p className="pafp-table-title">Duration:</p>
+                <p className="pafp-table-title-white">Host Institution Name:</p>
               </td>
               <td>
-                <p className="ap-text-other">Next {duration}</p>
+                <p className="ap-text-other-white">{hostUniName}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p className="pafp-table-title-white">Duration:</p>
+              </td>
+              <td>
+                <p className="ap-text-other-white">Next {duration}</p>
               </td>
             </tr>
           </table>
-          <div className="pafp-container2">
-            <p className="pafp-alert">Course or Requirement to be Exempted</p>
-            <p className="pafp-alert">
-              Host Institution Courses to be Transferred Upon Approval
-            </p>
-          </div>
+          <div
+            className="pafp-container2"
+            style={{ marginBottom: "50px" }}
+          ></div>
           <div className="pafp-flex-div">
             <TableAddRowsView
               getArrFunc={selectedCourse}

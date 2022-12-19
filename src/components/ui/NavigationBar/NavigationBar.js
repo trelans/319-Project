@@ -5,10 +5,8 @@ import { NotificationManager } from "react-notifications";
 import axios from "axios";
 
 function NavigationBar() {
-  
   async function fetchNotifications() {
-
-    let unreadNotifications = 0
+    let unreadNotifications = 0;
 
     const res = await axios.get(`http://localhost:8080/notifications`, {
       headers: {
@@ -18,21 +16,30 @@ function NavigationBar() {
 
     const notifications = res.data;
 
-    for(let i = 0; i < notifications.length && !notifications[i].read; i++) {
+    for (let i = 0; i < notifications.length && !notifications[i].read; i++) {
       NotificationManager.info(notifications[i].text, "Notification", 5000);
       unreadNotifications++;
     }
 
-    if(notifications.length == 0 || unreadNotifications) {
-      NotificationManager.info("You have no unread notifications.", "Info", 5000);
+    if (notifications.length == 0 || unreadNotifications) {
+      NotificationManager.info(
+        "You have no unread notifications.",
+        "Info",
+        5000
+      );
     }
-    
   }
 
   return (
     <div className={classes["nb-header"]}>
       <Link to="/main-page">
-        <img alt="" src={img} style={{ marginLeft: 10 }} />
+        <div style={{ width: 120, height: 40 }}>
+          <img
+            alt=""
+            src={img}
+            style={{ marginLeft: 10, maxWidth: "100%", height: "auto" }}
+          />
+        </div>
       </Link>
       <nav>
         <ul>
