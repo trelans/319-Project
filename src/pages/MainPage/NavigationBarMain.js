@@ -7,7 +7,6 @@ import axios from "axios";
 
 function NavigationBarMain() {
   async function fetchNotifications() {
-
     const res = await axios.get(`http://localhost:8080/notifications`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -16,28 +15,33 @@ function NavigationBarMain() {
 
     const notifications = res.data;
 
-    for(let i = 0; i < notifications.length; i++) {
+    for (let i = 0; i < notifications.length; i++) {
       NotificationManager.info(notifications[i].text, "Notification", 5000);
     }
 
-    if(notifications.length == 0) {
+    if (notifications.length == 0) {
       NotificationManager.info("You have no notifications.", "Info", 5000);
     }
-    
   }
 
   return (
     <div className={classes["nb-header"]}>
       <div>
         <Link to="/main-page">
-          <img alt="" src={img} style={{ marginLeft: 10 }} />
+          <div style={{ width: 120, height: 40 }}>
+            <img
+              alt=""
+              src={img}
+              style={{ marginLeft: 10, maxWidth: "100%", height: "auto" }}
+            />
+          </div>
         </Link>
       </div>
       <nav>
         <ul>
           <li>
             <Link to="/main-page">Home</Link>
-          </li> 
+          </li>
           <li>
             <Link to="/profile-own">Profile</Link>
           </li>
