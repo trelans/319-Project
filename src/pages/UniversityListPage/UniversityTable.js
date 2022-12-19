@@ -1,29 +1,13 @@
 import axios from "axios";
 import React from "react";
 
-const universities = [];
 
 class TableAddRows extends React.Component {
 
   createUniversity = async (data) => {
-    //update according to data
+    //create according to data
     try {
-      const res = await axios.post(
-        `http://localhost:8080/create/newUniversity`,
-        {
-          name: "Technical University of Dortmund",
-          departments: ["CS"],
-          universityId: 1,
-          fallSuitability: true,
-          springSuitability: false,
-          quota: 3,
-          mobilityPeriod: "09.09.2023-04.04.2024",
-          languageRequirement: [{ language: "English" }],
-          erasmusCode: "D DORTMUN01",
-          countryCode: "+49",
-          country: "Germany",
-          address: "August-Schmidt-Strasse 4, 44227 Dortmund",
-        },
+      const res = await axios.post(`http://localhost:8080/create/newUniversity`, data,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,7 +15,7 @@ class TableAddRows extends React.Component {
         }
       );
 
-      universities.append(res.data);
+      console.log(res.data)
     } catch (error) {}
   };
 
@@ -77,6 +61,7 @@ class TableAddRows extends React.Component {
 
   state = {
     rows: [{}],
+    option: 0
   };
   handleNameChange = (idx) => (e) => {
     const { value } = e.target;
@@ -163,11 +148,15 @@ class TableAddRows extends React.Component {
       rows,
     });
   };
-  handleSaveAll = () => {
+
+  handleSaveAll = (idx) => {
 
   }
 
   handleAddRow = () => {
+    this.setState({
+      option: 1
+    });
     const item = {
       universityName: "",
       semester: "",
@@ -187,11 +176,14 @@ class TableAddRows extends React.Component {
     this.setState({
       rows: this.state.rows.slice(0, -1),
     });
+
   };
   handleRemoveSpecificRow = (idx) => () => {
     const rows = [...this.state.rows];
     rows.splice(idx, 1);
     this.setState({ rows });
+
+    this.deleteUniversity(this.state.rows[idx]._id)
   };
 
   handleEditSpecificRow = (idx) => () => {
@@ -207,20 +199,33 @@ class TableAddRows extends React.Component {
   };
 
   handleSaveSpecificRow = (idx) => () => {
-    const selectedUniversity = this.state.rows[idx]
-    const rows = [...this.state.rows];
 
-    const isDisabled = rows[idx].disabledRow;
+      const selectedUniversity = this.state.rows[idx]
+      const rows = [...this.state.rows];
 
-    console.log("clicked")
-    if (!isDisabled) {
-      rows[idx].disabledRow = true;
-      this.setState({
-        rows,
-      });
+      const isDisabled = rows[idx].disabledRow;
+
+      console.log("clicked")
+      if (!isDisabled) {
+        rows[idx].disabledRow = true;
+        this.setState({
+          rows,
+        });
+      }
+
+    //update
+    if(this.state.option == 0) {
+
+      this.updateUniversity(selectedUniversity._id, this.state.rows[idx])
+    } else if (this.state.option == 1) { //create
+      console.log(this.state.rows[idx])
+      this.createUniversity(this.state.rows[idx])
     }
+    
+    this.setState({
+      option: 0
+    });
 
-    this.updateUniversity(selectedUniversity._id, this.state.rows[idx])
   };
 
   constructor(props) {
@@ -379,9 +384,9 @@ class TableAddRows extends React.Component {
               <button onClick={this.handleAddRow} className="btn btn-primary">
                 Add University
               </button>
-              <button onClick={this.handleSaveAll} className="btn btn-primary" style={{marginLeft : 5}}>
+                {(this.state.options != 0) ?   <button onClick={this.handleSaveAll} className="btn btn-primary" style={{marginLeft : 5}}>
                 Save
-              </button>
+              </button> : ""}
             </div>
           </div>
         </div>
