@@ -32,7 +32,10 @@ function NavigationBar() {
   return (
     <div className={classes["nb-header"]}>
       <Link to="/main-page">
-        <img alt="" src={img} style={{ marginLeft: 10 }} />
+        <div style={{width:120, height:40}}>
+        <img alt="" src={img} style={{ marginLeft: 10, maxWidth:"100%", height:"auto" }} />
+        </div>
+        
       </Link>
       <nav>
         <ul>
