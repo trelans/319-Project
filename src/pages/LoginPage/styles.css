@@ -1749,6 +1749,7 @@ a {
   background: #1D1F26;
   width: 557px;
 margin-left: 13%;
+  box-shadow: black 5px 5px;
 }
 
 ::-webkit-scrollbar-track {
