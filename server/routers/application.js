@@ -9,6 +9,22 @@ const University = require("../models/university")
 const Form = require("../models/form")
 const router = new express.Router()
 
+router.get('/application/:id', async (req, res) => {
+
+    try {
+        const application = await Application.findById(req.params.id)
+
+        if (!application) {
+            throw new Error()
+        }
+
+        res.send(application)
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
+
 router.post('/application-page1', async (req, res) => {
     try {
 
@@ -55,6 +71,8 @@ router.post('/application-page1', async (req, res) => {
 
 router.post('/application-page-coordinator', async (req, res) => {
     try {
+        console.log("portakal")
+        console.log(req.body)
         let response;
         let application;
         let appliedInstitution;

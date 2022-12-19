@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Link, useLocation } from "react-router-dom";
 import { Button, Card, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from "react";
@@ -9,14 +10,37 @@ import axios from "axios";
 function Todo({ todo, index, markTodo, removeTodo }) {
 
   const [isTodoDone, setIsTodoDone] = useState(false);
+  const [applicId, setApplicId] = useState();
+
+  /*
+  useEffect(() => {
+    const getApplicantId = async (applicationId) => {
+      let res;
+      try {
+            res = await axios.get(`http://localhost:8080/application/${applicationId}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });  
+      } catch (error) {
+        
+      }
+      setApplicId(res.data.appicantCandidate)
+    } 
+    getApplicantId(todo.appId)
+
+  }, [])
+  */
 
   return (
     <div className="todo">
-      <span style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
-        {todo.text}
-      </span>
-
-      {isTodoDone ? <div style={{marginRight: -120}}>
+      
+      <Link style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
+        {todo.text} 
+      </Link>
+      
+      
+      {todo.isDone ? <div style={{marginRight: -120}}>
         <Button
           disabled={true}
           variant="outline-success"
@@ -27,7 +51,7 @@ function Todo({ todo, index, markTodo, removeTodo }) {
         </Button>{" "}
       </div>:null}
 
-      {!isTodoDone ? <div style={{marginRight: -120}}>
+      {!todo.isDone ? <div style={{marginRight: -120}}>
         <Button
           disabled={true}
           variant="outline-success"
@@ -94,6 +118,7 @@ function TodoInside() {
             return {
               text: val.description,
               isDone: val.completed,
+              appId: val.applicationId
             };
           })
         );
