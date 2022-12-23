@@ -2,7 +2,9 @@ import axios from 'axios';
 
 //import React,{Component} from 'react';
 import React, {useState} from 'react';
-
+import {Link} from "react-router-dom";
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
+import {useNavigate} from "react-router-dom";
 /*
 class UploadExcel extends Component {
 
@@ -96,6 +98,7 @@ class UploadExcel extends Component {
  */
 
 function UploadExcel () {
+    const navigate = useNavigate()
     const [uploadedFile, setUploadedFile] = useState ('');
     const [fileTitle, setFileTitle] = useState ('');
 
@@ -118,39 +121,49 @@ function UploadExcel () {
         setUploadedFile (e.target.value);
     }
 
+
+    function buttonClicked() {
+        alert("Excel file is uploaded!");
+
+    }
+
     return (
-        <React.Fragment>
-            <h1>File upload</h1>
-            <form
+        <div>
+            <NavigationBar/>
+        <div className={"perfectCentered"} style={{marginTop : 300}}>
+        <React.Fragment >
+        <div className={"dashboard-cards-upload-excel"}>
+            <h2  style={{ color: "#afaaa0", textAlign: "center"}}>Upload Applicants List Excel File</h2>
+            <form style={{  display: "flex",
+                justifyContent: "center",
+                alignItems: "center"}}
+
                 encType="multipart/form-data"
                 onSubmit={handleFormSubmittion}
                 id="form"
             >
                 <input
+                    style={{color: "#afaaa0" }}
+                    required
                     type="file"
                     name="applicantListsExcel"
                     value={uploadedFile}
                     onChange={handleUploadedFile}
-                    required
+
                 />
                 <br />
                 <br />
 
-                <label>File title:</label><br />
-                <input
-                    type="text"
-                    placeholder="Enter file title"
-                    name="fileTitle"
-                    value={fileTitle}
-                    onChange={handleFileTitle}
-                    required
-                />
                 <br />
                 <br />
-
-                <button type="submit">Submit Form</button>
+              <div>
+                <button onClick={buttonClicked} className={"fpp-button-main"} type="submit">Submit Form</button>
+              </div>
             </form>
+        </div>
         </React.Fragment>
+        </div>
+        </div>
     );
 }
 export default UploadExcel;

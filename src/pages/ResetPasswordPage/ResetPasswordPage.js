@@ -13,7 +13,7 @@ function ResetPasswordPage() {
   const handleSubmit = () => {
     
     if(field_1 != field_2) {
-      alert("Passwords does not matche.")
+      alert("Passwords does not match")
     } else if (field_1 != "" && field_2 != "" && field_1 && field_2) {
       fetch("http://localhost:8080/user/updatePassword", {
         method: "POST",

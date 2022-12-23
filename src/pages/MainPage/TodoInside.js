@@ -12,32 +12,36 @@ function Todo({ todo, index, markTodo, removeTodo }) {
   const [isTodoDone, setIsTodoDone] = useState(false);
   const [applicId, setApplicId] = useState();
 
-  /*
   useEffect(() => {
-    const getApplicantId = async (applicationId) => {
-      let res;
-      try {
-            res = await axios.get(`http://localhost:8080/application/${applicationId}`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          });  
-      } catch (error) {
-        
-      }
-      setApplicId(res.data.appicantCandidate)
-    } 
-    getApplicantId(todo.appId)
 
-  }, [])
-  */
+    const getApplicantId = async (applicationId) => {
+      if(todo.text != "Upload student placement list.") {
+        let res;
+        try {
+          res = await axios.get(`http://localhost:8080/application/${applicationId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+      } catch (error) {
+
+      }
+      console.log(res.data.applicantCandidate)
+      setApplicId(res.data.applicantCandidate)
+
+      getApplicantId(todo.appId)
+    }}
+}, [])
+
 
   return (
     <div className="todo">
-      
-      <Link style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
-        {todo.text} 
-      </Link>
+      {todo.text == "Upload student placement list." ? <Link  to='/upload-excel' style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
+        {todo.text}
+      </Link>:<Link  to='/application-page-coordinator' state={applicId} style={{ textDecoration: todo.isDone ? "line-through" : "" }}>
+      {todo.text}
+        </Link>}
+
       
       
       {todo.isDone ? <div style={{marginRight: -120}}>

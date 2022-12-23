@@ -11,6 +11,7 @@ const University = require("../models/university")
 const BilkentCourse = require("../models/bilkentCourse")
 const ForeignUniversityCourse = require("../models/foreignUniversityCourse")
 const Application = require("../models/application");
+const Task = require("../models/task");
 
 // storage engine for multer
 const storageEngine = multer.diskStorage({
@@ -164,6 +165,7 @@ async function createCandidates(rankedApplicants) {
 
 // routing
 router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, res) => {
+    const task = await Task.findOneAndUpdate({description: "Upload student placement list."}, {completed: true})
     res.json(req.file).status(200);
     const students = convertToJson("applicantListsExcel.xlsx");
     let placedStudents = [];
@@ -174,7 +176,24 @@ router.post('/upload-excel', upload.single('applicantListsExcel'), async (req, r
     createWaitingList(rankedApplicants, waitingList)
     saveApplicantsIDs()
     await createCandidates(rankedApplicants, placedStudents)
+
+    var users = await User.find();
+
+    let contacts = users.map((cnt) => {
+        return {
+            name: cnt.name,
+            surname: cnt.surname,
+            objectId: cnt._id
+        }
+    })
+
+    //update contacts
+    for(let i = 0; i < users.length; i++) {
+        users[i].contacts = contacts
+        await users[i].save()
+    }
 });
+
 
 
 function parsePreviouslyAcceptedCourses(courseList) {
@@ -313,6 +332,7 @@ router.post('/applicants-list', async (req, res) => {
                         console.error(err);
                         return;
                     }
+
                     list = JSON.parse(data)
                     res.status(302).send(list)
                 });

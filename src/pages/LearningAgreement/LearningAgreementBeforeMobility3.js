@@ -146,7 +146,6 @@ function LearningAgreementBeforeMobility3() {
                                     } else if(userType === "1"){
                                         alert("Form is approved")
                                     }
-                                    navigate("/main-page");
                                 }
                             );
                         }}>{approveButtonText}

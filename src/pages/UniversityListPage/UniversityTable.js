@@ -384,9 +384,7 @@ class TableAddRows extends React.Component {
               <button onClick={this.handleAddRow} className="btn btn-primary">
                 Add University
               </button>
-                {(this.state.options != 0) ?   <button onClick={this.handleSaveAll} className="btn btn-primary" style={{marginLeft : 5}}>
-                Save
-              </button> : ""}
+
             </div>
           </div>
         </div>

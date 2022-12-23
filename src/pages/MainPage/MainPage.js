@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { handleRequests } from "../requests";
 
 import NavigationBarMain from "./NavigationBarMain";
@@ -14,6 +14,7 @@ import RatingPopup from "../../components/ui/CoursePopUp/UniversityRatingPopup";
 import Backdrop from "../../components/ui/CoursePopUp/Backdrop";
 import LoadingSpinner from "../../components/ui/loadingComponent";
 
+
 function MainPage() {
   /*
   const state = useLocation()
@@ -27,10 +28,12 @@ function MainPage() {
   console.log(id)
   // Rerouting the user to the main page can be here if we do not see id or maybe can be doable using tokens
   */
+  const [excelButtonClicked, setexcelButtonClicked] = useState(false);
   const [users, setUsers] = useState();
   const [universities, setUniversities] = useState();
   const [data, setData] = useState(users);
-
+  const navigate = useNavigate()
+  
   useEffect(() => {
     const getUsers = async () => {
       try {
@@ -75,6 +78,22 @@ function MainPage() {
       </Link>
     </Grid>
   );
+  const uploadPlacementExcelButton = () => (
+      <Grid xs={12}>
+        <Link to="/upload-excel">
+          <button onClick={() => { setexcelButtonClicked(true)}} className="fpp-button-main"> Upload Student Placements</button>
+        </Link>
+      </Grid>
+  );
+
+
+  const uploadCourseExcelButton = () => (
+      <Grid xs={12}>
+        <Link to="/upload-courses-excel">
+          <button className="fpp-button-main"> Upload Course Excel</button>
+        </Link>
+      </Grid>
+  );
 
   const applicationStatusButton = () => (
     <Grid xs={12}>
@@ -90,6 +109,15 @@ function MainPage() {
       </button>
     </Grid>
   );
+
+  const applicantListButton = () => (
+    <Grid xs={12}>
+      <button className="fpp-button-main" onClick={(e) => navigate('/applicants-list')}>
+        Applicants List
+      </button>
+    </Grid>
+  );
+
   useEffect(() => {
     const getUniversities = async () => {
       try {
@@ -187,6 +215,12 @@ function MainPage() {
                   Operations
                 </h1>
                 <Grid container padding={3}>
+                  {localStorage.getItem("userType") == 1 && !excelButtonClicked
+                      ? uploadPlacementExcelButton()
+                      : null}
+                  {localStorage.getItem("userType") == 1
+                      ? uploadCourseExcelButton()
+                      : null}
                   {localStorage.getItem("userType") == 0
                     ? applicationStatusButton()
                     : null}
@@ -197,6 +231,7 @@ function MainPage() {
                     ? universityListButton()
                     : null}
                   {localStorage.getItem("userType") == 1 ? logsButton() : null}
+                  {localStorage.getItem("userType") == 1 ? applicantListButton() : null}
                   {localStorage.getItem("userType") == 3 ||
                   localStorage.getItem("userType") == 1
                     ? replyNomRequestButton()

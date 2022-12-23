@@ -81,7 +81,6 @@ function PreApprovalFormPage() {
           (response, status) => {
             console.log(response);
             alert("Preapproval is submitted");
-            navigate("/main-page");
           }
         );
       }
@@ -219,7 +218,7 @@ function PreApprovalFormPage() {
     handleRequests(
       null,
       {
-        usrType: localStorage.getItem("userType"),
+        userType: localStorage.getItem("userType"),
         userId: state,
       },
       "preapproval-student",

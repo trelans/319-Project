@@ -35,7 +35,7 @@ function UniversityListPage() {
           <span>Universities Available for </span>
           <span>CS</span>
         </p>
-        <SearchBar />
+
         <UniversityTable  ref={childRef}/>
       </div>
     </div>

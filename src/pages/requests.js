@@ -8,6 +8,7 @@ export const handleRequests = (e, data, page, type, callback) => {
     }
     data.token = localStorage.getItem("token")
     data.type = type
+    data.userType = localStorage.getItem("userType")
     console.log("data:", data)
     const requestOptions = {
         method: "POST",

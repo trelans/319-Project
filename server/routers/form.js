@@ -24,7 +24,7 @@ router.post('/preapproval-student', async (req, res) => {
         if (req.body.type === "1") {
             console.log(req.body)
             console.log("ahmet")
-            if (req.body.usrType === '0') {
+            if (req.body.userType === '0') {
                 user = await User.findOne({'tokens.token': req.body.token})
                 console.log("asdasa")
             } else {
@@ -84,10 +84,12 @@ router.post('/preapproval-student', async (req, res) => {
                 "bilkentCourses": courseMap,
                 "wishCourses": wishCourses,
                 "formStatus": PAF.status,
-                "userType": user.userType
+                "userType": user.userType,
+                "academicYear": "2022-2023",
+                "semester": user.erasmusCandidateData.preferredSemester < 2 ? "Half Year": "Full Year"
             })
         } else if (req.body.type === "2") {
-            if (req.body.usrType === '0') {
+            if (req.body.userType === '0') {
                 user = await User.findOne({'tokens.token': req.body.token})
             } else {
                 user = await User.findById(req.body.userId)
@@ -126,19 +128,15 @@ router.post('/preapproval-student', async (req, res) => {
                 console.log("saksoy")
                 console.log(facultyMember.name)
 
+                
                 const notificationMember = new Notification({
-                    owner: facultyMember._id,
-                    text: user.name + " " + user.surname + " submitted their pre approval form."
+                    owner: erasmusCoordinator._id,
+                    text: "You have approved pre-approval form of " + user.name + " " + user.surname + "."
                 })
                 await notificationMember.save()
 
-                //create to do for erasmuss coord
-                const task = new Task({
-                    description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",
-                    owner: facultyMember._id,
-                    applicationId: application._id
-                })
-                await task.save()
+                //update to do for erasmus coord
+                const task = await Task.findOneAndUpdate({description: "Evaluate pre approval form of " + user.name + " " + user.surname + ".",   owner: erasmusCoordinator._id}, {completed: true})
 
             } else {
                 const user = await User.findOne({'tokens.token': req.body.token})
@@ -199,16 +197,19 @@ router.post('/preapproval-student', async (req, res) => {
 
 router.post('/preapproval-student-popup', async (req, res) => {
     try {
-
+//university => university.universityName == hostUniName
         let response;
         const eqCourseData = [];
         // 0 POST, 1 GET
         if (req.body.type === "1") {
             const hostUniName = req.body.hostUniName
             const bilkentCourse = await BilkentCourse.findOne({"courseCode": req.body.courseCode})
-            const courseList = bilkentCourse.foreignUniversities.find(
-                university => university.universityName === hostUniName
-            ).exemptedCourses
+            console.log(bilkentCourse)
+            console.log("kiraz")
+            console.log(bilkentCourse.foreignUniversities)
+            const courseList = bilkentCourse.foreignUniversities.find( function (element) {
+                return element.universityName == hostUniName
+            }).exemptedCourses
             await Promise.all(courseList.map(async (course) => {
                 const foreignUniversityCourse = await ForeignUniversityCourse.findOne({name: course.courseName})
                 eqCourseData.push({
@@ -262,12 +263,32 @@ router.post('/preapproval-student-nominate-course', async (req, res) => {
             })
 
             const erasmusCoordinator = await User.findOne({"erasmusCoordinator.assignedUniversities.universityId": user.erasmusCandidateData.nominatedUniversityId})
+            const application = await Application.findOne({'applicantCandidate': user._id})
+
+            //notification to user 
+            const notificationUser = new Notification({
+                owner: user._id,
+                text: "You have send a new course request to " + erasmusCoordinator._id
+            })
+
+            await notificationUser.save()
+
+            //notification to erasmus coordinatior
             const notification = new Notification({
                 owner: erasmusCoordinator._id,
                 text: user.name + " request a new exemption for " + req.body.bilkentCourse.courseCode + " at " + req.body.hostUniName
             })
 
             await notification.save()
+
+            //to do to erasmus coordinator
+            const task = new Task({
+                description: "Evaluate nominate new course request of " + user.name + " " + user.surname + ".",
+                owner: erasmusCoordinator._id,
+                applicationId: application._id
+            })
+
+            await task.save()
 
 
             response = res.status(201)
@@ -356,7 +377,7 @@ router.post('/learning-agreement-2-3', async (req, res) => {
         let user
         // 0 POST, 1 GET, 2 PATCH
         if (req.body.type === "1") {
-            if (req.body.usrType === '0') {
+            if (req.body.userType === '0') {
                 user = await User.findOne({'tokens.token': req.body.token})
             } else {
                 console.log("Test 2")

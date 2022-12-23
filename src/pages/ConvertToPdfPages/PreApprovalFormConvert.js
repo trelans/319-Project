@@ -4,6 +4,7 @@ import * as React from "react";
 import Pdf from "react-to-pdf";
 import PreApprovalFormCoursesTable from "./PdfTables/PreApprovalFormCoursesTable";
 import {useLocation} from 'react-router-dom';
+import NavigationBar from "../../components/ui/NavigationBar/NavigationBar";
 
 const durationTable = {
   0: "Fall",
@@ -81,6 +82,7 @@ function PreApprovalFormConvert() {
 
   return (
     <div>
+      <NavigationBar/>
       <div className="cp-center">
         <Pdf targetRef={ref} filename="PreApprovalForm.pdf" options={options}>
           {({ toPdf }) => (
@@ -130,11 +132,11 @@ function PreApprovalFormConvert() {
                 <td className="cp-col">{academicYear}</td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Semester:</td>
+                <td className="cp-col">Duration:</td>
                 <td className="cp-col">{semester}</td>
               </tr>
               <tr className="cp-row">
-                <td className="cp-col">Duration:</td>
+                <td className="cp-col">Semester:</td>
                 <td className="cp-col">{duration}</td>
               </tr>
             </table>

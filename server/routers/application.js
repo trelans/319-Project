@@ -72,7 +72,6 @@ router.post('/application-page1', async (req, res) => {
 router.post('/application-page-coordinator', async (req, res) => {
     try {
         console.log("portakal")
-        console.log(req.body)
         let response;
         let application;
         let appliedInstitution;

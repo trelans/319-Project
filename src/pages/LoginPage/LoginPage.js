@@ -43,7 +43,6 @@ function LoginPage() {
                   (res, status) => {
                     console.log(status);
                     console.log(res);
-                    console.log(res.user._id);
                     if (status === 200) {
                       // Send any necessary data to other page here
                       localStorage.setItem("token", res.token);
@@ -53,7 +52,10 @@ function LoginPage() {
                         JSON.stringify(res.user.contacts)
                       );
                       navigate("/main-page");
+                    }else {
+                      alert("Incorrect password or email!")
                     }
+
                   }
                 )
               }
