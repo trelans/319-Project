@@ -1,0 +1,36 @@
+.mainContactContainer {
+    flex : 1;
+    background-color: white;
+    display: flex;
+    /*height: 100vh;*/
+}
+
+.SearchBar {
+    width: 18.7pc;
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+    background-color: black;
+    margin-left: 8px;
+    color: white;
+}
+
+.userContainer {
+    display: flex;
+    margin-left: 18px;
+    background-color: rgb(183, 187, 182);
+    padding: 6px;
+    border-radius: 10px;
+    margin-top: 4px;
+}
+
+.userContainer:hover{
+    opacity: 75%;
+    cursor: pointer;
+}
+
+.usersDetailContainer{
+    height: 90vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
